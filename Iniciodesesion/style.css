@@ -1,0 +1,125 @@
+body {
+    background-image: url("imagenes/fofondo3.jpg");
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.hexagon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 630px;
+    height: 720px;
+}
+
+.hexagon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 830px; /* Tamaño del hexágono */
+    height: 940px; 
+    background: white;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    
+}
+
+.cuadrado {
+    width: 350px; 
+    height: 400px; 
+    background-color: #DDE3E7; 
+    border-radius: 3%;
+    box-shadow: 0px 0px 15px 1px rgba(105,105,105,1);
+}
+
+.form-section {
+    justify-content: center;
+    width: 100%;
+    max-width: 300px; 
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 20px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+/*alinear ícono*/
+.input-container i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    border-radius: 15px;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Espacio para el icono */
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background-color: #eaeff3; 
+    box-shadow: inset 3px 5px 4px rgb(0, 0, 0, 0.2);
+
+
+}
+
+.form-section button {
+    color: #f9f8f2;
+    width: 100%;
+    padding: 10px;
+    background-color: #283859;
+    border-radius: 15px;
+    box-shadow: inset 0px 4px 4px #090850;
+    transition: transform 0.3s ease;
+    border: none;
+
+}
+
+.form-section button:hover {
+    transform: scale(1.04);
+    color: #e8e8e8;
+    box-shadow: 0px 4px 4px #080743;
+
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+h4 {
+    font-size: 1em;
+    margin-bottom: 30px;
+    color: #777;
+    text-align: center;
+}
+
+.registro {
+    color: #fff;
+    background-color: #2E333C; /* Fondo oscuro */
+    padding: 10px 20px;
+    border-radius: 30px; /* Esquinas redondeadas */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 50px; /* Espacio desde la parte inferior de la pantalla */
+    left: 50%;
+    transform: translateX(-50%); /* Centra horizontalmente */
+    border: none;
+}
