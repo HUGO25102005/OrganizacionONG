@@ -13,20 +13,22 @@ return new class extends Migration
     {
         Schema::create('donantes', function (Blueprint $table) {
 
-            $table->id('ID_Donante');
+            $table->bigIncrements('ID_Donante');
             $table->string('Nombre_Completo', 255);
             $table->enum('Tipo_Donante', ['Individual', 'Corporativo', 'Organizacion', 'Anonimo']);
-            $table->decimal('Monto_Donacion', 10, 2);
-            $table->date('Fecha_Donacion');
-            $table->unsignedBigInteger('ID_Programa')->nullable();
-            $table->string('Metodo_Pago', 100);
             $table->boolean('Requiere_Recibo')->default(false);
-            $table->text('Comentarios_Adicionales')->nullable();
+            $table->string('Direccion', 100);
+            $table->string('Telefono', 10);
+            $table->string('Correo_electronico', 100);
+            $table->string('RFC', 20)->nullable();
+            $table->string('Domicilio_fiscal', 255)->nullable();
+            $table->string('Razon_social', 255)->nullable();
             $table->timestamp('Fecha_Registro')->useCurrent();
-
-            $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('set null');
-
+            $table->timestamp('Ultima_Actualizacion')->nullable();
             $table->timestamps();
+
+            $table->unique('ID_Donante');
+            $table->unique('RFC');
             
         });
     }
