@@ -37,7 +37,7 @@ return new class extends Migration
 
             // Clave foránea a la tabla 'organizacion'
             $table->foreign('Nombre_organizacion')
-                  ->references('Nombre')
+                  ->references('Nombre_organizacion')
                   ->on('organizacion');
 
             $table->dropForeign(['ID_donacion', 'ID_Donante']);

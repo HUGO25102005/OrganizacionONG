@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organizacion', function (Blueprint $table) {
-            $table->string('Nombre_organizacion', 100)->change();
+            $table->string('Nombre_organizacion', 100);
             $table->string('Direccion', 100);
             $table->tinyInteger('RFC'); // Campo RFC como TINYINT
 
             // Índice único para RFC
             $table->unique('RFC');
+
+            // Agrega el índice para la columna 'Nombre_organizacion'
+            $table->index('Nombre_organizacion');
         });
     }
 

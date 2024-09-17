@@ -30,10 +30,8 @@ return new class extends Migration
 
             // Clave foránea hacia 'registro_ingresos'
             $table->foreign('ID_no_comprobante_ingreso')
-                ->references('ID_no_comprobante')
-                ->on('registro_ingresos')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
+                ->references('ID_no_comprobante') // Asegúrate de que el nombre coincide
+                ->on('registro_ingresos');
 
             // Clave foránea hacia 'registro_egresos'
             $table->foreign('ID_no_comprobante')

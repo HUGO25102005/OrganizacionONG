@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('registro_ingresos', function (Blueprint $table) {
             $table->integer('ID_ingreso'); // Columna INT para ID_ingreso
-            $table->integer('ID_no_comprovante'); // Columna INT para ID_no_comprovante
+            $table->integer('ID_no_comprobante'); // Corregido el nombre de la columna
             $table->integer('ID_folio_comprobante'); // Columna INT para ID_folio_comprobante
             $table->integer('no_comprobante_ingreso'); // Columna INT para no_comprobante_ingreso
 
             // Clave primaria compuesta
-            $table->primary(['ID_ingreso', 'ID_no_comprovante']);
+            $table->primary(['ID_ingreso', 'ID_no_comprobante']); // Nombre corregido
 
             // Índices únicos
             $table->unique('ID_ingreso');
-            $table->unique('ID_no_comprovante');
+            $table->unique('ID_no_comprobante'); // Nombre corregido
 
             // Índice compuesto para la clave foránea
             $table->index(['ID_folio_comprobante', 'no_comprobante_ingreso'], 'fk_registro_ingresos_comprobante_ingreso1_idx');
 
             // Clave foránea hacia 'comprobante_ingresos'
-            $table->foreign(['ID_folio_comprobante', 'no_comprobante_ingreso'])
+            $table->foreign(['ID_folio_comprobante', 'no_comprobante_ingreso'], 'fk_reg_ing_comprobante')
                 ->references(['ID_folio', 'ID_no_comprobante'])
                 ->on('comprobante_ingresos');
         });
