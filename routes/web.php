@@ -1,13 +1,13 @@
 <?php
 
 // importaciones trabajadores 
-use App\Http\Controllers\Auth\AuthLoginTrabajadorController;
-use App\Http\Controllers\LoginTrabajadorController;
-
+use App\Http\Controllers\Login\LoginTrabController;
 // importaciones usuarios
-use App\Http\Controllers\LoginUsuarioController;
+use App\Http\Controllers\Login\loginBeneController;
 
 
+
+use App\Http\Controllers\Usuarios\AdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,15 +16,12 @@ Route::get('/', function () {
     return view('Login.app_login_trab_usuario');
 });
 
-// Redireccionamiento de logins, dependiendo el tipo de usuario, sera su login
-Route::get('/loginTrabajador', [LoginTrabajadorController::class, 'index'])->name('loginTrabajador');
-Route::post('/loginTrabajador', [LoginTrabajadorController::class, 'authenticate'])->name('loginTrabajador.authenticate');
 
-Route::get('/loginUsuario', [LoginUsuarioController::class, 'index'])->name('loginUsuario');
-
-// Formularios de login
+// router de login
+Route::resource('/loginBeneficiario', loginBeneController::class);
+Route::resource('/loginTrabajador', LoginTrabController::class);
 
 
-    //trabajador
+Route::resource('/admin', AdminController::class);
     
     
