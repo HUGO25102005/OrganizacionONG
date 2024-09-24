@@ -22,6 +22,12 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function isTrabajador(): bool{
+
+
+        return $this->Rol == 'Administrador' || $this->Rol == 'Coordinador' || $this->Rol == 'Voluntario';
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

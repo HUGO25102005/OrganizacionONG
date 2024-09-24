@@ -12,11 +12,47 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            // Laravel
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('Rol', ['Administrador', 'Coordinador', 'Voluntario'])->default('Voluntario');
+            /*
+            // usuarios (proyecto)
+            $table->date('Fecha_Nacimiento');
+            $table->enum('Genero', ['Masculino', 'Femenino', 'Otro']);
+            $table->string('Identificacion_Oficial', 50)->nullable();          
+            $table->string('Telefono', 20);
+            $table->string('Pais', 100);
+            $table->string('Estado', 100);
+            $table->string('Municipio', 100);
+            $table->string('Direccion', 255)->nullable();
+            $table->string('Dias_Disponibles', 100)->nullable();
+            $table->enum('Horario_Preferible', ['Mañana', 'Tarde', 'Noche', 'Indiferente'])->nullable();
+            $table->enum('Presencial_Virtual', ['Presencial', 'Virtual', 'Indiferente'])->nullable();
+            $table->text('Experiencia_Previa');
+            $table->text('Habilidades_Conocimientos');
+            $table->string('Area_Interes', 255)->nullable();
+            $table->text('Especializacion_Cursos')->nullable();
+            $table->integer('Experiencia_Laboral')->nullable();
+            $table->text('Experiencia_Sector_Educativo')->nullable();
+            $table->text('Habilidades_Clave')->nullable();
+            $table->string('Idiomas', 100)->nullable();
+            $table->text('Funcion_Clave')->nullable();
+            $table->string('Area_Supervision', 255)->nullable();
+            $table->integer('Capacidad_Manejo_Equipos')->nullable();
+            $table->text('Conocimientos_Herramientas')->nullable();
+            $table->boolean('Disponibilidad_Viajes')->default(false);
+            $table->text('Compromiso_ONG')->nullable();
+            $table->text('Referencias_Laborales')->nullable();
+            $table->text('Motivo_Sector_Educativo')->nullable();
+            $table->text('Motivo_Voluntariado')->nullable();
+            $table->text('Comentarios_Adicionales')->nullable();
+            $table->boolean('Declaracion_Veracidad')->default(false);
+            $table->timestamp('Fecha_Registro')->useCurrent();
+            */
             $table->rememberToken();
             $table->timestamps();
         });

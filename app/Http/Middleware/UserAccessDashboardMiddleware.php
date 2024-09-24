@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserAccessDashboardMiddlawere
+class UserAccessDashboardMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,9 @@ class UserAccessDashboardMiddlawere
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(auth()->user()->isTrabajador()){
+            return $next($request);
+        }
+        return redirect('/');
     }
 }
