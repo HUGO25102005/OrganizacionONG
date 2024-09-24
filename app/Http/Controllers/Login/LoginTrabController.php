@@ -14,7 +14,7 @@ class LoginTrabController extends Controller
      */
     public function index()
     {
-        
+
         return view('Login.app_login_trabajador');
     }
 
@@ -31,17 +31,24 @@ class LoginTrabController extends Controller
      */
     public function store(StoreLoginTrabRequest $request)
     {
-        
+
         // dd($request);
         // datos obtenidos del request
         $credentials = $request->only('correo', 'password');
         // verificacion
         $admin = Admin::where('Correo_Electronico', $credentials['correo'])
-                            ->where('Password', $credentials['password'])
-                            ->first();
+            ->where('Password', $credentials['password'])
+            ->first();
 
+        if ($admin && $admin->Rol =='Administrador') {
 
-        if($admin){
+            session([
+                'id' => $admin->ID_Usuario,
+                'nombre' => $admin->Nombre_Completo,
+                'correo' => $credentials['correo'],
+                'rol' => $admin->Rol,
+            ]);
+
             return to_route('admin.index');
         } else {
             return back()->withErrors([

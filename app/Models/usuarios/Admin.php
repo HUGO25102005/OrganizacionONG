@@ -3,11 +3,13 @@
 namespace App\Models\usuarios;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'usuarios';
     protected $fillable = [
@@ -38,6 +40,14 @@ class Admin extends Model
         'Motivo_Sector_Educativo',
         'Comentarios_Adicionales',
         'Declaracion_Veracidad',
-        'Rol',
+    ];
+
+    public function isAdmin(): bool{
+        return $this->rol == 'Administrador';
+    }
+
+    protected $hidden = [
+        'Password',
+        'remember_token',
     ];
 }

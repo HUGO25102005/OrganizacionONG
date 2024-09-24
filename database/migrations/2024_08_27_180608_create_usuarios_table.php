@@ -47,7 +47,7 @@ return new class extends Migration
             $table->text('Motivo_Voluntariado')->nullable();
             $table->text('Comentarios_Adicionales')->nullable();
             $table->boolean('Declaracion_Veracidad')->default(false);
-            $table->enum('Rol', ['Administrador', 'Coordinador', 'Voluntario']);
+            $table->enum('Rol', ['Administrador', 'Coordinador', 'Voluntario'])->default('Voluntario');
             $table->timestamp('Fecha_Registro')->useCurrent();
 
             $table->timestamps();
