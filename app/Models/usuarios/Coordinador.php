@@ -3,26 +3,25 @@
 namespace App\Models\usuarios;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends User{
+class Coordinador extends User
+{
     use HasFactory, Notifiable;
 
     protected $table = 'usuarios';
     protected $fillable = [
         'Identificacion_Oficial',
-        'Pais',
-        'Estado',
-        'Municipio',
         'Direccion',
         'Experiencia_Previa',
-        'Experiencia_Laboral',
         'Habilidades_Conocimientos',
-        'Habilidades_Clave',
+        'Experiencia_Laboral',
         'Experiencia_Sector_Educativo',
+        'Habilidades_Clave',
         'Idiomas',
         'Funcion_Clave',
         'Area_Supervision',

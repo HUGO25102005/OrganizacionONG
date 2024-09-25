@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends User{
+class Voluntario extends User
+{
     use HasFactory, Notifiable;
 
     protected $table = 'usuarios';
@@ -18,21 +19,26 @@ class Admin extends User{
         'Estado',
         'Municipio',
         'Direccion',
+        'Dias_Disponibles',
+        'Horario_Preferible',
+        'Presencial_Virtual',
         'Experiencia_Previa',
-        'Experiencia_Laboral',
         'Habilidades_Conocimientos',
-        'Habilidades_Clave',
+        'Area_Interes',
+        'Experiencia_Laboral',
+        'Motivo_Voluntariado',
+        'Comentarios_Adicionales',
+        'Declaracion_Veracidad',
+
+
         'Experiencia_Sector_Educativo',
+        'Habilidades_Clave',
         'Idiomas',
         'Funcion_Clave',
-        'Area_Supervision',
         'Capacidad_Manejo_Equipos',
         'Conocimientos_Herramientas',
-        'Disponibilidad_Viajes',
-        'Compromiso_ONG',
+        
         'Referencias_Laborales',
-        'Motivo_Sector_Educativo',
-        'Comentarios_Adicionales',
         'Declaracion_Veracidad',
     ];
 

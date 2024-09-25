@@ -20,12 +20,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'Fecha_Nacimiento',
+        'Genero',
+        'Telefono',
     ];
 
     public function isTrabajador(): bool{
 
 
         return $this->Rol == 'Administrador' || $this->Rol == 'Coordinador' || $this->Rol == 'Voluntario';
+    }
+
+    public function getRole(): string{
+        return $this->Rol;
     }
 
     /**

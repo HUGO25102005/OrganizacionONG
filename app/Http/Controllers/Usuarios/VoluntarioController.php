@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class VoluntarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,9 @@ class AdminController extends Controller
     public function index()
     {
         // Simular que los datos provienen del modelo User autenticado
-         session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
+        session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
 
-        return view('Dashboard.Admin.index');
-        
+        return view('Dashboard.Voluntario.index');
     }
 
     /**
