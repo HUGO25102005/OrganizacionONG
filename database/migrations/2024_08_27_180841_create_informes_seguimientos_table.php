@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamp('Fecha_Registro')->useCurrent();
 
             $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('cascade');
-            $table->foreign('ID_Usuario')->references('ID_Usuario')->on('usuarios')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
 
             $table->timestamps();
             

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
@@ -46,6 +47,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashbo
         }
 
     })->middleware(['auth'])->name('dashboard');
+});
+
+Route::group(['prefix' => 'page'], function () {
+    // El recurso ya manejará las rutas index, create, store, etc.
+    Route::resource('/', PageController::class)->names([
+        'index' => 'page.index', // Nombra la ruta index
+    ]);
 });
 
 require __DIR__.'/auth.php';

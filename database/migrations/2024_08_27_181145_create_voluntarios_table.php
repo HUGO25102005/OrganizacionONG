@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('Comentarios_Adicionales')->nullable();
             $table->timestamp('Fecha_Registro')->useCurrent();
 
-            $table->foreign('ID_Usuario')->references('ID_Usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('set null');
 
             $table->timestamps();

@@ -32,8 +32,8 @@ return new class extends Migration
 
             // Clave foránea hacia 'usuarios'
             $table->foreign('usuarios_ID_Usuario')
-                ->references('ID_Usuario')
-                ->on('usuarios');
+                ->references('id')
+                ->on('users');
         });
     }
 
