@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Page\ColaboraController;
+use App\Http\Controllers\Page\ConocenosController;
+use App\Http\Controllers\Page\DonarController;
+use App\Http\Controllers\Page\ExperienciasController;
 use App\Http\Controllers\Page\PageController;
+use App\Http\Controllers\Page\TrasparenciaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
@@ -27,11 +32,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashbo
         'voluntario' => VoluntarioController::class,
     ]);
     Route::get('/', function () {
-        
+
         // Sacamos el respectivo rol
         $rol = Auth::user()->getRole();
 
-        switch($rol){
+        switch ($rol) {
             case 'Administrador':
                 return redirect()->route('admin.index');
                 break;
@@ -45,18 +50,25 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashbo
                 return redirect()->route('dashboard');
                 break;
         }
-
     })->middleware(['auth'])->name('dashboard');
 });
 
 Route::group(['prefix' => 'page'], function () {
-    // El recurso ya manejará las rutas index, create, store, etc.
-    Route::resource('/', PageController::class)->names([
-        'index' => 'page.index', // Nombra la ruta index
+    
+    Route::resources([
+        'conocenos' => ConocenosController::class,
+        'transparencia' => TrasparenciaController::class,
+        'experiencias' => ExperienciasController::class,
+        'colabora' => ColaboraController::class,
+        'donar' => DonarController::class,
     ]);
+
+    Route::get('/', function () {
+        return redirect()->route('conocenos.index');
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 /*
 Route::get('/dashboard', function () {
