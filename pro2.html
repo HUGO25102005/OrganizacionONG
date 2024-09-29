@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="ml-[30px]">
+
+    <header>
+        <nav class="navbar">
+            <a href="dash.html">Panel de Control</a>
+            <a href="donaciones.html">Donaciones</a>
+            <a href="programas.html">Programas</a>
+            <a href="usuarios.html">Usuarios</a>
+        </nav>
+    </header>
+    <h1 class="text-3xl">Registro de actividades</h1>
+    <div class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
+        <div class="space-x-4 mt-10">
+        <a href="programas.html">
+            <button class="bg-[#F3F1F1] rounded-full ml-[30px]">
+                Regresar
+            </button>
+        </a>
+            <button class="bg-[#232B47] text-white rounded-full px-6 py-3 hover:bg-[#1b223b]">
+                Presencial
+            </button>
+            <button class="bg-[#232B47] text-white rounded-full px-6 py-3 hover:bg-[#1b223b]">
+                Virtual
+            </button>
+        </div>
+
+        <!-- Nuevo contenedor para la tabla -->
+        <div class="bg-[#232B47] w-full mt-10 p-6 rounded-lg">
+            <table class="w-full text-left">
+                <thead class="bg-[#FFF] rounded-lg font-bold text-shadow">
+                    <tr class="border-b border-gray-500 rounded-[20px] text-[#232B47]">
+                        <th class="py-3 px-4">Fecha</th>
+                        <th class="py-3 px-4">Nombre de la actividad</th>
+                        <th class="py-3 px-4">Nombre del voluntario</th>
+                        <th class="">Visualizar</th>
+                    </tr>
+                </thead>
+                <tbody class="text-white">
+                    <tr class="border-b border-gray-500 ">
+                        <td class="py-3 px-4">27 - 08 - 2024</td>
+                        <td class="py-3 px-4">Corriendo y bailando</td>
+                        <td class="py-3 px-4">Ernesto Saul</td>
+                        <td class="py-3 px-4 flex space-x-2">
+                            <i class='bx bx-show text-3xl'></i>
+                            <i class='bx bx-file text-3xl'></i>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-gray-500">
+                        <td class="py-3 px-4">27 - 08 - 2024</td>
+                        <td class="py-3 px-4">Activación Mental</td>
+                        <td class="py-3 px-4">Carlos Eusebio</td>
+                        <td class="py-3 px-4 flex space-x-2">
+                            <i class='bx bx-show text-3xl'></i>
+                            <i class='bx bx-file text-3xl'></i>
+                        </td>
+                    </tr>
+                    <!-- Agrega más filas según sea necesario -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

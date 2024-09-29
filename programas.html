@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="ml-[30px]">
+
+    <header>
+        <nav class="navbar">
+            <a href="dash.html">Panel de Control</a>
+            <a href="donaciones.html">Donaciones</a>
+            <a href="programas.html">Programas</a>
+            <a href="usuarios.html">Usuarios</a>
+        </nav>
+    </header>
+
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl">Programas educativos</h1>
+        <div class="relative"> <!-- Eliminar el margen -->
+            <input 
+                type="text" 
+                placeholder="Buscar" 
+                class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            />
+            <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
+        </div>
+    </div>
+    
+    
+    
+    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
+        <div class="bg-[#232B47] rounded-full p-2 flex">
+
+            <!-- Sección "Nombre" -->
+            <div class="bg-gray-100 text-black rounded-[15px] px-4 py-1 text-center flex-1">
+                <p>Nombre</p>
+            </div>
+    
+            <!-- Sección "Impartidor" -->
+            <div class="bg-gray-100 text-black rounded-[15px] px-4 py-1 text-center flex-1 ml-2">
+                <p>Impartidor</p>
+            </div>
+    
+            <!-- Sección "Fecha" -->
+            <div class="bg-gray-100 text-black rounded-[15px] px-4 py-1 text-center flex-1 ml-2">
+                <p>Fecha</p>
+            </div>
+        </div>
+
+        <div class="bg-[#232B47] p-5 rounded-[15px] mt-[20px]">
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto">
+                    <tbody>
+                        <tr class="bg-[#4a607a] rounded-lg">
+                            <td class="text-left px-4 py-2 text-white text-lg rounded-l-lg">"Código en acción"</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">Ernesto Jimenez</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">27 - 08 - 2024</td>
+                            <td class="py-3 px-4 text-right rounded-r-lg">
+                                <i class='bx bx-show text-xl cursor-pointer'></i>
+                                <a href="pro2.html">
+                                    <i class='bx bx-edit text-xl cursor-pointer ml-4'></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="bg-[#4a607a] rounded-lg mb-4">
+                            <td class="text-left px-4 py-2 text-white text-lg rounded-l-lg">"Explorando el mundo del software"</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">Isai Rodriguez</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">27 - 08 - 2024</td>
+                            <td class="py-3 px-4 text-right rounded-r-lg">
+                                <i class='bx bx-show text-xl cursor-pointer'></i>
+                                <a href="#">
+                                    <i class='bx bx-edit text-xl cursor-pointer ml-4'></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="bg-[#4a607a] rounded-lg mb-4">
+                            <td class="text-left px-4 py-2 text-white text-lg rounded-l-lg">"Código creativo"</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">Ernesto Medina</td>
+                            <td class="text-left px-4 py-2 text-white text-lg">27 - 08 - 2024</td>
+                            <td class="py-3 px-4 text-right rounded-r-lg">
+                                <i class='bx bx-show text-xl cursor-pointer'></i>
+                                <a href="#">
+                                    <i class='bx bx-edit text-xl cursor-pointer ml-4'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        
+    </div>
+    
+</body>
+</html>
