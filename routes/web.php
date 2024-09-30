@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Administrador\AdminPanelControlController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
@@ -15,54 +14,39 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Middleware\RoleMiddleware;
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
+// Rutas de perfil existentes de Breeze
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashboardMiddleware::class]], function () {
-    // RUTAS DE ADMINISTRADORES, COORDINADORES, VOLUNTARIOS
-    Route::resources([
-        'coordinador' => CoordinadorController::class,
-        'voluntario' => VoluntarioController::class,
-    ]);
-
-    // Grupo de rutas para 'admin'
-    Route::group(['prefix' => 'admin'], function () {
-
-        // Ruta para el panel de control del administrador
-        Route::resource('panel', AdminPanelControlController::class);
-
-        // Otras rutas relacionadas con el administrador
-        Route::resources([
-            'home' => AdminController::class,
-        ]);
+    // Rutas del Dashboard
+    Route::middleware([RoleMiddleware::class . ':Administrador'])->prefix('dashboard/admin')->group(function () {
+        Route::get('/home', [DashboardController::class, 'adminHome'])->name('admin.home');
+        Route::get('/panelControl', [DashboardController::class, 'adminPanelControl'])->name('admin.panelControl');
+        Route::get('/donaciones', [DashboardController::class, 'adminDonaciones'])->name('admin.donaciones');
+        Route::get('/programas', [DashboardController::class, 'adminProgramas'])->name('admin.programas');
+        Route::get('/usuarios', [DashboardController::class, 'adminUsuarios'])->name('admin.usuarios');
     });
 
-    Route::get('/', function () {
-        // Sacamos el respectivo rol
-        $rol = Auth::user()->getRole();
+    Route::middleware(['role:cordi'])->prefix('dashboard/cordi')->group(function () {
+        Route::get('/home', [DashboardController::class, 'cordiHome'])->name('cordi.home');
+        Route::get('/profile', [DashboardController::class, 'cordiProfile'])->name('cordi.profile');
+        Route::get('/settings', [DashboardController::class, 'cordiSettings'])->name('cordi.settings');
+    });
 
-        switch ($rol) {
-            case 'Administrador':
-                return redirect()->route('home.index');
-                break;
-            case 'Coordinador':
-                return redirect()->route('coordinador.index');
-                break;
-            case 'Voluntario':
-                return redirect()->route('voluntario.index');
-                break;
-            default:
-                return redirect()->route('dashboard');
-                break;
-        }
-    })->middleware(['auth'])->name('dashboard');
+    Route::middleware(['role:voluntario'])->prefix('dashboard/voluntario')->group(function () {
+        Route::get('/home', [DashboardController::class, 'voluntarioHome'])->name('voluntario.home');
+        Route::get('/profile', [DashboardController::class, 'voluntarioProfile'])->name('voluntario.profile');
+        Route::get('/settings', [DashboardController::class, 'voluntarioSettings'])->name('voluntario.settings');
+    });
 });
 
 
@@ -83,8 +67,3 @@ Route::group(['prefix' => 'page'], function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';
-
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); */

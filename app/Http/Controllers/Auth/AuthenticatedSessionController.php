@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         
         // Redirigir según el rol del usuario
         if ($user->Rol === 'Administrador') {
-            return redirect()->intended(route('home.index'));
+            return redirect()->intended(route('admin.home'));
         } 
         // elseif ($user->Rol === 'coordinador') {
         //     return redirect()->intended(route('coordinador.index')); // Crear ruta coordinador.index

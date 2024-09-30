@@ -18,7 +18,7 @@
                     @if (session()->has('name'))
                         <h1>Bienvenido {{ session('name') }}</h1>
                         <h2>Rol: {{ session('rol') }}</h2>
-                        <h3>Panel</h3>
+                        <h3>Donaciones</h3>
                     @endif
                     {{ __("You're logged in!") }}
                 </div>
