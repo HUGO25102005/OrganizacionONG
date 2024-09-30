@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Administrador\AdminPanelControlController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
 use App\Http\Controllers\Page\ExperienciasController;
-use App\Http\Controllers\Page\PageController;
 use App\Http\Controllers\Page\TrasparenciaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuarios\AdminController;
@@ -26,19 +26,31 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashboardMiddleware::class]], function () {
+    // RUTAS DE ADMINISTRADORES, COORDINADORES, VOLUNTARIOS
     Route::resources([
-        'admin' => AdminController::class,
         'coordinador' => CoordinadorController::class,
         'voluntario' => VoluntarioController::class,
     ]);
-    Route::get('/', function () {
 
+    // Grupo de rutas para 'admin'
+    Route::group(['prefix' => 'admin'], function () {
+
+        // Ruta para el panel de control del administrador
+        Route::resource('panel', AdminPanelControlController::class);
+
+        // Otras rutas relacionadas con el administrador
+        Route::resources([
+            'home' => AdminController::class,
+        ]);
+    });
+
+    Route::get('/', function () {
         // Sacamos el respectivo rol
         $rol = Auth::user()->getRole();
 
         switch ($rol) {
             case 'Administrador':
-                return redirect()->route('admin.index');
+                return redirect()->route('home.index');
                 break;
             case 'Coordinador':
                 return redirect()->route('coordinador.index');
@@ -52,6 +64,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', UserAccessDashbo
         }
     })->middleware(['auth'])->name('dashboard');
 });
+
 
 Route::group(['prefix' => 'page'], function () {
     
@@ -69,6 +82,7 @@ Route::group(['prefix' => 'page'], function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/dashboard.php';
 
 /*
 Route::get('/dashboard', function () {

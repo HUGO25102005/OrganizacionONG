@@ -6,8 +6,8 @@
     @endif
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">  
-            {{ __('Dashboard') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Users') }}
         </h2>
     </x-slot>
 
@@ -18,6 +18,7 @@
                     @if (session()->has('name'))
                         <h1>Bienvenido {{ session('name') }}</h1>
                         <h2>Rol: {{ session('rol') }}</h2>
+                        <h3>eres un admin</h3>
                     @endif
                     {{ __("You're logged in!") }}
                 </div>

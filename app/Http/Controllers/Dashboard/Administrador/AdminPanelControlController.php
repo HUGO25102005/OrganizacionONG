@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Login;
+namespace App\Http\Controllers\Dashboard\Administrador;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class loginBeneController extends Controller
+class AdminPanelControlController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +13,7 @@ class loginBeneController extends Controller
     public function index()
     {
         //
+        return view('Dashboard.Admin.panel-control'); // La vista que será cargada
     }
 
     /**

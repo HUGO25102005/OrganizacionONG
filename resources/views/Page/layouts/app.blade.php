@@ -10,7 +10,7 @@
     <link rel="icon" href="{{ asset('images/logo.png"') }}">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/page.css'])
 
 
     <title>Pi</title>
