@@ -14,12 +14,17 @@ class DashboardController extends Controller
      */
     public function adminHome(){ 
 
+        
+        session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
+        return view('Dashboard.Admin.index'); 
+    }
+    public function adminPanelControl(){ 
+
         $total_ingresos = ComprobanteIngreso::getTotalDonaciones();
         $ultimas_donaciones = Donacion::all();
         session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
-        return view('Dashboard.Admin.index', compact('total_ingresos', 'ultimas_donaciones')); 
+        return view('Dashboard.Admin.panel-control', compact('total_ingresos', 'ultimas_donaciones')); 
     }
-    public function adminPanelControl(){ return view('Dashboard.Admin.panel-control'); }
     public function adminDonaciones(){ return view('Dashboard.Admin.donaciones'); }
     public function adminProgramas(){ return view('Dashboard.Admin.programas'); }
     public function adminUsuarios(){ return view('Dashboard.Admin.usuarios'); }
