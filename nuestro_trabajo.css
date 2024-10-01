@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ body {
+    background-color: #F4F8FF;
+    font-family: "Urbanist", sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+  
+  /*----------Navbar section----------*/
+.navbar {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 0px 40px;
+}
+
+.navbar .logo img {
+  height: 68px;
+  width: 70px;
+}
+
+.navbar .links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: #222f48;
+  border-radius: 30px;
+  height: 50px;
+  padding: 0 1rem;
+  position: absolute; /* Centrado relativo al navbar */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar .links li {
+  list-style: none;
+}
+
+.navbar .links a {
+  text-decoration: none;
+  color: #f9f8f2;
+  width: 180px;
+  height: 30px;
+  line-height: 70px;
+  border-radius: 20px;
+  background-color: #334568;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Asegura que el enlace esté sobre cualquier pseudo-elemento */
+  transition: all 0.3s ease-in-out; 
+}
+
+.navbar .links a:hover {
+  color: #e8e8e8;
+  background-color: #3f4f6e; /* Color de fondo al pasar el mouse */
+  box-shadow: 0px 4px 4px #1a2246;
+  transition: ease-in-out;
+}
+
+.user a img {
+  width: 180px;
+  height: 60px;
+  transition: transform 0.2s ease-in-out; /* Efecto de zoom al pasar el mouse */
+}
+
+.user a img:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+}
+
+  
+
+
+  /* Video fondo seccion 1 */
+  .cont_video {
+    position: relative; /* Cambiado a relative */
+    width: 100%;
+    height: 103vh; /* Ajusta la altura para que ocupe toda la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0px 100px 100px;
+    overflow: hidden; 
+    z-index: 1;
+  }
+  
+  .back-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .cont_video h1 {
+    position: absolute;
+    color: #ffffff;
+    font-size: 68px; 
+    text-align: center;
+    z-index: 2; 
+    margin: 0;
+    padding: 0 20px;
+    top: 25%;
+    font-family: "Wallpoet", sans-serif;
+    font-weight: 400;
+  }
+  
+  .cont_video::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    
+    z-index: 2;
+  }
+  
+
+
+  /*-------------Cards-------------*/
+
+.rutinas {
+    height: 70vh;
+    background-color:  #F4F8FF;
+    justify-content: space-around;
+    padding-top: 0px;
+    border-radius: 50px 50px 0px 0px;
+    font-weight: 400;
+    font-style: bolder;
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rutinas h1 {
+    color: #3C3C3C;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    gap: 15px;
+    flex-direction: row;
+    width: 90%; /* Ajuste de ancho para mantener las tarjetas dentro de la sección */
+}
+
+.card {
+    width: 250px;
+    height: 310px;
+    padding: 2rem;
+    border-radius: 20px;
+    background-color: #f9fafc;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease-in-out;
+    margin-top: 0px;
+}
+
+.card:hover {
+    transform: translateY(10px);
+}
+
+.card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgb(47,37,32);
+    background: linear-gradient(0deg, rgba(40,36,33,0.46964723389355745) 40%, rgba(69, 69, 69, 0.595) 50%, rgba(40,36,33,0.46964723389355745) 60%);
+    z-index: 2;
+    transition: 0.5s all;
+    opacity: 0;
+}
+
+.card:hover:before {
+    opacity: 1;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+}
+
+.card .info {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s all;
+    margin-top: auto; 
+    text-align: justify;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.card:hover .info {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.card .info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.card .info p {
+    letter-spacing: 1px;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-justify: center;
+}
+
+.card button {
+   background-color: #1a2246;
+    color: #fbe7de;
+    height: 35px;
+    width: 45px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    outline: none;
+    border-radius: 60px;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.card button:hover {
+    color: #fff;
+    background-color: #1a2246;
+}
+
+
+
+
+/* Sección 3 */
+.sect4 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 65vh;
+    background-color: #000;
+    justify-content: center;
+    align-items: center;
+
+    color: #ffff;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Asegura que el contenido se ajuste al border-radius */
+  }
+  
+  .carousel {
+    display: flex;
+    width: 100%;
+    overflow: hidden; /* Evita que el contenido del carrusel desborde */
+    position: relative;
+  }
+  
+  .carousel img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      transition: transform 0.5s ease-in-out;
+  }
+  
+  
+  .carousel-text {
+      position: absolute;
+      bottom: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+  
+      font-size: 1.2rem;
+      line-height: 1.5; 
+   /* Ajusta el padding para tener espacio a los lados */
+      text-align: center; /* Centra el texto */
+      text-justify: auto;
+  }
+  
+  .carousel-buttons {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+  }
+  
+  .carousel-buttons .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: #b8b8b8;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+  }
+  
+  .carousel-buttons .dot.active {
+      background-color: #FCF9F9;
+  }
+  
+
+
+
+/*Footer*/
+.footer {
+  background-color: #232323;
+  height: 25vh;
+  position: relative;
+  
+}
+
+.footer-cont {
+  height: 15vh;
+  padding: 10px ;
+}
+
+.login-container {
+  height: 20px;
+  top: 60%;
+  left: 6%;
+  position: absolute;
+  transition: transform 0.2s ease-in-out 
+}
+
+.login-container:hover {
+  transform: translate(-50%, -50%) scale(1.005);
+}
+
+.footer p {
+  color: #9a9a9a;
+  font-size: 11px;
+  text-align: center;
+  position: absolute;
+  left: 25%; /* Mover 30px a la izquierda */
+  top: 60%; /* Ajustar la posición vertical */
+  letter-spacing: 1px;
+  font-weight: lighter;
+}
+
+
+.link {
+  position: absolute;
+  left: 25%; /* Ajusta la posición horizontal */
+  top: 45%; /* Ajusta la posición vertical */
+  display: flex; /* Hace que los elementos estén en línea */
+  justify-content: center; /* Centra horizontalmente los elementos */
+}
+
+.link ul {
+  list-style-type: none; /* Elimina los marcadores de lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+  margin: 0; /* Elimina el margen predeterminado de la lista */
+  display: flex; 
+  text-decoration: none;
+}
+
+.link a {
+  font-size: 13px;
+  color: #9a9a9a; 
+  margin-right: 15px; /* Agrega un margen derecho entre los elementos */
+  width: 100px;
+  letter-spacing: 1px;
+  transition: transform 0.5s ease;
+  font-weight: lighter;
+  text-decoration: none;
+}
+
+.link ul li {
+  display: inline; /* Hace que los elementos <li> estén en línea */
+  transition: transform 0.5s ease; /* Agrega una transición suave */
+}
+
+.link ul li:hover {
+  transform: translateY(-2px); /* Mueve el elemento hacia arriba al hacer hover */
+}
+.footer img {
+  height: 60px;
+  top: 28%;
+  left: 4%;
+  position: absolute;
+}
+.footer h2 {
+  font-size: 40px; /* Ajusta el tamaño del texto según tus necesidades */
+  font-weight: lighter;
+  color: #b2ebf9; /* Ajusta el color del texto según tus necesidades */
+  position: absolute; /* Permite posicionar el texto dentro del footer */
+  left: 15%; /* Ajusta la posición a la mitad horizontal */
+  top: 40%; /* Ajusta la posición a la mitad vertical */
+  transform: translate(-50%, -50%); /* Centra el texto horizontal y verticalmente */
+}
+
+
+.footer-cont::after {
+  content: '';
+  position: absolute;
+  width: 1px; 
+  height: 150px;
+  background-color: #e3e3e4;
+  top: 20%; 
+  left: 22.5%; 
+  transform: translateX(-50%); 
+  z-index: 1; 
+}
+
+
+
+.button-container {
+  position: absolute;
+  right: 6%; 
+  top: 48%; 
+  display: flex;
+  width: 100px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.button {
+  outline: 0 !important;
+  border: 2px solid transparent; 
+  width: 40px;
+  height: 40px;
+  border-radius: 10%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  border-color: #b2ebf9; 
+}
+
+.button i {
+  font-size: 25px; 
+  color: #fff;
+}
+.button a {
+  color: #fff; 
+}

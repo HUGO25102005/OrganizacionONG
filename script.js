@@ -1,3 +1,5 @@
+
+//-----------------------Contador regresivo de donaciones------------------------
 window.addEventListener('scroll', function() {
     var counters = document.querySelectorAll('.count');
     var speed = 200; // Velocidad de la animación
@@ -27,7 +29,7 @@ window.addEventListener('scroll', function() {
 });
 
 
-
+//Codigo de otra cosa
 let slideIndex = 1;
 showSlides(slideIndex);
 
@@ -54,3 +56,91 @@ function showSlides(n) {
     }
     dots[slideIndex - 1].className += " active";
 }
+
+
+
+//---------------------Carrusel de transparencia------------------------ 
+// Obtener los elementos de las flechas (prev y next)
+let nextDom = document.getElementById('next');
+let prevDom = document.getElementById('prev');
+
+// Obtener el contenedor del carrusel y los elementos dentro del carrusel
+let carruselDom = document.querySelector('.carrusel');
+let SliderDom = carruselDom.querySelector('.carrusel .list');
+let thumbnailBorderDom = document.querySelector('.carrusel .thumbnail');
+let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item');
+let timeDom = document.querySelector('.carrusel .time');
+
+// Duración para la barra de tiempo y para el cambio automático de imágenes
+let timeRunning = 3000; // Tiempo de animación para transiciones
+let timeAutoNext = 7000; // Tiempo entre el cambio automático de imágenes
+
+// Esta variable controlará el temporizador para el cambio automático de imágenes
+let runNextAuto;
+
+// Función que reinicia el temporizador de cambio automático de imágenes
+function restartAutoNext() {
+    // Limpiamos cualquier temporizador previo para evitar conflictos
+    clearTimeout(runNextAuto);
+
+    // Configuramos el temporizador para cambiar de imagen automáticamente
+    runNextAuto = setTimeout(() => {
+        nextDom.click(); // Simula un clic en el botón "next" para cambiar la imagen
+    }, timeAutoNext);
+}
+
+// Función que controla el cambio de imagen del carrusel
+function showSlider(type) {
+    // Obtener los elementos actuales del slider (imágenes principales) y las miniaturas
+    let SliderItemsDom = SliderDom.querySelectorAll('.carrusel .list .item');
+    let thumbnailItemsDom = document.querySelectorAll('.carrusel .thumbnail .item');
+
+    // Reiniciar la barra de tiempo (línea de progreso)
+    timeDom.style.transition = 'none';  // Eliminar cualquier animación anterior
+    timeDom.style.width = '0%';         // Reiniciar el ancho de la barra a 0%
+
+    // Usamos un pequeño retardo antes de iniciar la nueva animación de la barra de tiempo
+    setTimeout(() => {
+        timeDom.style.transition = `width ${timeAutoNext}ms linear`; // Configuramos la nueva animación
+        timeDom.style.width = '100%';  // Inicia la animación de la barra de tiempo
+    }, 50); // Le damos un pequeño tiempo para que el navegador pueda procesarlo
+
+    // Lógica para avanzar al siguiente slide o retroceder
+    if (type === 'next') {
+        // Mover el primer elemento del slider al final
+        SliderDom.appendChild(SliderItemsDom[0]);
+        // Mover la primera miniatura al final
+        thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+        // Añadir la clase para la animación "next"
+        carruselDom.classList.add('next');
+    } else {
+        // Mover el último elemento del slider al inicio
+        SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+        // Mover la última miniatura al inicio
+        thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+        // Añadir la clase para la animación "prev"
+        carruselDom.classList.add('prev');
+    }
+
+    // Limpiar las clases de animación después de un tiempo para evitar acumulación
+    setTimeout(() => {
+        carruselDom.classList.remove('next');
+        carruselDom.classList.remove('prev');
+    }, timeRunning);
+}
+
+// Eventos para los botones de flechas (siguiente y anterior)
+nextDom.onclick = function () {
+    showSlider('next');  // Muestra el siguiente slide
+    restartAutoNext();   // Reinicia el temporizador para el cambio automático
+};
+
+prevDom.onclick = function () {
+    showSlider('prev');  // Muestra el slide anterior
+    restartAutoNext();   // Reinicia el temporizador para el cambio automático
+};
+
+// Inicia el ciclo automático del carrusel cuando la página se carga completamente
+document.addEventListener('DOMContentLoaded', function () {
+    restartAutoNext();  // Iniciar el ciclo automático al cargar la página
+});

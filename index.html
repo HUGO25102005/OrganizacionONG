@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Wallpoet&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="responsive.css"> <!-- Añade este archivo -->
     <link rel="icon" href="img/logo.png">
     <title>Pi</title>
 </head>
-
 <body>
     <header>
         <div class="navbar">
             <div class="logo">
                 <img src="img/logo_n.png" alt="Logo">
-                </a>
             </div>
             <ul class="links">
                 <li><a href="index.html">CONÓCENOS</a></li>
-                <li><a href="coordinadores.html">TRANSPARENCIA</a></li>
-                <li><a href="voluntarios.html">EXPERIENCIAS</a></li>
-                <li><a href="beneficiarios.html">COLABORA</a></li>
+                <li><a href="transparencia.html">TRANSPARENCIA</a></li>
+                <li><a href="nuestro_trabajo.html">NUESTRO TRABAJO</a></li>
+                <li><a href="colabora.html">COLABORA</a></li>
             </ul>
             <div class="user">
-                <img class="usr_img" src="./img/donar.png">
+                <a href="donar.html"><img class="usr_img" src="./img/donar.png" alt="Donar"></a>
             </div>
-        </div>
-
+        </div> 
     </header>
+    
 
     <section class="cont_video" id="home">
         <h1>La educación sin barreras emerge</h1>
@@ -39,53 +35,56 @@
         </video>
     </section>
 
-
-    <section class="sect2">
-        <div class="slider">
-            <input type="radio" name="slider" id="s1" checked>
-            <input type="radio" name="slider" id="s2">
-            <input type="radio" name="slider" id="s3">
-
-            <div class="buttons">
-                <label for="s1"></label>
-                <label for="s2"></label>
-                <label for="s3"></label>
-            </div>
-
-            <div class="content_slider">
-                <div class="firstsld">
-                    <h1>¿Quiénes somos?</h1>
-                    <p>(Nombre de la asociación) somos una organización internacional
-                        donde generamos oportunidades de futuro para la juventud.
-                        Apoyamos a las personas más vulnerables, facilitando el acceso a
-                        la educación. Garantizando entornos centros educativos, basados
-                        en el programa, cerrando la brecha digital.
-                    </p>
-                </div>
-                <div class="secndsld">
-                    <h1>Nuestro Objetivo</h1>
-                    <p>(Nombre de la asociación) somos una organización internacional
-                        donde generamos oportunidades de futuro para la juventud.
-                        Apoyamos a las personas más vulnerables, facilitando el acceso a
-                        la educación. Garantizando entornos centros educativos, basados
-                        en el programa, cerrando la brecha digital.
-                    </p>
-                </div>
-                <div class="trdsld">
-                    <h1>¿Quiénes lo conforman?</h1>
-                    <p>(Nombre de la asociación) somos una organización internacional
-                        donde generamos oportunidades de futuro para la juventud.
-                        Apoyamos a las personas más vulnerables, facilitando el acceso a
-                        la educación. Garantizando entornos centros educativos, basados
-                        en el programa, cerrando la brecha digital.
-                    </p>
-                </div>
-            </div>
+    
+<section class="sect2">
+    <div class="slider">
+      <input type="radio" name="slider" id="s1" checked>
+      <input type="radio" name="slider" id="s2">
+      <input type="radio" name="slider" id="s3">
+  
+      <div class="buttons">
+        <label for="s1"></label>
+        <label for="s2"></label>
+        <label for="s3"></label>
+      </div>
+  
+      <div class="content_slider">
+        <div class="firstsld">
+          <h1>¿Quiénes somos?</h1>
+          <p>En InspireUp somos una organización internacional 
+              donde generamos oportunidades de futuro para la juventud. 
+              Apoyamos a las personas más vulnerables, facilitando el acceso a 
+              la educación. Garantizando entornos centros educativos, basados 
+              en el programa, cerrando la brecha digital.
+          </p>
         </div>
-    </section>
+        <div class="secndsld">
+          <h1>Nuestro Objetivo</h1>
+          <p>El objetivo de InspireUp es proporcionar acceso 
+            gratuito a la educación y promover el desarrollo personal y profesional 
+            de jóvenes y adultos en situación de vulnerabilidad. A través de 
+            programas educativos inclusivos y recursos accesibles, buscamos 
+            empoderar a las personas para que puedan construir un futuro mejor 
+            y contribuir positivamente a sus comunidades.
+          </p>
+        </div>
+        <div class="trdsld">
+          <h1>¿Quiénes lo conforman?</h1>
+          <p>InspireUp está conformada por un grupo de 
+            jóvenes apasionados y comprometidos con la educación de las 
+            personas. Nuestra diversidad de talentos y experiencias nos 
+            permite trabajar en conjunto para crear un impacto significativo 
+            en la vida de quienes más lo necesitan. Creemos en la fuerza del 
+            trabajo en equipo y en la importancia de inspirar a otros a 
+            alcanzar su máximo potencial.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <section class="cont_video" id="home">
-
+        
         <video autoplay loop muted plays-inline class="back-video">
             <source src="./img/font_reversa.mov" type="video/mp4">
         </video>
@@ -93,13 +92,12 @@
         <div class="statistics">
             <div class="stat-item">
                 <h2 class="count" data-count="767282756">0</h2>
-                <p>pesos hemos recibido por parte de donantes durante este programa para ayudarnos a crear un futuro.
-                </p>
+                <p>pesos hemos recibido por parte de donantes durante este programa para ayudarnos a crear un futuro.</p>
                 <i class='bx bx-donate-heart'></i>
             </div>
             <div class="stat-item">
                 <h2 class="count" data-count="200000">0</h2>
-                <p>personas han colaborado con (Nombre de la asociación). En total, 186.000 eran donantes.</p>
+                <p>donaciones hemos recibido en InspireUp. Todas dirijidas a la mejora de este programa.</p>
                 <i class='bx bx-group'></i>
             </div>
             <div class="stat-item">
@@ -108,75 +106,88 @@
                 <i class='bx bx-world'></i>
             </div>
         </div>
-
+        
     </section>
 
     <section class="valores">
-        <div class="val_font">
-            <h2>Nuestros valores</h2>
-            <p class="paragraph">Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión
-                principal que
-                es el apoyo con programas educativos, mediante la impartición de cursos y centros comunitarios
-                para fomentar la educación digital y el desarrollo intelectual de cada ser humano</p>
+    <div class="val_font">
+        <h2>Nuestros valores</h2>
+        <p class="paragraph">Nuestra plataforma está dedicada a brindar acceso gratuito a la educación 
+            para todas las personas, sin importar su situación. A través de cursos y centros comunitarios, 
+            buscamos promover la educación digital y el desarrollo intelectual de cada ser humano. Estos son 
+            los valores que guían nuestro trabajo:</p>
 
-            <div class="valores-grid">
-                <div class="valor-item">
-                    <h3>Empatía</h3>
-                    <p>Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión</p>
-                </div>
-                <div class="valor-item">
-                    <h3>Integridad</h3>
-                    <p>Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión</p>
-                </div>
-                <div class="valor-item">
-                    <h3>Solidaridad</h3>
-                    <p>Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión</p>
-                </div>
-                <div class="valor-item">
-                    <h3>Transparencia</h3>
-                    <p>Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión</p>
-                </div>
-                <div class="valor-item">
-                    <h3>Compromiso social</h3>
-                    <p>Estamos comprometidos con ser transparentes, honestos, refrendando nuestra misión</p>
-                </div>
+        <div class="valores-grid">
+            <div class="valor-item">
+                <h3>Empatía</h3>
+                <p>Nos esforzamos por entender las necesidades de quienes más lo necesitan. Trabajamos para 
+                    ofrecer educación que sea accesible, inclusiva y adaptada a las circunstancias de cada persona, 
+                    con el fin de contribuir a su desarrollo personal y profesional.
+                </p>
+            </div>
+            <div class="valor-item">
+                <h3>Integridad</h3>
+                <p>Actuamos con honestidad y ética en todo lo que hacemos. Nuestros programas educativos se 
+                    gestionan de manera responsable, siempre garantizando que nuestros beneficiarios reciban 
+                    un servicio de calidad y sin fines de lucro.</p>
+            </div>
+            <div class="valor-item">
+                <h3>Solidaridad</h3>
+                <p>Creemos en la importancia de unir esfuerzos para generar un impacto real en la sociedad. 
+                    Nos comprometemos a trabajar en colaboración con comunidades, voluntarios y socios para hacer 
+                    que la educación sea una herramienta accesible para todos.
+                </p>
+            </div>
+            <div class="valor-item">
+                <h3>Transparencia</h3>
+                <p>Nos comprometemos a ser claros en nuestras acciones, decisiones y el uso de recursos. 
+                    Mantenemos un diálogo abierto con nuestros beneficiarios y colaboradores para garantizar 
+                    que todos los aspectos de nuestra labor sean visibles y accesibles.</p>
+            </div>
+            <div class="valor-item">
+                <h3>Compromiso social</h3>
+                <p>Estamos dedicados a mejorar la vida de las personas a través de la educación gratuita. 
+                    Reconocemos la importancia de nuestra misión y trabajamos incansablemente para contribuir 
+                    al progreso social y reducir la brecha educativa.</p>
             </div>
         </div>
-
+    </div>
+    
 
     </section>
 
-
+  
     <section class="sect4">
         <div class="carousel">
             <div class="carousel-slide">
                 <img src="img/img1.jpg" alt="Imagen 1">
                 <div class="carousel-text">
-                    <p>Se le da apoyo a(Nombre de la asociación)
-                        somos una organización internacional donde
-                        generamos oportunidades de futuro para la
-                        juventud. Apoyamos a las personas más vulnerables,
-                        facilitando el acceso a la educación.</p>
+                    <p>En InspireUp, somos una organización
+                         internacional comprometida con generar oportunidades 
+                         de futuro para la juventud. Brindamos apoyo a las personas 
+                         más vulnerables, facilitando el acceso gratuito a la educación 
+                         para que puedan desarrollarse y construir un futuro mejor.</p>
                 </div>
             </div>
             <div class="carousel-slide">
                 <img src="img/img3.jpg" alt="Imagen 2">
                 <div class="carousel-text">
-                    <p>Se le da apoyo a(Nombre de la asociación)
-                        somos una organización internacional donde
-                        generamos oportunidades de futuro para la
-                        juventud. Apoyamos a las personas más vulnerables,
-                        facilitando el acceso a la educación.</p>
+                    <p>En InspireUp, promovemos el acceso equitativo 
+                        a las herramientas tecnológicas. Nuestra misión es proporcionar 
+                        a los jóvenes de comunidades vulnerables los recursos y 
+                        habilidades digitales que necesitan para prosperar en un 
+                        mundo cada vez más conectado.</p>
                 </div>
             </div>
             <div class="carousel-slide">
                 <img src="img/img_3.jpg" alt="Imagen 3">
                 <div class="carousel-text">
-                    <p>Se le da apoyo a(Nombre de la asociación)
-                        somos una organización internacional donde
-                        generamos oportunidades de futuro para la
-                        juventud. Apoyamos a las personas más vulnerables,
-                        facilitando el acceso a la educación.</p>
+                    <p>En InspireUp, trabajamos para 
+                        fortalecer el tejido social a través de programas 
+                        que promueven el bienestar comunitario. Ayudamos 
+                        a jóvenes en situación de riesgo a superar 
+                        barreras económicas y sociales, ofreciéndoles 
+                        oportunidades para mejorar su calidad de vida.</p>
                 </div>
             </div>
         </div>
@@ -187,46 +198,51 @@
         </div>
     </section>
 
-
-
-
-    <section class="parallax">
+   
+    
+    <section class="parallax">  
         <h1>Educación sin barreras</h1>
         <img src="img/image-removebg-preview (1).png" alt="Laptop con libro" class="parallax-image">
         <img src="img/image-removebg-preview (2).png" alt="Laptop con libro" class="parallax-image">
         <a href="donar.html"><img class="donate-button" src="./img/donar.png"></a>
     </section>
+       
 
-
+    
     <!-----------footer------------->
 
     <section class="footer">
-        <div class="footer-cont">
-            <img src="img/logo_n.png">
-            <h2>InspireUp</h2> <!-- Aquí está el título h1 -->
-
-            <div class="link">
+        <div class="footer-cont"> 
+            <img src="img/logo_n.png" alt="Logo" class="footer-logo">
+            <h2>InspireUp</h2> <!-- Aquí está el título h2 -->
+    
+            <div class="link">          
                 <ul>
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="publicaciones.php">Transparencia</a></li>
                     <li><a href="historia.php">Experiencias</a></li>
                     <li><a href="historia.php">Únete</a></li>
                 </ul>
-            </div>
-
+            </div>        
+    
             <p>&copy; 2024 InspireUp - All Rights Reserved </p>
-
-
+    
+            <!-- Contenedor para el logo, el h2 y la imagen de inicio de sesión -->
+            <div class="login-container">
+                <a href="login.html" class="login-link"> 
+                    <img src="img/iniciarsesion.png" alt="Login" class="login-image"> <!-- Imagen del login -->
+                </a>
+            </div>
+            
             <div class="button-container">
-
                 <button class="button">
                     <a href="https://www.instagram.com/_unigen_" target="_blank"><i class='bx bxl-instagram'></i></a>
                 </button>
-
             </div>
-
-        </div>
+        </div> 
     </section>
+    
 
-    <script src="script.js"></script>
+
+<script src="script.js"></script>
 </body>

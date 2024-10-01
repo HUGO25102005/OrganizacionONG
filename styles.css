@@ -5,7 +5,7 @@
 }
 
  body {
-    background-color: #f3f3f3;
+    background-color: #ebecf3;
     font-family: "Urbanist", sans-serif;
     font-weight: bold;
     margin: 0;
@@ -13,89 +13,79 @@
     text-decoration: none;
   }
   
-  /*----------Navbar section----------*/
-  .navbar {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    padding: 0px 40px;
-  }
-  
-  .navbar .logo img {
-    height: 68px;
-    width: 70px;
-  }
-  
-
-  .navbar .links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    background-color: #222f48;
-    border-radius: 30px;
-    height: 50px;
-    padding: 0 1rem;
-    position: absolute; /* Centrado relativo al navbar */
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .navbar a {
-    text-decoration: none;
-    color: #f9f8f2;
-    width: 180px;
-    height: 30px;
-    line-height: 70px;
-    border-radius: 20px;
-    background-color: #334568;
-
-    font-size: 1rem;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    z-index: 2; /* Asegura que el enlace esté sobre cualquier pseudo-elemento */
-    transition: all 0.3s ease-in-out; 
-  }
-  
-  .navbar a:hover {
-    color: #e8e8e8;
-    background-color: #3f4f6e;
-    box-shadow: 0px 4px 4px #1a2246;
-    transition: ease-in-out;
-  }
-  
-  .navbar li {
-    list-style: none;
-    position: relative;
-  }
-  
-  /* Elimina el pseudo-elemento ::before que interfería */
-  .navbar li::before {
-    content: none;
-  }
-  
-  .usr_img {
-    width: 180px;
-    height: 60px;
-    border-radius: 50%;
-    padding: 0 10px;
-    position: relative; /* Cambiado de 'fixed' a 'relative' para que se alinee correctamente con los otros elementos */
-    transition: transform 0.2s ease-in-out
-  }
-
-  .usr_img:hover {
-    transform: scale(1.05); /* Aumenta el tamaño en un 10% al pasar el cursor */
+/*----------Navbar section----------*/
+.navbar {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 0px 40px;
 }
+
+.navbar .logo img {
+  height: 68px;
+  width: 70px;
+}
+
+.navbar .links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: #222f48;
+  border-radius: 30px;
+  height: 50px;
+  padding: 0 1rem;
+  position: absolute; /* Centrado relativo al navbar */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar .links li {
+  list-style: none;
+}
+
+.navbar .links a {
+  text-decoration: none;
+  color: #f9f8f2;
+  width: 180px;
+  height: 30px;
+  line-height: 70px;
+  border-radius: 20px;
+  background-color: #334568;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Asegura que el enlace esté sobre cualquier pseudo-elemento */
+  transition: all 0.3s ease-in-out; 
+}
+
+.navbar .links a:hover {
+  color: #e8e8e8;
+  background-color: #3f4f6e; /* Color de fondo al pasar el mouse */
+  box-shadow: 0px 4px 4px #1a2246;
+  transition: ease-in-out;
+}
+
+.user a img {
+  width: 180px;
+  height: 60px;
+  transition: transform 0.2s ease-in-out; /* Efecto de zoom al pasar el mouse */
+}
+
+.user a img:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+}
+
   
   /* Video fondo seccion 1 */
   .cont_video {
@@ -286,14 +276,14 @@
 
 /*Section 4 Values*/
 .valores {
-    height: 82vh;
+    height: 103vh;
     text-align: center;
     padding: 30px 0px;
     background-color: #ebecf3;
     color: #262D34;
 } 
 .val_font {
-    height: 75vh;
+    height: 95vh;
     width: 100%;
     margin: 0 auto;
     width: 160VH;
@@ -308,6 +298,7 @@
     flex-direction: column;
     justify-content: space-between; /* Asegura que la imagen esté en la parte inferior */
     align-items: center;
+    overflow: hidden;
 }
 
 
@@ -364,6 +355,7 @@
 }
 
 
+
 /* Sección 4 */
 .sect4 {
   display: flex;
@@ -373,11 +365,9 @@
   background-color: #000;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
   color: #ffff;
   text-align: center;
   position: relative;
-  overflow: hidden; /* Asegura que el contenido se ajuste al border-radius */
 }
 
 .carousel {
@@ -390,7 +380,6 @@
 .carousel img {
   width: 100%;
   height: auto;
-  border-radius: 46px; /* Esto aplica el mismo borde redondeado a las imágenes */
 }
 
 .carousel-slide {
@@ -428,15 +417,16 @@
     height: 15px;
     width: 15px;
     margin: 0 5px;
-    background-color: #b8b8b8;
+    background-color: #c3c1c1;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
 }
 
 .carousel-buttons .dot.active {
-    background-color: #FCF9F9;
+    background-color: #060b64;
 }
+
 
 
 /*Parallax*/
@@ -448,7 +438,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3; /* Cambiar si es necesario */
+    background-color: #ebecf3; /* Cambiar si es necesario */
 }
 
 .parallax h1 {
@@ -503,15 +493,17 @@
   padding: 10px ;
 }
 
-/*.footer p {
-  color: #9a9a9a;
-  font-size: 13px;
-  text-align: center; 
+.login-container {
+  height: 20px;
+  top: 60%;
+  left: 6%;
   position: absolute;
-  bottom: 10px; /* Ajustar la posición vertical */
- /* width: 100%; /* Asegurar que ocupe todo el ancho 
+  transition: transform 0.2s ease-in-out 
 }
-*/
+
+.login-container:hover {
+  transform: translate(-50%, -50%) scale(1.005);
+}
 
 .footer p {
   color: #9a9a9a;
@@ -521,6 +513,7 @@
   left: 25%; /* Mover 30px a la izquierda */
   top: 60%; /* Ajustar la posición vertical */
   letter-spacing: 1px;
+  font-weight: lighter;
 }
 
 
@@ -536,7 +529,7 @@
   list-style-type: none; /* Elimina los marcadores de lista */
   padding: 0; /* Elimina el relleno predeterminado de la lista */
   margin: 0; /* Elimina el margen predeterminado de la lista */
-  display: flex; /* Hace que los elementos de la lista estén en línea */
+  display: flex; 
   text-decoration: none;
 }
 
@@ -547,6 +540,8 @@
   width: 100px;
   letter-spacing: 1px;
   transition: transform 0.5s ease;
+  font-weight: lighter;
+  text-decoration: none;
 }
 
 .link ul li {
@@ -559,7 +554,7 @@
 }
 .footer img {
   height: 60px;
-  top: 44%;
+  top: 28%;
   left: 4%;
   position: absolute;
 }
@@ -569,7 +564,7 @@
   color: #b2ebf9; /* Ajusta el color del texto según tus necesidades */
   position: absolute; /* Permite posicionar el texto dentro del footer */
   left: 15%; /* Ajusta la posición a la mitad horizontal */
-  top: 55%; /* Ajusta la posición a la mitad vertical */
+  top: 40%; /* Ajusta la posición a la mitad vertical */
   transform: translate(-50%, -50%); /* Centra el texto horizontal y verticalmente */
 }
 
@@ -578,20 +573,20 @@
   content: '';
   position: absolute;
   width: 1px; 
-  height: 50px; /* Altura de la línea */
-  background-color: #e3e3e4;/* Color de la línea */
-  top: 45%; /* Posiciona la línea verticalmente debajo del h2 */
-  left: 22.5%; /* Posiciona la línea horizontalmente en el centro */
-  transform: translateX(-50%); /* Centra horizontalmente la línea */
-  z-index: 1; /* Asegura que la línea esté sobre el contenido */
+  height: 150px;
+  background-color: #e3e3e4;
+  top: 20%; 
+  left: 22.5%; 
+  transform: translateX(-50%); 
+  z-index: 1; 
 }
 
 
 
 .button-container {
   position: absolute;
-  right: 6%; /* Ajusta la posición a la mitad horizontal en el lado derecho */
-  top: 48%; /* Ajusta la posición a la mitad vertical */
+  right: 6%; 
+  top: 48%; 
   display: flex;
   width: 100px;
   height: 40px;
@@ -602,7 +597,7 @@
 
 .button {
   outline: 0 !important;
-  border: 2px solid transparent; /* Establece un borde inicial transparente */
+  border: 2px solid transparent; 
   width: 40px;
   height: 40px;
   border-radius: 10%;
@@ -617,13 +612,13 @@
 
 .button:hover {
   transform: translateY(-3px);
-  border-color: #b2ebf9; /* Cambia el color del contorno al hacer hover */
+  border-color: #b2ebf9; 
 }
 
 .button i {
-  font-size: 25px; /* Ajusta el tamaño de la fuente de los iconos */
+  font-size: 25px; 
   color: #fff;
 }
 .button a {
-  color: #fff; /* Establece el color del texto del enlace en blanco */
+  color: #fff; 
 }
