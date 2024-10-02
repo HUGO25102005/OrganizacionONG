@@ -3,7 +3,7 @@ function showTab(tabName) {
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
 
-    tabs.forEach(tab => {
+    tabs.forEach(tab => { 
         tab.classList.remove('active');
     });
     buttons.forEach(button => {
@@ -60,4 +60,42 @@ document.addEventListener('DOMContentLoaded', function () {
         modalAgregarVoluntario.classList.add('hidden');
     });
 });
+
+ // Modal de Visualización
+ const viewModal = document.getElementById("viewModal");
+ const openViewModalBtn = document.getElementById("openViewModal");
+ const closeViewModalBtn = document.querySelector(".closeViewModal");
+
+ openViewModalBtn.onclick = function() {
+     viewModal.classList.remove("hidden");
+ }
+
+ closeViewModalBtn.onclick = function() {
+     viewModal.classList.add("hidden");
+ }
+
+ window.onclick = function(event) {
+     if (event.target === viewModal) {
+         viewModal.classList.add("hidden");
+     }
+ }
+
+ // Modal de Archivo
+ const fileModal = document.getElementById("fileModal");
+ const openFileModalBtn = document.getElementById("openFileModal");
+ const closeFileModalBtn = document.querySelector(".closeFileModal");
+
+ openFileModalBtn.onclick = function() {
+     fileModal.classList.remove("hidden");
+ }
+
+ closeFileModalBtn.onclick = function() {
+     fileModal.classList.add("hidden");
+ }
+
+ window.onclick = function(event) {
+     if (event.target === fileModal) {
+         fileModal.classList.add("hidden");
+     }
+ }
 

@@ -71,11 +71,73 @@
               <!-- Contenedor de botones -->
               <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">
                 <!-- Primer botón -->
-                <a href="#">
-                  <div class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                 
+                <div id="openModalBtn" class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105 cursor-pointer">
                     <p class="text-center text-[20px]">Solicitudes de donación</p>
                   </div>
-                </a>
+                
+                  <div id="myModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white p-8 rounded-lg w-1/2 relative">
+                      <!-- Botón para cerrar el modal -->
+                      <span id="closeModalBtn" class="text-gray-500 hover:text-black text-2xl font-bold absolute top-2 right-4 cursor-pointer">&times;</span>
+                      
+                      <h2 class="text-2xl mb-4">Solicitud</h2>
+                  
+                      <!-- Información -->
+                      <div class="mb-6">
+                        <div class="grid grid-cols-2 gap-4">
+                          <!-- Nombre -->
+                          <div>
+                            <div class="bg-[#CCF9FF] text-center py-2 rounded-[20px]">Nombre</div>
+                            <div class="text-center py-2">Ernesto Jimenez</div>
+                          </div>
+                          <!-- Material -->
+                          <div>
+                            <div class="bg-[#CCF9FF] text-center py-2 rounded-[20px]">Material</div>
+                            <div class="text-center py-2">Aire acondicionado</div>
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <!-- Fotos del material -->
+                      <div class="text-center text-lg mb-4 bg-[#CCF9FF] text-center py-2 rounded-[20px]">Fotos del material</div>
+                      <div class="flex justify-center gap-4 mb-6">
+                        <img src="https://via.placeholder.com/150" alt="Foto del material 1" class="w-32 h-32 object-cover">
+                        <img src="https://via.placeholder.com/150" alt="Foto del material 2" class="w-32 h-32 object-cover">
+                      </div>
+                  
+                      <!-- Botones de acción -->
+                      <div class="flex justify-center gap-6">
+                        <button class="bg-red-500 hover:bg-red-600 text-black py-2 px-4 rounded-[20px]">No aceptar</button>
+                        <button class="bg-green-500 hover:bg-green-600 text-black py-2 px-4 rounded-[20px]">Aceptar</button>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <script>
+                    // Obtener los elementos
+                    var modal = document.getElementById("myModal");
+                    var openModalBtn = document.getElementById("openModalBtn");
+                    var closeModalBtn = document.getElementById("closeModalBtn");
+                
+                    // Función para abrir el modal
+                    openModalBtn.onclick = function() {
+                      modal.classList.remove("hidden");
+                    }
+                
+                    // Función para cerrar el modal
+                    closeModalBtn.onclick = function() {
+                      modal.classList.add("hidden");
+                    }
+                
+                    // Cerrar el modal si el usuario hace clic fuera del contenido del modal
+                    window.onclick = function(event) {
+                      if (event.target == modal) {
+                        modal.classList.add("hidden");
+                      }
+                    }
+                  </script>
+                  
                 
                 <!-- Segundo botón -->
                 <a href="#">
@@ -90,6 +152,6 @@
               
         </div>
   </div>
-        
+     <script src="scripts.js"></script>   
 </body>
 </html>
