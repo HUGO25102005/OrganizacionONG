@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Usuarios\UserController;
 use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
@@ -34,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/donaciones', [DashboardController::class, 'adminDonaciones'])->name('admin.donaciones');
         Route::get('/programas', [DashboardController::class, 'adminProgramas'])->name('admin.programas');
         Route::get('/usuarios', [DashboardController::class, 'adminUsuarios'])->name('admin.usuarios');
+        Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
     });
 
     Route::middleware(['role:cordi'])->prefix('dashboard/cordi')->group(function () {

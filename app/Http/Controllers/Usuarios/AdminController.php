@@ -11,14 +11,6 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Simular que los datos provienen del modelo User autenticado
-         session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
-
-        return view('Dashboard.Admin.index');
-        
-    }
 
     /**
      * Show the form for creating a new resource.

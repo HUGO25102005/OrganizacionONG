@@ -13,6 +13,15 @@
 
     <div
         class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="container w-full mb-5">
             <h2 class="text-center font-semibold text-3xl">
                 Lista de {{ $tipo }}{{ $tipo === 'Administrador' || $tipo === 'Coordinador' ? 'es' : 's' }}
@@ -25,7 +34,8 @@
         <div class="content w-full">
             <!-- Administradores Tab -->
             <div id="administradores" class="tab-content active">
-                <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
+                <div
+                    class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
                     <a href="{{ route('admin.usuarios', ['tipo' => 'Administrador']) }}"
                         class="tab-a {{ $tipo === 'Administrador' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
                         Administradores
@@ -42,10 +52,21 @@
                         class="tab-a {{ $tipo === 'Beneficiario' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
                         Beneficiarios
                     </a>
-                    <button
-                        class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                        <i class='bx bx-user-plus mr-2'></i> Agregar {{ $tipo }}
-                    </button>
+                    @switch($tipo)
+                        @case('Administrador')
+                            @include('components.modal-admin')
+                        @break
+
+                        @case('Coordinador')
+                            @include('components.modal-coordi')
+                        @break
+                        @case('Voluntario')
+                            @include('components.modal-volunt')
+                        @break
+
+                        @default
+                    @endswitch
+
                 </div>
 
                 <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
@@ -54,7 +75,7 @@
                             <th class="py-3 px-4 rounded-l-lg">Número</th>
                             <th class="py-3 px-4">Nombre completo</th>
                             <th class="py-3 px-4">Email</th>
-                            <th class="py-3 px-4 rounded-rr-lg">Acciones</th>
+                            <th class="py-3 px-4 rounded-r-lg">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,16 +92,16 @@
                                     </td>
                                 </tr>
                             @else
-                            <tr class="border-b border-gray-300">
-                                <td class="py-3 px-4 text-center">{{ $usuario->ID_Beneficiario }}</td>
-                                <td class="py-3 px-4 text-center">{{ $usuario->Nombre_Completo }}</td>
-                                <td class="py-3 px-4 text-center">{{ $usuario->Correo_Electronico }}</td>
-                                <td class="py-3 px-4 text-center">
-                                    <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                                    <button class="delete-button text-red-500 text-xl"><i
-                                            class='bx bx-trash'></i></button>
-                                </td>
-                            </tr>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-3 px-4 text-center">{{ $usuario->ID_Beneficiario }}</td>
+                                    <td class="py-3 px-4 text-center">{{ $usuario->Nombre_Completo }}</td>
+                                    <td class="py-3 px-4 text-center">{{ $usuario->Correo_Electronico }}</td>
+                                    <td class="py-3 px-4 text-center">
+                                        <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
+                                        <button class="delete-button text-red-500 text-xl"><i
+                                                class='bx bx-trash'></i></button>
+                                    </td>
+                                </tr>
                             @endif
                         @endforeach
                     </tbody>

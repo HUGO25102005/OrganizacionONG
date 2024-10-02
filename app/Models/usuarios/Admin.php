@@ -37,7 +37,7 @@ class Admin extends User{
     ];
 
     protected $hidden = [
-        'Password',
+        'password',
         'remember_token',
     ];
 }
