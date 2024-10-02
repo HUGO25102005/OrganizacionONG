@@ -95,11 +95,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
     overflow: hidden; 
     z-index: 1;
   }
   
+
+
   .back-video {
     width: 100%;
     height: 100%;
@@ -129,8 +130,7 @@
     left: 0;
     width: 100%;
     height: 60%;
-    
-    z-index: 2;
+    z-index: 3;
   }
   
   
@@ -276,14 +276,14 @@
 
 /*Section 4 Values*/
 .valores {
-    height: 103vh;
+    height: 138vh;
     text-align: center;
     padding: 30px 0px;
     background-color: #ebecf3;
     color: #262D34;
 } 
 .val_font {
-    height: 95vh;
+    height: 122vh;
     width: 100%;
     margin: 0 auto;
     width: 160VH;
@@ -361,7 +361,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 65vh;
+  height: 90vh;
   background-color: #000;
   justify-content: center;
   align-items: center;
@@ -391,14 +391,14 @@
 
 .carousel-text {
     position: absolute;
-    bottom: 250px;
+    bottom: 330px;
     left: 50%;
     transform: translateX(-50%);
     color: #fff;
     padding: 10px 20px;
     border-radius: 10px;
 
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     line-height: 1.5; 
  /* Ajusta el padding para tener espacio a los lados */
     text-align: center; /* Centra el texto */
@@ -417,14 +417,14 @@
     height: 15px;
     width: 15px;
     margin: 0 5px;
-    background-color: #c3c1c1;
+    background-color: #f5eeee;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
 }
 
 .carousel-buttons .dot.active {
-    background-color: #060b64;
+    background-color: #243870;
 }
 
 
@@ -432,58 +432,63 @@
 /*Parallax*/
 
 .parallax {
-    height: 130vh;
-    width: 100%;
-    position: relative; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ebecf3; /* Cambiar si es necesario */
+  height: 90vh;
+  margin-bottom: 20vh;
+  width: 100%;
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebecf3; /* Cambiar si es necesario */
 }
 
 .parallax h1 {
-    text-align: center;
-    color: #0B237A;
-    font-size: 10vw;
-    font-family: "Wallpoet", sans-serif;
-    font-weight: 400;
-    z-index: 1;
-    position: relative;
-    margin: 0;
+  text-align: center;
+  color: #0B237A;
+  font-size: 10vw;
+  font-family: "Wallpoet", sans-serif;
+  font-weight: 400;
+  z-index: 1;
+  position: relative;
+  margin: 0;
 }
 
 .parallax-image {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 30%; /* Ajusta el tamaño según sea necesario */
-    z-index: 2;
+  position: absolute;
+  filter: blur(2px);
+  width: 200%; /* Aumenta el ancho al 150% */
+  height: auto; /* Mantiene la proporción */
+  top: 45%;
+  left: 32%;
+  transform: translateY(-50%);
+  max-width: 30%; /* Ajusta el tamaño según sea necesario */
+  z-index: 0;
 }
 
 .donate-button {
-    width: 250px;
-    height: 100px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 80px; /* Ajusta según sea necesario */
-    padding: 10px 30px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out
+  width: 250px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 45vh;
+  padding: 10px 30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out
 }
 
 
-  .donate-button:hover {
-    transform: translate(-50%, -50%) scale(1.05); /* Aumenta el tamaño en un 10% al pasar el cursor */
+.donate-button:hover {
+  transform: translate(-50%, -50%) scale(1.05); /* Aumenta el tamaño en un 10% al pasar el cursor */
 }
 
 
 /*Footer*/
 .footer {
   background-color: #232323;
-  height: 25vh;
+  height: 26vh;
   position: relative;
   
 }
