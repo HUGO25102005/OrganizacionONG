@@ -6,11 +6,11 @@
     <ul class="links">
         <li><a href="{{route('conocenos.index')}}">CONÓCENOS</a></li>
         <li><a href="{{route('transparencia.index')}}">TRANSPARENCIA</a></li>
-        <li><a href="{{route('experiencias.index')}}">EXPERIENCIAS</a></li>
+        <li><a href="{{route('nuestro-trabajo.index')}}">NUESTRO TRABAJO</a></li>
         <li><a href="{{route('colabora.index')}}">COLABORA</a></li>
     </ul>
     <div class="user">
-        <img class="usr_img" src="{{ asset('images/donar.png') }}" onclick="window.location.href='{{route('donar.index')}}'">
+            <a href="{{route('donar.index')}}"><img class="usr_img" src="{{ asset('images/donar.png') }}" alt="Donar"></a>
     </div>
 </div> 
 

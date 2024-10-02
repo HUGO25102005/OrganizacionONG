@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
-use App\Http\Controllers\Page\ExperienciasController;
+use App\Http\Controllers\Page\NuestroTrabajoController;
 use App\Http\Controllers\Page\TrasparenciaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Usuarios\AdminController;
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'page'], function () {
     Route::resources([
         'conocenos' => ConocenosController::class,
         'transparencia' => TrasparenciaController::class,
-        'experiencias' => ExperienciasController::class,
+        'nuestro-trabajo' => NuestroTrabajoController::class,
         'colabora' => ColaboraController::class,
         'donar' => DonarController::class,
     ]);

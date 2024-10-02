@@ -6,7 +6,7 @@
         <ul>
             <li><a href="{{route('conocenos.index')}}">Inicio</a></li>
             <li><a href="{{route('transparencia.index')}}">Transparencia</a></li>
-            <li><a href="{{route('experiencias.index')}}">Experiencias</a></li>
+            <li><a href="{{route('nuestro-trabajo.index')}}">Experiencias</a></li>
             <li><a href="{{route('colabora.index')}}">Únete</a></li>
         </ul>
     </div>        
