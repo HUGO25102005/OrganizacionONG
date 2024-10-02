@@ -44,6 +44,11 @@ class InformesSeguimientos extends Model
         return $this->belongsTo(User::class, 'ID_Usuario', 'id');
     }
 
+
+    public static function getTotalInformesSeguimineto(){
+        return self::count();
+    }
+
     // Definir los tipos de datos de las fechas
     protected $casts = [
         'Fecha_Informe' => 'date',

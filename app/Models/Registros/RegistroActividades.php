@@ -37,6 +37,12 @@ class RegistroActividades extends Model
         return $this->belongsTo(ProgramasEducativos ::class, 'ID_Programa', 'ID_Programa');
     }
 
+
+    public static function getTotalActividades(){
+        return self::count();
+    }
+
+
     // Relación con el modelo Beneficiario
     public function beneficiario()
     {

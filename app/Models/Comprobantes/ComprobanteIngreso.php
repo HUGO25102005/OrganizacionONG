@@ -2,9 +2,12 @@
 
 namespace App\Models\Comprobantes;
 
+use App\Models\Apoyo\Funciones;
 use App\Models\Registros\Donacion;
 use App\Models\usuarios\Donante;
 use App\Models\Registros\RegistroIngresos;
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,13 +15,22 @@ class ComprobanteIngreso extends Model
 {
     use HasFactory;
 
-    // Define la tabla asociada a este modelo
+    // Nombre de la tabla asociada
     protected $table = 'comprobante_ingresos';
 
-    // Desactiva los timestamps si no tienes columnas created_at y updated_at
+    // Deshabilitar timestamps automáticos si no se usan
     public $timestamps = false;
 
-    // Define los atributos que son asignables en masa
+    // Definir la clave primaria compuesta
+    protected $primaryKey = ['ID_folio', 'ID_no_comprobante'];
+
+    // Definir el tipo de clave primaria
+    protected $keyType = 'integer';
+
+    // Deshabilitar el autoincremento, ya que las claves primarias no son autoincrementales
+    public $incrementing = false;
+
+    // Atributos que se pueden asignar masivamente
     protected $fillable = [
         'ID_folio',
         'ID_no_comprobante',
@@ -30,51 +42,40 @@ class ComprobanteIngreso extends Model
         'RFC_donante',
         'Direccion_fiscal',
         'Metodo_pago',
-        'Fecha_creacion_registro',
+        'Fecha_creacion_registro'
     ];
 
-    // Define la clave primaria compuesta
-    protected $primaryKey = ['ID_folio', 'ID_no_comprobante'];
-    public $incrementing = false; // Desactiva auto-increment para clave primaria compuesta
-
-
     //FUNCIONES -------------------------------------
-    public static function getTotalDonaciones(){
+    public static function getMontoTotalDonaciones()
+    {
         return self::sum('Total');
     }
+    public static function getTotalRecaudadoSemana()
+    {
+        $dias = Funciones::obtenerRangoSemana();
+        // Obtener las fechas en formato Y-m-d
+        $primerDia = $dias['primer_dia'];
+        $ultimoDia = $dias['ultimo_dia'];
+
+
+        return self::where('Fecha_creacion_registro', '>=', $primerDia)
+            ->where('Fecha_creacion_registro', '<=', $ultimoDia)
+            ->sum('Total');
+    }
+
+    //FIN FUNCIONES -------------------------------------
 
 
 
-    /**
-     * Relación con la tabla `donacion`.
-     * Un comprobante de ingreso pertenece a una donación.
-     */
+    // Relación con la tabla 'donacion'
     public function donacion()
     {
-        return $this->belongsTo(Donacion::class, 'ID_donacion');
+        return $this->belongsTo(Donacion::class, ['ID_donacion', 'ID_Donante'], ['ID_donacion', 'ID_Donante']);
     }
 
-    /**
-     * Relación con el modelo `Donante`.
-     * Un comprobante de ingreso pertenece a un donante.
-     */
-    public function donante()
-    {
-        return $this->belongsTo(Donante::class, 'ID_Donante');
-    }
 
-    /**
-     * Relación con la tabla `RegistroIngreso`.
-     * Un comprobante de ingreso puede tener varios registros de ingreso.
-     */
-    public function registroIngresos()
-    {
-        return $this->hasMany(RegistroIngresos::class, [
-            'ID_folio_comprobante', 
-            'no_comprobante_ingreso'
-        ], [
-            'ID_folio', 
-            'ID_no_comprobante'
-        ]);
-    }
+
+
+    // FUNCIONES APOYO--------------------------
+
 }

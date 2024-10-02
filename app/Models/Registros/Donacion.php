@@ -2,6 +2,7 @@
 
 namespace App\Models\Registros;
 
+use App\Models\Apoyo\Funciones;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\usuarios\Donante;
@@ -38,6 +39,21 @@ class Donacion extends Model
 
 
     // FUNCIONES --------------------------------
+
+    public static function getTotalDonaciones()
+    {
+        return Donacion::count();
+    }
+    public static function getTotalDonacionesSemana()
+    {
+        $dias = Funciones::obtenerRangoSemana();
+        // Obtener las fechas en formato Y-m-d
+        $primerDia = $dias['primer_dia'];
+        $ultimoDia = $dias['ultimo_dia'];
+
+        return Donacion::where('Fecha_Registro', '>=', $primerDia)
+        ->where('Fecha_Registro', '<=', $ultimoDia)->count();
+    }
 
 
     /**

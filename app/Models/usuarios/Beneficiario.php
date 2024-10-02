@@ -49,6 +49,10 @@ class Beneficiario extends Model
         return $this->belongsTo(ProgramasEducativos::class, 'ID_Programa', 'ID_Programa');
     }
 
+    public static function getTotalBeneficiarios(){
+        return self::count();
+    }
+
     // Definir los tipos de datos de las fechas
     protected $casts = [
         'Fecha_Nacimiento' => 'date',

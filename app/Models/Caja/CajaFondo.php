@@ -2,6 +2,7 @@
 
 namespace App\Models\Caja;
 
+use App\Models\Registros\RegistroEgresos;
 use App\Models\Registros\RegistroIngresos;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,6 +42,6 @@ class CajaFondo extends Model
     
         public function registroEgreso()
         {
-            return $this->belongsTo(RegistroEgreso::class, 'ID_no_comprobante', 'ID_no_comprobante');
+            return $this->belongsTo(RegistroEgresos::class, 'ID_no_comprobante', 'ID_no_comprobante');
         }
 }

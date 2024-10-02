@@ -41,6 +41,10 @@ class ProgramasEducativos extends Model
         return $this->belongsTo(User::class, 'ID_Usuario', 'id');
     }
 
+
+    public static function getTotalProgramasActivos(){
+        return self::where('Estado', 'Ejecucion')->count();
+    }
     // Opcionalmente, puedes personalizar los timestamps si no deseas usarlos
     public $timestamps = true;
 

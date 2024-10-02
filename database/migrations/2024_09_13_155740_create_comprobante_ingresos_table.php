@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('RFC_donante', 20);
             $table->string('Direccion_fiscal', 255);
             $table->string('Metodo_pago', 45)->nullable();
-            $table->date('Fecha_creacion_registro');
+            $table->date('Fecha_creacion_registro')->default(now());
 
             // Clave primaria compuesta
             $table->primary(['ID_folio', 'ID_no_comprobante']);
