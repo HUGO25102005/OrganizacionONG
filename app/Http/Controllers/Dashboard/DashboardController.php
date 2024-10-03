@@ -116,4 +116,16 @@ class DashboardController extends Controller
 
         return view('Dashboard.Admin.usuarios', compact('tipo', 'datos')); // Pasa los datos a la vista
     }
+    public function coordiHome()
+    {
+        session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
+        return view('Dashboard.Coordinador.index');
+    }
+    public function voluntarioHome()
+    {
+
+
+        session(['name' => auth()->user()->name, 'rol' => auth()->user()->Rol]);
+        return view('Dashboard.Voluntario.index');
+    }
 }

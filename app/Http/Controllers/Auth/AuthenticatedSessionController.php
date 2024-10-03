@@ -29,15 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         // Obtener el rol del usuario autenticado
         $user = Auth::user();
-        
+
         // Redirigir según el rol del usuario
         if ($user->Rol === 'Administrador') {
             return redirect()->intended(route('admin.home'));
-        } 
-        // elseif ($user->Rol === 'coordinador') {
-        //     return redirect()->intended(route('coordinador.index')); // Crear ruta coordinador.index
-        // } 
-        else {
+        } elseif ($user->Rol === 'Coordinador') {
+            return redirect()->intended(route('cordi.home')); // Crear ruta coordinador.index
+        } elseif ($user->Rol === 'Voluntario') {
+            return redirect()->intended(route('voluntario.home')); // Crear ruta coordinador.index
+        } else {
             return redirect()->intended(route('dashboard')); // Usuario común
         }
     }

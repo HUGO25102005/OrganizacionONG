@@ -39,13 +39,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
     });
 
-    Route::middleware(['role:cordi'])->prefix('dashboard/cordi')->group(function () {
-        Route::get('/home', [DashboardController::class, 'cordiHome'])->name('cordi.home');
+    Route::middleware([RoleMiddleware::class .':Coordinador'])->prefix('dashboard/cordi')->group(function () {
+        Route::get('/home', [DashboardController::class, 'coordiHome'])->name('cordi.home');
         Route::get('/profile', [DashboardController::class, 'cordiProfile'])->name('cordi.profile');
         Route::get('/settings', [DashboardController::class, 'cordiSettings'])->name('cordi.settings');
     });
 
-    Route::middleware(['role:voluntario'])->prefix('dashboard/voluntario')->group(function () {
+    Route::middleware([RoleMiddleware::class .':Voluntario'])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardController::class, 'voluntarioHome'])->name('voluntario.home');
         Route::get('/profile', [DashboardController::class, 'voluntarioProfile'])->name('voluntario.profile');
         Route::get('/settings', [DashboardController::class, 'voluntarioSettings'])->name('voluntario.settings');
