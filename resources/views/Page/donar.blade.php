@@ -31,7 +31,7 @@
                         shape: 'pill',
                     },
                     image: {
-                        src: './img/donar.png',
+                        src: "{{asset('images/donar.png')}}",
                         alt: 'Donar con el botón PayPal',
                         title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
                     }

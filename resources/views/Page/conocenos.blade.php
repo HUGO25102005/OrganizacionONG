@@ -58,7 +58,7 @@
     <section class="cont_video" id="home">
 
         <video autoplay loop muted plays-inline class="back-video">
-            <source src="{{ asset('images/font_reversa.mov') }}" type="video/mp4">
+            <source src="{{ asset('images/font_reversa.mp4') }}" type="video/mp4">
         </video>
 
         <div class="statistics">

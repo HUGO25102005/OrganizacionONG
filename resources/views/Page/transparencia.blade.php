@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{asset('imges/img_3.jpg')}}">
+                    <img src="{{asset('images/img_3.jpg')}}">
                     <div class="contenido">
                         <div class="title">Lo Personal es Político</div>
                         <div class="topic">Sororidad</div>
@@ -58,7 +58,7 @@
             <!-- list thumnail -->
             <div class="thumbnail">
                 <div class="item">
-                    <img src="{{asset('imges/img1.jpg')}}">
+                    <img src="{{asset('images/img1.jpg')}}">
                     <div class="contenido">
                         <div class="title">
                             Educación Transformadora
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{asset('imges/img3.jpg')}}">
+                    <img src="{{asset('images/img3.jpg')}}">
                     <div class="contenido">
                         <div class="title">
                             Planes Educativos
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{asset('imges/img_2.jpg')}}">
+                    <img src="{{asset('images/img_2.jpg')}}">
                     <div class="contenido">
                         <div class="title">
                             Formación Academica
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{asset('imges/img_3.jpg')}}">
+                    <img src="{{asset('images/img_3.jpg')}}">
                     <div class="contenido">
                         <div class="title">
                             Lo Personal es Político
