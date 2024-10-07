@@ -2,8 +2,8 @@
 
 namespace App\Models\Registros;
 
-use App\Models\ProgramasEducativos\ProgramasEducativos;
-use App\Models\usuarios\Beneficiario;
+use App\Models\ProgramasEducativos\ProgramaEducativo;
+use App\Models\Usuarios\Trabajadores\Voluntario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,47 +11,32 @@ class RegistroActividades extends Model
 {
     use HasFactory;
 
-    // Nombre de la tabla asociada
+    // Especifica la tabla si el nombre no sigue la convención plural
     protected $table = 'registro_actividades';
 
-    // Clave primaria de la tabla
-    protected $primaryKey = 'ID_Registro';
-
-    // Atributos que se pueden asignar masivamente
+    // Define los atributos que se pueden asignar masivamente
     protected $fillable = [
-        'ID_Programa',
-        'ID_Beneficiario',
-        'Fecha_Actividad',
-        'Descripcion_Actividad',
-        'Resultados_Actividad',
-        'Comentarios_Adicionales',
-        'Fecha_Registro',
+        'id_programa',
+        'id_voluntario',
+        'fecha_actividad',
+        'descripcion_actividad',
+        'resultados_actividad',
+        'comentarios_adicionales',
     ];
 
-    // Definir que la tabla tiene timestamps (created_at y updated_at)
-    public $timestamps = true;
-
-    // Relación con el modelo ProgramaEducativo
+    // Define las relaciones con otros modelos
     public function programa()
     {
-        return $this->belongsTo(ProgramasEducativos ::class, 'ID_Programa', 'ID_Programa');
+        return $this->belongsTo(ProgramaEducativo::class, 'id_programa');
     }
 
+    public function voluntario()
+    {
+        return $this->belongsTo(Voluntario::class, 'id_voluntario');
 
+    }    
+    
     public static function getTotalActividades(){
         return self::count();
     }
-
-
-    // Relación con el modelo Beneficiario
-    public function beneficiario()
-    {
-        return $this->belongsTo(Beneficiario::class, 'ID_Beneficiario', 'ID_Beneficiario');
-    }
-
-    // Definir los tipos de datos de las fechas
-    protected $casts = [
-        'Fecha_Actividad' => 'date',
-        'Fecha_Registro' => 'datetime',
-    ];
 }

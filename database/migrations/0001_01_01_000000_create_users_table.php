@@ -60,9 +60,6 @@ return new class extends Migration
             $table->string('ocupacion', 100);
             $table->tinyInteger('num_dependientes')->comment('Numero de personas que dependen del usuario');
             $table->float('ingresos_mensuales')->comment('Ingresos del usuario, si no es el caso, dejar en blanco')->nullable();
-            $table->string('nombre_contacto_emerg', 100);
-            $table->string('relacion_contacto_emerg', 20);
-            $table->string('telefono_contacto_emerg', 10);
             $table->timestamps();
         });
         Schema::create('contacto_emergencia', function (Blueprint $table) {
