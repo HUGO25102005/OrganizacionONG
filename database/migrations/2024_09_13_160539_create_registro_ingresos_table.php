@@ -12,25 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registro_ingresos', function (Blueprint $table) {
-            $table->integer('ID_ingreso'); // Columna INT para ID_ingreso
-            $table->integer('ID_no_comprobante'); // Corregido el nombre de la columna
-            $table->integer('ID_folio_comprobante'); // Columna INT para ID_folio_comprobante
-            $table->integer('no_comprobante_ingreso'); // Columna INT para no_comprobante_ingreso
+            $table->id();
+            $table->foreignId('id_donacion')->constrained('donacion')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del donante');
+            $table->decimal('monto', 10, 2);
+            $table->timestamps();
 
-            // Clave primaria compuesta
-            $table->primary(['ID_ingreso', 'ID_no_comprobante']); // Nombre corregido
-
-            // Índices únicos
-            $table->unique('ID_ingreso');
-            $table->unique('ID_no_comprobante'); // Nombre corregido
-
-            // Índice compuesto para la clave foránea
-            $table->index(['ID_folio_comprobante', 'no_comprobante_ingreso'], 'fk_registro_ingresos_comprobante_ingreso1_idx');
-
-            // Clave foránea hacia 'comprobante_ingresos'
-            $table->foreign(['ID_folio_comprobante', 'no_comprobante_ingreso'], 'fk_reg_ing_comprobante')
-                ->references(['ID_folio', 'ID_no_comprobante'])
-                ->on('comprobante_ingresos');
         });
     }
 

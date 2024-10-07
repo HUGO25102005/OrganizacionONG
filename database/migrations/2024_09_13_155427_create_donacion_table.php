@@ -14,23 +14,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donacion', function (Blueprint $table) {
-            $table->unsignedBigInteger('ID_donacion');
-            $table->unsignedBigInteger('ID_Donante');
-            $table->decimal('Monto_Donacion', 10, 2);
-            $table->tinyInteger('Metodo_Pago');
-            $table->string('Moneda', 3);
-            $table->string('Concepto_donacion', 255);
-            $table->string('Frecuencia_Pago', 45);
-            $table->string('Area_Interes', 45)->nullable();
-            $table->timestamp('Fecha_Registro')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('Ultima_Actualizacion')->nullable();
-
-            // Clave primaria compuesta
-            $table->primary(['ID_donacion', 'ID_Donante']);
-
-            // Otros índices necesarios
-            $table->unique('ID_donacion');
-            $table->index('ID_Donante');
+            $table->id();
+            $table->string('id_transaccion');
+            $table->foreignId('payer_id')->constrained('donantes')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del donante');
+            $table->tinyInteger('currency');
+            $table->decimal('monto', 10, 2);
+            $table->timestamps();
         });
     }
 

@@ -13,17 +13,13 @@ return new class extends Migration
     {
         Schema::create('registro_actividades', function (Blueprint $table) {
 
-            $table->id('ID_Registro');
-            $table->unsignedBigInteger('ID_Programa');
-            $table->unsignedBigInteger('ID_Beneficiario');
-            $table->date('Fecha_Actividad');
-            $table->text('Descripcion_Actividad');
-            $table->text('Resultados_Actividad')->nullable();
-            $table->text('Comentarios_Adicionales')->nullable();
-            $table->timestamp('Fecha_Registro')->useCurrent();
-
-            $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('cascade');
-            $table->foreign('ID_Beneficiario')->references('ID_Beneficiario')->on('beneficiarios')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('id_programa')->constrained('programas_educativos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del programa educativo');
+            $table->foreignId('id_voluntario')->constrained('voluntarios')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de voluntario');
+            $table->date('fecha_actividad');
+            $table->text('descripcion_actividad');
+            $table->text('resultados_actividad');
+            $table->text('comentarios_adicionales')->nullable();
 
             $table->timestamps();
             

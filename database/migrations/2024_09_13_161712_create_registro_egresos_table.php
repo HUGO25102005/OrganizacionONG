@@ -12,23 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registro_egresos', function (Blueprint $table) {
-            $table->integer('ID_egreso');
-            $table->integer('ID_no_comprobante');
-
-            // Clave primaria compuesta
-            $table->primary(['ID_egreso', 'ID_no_comprobante']);
-
-            // Índices únicos
-            $table->unique('ID_egreso');
-            $table->unique('ID_no_comprobante');
-
-            // Índice para la clave foránea
-            $table->index('ID_no_comprobante');
-
-            // Clave foránea hacia 'comprobante_egreso'
-            $table->foreign('ID_no_comprobante')
-                ->references('ID_no_comprobante')
-                ->on('comprobante_egreso');
+            $table->id();
+            $table->foreignId('id_presupuesto')->constrained('presupuestos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del donante');
+            $table->decimal('monto', 10, 2);
+            $table->timestamps();
         });
     }
 

@@ -13,21 +13,20 @@ return new class extends Migration
     {
         Schema::create('informes_seguimientos', function (Blueprint $table) {
 
-            $table->id('ID_Informe');
-            $table->unsignedBigInteger('ID_Programa');
-            $table->unsignedBigInteger('ID_Usuario')->nullable();
-            $table->date('Fecha_Informe');
-            $table->text('Resumen_Informe');
-            $table->text('Cumplimiento_Indicadores');
-            $table->text('Desafios_Encontrados');
-            $table->text('Recomendaciones')->nullable();
-            $table->text('Comentarios_Adicionales')->nullable();
-            $table->timestamp('Fecha_Registro')->useCurrent();
-
-            $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('cascade');
-            $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
-
+            $table->id('id_informe');
+            $table->foreignId('id_programa_educativo')->constrained('programas_educativos')->onDelete('cascade')->comment('Clave foranea de programas_educativos');
+            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajador');
+            //$table->foreignId('id_voluntario')->constrained('trabajadores')->onDelete('set null')->onUpdate('cascade')->comment('Clave foranea de trabajador');
+            $table->date('fecha_informe');
+            $table->text('resumen_informe');
+            $table->text('cumplimiento_indicadores');
+            $table->text('desafios_encontrados');
+            $table->text('recomendaciones')->nullable();
+            $table->text('comentarios_Adicionales')->nullable();
             $table->timestamps();
+
+            // $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('cascade');
+            // $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             
         });
     }

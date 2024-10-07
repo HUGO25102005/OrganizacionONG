@@ -13,18 +13,13 @@ return new class extends Migration
     {
         Schema::create('evaluaciones', function (Blueprint $table) {
 
-            $table->id('ID_Evaluacion');
-            $table->unsignedBigInteger('ID_Programa');
-            $table->unsignedBigInteger('ID_Beneficiario');
-            $table->date('Fecha_Evaluacion');
-            $table->text('Metodologia');
-            $table->text('Resultados_Evaluacion');
-            $table->text('Recomendaciones')->nullable();
-            $table->text('Comentarios_Adicionales')->nullable();
-            $table->timestamp('Fecha_Registro')->useCurrent();
+            $table->id();
+            $table->foreignId('id_programa')->constrained('programas_educativos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del programa educativo');
+            $table->text('metodologia');
+            $table->text('resultados_evaluacion')->comment('es una retroalimentacion');
+            $table->text('recomendaciones')->nullable();
+            $table->text('comentarios_adicionales')->nullable();
 
-            $table->foreign('ID_Programa')->references('ID_Programa')->on('programas_educativos')->onDelete('cascade');
-            $table->foreign('ID_Beneficiario')->references('ID_Beneficiario')->on('beneficiarios')->onDelete('cascade');
 
             $table->timestamps();
             
