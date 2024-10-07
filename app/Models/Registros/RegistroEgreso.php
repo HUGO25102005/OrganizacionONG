@@ -3,7 +3,6 @@
 namespace App\Models\Registros;
 
 use App\Models\Caja\Presupuesto;
-use App\Models\Comprobantes\ComprobanteEgreso;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

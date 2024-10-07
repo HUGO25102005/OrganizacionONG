@@ -2,7 +2,6 @@
 
 namespace App\Models\Registros;
 
-use App\Models\Comprobantes\ComprobanteIngreso;
 use App\Models\Donaciones\Donacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

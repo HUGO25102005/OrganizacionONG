@@ -7,6 +7,7 @@ use App\Http\Controllers\Page\DonarController;
 use App\Http\Controllers\Page\NuestroTrabajoController;
 use App\Http\Controllers\Page\TrasparenciaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
 use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
@@ -66,6 +67,11 @@ Route::group(['prefix' => 'page'], function () {
     Route::get('/', function () {
         return redirect()->route('conocenos.index');
     });
+});
+Route::group(['prefix' => 'terminosCondiciones'], function () {
+
+    Route::get('/',[TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
+
 });
 
 require __DIR__ . '/auth.php';
