@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="dash.html">Panel de Control</a>
+            <a href="donaciones.html">Donaciones</a>
+            <a href="programas.html">Programas</a>
+            <a href="usuarios.html">Usuarios</a>
+        </nav>
+    </header>
+
+    <div class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
+        <div class="container w-full">
+            <div class="header flex justify-center space-x-20 mb-4">
+                <button class="tab-button active bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] text-white py-2 px-6 rounded-full" onclick="showTab('administradores')">Administradores</button>
+                <button class="tab-button bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] text-white py-2 px-6 rounded-full" onclick="showTab('coordinadores')">Coordinadores</button>
+                <button class="tab-button bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] text-white py-2 px-6 rounded-full" onclick="showTab('voluntarios')">Voluntarios</button>
+                <button class="tab-button bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] text-white py-2 px-6 rounded-full" onclick="showTab('beneficiarios')">Beneficiarios</button>
+            </div>
+
+            <div class="content w-full">
+
+                <!-- Administradores Tabla -->
+                <div id="administradores" class="tab-content active">
+                    <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg ">
+                        <h2 class="admin-title text-lg">Lista de administradores</h2>
+                        <button class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
+                            <i class='bx bx-user-plus mr-2'></i> Agregar administrador
+                        </button>
+                    </div>
+
+                    <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
+                        <thead class="bg-[#2A334B] text-white">
+                            <tr>
+                                <th class="py-3 px-4">Número</th>
+                                <th class="py-3 px-4">Nombre completo</th>
+                                <th class="py-3 px-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-3 px-4 text-center">1</td>
+                                <td class="py-3 px-4 text-center">Carlos Manuel Eusebio Alejo</td>
+                                <td class="py-3 px-4 text-center">
+                                    <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
+                                    <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                
+                <!-- Coordinadores Tabla -->
+                <div id="coordinadores" class="tab-content">
+                    <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
+                        <h2 class="admin-title">Lista de coordinadores</h2>
+                        <button id="botonAbrirModal"class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
+                            <i class='bx bx-user-plus mr-2'></i> Agregar coordinador
+                        </button>
+                    </div>
+                    
+                    <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
+                        <thead class="bg-[#2A334B] text-white">
+                            <tr>
+                                <th class="py-3 px-4">Número</th>
+                                <th class="py-3 px-4">Nombre completo</th>
+                                <th class="py-3 px-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-3 px-4 text-center">1</td>
+                                <td class="py-3 px-4 text-center">Juan Pérez</td>
+                                <td class="py-3 px-4 text-center">
+                                    <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
+                                    <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Voluntarios Tabla -->
+                <div id="voluntarios" class="tab-content">
+                    <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
+                        <h2 class="admin-title text-lg">Lista de voluntarios</h2>
+                        <button id="btnAgregarVoluntario" class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full hover:bg-gray-100">
+                            <i class='bx bx-user-plus mr-2'></i> Agregar voluntario
+                        </button>
+                    </div>
+                    
+                    <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg border-collapse">
+                        <thead class="bg-[#2A334B] text-white">
+                            <tr>
+                                <th class="py-3 px-4">Número</th>
+                                <th class="py-3 px-4">Nombre completo</th>
+                                <th class="py-3 px-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-3 px-4 text-center">1</td>
+                                <td class="py-3 px-4 text-center">Ana Gómez</td>
+                                <td class="py-3 px-4 text-center">
+                                    <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
+                                    <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Beneficiarios Tabla -->
+                <div id="beneficiarios" class="tab-content">
+                    <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
+                        <h2 class="admin-title text-lg">Lista de beneficiarios</h2>
+                    </div>
+                    
+                    <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg ">
+                        <thead class="bg-[#2A334B] text-white">
+                            <tr>
+                                <th class="py-3 px-4">Número</th>
+                                <th class="py-3 px-4">Nombre completo</th>
+                                <th class="py-3 px-4">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-3 px-4 text-center">1</td>
+                                <td class="py-3 px-4 text-center">Luis Martínez</td>
+                                <td class="py-3 px-4 text-center">
+                                    <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+<!-- Modal admin -->
+
+    <div id="modalAgregarAdmin" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-[#F6F8FF] rounded-3xl p-8 w-[400px] shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Agregar administrador</h2>
+            <form class="space-y-4">
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class='bx bx-user' ></i>
+                    </div>
+                    <input type="text" placeholder="Nombre completo" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <input type="email" placeholder="Correo electrónico" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                    <input type="password" placeholder="Contraseña" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class='bx bx-phone'></i>
+                    </div>
+                    <input type="tel" placeholder="Teléfono" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class='bx bx-map'></i>
+                    </div>
+                    <input type="text" placeholder="Dirección" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class='bx bx-calendar'></i>
+                    </div>
+                    <input type="text" placeholder="dd/mm/aaaa" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <button type="button" id="cancelarModal" class="flex items-center space-x-2 bg-red-600 text-white py-2 px-6 rounded-full">
+                        <i class='bx bx-x text-xl'></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="flex items-center space-x-2 bg-[#53A4DE] text-white py-2 px-6 rounded-full">
+                        <i class='bx bx-user-plus text-xl'></i>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--Modal coordinador-->
+
+    <div id="modalAgregarCoordinador" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-[#F6F8FF] rounded-3xl p-8 w-[600px] shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Agregar coordinador</h2>
+            <form class="grid grid-cols-2 gap-6 max-w-full mx-auto px-6">
+                <!-- Columna izquierda -->
+                <div class="space-y-4">
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-user'></i>
+                        </div>
+                        <input type="text" placeholder="Nombre completo" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-calendar'></i>
+                        </div>
+                        <input type="date" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bxs-hand'></i>
+                        </div>
+                        <input type="text" placeholder="Género" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bxs-map'></i>
+                        </div>
+                        <input type="text" placeholder="Domicilio" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-phone'></i>
+                        </div>
+                        <input type="tel" placeholder="Teléfono" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-envelope'></i>
+                        </div>
+                        <input type="email" placeholder="Correo electrónico" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-lock-alt'></i>
+                        </div>
+                        <input type="password" placeholder="Contraseña" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-book'></i>
+                        </div>
+                        <input type="text" placeholder="Especialización en curso" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-briefcase'></i>
+                        </div>
+                        <input type="text" placeholder="Experiencia laboral" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                </div>
+    
+                <!-- Columna derecha -->
+                <div class="space-y-4">
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-book-reader'></i>
+                        </div>
+                        <input type="text" placeholder="Experiencia en sector educativo" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-world'></i>
+                        </div>
+                        <input type="text" placeholder="Idiomas" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-cog'></i>
+                        </div>
+                        <input type="text" placeholder="Función clave" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-user-check'></i>
+                        </div>
+                        <input type="text" placeholder="Área de supervisión" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-hdd'></i>
+                        </div>
+                        <input type="text" placeholder="Capacidad de manejo de equipos" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-cut'></i>
+                            </div>
+                        <input type="text" placeholder="Conocimiento de herramientas" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-time'></i>
+                        </div>
+                        <input type="text" placeholder="Horario de trabajo" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bxs-plane-take-off'></i>
+                        </div>
+                        <input type="text" placeholder="Disponibilidad de viajes" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                            <i class='bx bx-calendar'></i>
+                        </div>
+                        <input type="date" placeholder="Fecha de registro" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                    </div>
+                </div>
+    
+                <!-- Botones -->
+                <div class="flex justify-center mt-6 col-span-2">
+                    <button type="button" id="cancelarModalCoordinador" class="flex items-center bg-red-600 text-white py-2 px-6 rounded-full mr-2">
+                        <i class='bx bx-x text-xl'></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="flex items-center bg-[#53A4DE] text-white py-2 px-6 rounded-full">
+                        <i class='bx bx-user-plus text-xl'></i>
+                        <span>Agregar</span>
+                    </button>
+                </div>
+            </div>                
+    </div>
+
+    <!--Modal voluntario -->
+    <div id="modalAgregarVoluntario" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-[#F6F8FF] rounded-3xl p-4 w-[600px] shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Agregar Voluntario</h2>
+            <form>
+                <div class="grid grid-cols-2 gap-6 max-w-full mx-auto px-6">
+                    <!-- Columna izquierda -->
+                    <div class="space-y-4">
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-user'></i>
+                            </div>
+                            <input type="text" placeholder="Nombre completo" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-calendar'></i>
+                            </div>
+                            <input type="date" placeholder="Fecha de nacimiento" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bxs-hand'></i>
+                            </div>
+                            <input type="text" placeholder="Género" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-envelope'></i>
+                            </div>
+                            <input type="email" placeholder="Correo electrónico" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-phone'></i>
+                            </div>
+                            <input type="tel" placeholder="Teléfono" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-globe'></i>
+                            </div>
+                            <input type="text" placeholder="País" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-map'></i>
+                            </div>
+                            <input type="text" placeholder="Estado" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-map-pin'></i>
+                            </div>
+                            <input type="text" placeholder="Municipio" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-home'></i>
+                            </div>
+                            <input type="text" placeholder="Dirección" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-calendar'></i>
+                            </div>
+                            <input type="text" placeholder="Días disponibles" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+                    </div>
+                
+                    <!-- Columna derecha -->
+                    <div class="space-y-4">
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-time'></i>
+                            </div>
+                            <input type="text" placeholder="Horario preferible" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-star'></i>
+                            </div>
+                            <input type="text" placeholder="Preferencia de colaboración" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-book-reader'></i>
+                            </div>
+                            <input type="text" placeholder="Experiencia previa" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-brain'></i>
+                            </div>
+                            <input type="text" placeholder="Habilidades y conocimientos" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-brain'></i>
+                            </div>
+                            <input type="text" placeholder="Área de interés" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-receipt'></i>
+                            </div>
+                            <input type="text" placeholder="Motivo de voluntariado" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-comment'></i>
+                            </div>
+                            <input type="text" placeholder="Comentarios adicionales" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-check-circle'></i>
+                            </div>
+                            <input type="text" placeholder="Declaración de veracidad" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow">
+                                <i class='bx bx-calendar'></i>
+                            </div>
+                            <input type="date" placeholder="Fecha de registro" class="pl-10 pr-4 py-2 w-full rounded-full bg-[#EFF0F0] focus:outline-none">
+                        </div>
+
+                    </div>
+                </div>
+                
+            </form>
+            <!--Botones-->
+            <div class="flex justify-center mt-4">
+                <button type="button" id="cancelarModalVoluntario" class="flex items-center bg-red-600 text-white py-2 px-6 rounded-full mr-2">
+                    <i class='bx bx-x text-xl'></i>
+                    <span>Cancelar</span>
+                </button>
+            
+                <button type="submit" class="flex items-center bg-[#53A4DE] text-white py-2 px-6 rounded-full">
+                    <i class='bx bx-user-plus text-xl'></i>
+                    <span>Agregar</span>
+                </button>
+            </div>            
+        </div>
+    </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
