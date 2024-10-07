@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Usuarios\Trabajadores\Trabajador;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,51 +19,20 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellido_paterno',
+        'apellido_materno',
+        'fecha_nacimiento',
         'email',
         'password',
-        'Rol',
-        'Fecha_Nacimiento',
-        'Genero',
-        'Identificacion_Oficial',
-        'Telefono',
-        'Pais',
-        'Estado',
-        'Municipio',
-        'Direccion',
-        'Dias_Disponibles',
-        'Horario_Preferible',
-        'Presencial_Virtual',
-        'Experiencia_Previa',
-        'Habilidades_Conocimientos',
-        'Area_Interes',
-        'Especializacion_Cursos',
-        'Experiencia_Laboral',
-        'Experiencia_Sector_Educativo',
-        'Habilidades_Clave',
-        'Idiomas',
-        'Funcion_Clave',
-        'Area_Supervision',
-        'Capacidad_Manejo_Equipos',
-        'Conocimientos_Herramientas',
-        'Disponibilidad_Viajes',
-        'Compromiso_ONG',
-        'Referencias_Laborales',
-        'Motivo_Sector_Educativo',
-        'Motivo_Voluntariado',
-        'Comentarios_Adicionales',
-        'Declaracion_Veracidad',
-        'Fecha_Registro',
+        'pais',
+        'estado',
+        'municipio',
+        'cp',
+        'direccion',
+        'genero',
+        'telefono',
+        'declaracion_veracidad',
     ];
-
-    public function isTrabajador(): bool{
-
-
-        return $this->Rol == 'Administrador' || $this->Rol == 'Coordinador' || $this->Rol == 'Voluntario';
-    }
-
-    public function getRole(): string{
-        return $this->Rol;
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -75,7 +45,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -86,4 +56,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the trabajador associated with the user.
+     */
+    public function trabajador()
+    {
+        return $this->hasOne(Trabajador::class, 'id_user');
+    }
+    
 }
