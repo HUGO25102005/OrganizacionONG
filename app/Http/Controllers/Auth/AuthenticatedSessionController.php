@@ -27,18 +27,18 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        // Obtener el rol del usuario autenticado
+        // Obtener el usuario autenticado
         $user = Auth::user();
+        
 
-        // Redirigir según el rol del usuario
-        if ($user->Rol === 'Administrador') {
+        if ($user->trabajador && $user->trabajador->administrador) {
             return redirect()->intended(route('admin.home'));
-        } elseif ($user->Rol === 'Coordinador') {
-            return redirect()->intended(route('cordi.home')); // Crear ruta coordinador.index
-        } elseif ($user->Rol === 'Voluntario') {
-            return redirect()->intended(route('voluntario.home')); // Crear ruta coordinador.index
+        } elseif ($user->trabajador && $user->trabajador->coordinador) {
+            return redirect()->intended(route('cordi.home'));
+        } elseif ($user->trabajador && $user->trabajador->voluntario) {
+            return redirect()->intended(route('voluntario.home'));
         } else {
-            return redirect()->intended(route('dashboard')); // Usuario común
+            return redirect()->intended(route('dashboard'));
         }
     }
 

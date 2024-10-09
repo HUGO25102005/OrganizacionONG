@@ -32,6 +32,11 @@ class ProgramaEducativo extends Model
         'comentarios_adicionales',
     ];
 
+
+    public static function getTotalProgramasActivos(){
+        return self::where('estado', 6)->count();
+    }
+
     public function voluntario()
     {
         return $this->belongsTo(Voluntario::class, 'id_voluntario');

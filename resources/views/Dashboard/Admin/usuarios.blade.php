@@ -79,31 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datos as $usuario)
-                            @if ($tipo != 'Beneficiario')
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-3 px-4 text-center">{{ $usuario->id }}</td>
-                                    <td class="py-3 px-4 text-center">{{ $usuario->name }}</td>
-                                    <td class="py-3 px-4 text-center">{{ $usuario->email }}</td>
-                                    <td class="py-3 px-4 text-center">
-                                        <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                                        <button class="delete-button text-red-500 text-xl"><i
-                                                class='bx bx-trash'></i></button>
-                                    </td>
-                                </tr>
-                            @else
-                                <tr class="border-b border-gray-300">
-                                    <td class="py-3 px-4 text-center">{{ $usuario->ID_Beneficiario }}</td>
-                                    <td class="py-3 px-4 text-center">{{ $usuario->Nombre_Completo }}</td>
-                                    <td class="py-3 px-4 text-center">{{ $usuario->Correo_Electronico }}</td>
-                                    <td class="py-3 px-4 text-center">
-                                        <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                                        <button class="delete-button text-red-500 text-xl"><i
-                                                class='bx bx-trash'></i></button>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

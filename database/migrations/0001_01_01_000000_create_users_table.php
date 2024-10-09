@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apellido_materno');
             $table->date('fecha_nacimiento');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('pais', 100);
             $table->string('estado', 100);
@@ -82,29 +82,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Schema::create('permisos', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->comment('Clave foranea de trabajador');
-        //     $table->boolean('c_admin')->comment('Crear Administradores')->default(false);
-        //     $table->boolean('c_coordi')->comment('Crear Coordinador')->default(false);
-        //     $table->boolean('c_voluntario')->comment('Crear Voluntario')->default(false);
-        //     $table->boolean('c_beneficiario')->comment('Crear Bneneficiario')->default(false);
-        //     $table->boolean('c_programas_educativos')->comment('Crear Porgramas Educativos')->default(false);
-        //     $table->boolean('c_reportes')->comment('Crear Crea Reportes')->default(false);
-        //     $table->boolean('c_convocatorias')->comment('Crear Comvocatorias')->default(false);
-        //     $table->boolean('conf_recursos')->comment('Confirma Solicitudes Recursos')->default(false);
-        //     $table->boolean('e_admin')->comment('Edita Administradores')->default(false);
-        //     $table->boolean('e_coordi')->comment('Edita Coordinadores')->default(false);
-        //     $table->boolean('e_voluntario')->comment('Edita Voluntarios')->default(false);
-        //     $table->boolean('e_beneficiario')->comment('Edita Beneficiarios')->default(false);
-        //     $table->boolean('e_programas_educativos')->comment('Edita Programas Educativos')->default(false);
-        //     $table->boolean('e_reportes')->comment('Edita Reportes')->default(false);
-        //     $table->boolean('e_convocatorias')->comment('Edita Comvocatorias')->default(false);
-        //     $table->boolean('e_recursos')->comment('Edita Recursos')->default(false);
-        //     $table->boolean('visualizar')->comment('Visualiza Info')->default(false);
-
-        //     $table->timestamps();
-        // });
 
         Schema::create('administradores', function (Blueprint $table) {
             $table->id();

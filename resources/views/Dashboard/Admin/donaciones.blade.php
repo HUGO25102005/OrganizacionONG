@@ -37,7 +37,7 @@
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col items-start ml-4 sm:ml-[80px]">
                         <h3 class="text-[24px]">Dinero recaudado la última semana:</h3>
-                        <p class="text-[24px] ml-[140px]">${{ $total_recaudado_semana }}</p>
+                        <p class="text-[24px] ml-[140px]">${{ 0 }}</p>
                     </div>
                     <i class='bx bxs-dollar-circle icono text-6xl'></i>
                 </div>

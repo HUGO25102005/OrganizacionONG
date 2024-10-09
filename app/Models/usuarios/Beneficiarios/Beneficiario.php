@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\usuarios;
+namespace App\Models\usuarios\Beneficiarios;
 
 use App\Models\User;
 use App\Models\Usuarios\Beneficiarios\ContactoEmergencia;

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('porque');
             $table->timestamps();
         });
+        
         Schema::create('programas_educativos', function (Blueprint $table) {
             
             $table->id();
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_termino');
             $table->text('recursos_necesarios');
-            $table->enum('estado', [1,2,3,4])->comment('1 = Solicitado(coordinador), 2 = En Revision(admin), 3 = Aprovado, 4 = Cancelado');
+            $table->enum('estado', [1,2,3,4,5,6])->comment('1 = Solicitado(coordinador), 2 = En Revision(admin), 3 = Aprovado, 4 = activo, 5 = terminado, 6 = Cancelado');
             $table->text('resultados_esperados');
             $table->foreignId('id_presupuesto')->constrained('presupuestos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de presupuesto');
             $table->integer('beneficiarios_estimados')->nullable();
