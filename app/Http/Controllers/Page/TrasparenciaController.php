@@ -12,7 +12,8 @@ class TrasparenciaController extends Controller
      */
     public function index()
     {
-        return view('Page.transparencia');
+        $linkActive = 2;
+        return view('Page.transparencia', compact('linkActive'));
     }
 
     /**

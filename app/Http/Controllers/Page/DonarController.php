@@ -12,7 +12,8 @@ class DonarController extends Controller
      */
     public function index()
     {
-        return view('Page.donar');
+        $linkActive = 5;
+        return view('Page.donar', compact('linkActive'));
     }
 
     /**

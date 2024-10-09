@@ -3,7 +3,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/page.css'])
 @endsection
 @section('content')
-    <section class="cont_video" id="home">
+    <section class="cont_video" id="conocenos">
         <h1>La educación sin barreras emerge</h1>
         <video autoplay loop muted plays-inline class="back-video">
             <source src="{{ asset('images/font.mp4') }}" type="video/mp4">
@@ -176,6 +176,6 @@
         <h1>Educación sin barreras</h1>
         <img src="{{ asset('images/image-removebg-preview_1.png') }}" alt="Laptop con libro" class="parallax-image">
         <img src="{{ asset('images/image-removebg-preview_2.png') }}" alt="Laptop con libro" class="parallax-image">
-        <a href="donar.html"><img class="donate-button" src="{{ asset('images/donar.png') }}"></a>
+        <a href="donar"><img class="donate-button" src="{{ asset('images/donar.png') }}"></a>
     </section>
 @endsection

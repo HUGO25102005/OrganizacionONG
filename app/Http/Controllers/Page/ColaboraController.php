@@ -12,7 +12,8 @@ class ColaboraController extends Controller
      */
     public function index()
     {
-        return view('Page.colabora');
+        $linkActive = 4;
+        return view('Page.colabora', compact('linkActive'));
     }
 
     /**

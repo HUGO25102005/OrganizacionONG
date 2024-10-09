@@ -34,7 +34,13 @@
 .navbar .logo img {
   height: 68px;
   width: 70px;
+  transition: transform 0.3s ease-in-out; /* Transición suave */
 }
+
+.navbar .logo img:hover {
+  transform: scale(1.2); /* Escala el logo un 20% más grande */
+}
+
 
 .navbar .links {
   display: flex;
@@ -61,7 +67,7 @@
   height: 30px;
   line-height: 70px;
   border-radius: 20px;
-  background-color: #334568;
+  background-color: #222f48;
   font-size: 1rem;
   letter-spacing: 1px;
   display: flex;
@@ -72,7 +78,7 @@
   z-index: 2; /* Asegura que el enlace esté sobre cualquier pseudo-elemento */
   transition: all 0.3s ease-in-out; 
 }
-
+ 
 .navbar .links a:hover {
   color: #e8e8e8;
   background-color: #3f4f6e; /* Color de fondo al pasar el mouse */
@@ -89,9 +95,6 @@
 .user a img:hover {
   transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
 }
-
-  
-
 
   /* Video fondo seccion 1 */
   .cont_video {
@@ -348,10 +351,8 @@
   .carousel-buttons .dot.active {
       background-color: #FCF9F9;
   }
+
   
-
-
-
 /*Footer*/
 .footer {
   background-color: #232323;

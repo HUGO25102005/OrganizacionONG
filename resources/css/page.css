@@ -32,9 +32,15 @@ padding: 0px 40px;
 }
 
 .navbar .logo img {
-height: 68px;
-width: 70px;
+  height: 68px;
+  width: 70px;
+  transition: transform 0.3s ease-in-out; /* Transición suave */
 }
+
+.navbar .logo img:hover {
+  transform: scale(1.2); /* Escala el logo un 20% más grande */
+}
+
 
 .navbar .links {
 display: flex;
@@ -61,7 +67,7 @@ width: 180px;
 height: 30px;
 line-height: 70px;
 border-radius: 20px;
-background-color: #334568;
+background-color: #222f48;
 font-size: 1rem;
 letter-spacing: 1px;
 display: flex;
@@ -72,12 +78,12 @@ position: relative;
 z-index: 2; /* Asegura que el enlace esté sobre cualquier pseudo-elemento */
 transition: all 0.3s ease-in-out; 
 }
-
+ 
 .navbar .links a:hover {
-color: #e8e8e8;
-background-color: #3f4f6e; /* Color de fondo al pasar el mouse */
-box-shadow: 0px 4px 4px #1a2246;
-transition: ease-in-out;
+  color: #e8e8e8;
+  background-color: #3f4f6e; /* Color de fondo al pasar el mouse */
+  box-shadow: 0px 4px 4px #1a2246;
+  transition: ease-in-out;
 }
 
 .user a img {

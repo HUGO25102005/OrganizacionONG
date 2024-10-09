@@ -9,35 +9,6 @@ body, html {
     font-family: 'Urbanist', sans-serif; /* Fuente Urbanist */
 }
 
-.navbar {
-    background-color: #232B47;
-    padding: 9x 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 40px;
-    min-width: 800px; /* Mínimo ancho */
-    width: fit-content;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-.navbar a {
-    color: white; /* Color del texto */
-    text-decoration: none; /* Sin subrayado */
-    padding: 10px 20px;
-    font-size: 16px; /* Tamaño de fuente */
-    transition: background-color 0.3s ease; /* Efecto suave al pasar por encima */
-}
-
-.navbar a:hover {
-    background-color: #334568; /* Color de fondo al pasar por encima */
-    border-radius: 20px; /* Bordes redondeados en el hover */
-}
-
-
-
 .header {
     display: flex; /* Flexbox para organizar los textos */
     justify-content: flex-start; /* Alinea ambos textos a la izquierda */

@@ -12,7 +12,8 @@ class NuestroTrabajoController extends Controller
      */
     public function index()
     {
-        return view('Page.nuestro-trabajo');
+        $linkActive = 3;
+        return view('Page.nuestro-trabajo', compact('linkActive'));
     }
 
     /**
