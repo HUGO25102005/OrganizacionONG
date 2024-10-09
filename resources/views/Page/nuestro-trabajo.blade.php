@@ -3,7 +3,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/nuestro_trabajo.css'])
 @endsection
 @section('content')
-<section class="cont_video" id="home">
+<section class="cont_video" id="nuestro-trabajo">
     <video autoplay loop muted plays-inline class="back-video">
         <source src="{{asset('images/font_2.mp4')}}" type="video/mp4">
     </video>

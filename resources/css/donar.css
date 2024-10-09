@@ -57,7 +57,7 @@
     height: 30px;
     line-height: 70px;
     border-radius: 20px;
-    background-color: #334568;
+    background-color: #222f48;
     font-size: 1rem;
     letter-spacing: 1px;
     display: flex;
@@ -85,11 +85,6 @@
   .user a img:hover {
     transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
   }
-
-
-
-
-
 
   .cont_video {
     position: relative; /* Cambiado a relative */
@@ -298,26 +293,27 @@
     background-color: #232323;
     height: 26vh;
     position: relative;
-}
-
-.footer-cont {
+    
+  }
+  
+  .footer-cont {
     height: 15vh;
     padding: 10px ;
-}
-
-.login-container {
+  }
+  
+  .login-container {
     height: 20px;
     top: 60%;
     left: 6%;
     position: absolute;
     transition: transform 0.2s ease-in-out 
-}
-
-.login-container:hover {
+  }
+  
+  .login-container:hover {
     transform: translate(-50%, -50%) scale(1.005);
-}
-
-.footer p {
+  }
+  
+  .footer p {
     color: #9a9a9a;
     font-size: 11px;
     text-align: center;
@@ -326,26 +322,26 @@
     top: 60%; /* Ajustar la posición vertical */
     letter-spacing: 1px;
     font-weight: lighter;
-}
-
-
-.link {
+  }
+  
+  
+  .link {
     position: absolute;
     left: 25%; /* Ajusta la posición horizontal */
     top: 45%; /* Ajusta la posición vertical */
     display: flex; /* Hace que los elementos estén en línea */
     justify-content: center; /* Centra horizontalmente los elementos */
-}
-
-.link ul {
+  }
+  
+  .link ul {
     list-style-type: none; /* Elimina los marcadores de lista */
     padding: 0; /* Elimina el relleno predeterminado de la lista */
     margin: 0; /* Elimina el margen predeterminado de la lista */
     display: flex; 
     text-decoration: none;
-}
-
-.link a {
+  }
+  
+  .link a {
     font-size: 13px;
     color: #9a9a9a; 
     margin-right: 15px; /* Agrega un margen derecho entre los elementos */
@@ -354,23 +350,23 @@
     transition: transform 0.5s ease;
     font-weight: lighter;
     text-decoration: none;
-}
-
-.link ul li {
+  }
+  
+  .link ul li {
     display: inline; /* Hace que los elementos <li> estén en línea */
     transition: transform 0.5s ease; /* Agrega una transición suave */
-}
-
-.link ul li:hover {
+  }
+  
+  .link ul li:hover {
     transform: translateY(-2px); /* Mueve el elemento hacia arriba al hacer hover */
-}
-.footer img {
+  }
+  .footer img {
     height: 60px;
     top: 28%;
     left: 4%;
     position: absolute;
-}
-.footer h2 {
+  }
+  .footer h2 {
     font-size: 40px; /* Ajusta el tamaño del texto según tus necesidades */
     font-weight: lighter;
     color: #b2ebf9; /* Ajusta el color del texto según tus necesidades */
@@ -378,10 +374,10 @@
     left: 15%; /* Ajusta la posición a la mitad horizontal */
     top: 40%; /* Ajusta la posición a la mitad vertical */
     transform: translate(-50%, -50%); /* Centra el texto horizontal y verticalmente */
-}
-
-
-.footer-cont::after {
+  }
+  
+  
+  .footer-cont::after {
     content: '';
     position: absolute;
     width: 1px; 
@@ -391,11 +387,11 @@
     left: 22.5%; 
     transform: translateX(-50%); 
     z-index: 1; 
-}
-
-
-
-.button-container {
+  }
+  
+  
+  
+  .button-container {
     position: absolute;
     right: 6%; 
     top: 48%; 
@@ -405,9 +401,9 @@
     align-items: center;
     justify-content: space-around;
     border-radius: 10px;
-}
-
-.button {
+  }
+  
+  .button {
     outline: 0 !important;
     border: 2px solid transparent; 
     width: 40px;
@@ -420,17 +416,18 @@
     color: #fff;
     transition: all ease-in-out 0.3s;
     cursor: pointer;
-}
-
-.button:hover {
+  }
+  
+  .button:hover {
     transform: translateY(-3px);
     border-color: #b2ebf9; 
-}
-
-.button i {
+  }
+  
+  .button i {
     font-size: 25px; 
     color: #fff;
-}
-.button a {
+  }
+  .button a {
     color: #fff; 
-}
+  }
+  

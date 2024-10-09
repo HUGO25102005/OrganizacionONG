@@ -12,7 +12,8 @@ class ConocenosController extends Controller
      */
     public function index()
     {
-        return view('Page.conocenos');
+        $linkActive = 1;
+        return view('Page.conocenos', compact('linkActive'));
     }
 
     /**

@@ -3,7 +3,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/colabora.css'])
 @endsection
 @section('content')
-    <section class="info" id="home">
+
+    
+    <section class="info" id="colabora">
         <h1><b>Se parte de nuestro equipo</b></h1>
         <img src="{{asset('images/amigos.png')}}" alt="">
     </section>
