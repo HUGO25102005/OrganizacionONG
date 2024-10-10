@@ -54,18 +54,48 @@
                     </a>
                     @switch($tipo)
                         @case('Administrador')
-                            @include('components.modal-admin')
+                            <x-modal-form 
+                                :btnTitulo="'Nuevo Administrador'" 
+                                :tituloModal="'Agrega Nuevo Administrador'" 
+                                :router="route('admin.store')" 
+                                :btnDanger="'Cancelar'"
+                                :btnSuccess="'Confirmar'">
+                                
+                                <div class="relative">
+                                    <div
+                                        class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#2A334B] rounded-full flex items-center justify-center">
+                                        <i class='bx bx-group text-white'></i> <!-- Icono para referencias laborales -->
+                                    </div>
+                                    <input type="text" placeholder="Referencias laborales" name="Referencias_Laborales"
+                                        class="text-black pl-10 pr-4 py-2 w-full rounded-full bg-[#F1F3F5] focus:outline-none border border-gray-300 focus:border-[#2A334B] transition duration-200">
+                                </div>
+                
+                                <div class="relative">
+                                    <div
+                                        class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#2A334B] rounded-full flex items-center justify-center">
+                                        <i class='bx bx-comment-detail text-white'></i> <!-- Icono para motivo en sector educativo -->
+                                    </div>
+                                    <textarea type="text" placeholder="Motivo en sector educativo"
+                                        class="text-black pl-10 pr-4 py-2 w-full rounded bg-[#F1F3F5] focus:outline-none border border-gray-300 focus:border-[#2A334B] transition duration-200"
+                                        name="Motivo_Sector_Educativo" id="" cols="30" rows="1"></textarea>
+                
+                                </div>
+                            </x-modal-form>
                         @break
 
                         @case('Coordinador')
                             @include('components.modal-coordi')
                         @break
+
                         @case('Voluntario')
                             @include('components.modal-volunt')
                         @break
 
                         @default
+                            <p>No se ha seleccionado un tipo válido.</p>
                     @endswitch
+
+
 
                 </div>
 
@@ -79,7 +109,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @switch($tipo)
+                            @case('Administrador')
+                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                            @break
+
+                            @case('Coordinador')
+                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                            @break
+
+                            @case('Voluntario')
+                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                            @break
+
+                            @case('Beneficiario')
+                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                            @break
+
+                            @default
+                        @endswitch
                     </tbody>
                 </table>
             </div>

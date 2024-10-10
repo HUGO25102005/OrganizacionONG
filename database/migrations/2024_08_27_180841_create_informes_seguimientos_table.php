@@ -14,8 +14,15 @@ return new class extends Migration
         Schema::create('informes_seguimientos', function (Blueprint $table) {
 
             $table->id('id_informe');
-            $table->foreignId('id_programa_educativo')->constrained('programas_educativos')->onDelete('cascade')->comment('Clave foranea de programas_educativos');
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajador');
+            $table->foreignId('id_programa_educativo')
+                                ->constrained('programas_educativos')
+                                ->onDelete('cascade')
+                                ->comment('Clave foranea de programas_educativos');
+            $table->foreignId('id_trabajador')
+                                ->constrained('trabajadores')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de trabajador');
             //$table->foreignId('id_voluntario')->constrained('trabajadores')->onDelete('set null')->onUpdate('cascade')->comment('Clave foranea de trabajador');
             $table->date('fecha_informe');
             $table->text('resumen_informe');

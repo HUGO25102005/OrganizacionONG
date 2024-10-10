@@ -90,18 +90,20 @@ class DashboardAdminController extends Controller
         
         switch($tipo){
             case 'Administrador':
-                $datos = Administrador::all();
+                $datos = Administrador::paginate(10);
                 break;
             case 'Coordinador': 
-                $datos = Coordinador::all();
+                $datos = Coordinador::paginate(10);
                 break;
             case 'Voluntario':
-                $datos = Voluntario::all();
+                $datos = Voluntario::paginate(10);
                 break;
             case 'Beneficiario':
-                $datos = Beneficiario::all();
+                $datos = Beneficiario::paginate(10);
                 break;
         }
+
+
 
         return view('Dashboard.Admin.usuarios', compact('tipo', 'datos')); // Pasa los datos a la vista
     }

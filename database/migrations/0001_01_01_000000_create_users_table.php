@@ -14,20 +14,20 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             // Laravel
             $table->id();
-            $table->string('name');
-            $table->string('apellido_paterno');
-            $table->string('apellido_materno');
+            $table->string('name', 40);
+            $table->string('apellido_paterno', 30);
+            $table->string('apellido_materno', 30);
             $table->date('fecha_nacimiento');
-            $table->string('email')->unique();
+            $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password', 20);
             $table->string('pais', 100);
             $table->string('estado', 100);
             $table->string('municipio', 100);
-            $table->string('cp', 100);
+            $table->string('cp', 5);
             $table->string('direccion', 255);
             $table->enum('genero', ['M', 'F', 'O']);
-            $table->string('telefono', 20);
+            $table->string('telefono', 10);
             $table->boolean('declaracion_veracidad')->default(false);
             $table->timestamp('fecha_registro')->useCurrent();
 
@@ -55,7 +55,7 @@ return new class extends Migration
         // BENEFICIARIOS------------------------------------------------------------------
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->comment('Clave foranea de usuarios');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de usuarios');
             $table->enum('nivel_educativo', [1, 2, 3, 4])->comment('1 = Primaria, 2 = Secundaria, 3 = Preparatoria, 4 = Superior');
             $table->string('ocupacion', 100);
             $table->tinyInteger('num_dependientes')->comment('Numero de personas que dependen del usuario');
@@ -64,7 +64,7 @@ return new class extends Migration
         });
         Schema::create('contacto_emergencia', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_beneficiario')->constrained('beneficiarios')->onDelete('cascade')->comment('Clave foranea de beneficiarios');
+            $table->foreignId('id_beneficiario')->constrained('beneficiarios')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de beneficiarios');
             $table->string('nombre', 100);
             $table->string('relacion', 20);
             $table->string('telefono', 10);
@@ -75,7 +75,7 @@ return new class extends Migration
         // TRABAJADORES ---------------------------------------------------------------------
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->comment('Clave foranea de usuarios');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de usuarios');
             $table->enum('estado', [1, 2, 3])->comment('1 = Activo, 2 = Desactivado, 3 = Suspendido');
             $table->time('hora_inicio')->comment('hora de ingreso del trabajador');
             $table->time('hora_fin')->comment('hora de salida del trabajador');
@@ -85,17 +85,17 @@ return new class extends Migration
 
         Schema::create('administradores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
             $table->timestamps();
         });
         Schema::create('coordinadores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
             $table->timestamps();
         });
         Schema::create('voluntarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
             $table->date('fecha_inicio')->comment('fecha de ingreso del voluntario');
             $table->date('fecha_termino')->comment('fecha de salida del voluntario');
             $table->time('hrs_dedicadas_semana')->comment('Horas dedicadas a la semana (clases de las cuales podra)');

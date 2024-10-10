@@ -8,6 +8,7 @@ use App\Http\Controllers\Page\NuestroTrabajoController;
 use App\Http\Controllers\Page\TrasparenciaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
+use App\Http\Controllers\Usuarios\AdminController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     // Rutas del Dashboard
     Route::middleware([CheckAdmin::class])->prefix('dashboard/admin')->group(function () {
         Route::get('/home', [DashboardAdminController::class, 'home'])->name('admin.home');
+        Route::post('/home', [AdminController::class, 'store'])->name('admin.store');
         Route::get('/panelControl', [DashboardAdminController::class, 'panelControl'])->name('admin.panelControl');
         Route::get('/donaciones', [DashboardAdminController::class, 'donaciones'])->name('admin.donaciones');
         Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
