@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 /* Nueva regla para el enlace activo con una línea amarilla debajo */
 .navbar .links a.active {
     border: 3px solid transparent;

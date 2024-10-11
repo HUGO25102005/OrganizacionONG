@@ -15,7 +15,7 @@ class UserAccessDashboardMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->isTrabajador()){
+        if(auth()->user()->trabajador()){
             return $next($request);
         }
         return redirect('/');

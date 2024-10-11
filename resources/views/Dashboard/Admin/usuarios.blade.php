@@ -1,4 +1,16 @@
 <x-app-layout>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -34,70 +46,10 @@
         <div class="content w-full">
             <!-- Administradores Tab -->
             <div id="administradores" class="tab-content active">
-                <div
-                    class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
-                    <a href="{{ route('admin.usuarios', ['tipo' => 'Administrador']) }}"
-                        class="tab-a {{ $tipo === 'Administrador' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                        Administradores
-                    </a>
-                    <a href="{{ route('admin.usuarios', ['tipo' => 'Coordinador']) }}"
-                        class="tab-a {{ $tipo === 'Coordinador' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                        Coordinadores
-                    </a>
-                    <a href="{{ route('admin.usuarios', ['tipo' => 'Voluntario']) }}"
-                        class="tab-a {{ $tipo === 'Voluntario' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                        Voluntarios
-                    </a>
-                    <a href="{{ route('admin.usuarios', ['tipo' => 'Beneficiario']) }}"
-                        class="tab-a {{ $tipo === 'Beneficiario' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                        Beneficiarios
-                    </a>
-                    @switch($tipo)
-                        @case('Administrador')
-                            <x-modal-form 
-                                :btnTitulo="'Nuevo Administrador'" 
-                                :tituloModal="'Agrega Nuevo Administrador'" 
-                                :router="route('admin.store')" 
-                                :btnDanger="'Cancelar'"
-                                :btnSuccess="'Confirmar'">
-                                
-                                <div class="relative">
-                                    <div
-                                        class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#2A334B] rounded-full flex items-center justify-center">
-                                        <i class='bx bx-group text-white'></i> <!-- Icono para referencias laborales -->
-                                    </div>
-                                    <input type="text" placeholder="Referencias laborales" name="Referencias_Laborales"
-                                        class="text-black pl-10 pr-4 py-2 w-full rounded-full bg-[#F1F3F5] focus:outline-none border border-gray-300 focus:border-[#2A334B] transition duration-200">
-                                </div>
                 
-                                <div class="relative">
-                                    <div
-                                        class="absolute left-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#2A334B] rounded-full flex items-center justify-center">
-                                        <i class='bx bx-comment-detail text-white'></i> <!-- Icono para motivo en sector educativo -->
-                                    </div>
-                                    <textarea type="text" placeholder="Motivo en sector educativo"
-                                        class="text-black pl-10 pr-4 py-2 w-full rounded bg-[#F1F3F5] focus:outline-none border border-gray-300 focus:border-[#2A334B] transition duration-200"
-                                        name="Motivo_Sector_Educativo" id="" cols="30" rows="1"></textarea>
-                
-                                </div>
-                            </x-modal-form>
-                        @break
-
-                        @case('Coordinador')
-                            @include('components.modal-coordi')
-                        @break
-
-                        @case('Voluntario')
-                            @include('components.modal-volunt')
-                        @break
-
-                        @default
-                            <p>No se ha seleccionado un tipo válido.</p>
-                    @endswitch
-
-
-
-                </div>
+                {{-- Encabezado table CONDICION DE MODALS Y FORMS --}}
+                @include('Dashboard.Admin.layouts.forms_app')
+                {{-- FIN CONDICION DE MODALS Y FORMS --}}
 
                 <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
                     <thead class="bg-[#2A334B] text-white ">

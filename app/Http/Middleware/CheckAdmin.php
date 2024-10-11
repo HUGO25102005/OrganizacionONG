@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Usuarios\Trabajadores\Administrador;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,25 +16,14 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Verifica si el usuario está autenticado
-        if (Auth::check()) {
-            // Obtiene el usuario autenticado
-            $user = Auth::user();
-
-            // Verifica si el usuario tiene un administrador asociado
-            $admin = Administrador::where('id_trabajador', $user->trabajador->id)->first();
-
-            if (!$admin) {
-                // Si no existe un administrador, redirige a donde desees
-                return redirect()->route('unauthorized')->with('error', 'Acceso denegado. No tienes permisos de administrador.');
+        if (Auth::check() && 
+            Auth::user()->id == Auth::user()->trabajador->id_user &&  
+            Auth::user()->trabajador->estado == "1" && 
+            Auth::user()->trabajador->id == Auth::user()->trabajador->administrador->id_trabajador) {
+                // dd($request);
+                return $next($request);
             }
-
-            // Si existe, continúa con la solicitud
-            return $next($request);
-        }
-
-        // Redirige si no está autenticado
+            
         return redirect()->route('login');
-
     }
 }
