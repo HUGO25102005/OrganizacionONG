@@ -172,15 +172,7 @@
             </x-modal-form>
         @break
 
-        @case('Voluntario')
-            
-        @break
-
-        @case('Beneficiario')
-            
-        @break
-
         @default
-            <p>No se ha seleccionado un tipo válido.</p>
+            
     @endswitch
 </div>
