@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif; /* Fuente Urbanist */
+}
+
+.header {
+    display: flex; /* Flexbox para organizar los textos */
+    justify-content: flex-start; /* Alinea ambos textos a la izquierda */
+    align-items: center; /* Centra verticalmente */
+    gap: 30px; /* Espacio horizontal entre los textos */
+    padding-bottom: 10px; /* Espacio debajo de los textos */
+}
+
+/* Estilo para los elementos de texto e ícono */
+
+.tab-button {
+    cursor: pointer;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2A334B;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.admin-title {
+    font-size: 1.2rem;
+    margin-left: 560px;
+}
+
+.add-admin-button {
+    display: flex;
+    align-items: center;
+    background-color: #EAF6FF;
+    color: #2A334B;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-admin-button:hover {
+    transform: scale(1.05);
+}
+
+.add-admin-button .icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}

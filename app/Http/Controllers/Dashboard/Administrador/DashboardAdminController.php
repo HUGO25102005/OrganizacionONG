@@ -1,0 +1,109 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard\Administrador;
+
+use App\Http\Controllers\Controller;
+use App\Models\Donaciones\Donacion;
+use App\Models\ProgramasEducativos\InformesSeguimientos;
+use App\Models\ProgramasEducativos\ProgramaEducativo;
+use App\Models\Registros\RegistroActividades;
+use App\Models\User;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
+use App\Models\Usuarios\Trabajadores\Administrador;
+use App\Models\Usuarios\Trabajadores\Coordinador;
+use App\Models\Usuarios\Trabajadores\Voluntario;
+use Illuminate\Http\Request;
+
+class DashboardAdminController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function home()
+    {
+        
+        session(['name' => auth()->user()->name, 'rol' => 'Administrador']);
+
+        return view('Dashboard.Admin.index');
+    }
+
+    public function panelControl()
+    {
+
+        $total_ingresos = Donacion::getMontoTotal();
+        $ultimas_donaciones = Donacion::all();
+        $programas_activos = ProgramaEducativo::getTotalProgramasActivos();
+        $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
+        $actividades_registradas = RegistroActividades::getTotalActividades();
+        $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
+    
+        session(['name' => auth()->user()->name,]);
+
+        return view(
+            'Dashboard.Admin.panel-control',
+            compact(
+                'total_ingresos',
+                'ultimas_donaciones',
+                'programas_activos',
+                'informes_seguimiento',
+                'actividades_registradas',
+                'total_beneficiarios',
+            )
+        );
+    }
+    public function donaciones()
+    {
+
+        $monto_total_donaciones = Donacion::getMontoTotal();
+        $total_donaciones = Donacion::all();
+        $total_donaciones_semana = Donacion::getTotalMontoSemana();
+
+        return view(
+            'Dashboard.Admin.donaciones',
+            compact(
+                'monto_total_donaciones',
+                'total_donaciones',
+                'total_donaciones_semana',
+            )
+        );
+    }
+    public function programas(Request $request)
+    {
+        $search = $request->input('search');
+
+        $programas = ProgramaEducativo::when($search, function ($query, $search) {
+            return $query->where('Nombre_Programa', 'LIKE', '%' . $search . '%')
+                ->orWhereHas('usuario', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%');
+                })
+                ->orWhereDate('Fecha_Inicio', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
+                ->orWhereDate('Fecha_Termino', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
+                ->orWhere('Estado', 'LIKE', '%' . $search . '%');
+        })
+            ->paginate(5);
+
+        return view('Dashboard.Admin.programas', compact('programas'));
+    }
+    public function usuarios(Request $request)
+    {
+        $tipo = $request->get('tipo', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los tipos
+        
+        switch($tipo){
+            case 'Administrador':
+                $datos = Administrador::all();
+                break;
+            case 'Coordinador': 
+                $datos = Coordinador::all();
+                break;
+            case 'Voluntario':
+                $datos = Voluntario::all();
+                break;
+            case 'Beneficiario':
+                $datos = Beneficiario::all();
+                break;
+        }
+
+        return view('Dashboard.Admin.usuarios', compact('tipo', 'datos')); // Pasa los datos a la vista
+    }
+    
+}

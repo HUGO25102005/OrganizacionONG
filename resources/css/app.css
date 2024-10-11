@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Nueva regla para el enlace activo con una línea amarilla debajo */
+.navbar .links a.active {
+    border: 3px solid transparent;
+    border-radius: 20px;
+    padding: 0 10px;
+    background: linear-gradient(#222f48, #222f48), linear-gradient(45deg, rgb(122, 192, 218), rgb(226, 142, 243), rgb(37, 211, 255));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 200% 200%;
+    animation: borderAnimation 3s linear infinite;
+    font-size: 12px;
+  }
+  
+  /* Keyframes para animar el gradiente del borde */
+  @keyframes borderAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
