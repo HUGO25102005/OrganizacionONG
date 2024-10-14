@@ -41,12 +41,12 @@
                     <tbody class="mt-5"> <!-- Agregar margen superior en tbody -->
                         @foreach ($programas as $programa)
                             <tr class="bg-[#4a607a] rounded-lg">
-                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->Nombre_Programa }}
+                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->nombre_programa }}
                                 </td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->usuario->name }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->voluntario->trabajador->user->name }}</td>
                                 <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Inicio)->format('d-m-Y') }}</td>
                                 <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Termino)->format('d-m-Y') }}</td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->Estado }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->estado == 1 ? 'activo' : 'inactivo' }}</td>
                                 <td class="py-3 px-4 {{ $loop->last ? 'rounded-br-lg' : ''}} text-center">
                                     <i class='bx bx-show text-xl cursor-pointe text-center'></i>
                                     <a href="pro2.html">
