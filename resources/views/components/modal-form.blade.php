@@ -6,23 +6,24 @@
         </button>
     
         <!-- Modal -->
-        <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-30 flex justify-center items-center"
+        <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"
             @click.away="open = false" style="display: none;">
             <div class="bg-white rounded-3xl p-8 w-[800px] max-h-[80vh] shadow-lg overflow-y-auto">
                 <h2 class="text-2xl font-bold mb-6 text-center text-[#2A334B]">{{ $tituloModal }}</h2>
-                <form class="space-y-4" action="{{ $router }}" method="POST">
+                <form class="space-y-4 text-black" action="{{ $router }}" method="POST">
+                    
                     @csrf
                     
                     {{ $slot }}
     
-                    <div class="flex justify-between mt-6">
+                    <div class="flex justify-start mt-6">
                         <button @click="open = false" type="button"
-                            class="flex items-center space-x-2 bg-gray-500 text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
+                            class="bg-gray-300 py-2 px-4 rounded-full flex items-center mr-4">
                             <i class='bx bx-x text-xl'></i>
                             <span>{{ $btnDanger }}</span>
                         </button>
                         <button type="submit"
-                            class="flex items-center space-x-2 bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700 transition duration-200">
+                            class="bg-green-500 text-white py-2 px-4 rounded-full flex items-center">
                             <i class='bx bx-user-plus text-xl'></i>
                             <span>{{ $btnSuccess }}</span>
                         </button>

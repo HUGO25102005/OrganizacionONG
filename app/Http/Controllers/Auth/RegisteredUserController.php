@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
      */
     public function store(AdminRequest $request): RedirectResponse
     {
-
+        //dd($request);
         // Creación del usuario
         $user = User::create([
             'name' => $request->name,

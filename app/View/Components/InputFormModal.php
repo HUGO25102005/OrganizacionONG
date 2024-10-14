@@ -18,17 +18,20 @@ class InputFormModal extends Component
     public $id;
     public $required;
     public $value;
+    public $placeholder;
     public function __construct(
         $name,
         $labelText,
         $type,
         $id,
+        $placeholder,
 
     ){
         $this->name = $name;
         $this->labelText = $labelText;
         $this->type = $type;
         $this->id = $id;
+        $this->placeholder = $placeholder;
     }
 
     /**

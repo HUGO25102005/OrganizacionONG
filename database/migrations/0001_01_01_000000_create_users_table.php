@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 20);
+            $table->string('password', 60);
             $table->string('pais', 100);
             $table->string('estado', 100);
             $table->string('municipio', 100);
