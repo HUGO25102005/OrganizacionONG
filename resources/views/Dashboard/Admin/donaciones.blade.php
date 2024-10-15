@@ -78,21 +78,21 @@
                                     :btnSuccess="'Confirmar'">
                                     <!-- Nombre -->
                                     <x-input-form-modal :name="'nombre'" :labelText="'Nombre:'" :type="'text'"
-                                        :id="'nombre'" placeholder="Nombre: " :maxLength="'255'" required>
+                                        :id="'nombre'" :placeholder="'Nombre: '" :maxLength="'255'" required>
                                     </x-input-form-modal>
 
                                     <!-- Descripción -->
                                     <x-input-form-modal :name="'descripcion'" :labelText="'Descripción:'" :type="'text'"
-                                        :id="'descripcion'" placeholder="Descripción: " required>
+                                        :id="'descripcion'" :placeholder="'Descripción: '" required>
                                     </x-input-form-modal>
 
                                     <!-- Fecha de Inicio -->
                                     <x-input-form-modal :name="'fecha_inicio'" :labelText="'Fecha de Inicio:'" :type="'date'"
-                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')" />
+                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')"  :placeholder="'Fecha'"/>
 
                                     <!-- Fecha de Fin -->
                                     <x-input-form-modal :name="'fecha_fin'" :labelText="'Fecha de Fin:'" :type="'date'"
-                                        :id="'fecha_fin'" required :value="old('fecha_fin')" />
+                                        :id="'fecha_fin'" required :value="old('fecha_fin')" :placeholder="'Fecha'"/>
 
                                     <!-- Objetivo -->
                                     <x-input-form-modal :name="'objetivo'" :labelText="'Objetivo:'" :type="'text'"
