@@ -55,7 +55,11 @@ return new class extends Migration
         // BENEFICIARIOS------------------------------------------------------------------
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de usuarios');
+            $table->foreignId('id_user')
+                                ->constrained('users')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de usuarios');
             $table->enum('nivel_educativo', [1, 2, 3, 4])->comment('1 = Primaria, 2 = Secundaria, 3 = Preparatoria, 4 = Superior');
             $table->string('ocupacion', 100);
             $table->tinyInteger('num_dependientes')->comment('Numero de personas que dependen del usuario');
@@ -75,7 +79,11 @@ return new class extends Migration
         // TRABAJADORES ---------------------------------------------------------------------
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de usuarios');
+            $table->foreignId('id_user')
+                                ->constrained('users')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de usuarios');
             $table->enum('estado', [1, 2, 3])->comment('1 = Activo, 2 = Desactivado, 3 = Suspendido');
             $table->time('hora_inicio')->comment('hora de ingreso del trabajador');
             $table->time('hora_fin')->comment('hora de salida del trabajador');
@@ -85,20 +93,32 @@ return new class extends Migration
 
         Schema::create('administradores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')
+                                ->constrained('trabajadores')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de trabajadores');
             $table->timestamps();
         });
         Schema::create('coordinadores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')
+                                ->constrained('trabajadores')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de trabajadores');
             $table->timestamps();
         });
         Schema::create('voluntarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_trabajador')->constrained('trabajadores')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de trabajadores');
+            $table->foreignId('id_trabajador')
+                                ->constrained('trabajadores')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de trabajadores');
             $table->date('fecha_inicio')->comment('fecha de ingreso del voluntario');
             $table->date('fecha_termino')->comment('fecha de salida del voluntario');
-            $table->time('hrs_dedicadas_semana')->comment('Horas dedicadas a la semana (clases de las cuales podra)');
+            $table->integer('hrs_dedicadas_semana', 2)->comment('Horas dedicadas a la semana (clases de las cuales podra)');
             $table->text('comentarios')->nullable();
 
             $table->timestamps();

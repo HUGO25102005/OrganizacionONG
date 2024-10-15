@@ -63,19 +63,19 @@
                     <tbody>
                         @switch($tipo)
                             @case('Administrador')
-                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                                @include('Dashboard.Admin.layouts.tables.tbody.tb_admin')
                             @break
 
                             @case('Coordinador')
-                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                                @include('Dashboard.Admin.layouts.tables.tbody.tb_coordi')
                             @break
 
                             @case('Voluntario')
-                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                                @include('Dashboard.Admin.layouts.tables.tbody.tb_voluntario')
                             @break
 
                             @case('Beneficiario')
-                                @include('Dashboard.Admin.layouts.tables.tbody_admins')
+                                @include('Dashboard.Admin.layouts.tables.tbody.tb_beneficiario')
                             @break
 
                             @default
