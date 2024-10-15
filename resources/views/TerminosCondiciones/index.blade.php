@@ -86,4 +86,4 @@
             showInfo('politicas'); // Mostrar el contenido de "Desarrollo de políticas" por defecto
         });
     </script>
-@endsection
+    @endsection

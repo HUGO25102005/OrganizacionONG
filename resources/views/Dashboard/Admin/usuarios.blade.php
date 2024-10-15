@@ -18,10 +18,21 @@
     @endif
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
-        </h2>
+        <div class="flex space-x-7 items-center">
+            <a href="{{ route('admin.usuarios', ['tipo' => 'Administrador']) }}">
+                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('admin.usuarios') && request('tipo') === 'Administrador' ? 'border-b-2 border-black' : '' }}">
+                    {{ __('Lista de Usuarios') }}
+                </h2>
+            </a>            
+            </a>
+            <a href="{{ route('admin.usuarios') }}">
+                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight">
+                    {{ __('Solicitudes') }}
+                </h2>
+            </a>
+        </div>
     </x-slot>
+    
 
     <div
         class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
@@ -56,7 +67,7 @@
                         <tr>
                             <th class="py-3 px-4 rounded-l-lg">Número</th>
                             <th class="py-3 px-4">Nombre completo</th>
-                            <th class="py-3 px-4">Email</th>
+                            <th class="py-3 px-4">Correo electrónico</th>
                             <th class="py-3 px-4 rounded-r-lg">Acciones</th>
                         </tr>
                     </thead>
