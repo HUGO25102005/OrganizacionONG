@@ -6,25 +6,25 @@
     @endif
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Programas') }}
-            </h2>
-            <a href="{{ route('pdf.generar') }}">
-                <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
-            </a>        
-        </div>
-        <div class="flex space-x-7 items-center">
-            <a href="#">
-                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('presupuesto') ? 'border-b-4 border-indigo-500' : '' }}">
-                    {{ __('Solicitud de presupuesto') }}
-                </h2>
-            </a>
-            <a href="#">
-                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('programas') ? 'border-b-4 border-indigo-500' : '' }}">
-                    {{ __('Programas') }}
-                </h2>
-            </a>
+        
+        <div class="flex items-center justify-between space-x-7">
+            <div class="flex items-center">
+                <a href="#">
+                    <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('presupuesto') ? 'border-b-4 border-indigo-500' : '' }}">
+                        {{ __('Solicitud de presupuesto') }}
+                    </h2>
+                </a>
+                <a href="#">
+                    <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('programas') ? 'border-b-4 border-indigo-500' : '' }}">
+                        {{ __('Programas') }}
+                    </h2>
+                </a>
+            </div>
+            <div class="">        
+                <a href="{{ route('pdf.generar') }}">
+                    <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+                </a> 
+            </div>
         </div>
     </x-slot>
 
