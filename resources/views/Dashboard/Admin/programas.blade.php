@@ -14,8 +14,19 @@
                 <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
             </a>        
         </div>
+        <div class="flex space-x-7 items-center">
+            <a href="#">
+                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('presupuesto') ? 'border-b-4 border-indigo-500' : '' }}">
+                    {{ __('Solicitud de presupuesto') }}
+                </h2>
+            </a>
+            <a href="#">
+                <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('programas') ? 'border-b-4 border-indigo-500' : '' }}">
+                    {{ __('Programas') }}
+                </h2>
+            </a>
+        </div>
     </x-slot>
-
 
 
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
@@ -33,13 +44,13 @@
             <div class="overflow-x-auto">
                 <table class="w-full table-auto">
                     <thead class="bg-[#232B47]"> <!-- Mantener el fondo en el thead -->
-                        <tr>
-                            <th class="bg-gray-100 text-black rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Impartidor</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Fecha Incio</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Fecha Termino</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Estado</th>
-                            <th class="bg-gray-100 text-black rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
+                        <tr class="text-black">
+                            <th class="bg-gray-100 rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Impartidor</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Incio</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Termino</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Estado</th>
+                            <th class="bg-gray-100 rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
                             </th>
                         </tr>
                     </thead>
