@@ -27,7 +27,6 @@
                     </div>
                     <i class='bx bx-money-withdraw icono text-6xl'></i>
                 </div>
-
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col items-start ml-4 sm:ml-[175px]">
                         <h3 class="text-[24px]">Donaciones recibidas:</h3>
@@ -35,7 +34,6 @@
                     </div>
                     <i class='bx bxs-donate-heart icono text-6xl'></i>
                 </div>
-
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col items-start ml-4 sm:ml-[80px]">
                         <h3 class="text-[24px]">Dinero recaudado la última semana:</h3>
@@ -43,7 +41,6 @@
                     </div>
                     <i class='bx bxs-dollar-circle icono text-6xl'></i>
                 </div>
-
                 <div class="flex items-center justify-between">
                     <div class="flex flex-col items-start ml-4 sm:ml-[95px]">
                         <h3 class="text-[24px]">Donaciones recibidas la última semana:</h3>
