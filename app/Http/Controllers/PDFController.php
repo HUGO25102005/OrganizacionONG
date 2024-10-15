@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; // Ajusta según tu modelo
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ProgramasEducativos\ProgramaEducativo;
+use Barryvdh\DomPDF\Facade\Pdf;  // Ajustar la referencia a la clase PDF
 use Illuminate\Http\Request;
 
 class PDFController extends Controller
 {
-    public function generatePDF()
+    public function generarPDF()
     {
-        // Obtener los datos que necesitas para el PDF
-        $users = User::all(); // Ajusta según el modelo y consulta que uses
+        // Obtener los programas educativos con sus voluntarios
+        $programas = ProgramaEducativo::with(['voluntario.trabajador.usuario'])
+            ->select('nombre_programa', 'estado', 'fecha_inicio', 'fecha_termino')
+            ->get();
 
-        // Título dinámico
-        $titulo = "Reporte de Usuarios"; // Cambia este valor o pásalo como parámetro
+        // Título para el PDF
+        $titulo = 'Programas Educativos';
 
-        // Generar el PDF
-        $pdf = PDF::loadView('pdf.reporte', compact('users', 'titulo'));
+        // Cargar la vista para el PDF
+        $pdf = Pdf::loadView('pdf.reporte', compact('programas', 'titulo'));
 
-        // Descargar o mostrar el PDF
-        return $pdf->download('reporte_usuarios.pdf');
+        // Devolver el PDF como descarga
+        return $pdf->download('programas_educativos.pdf');
     }
 }

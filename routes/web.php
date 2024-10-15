@@ -71,10 +71,9 @@ Route::group(['prefix' => 'terminosCondiciones'], function () {
 });
 
 Route::group(['prefix' => 'pdf'], function () {
-
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
-
 });
+
 
 
 require __DIR__ . '/auth.php';

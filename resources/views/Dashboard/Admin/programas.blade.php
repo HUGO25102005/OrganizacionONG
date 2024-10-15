@@ -6,9 +6,14 @@
     @endif
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Programas') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Programas') }}
+            </h2>
+            <a href="{{ route('pdf.generar') }}">
+                <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+            </a>        
+        </div>
     </x-slot>
 
 
