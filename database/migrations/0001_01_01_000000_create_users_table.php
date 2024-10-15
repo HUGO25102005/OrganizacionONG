@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 20);
+            $table->string('password', 80);
             $table->string('pais', 100);
             $table->string('estado', 100);
             $table->string('municipio', 100);
@@ -118,7 +118,7 @@ return new class extends Migration
                                 ->comment('Clave foranea de trabajadores');
             $table->date('fecha_inicio')->comment('fecha de ingreso del voluntario');
             $table->date('fecha_termino')->comment('fecha de salida del voluntario');
-            $table->integer('hrs_dedicadas_semana', 2)->comment('Horas dedicadas a la semana (clases de las cuales podra)');
+            $table->integer('hrs_dedicadas_semana')->comment('Horas dedicadas a la semana (clases de las cuales podra)');
             $table->text('comentarios')->nullable();
 
             $table->timestamps();

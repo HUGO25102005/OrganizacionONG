@@ -39,7 +39,7 @@ return new class extends Migration
             $table->date('fecha_fin');
             $table->enum('estado', [1,2,3])->comment('1 = activo, 2 = finalizada, 3 = cancelada');
             $table->text('objetivo');
-            $table->text('comentartios');   
+            $table->text('comentarios');   
             $table->timestamps();
         });
     }

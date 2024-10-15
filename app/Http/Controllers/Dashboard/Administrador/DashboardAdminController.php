@@ -22,7 +22,7 @@ class DashboardAdminController extends Controller
     public function home()
     {
         
-        session(['name' => auth()->user()->name, 'rol' => 'Administrador']);
+        session(['name' => auth()->user()->name, 'rol' => 'Administrador', 'id' => auth()->user()->id]);
 
         return view('Dashboard.Admin.index');
     }
@@ -72,15 +72,19 @@ class DashboardAdminController extends Controller
         $search = $request->input('search');
 
         $programas = ProgramaEducativo::when($search, function ($query, $search) {
-            return $query->where('Nombre_Programa', 'LIKE', '%' . $search . '%')
-                ->orWhereHas('usuario', function ($query) use ($search) {
+            return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
+                // Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
+                ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%' . $search . '%');
                 })
-                ->orWhereDate('Fecha_Inicio', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
-                ->orWhereDate('Fecha_Termino', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
-                ->orWhere('Estado', 'LIKE', '%' . $search . '%');
+                ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
+                ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
+                ->orWhere('estado', 'LIKE', '%' . $search . '%');
         })
-            ->paginate(5);
+        ->paginate(5);
+        
+        
+        
 
         return view('Dashboard.Admin.programas', compact('programas'));
     }
