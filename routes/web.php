@@ -7,6 +7,7 @@ use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
 use App\Http\Controllers\Page\NuestroTrabajoController;
 use App\Http\Controllers\Page\TrasparenciaController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
 use App\Http\Controllers\Usuarios\AdminController;
@@ -60,10 +61,14 @@ Route::group(['prefix' => 'page'], function () {
         return redirect()->route('conocenos.index');
     });
 });
+
 Route::group(['prefix' => 'terminosCondiciones'], function () {
 
     Route::get('/',[TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
 
+});
+Route::group(['prefix' => 'pdf'], function () {
+    Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });
 
 require __DIR__ . '/auth.php';
