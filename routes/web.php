@@ -40,7 +40,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
 
         Route::get('/usuarios', [DashboardAdminController::class, 'usuarios'])->name('admin.usuarios');
-        Route::post('/usuarios/admins', [AdminController::class, 'store'])->name('admin.store');
+        
+        Route::post('/usuarios/adminsList', [AdminController::class, 'store'])->name('admin.store');
+        Route::put('/usuarios/admin', [AdminController::class, 'desactivar'])->name('admin.desactivar');
+
+
         Route::post('/usuarios/coordis', [CoordinadorController::class, 'store'])->name('coordinador.store');
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
     });

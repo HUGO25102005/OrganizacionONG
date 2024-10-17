@@ -1,8 +1,9 @@
 @foreach ($datos as $admin)
     <tr class="border-b border-gray-300">
-        <td class="py-3 px-4 text-center">{{ $admin->id }}</td>
+        <td class="py-3 px-4 text-center">{{ $admin->trabajador->id }}</td>
         <td class="py-3 px-4 text-center">{{ $admin->trabajador->user->name }}</td>
         <td class="py-3 px-4 text-center">{{ $admin->trabajador->user->email }}</td>
+        <td class="py-3 px-4 text-center">{{ $admin->trabajador->getEstadoDescripcion() }}</td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
@@ -87,8 +88,8 @@
                                 {{ $admin->trabajador->user->genero }}
                             </div>
                         </div>
-                        
-                        
+
+
                     </section>
                     {{-- separacion --}}
                     <hr class="my-4 border-gray-300"> <!-- Línea separadora -->
@@ -98,19 +99,19 @@
                         <div>
                             <label class="block text-gray-600 mb-1">Estado del Trabajador:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $admin->trabajador->estado == 1 ? 'Activo' : 'Deshabilitado'}}
+                                {{ $admin->trabajador->estado == 1 ? 'Activo' : 'Deshabilitado' }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Hora de Inicio:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$admin->trabajador->hora_inicio}}
+                                {{ $admin->trabajador->hora_inicio }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Hora de Fin:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$admin->trabajador->hora_fin}}
+                                {{ $admin->trabajador->hora_fin }}
                             </div>
                         </div>
                     </section>
@@ -124,10 +125,12 @@
                         </button>
                     </div>
                 </x-modal-view-info>
+                <x-button-trash 
+                    :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' .  $admin->trabajador->user->name .'?'" 
+                    :router="route('admin.desactivar')" 
+                    :itemId="$admin->trabajador->id"
+                    :tituloModal="'Confirmar Eliminación'" />
 
-                <button class="delete-button text-red-500 text-xl">
-                    <i class='bx bx-trash'></i>
-                </button>
             </div>
         </td>
     </tr>
