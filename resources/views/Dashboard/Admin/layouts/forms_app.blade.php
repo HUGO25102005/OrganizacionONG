@@ -35,11 +35,16 @@
                     placeholder="Apellido Materno" :maxLength="'255'" required :value="old('apellido_materno')">
                     <i class='bx bxs-universal-access' ></i>
                 </x-input-form-modal>
-                {{-- <!-- Fecha de Nacimiento 
-                <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'" required
-                    :value="old('fecha_nacimiento')" />
-                                                        --> --}}
 
+                 <!-- Fecha de Nacimiento -->
+                 <div class="mb-4">
+                    <label for="hora_inicio" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento:</label>
+                    <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'" required
+                    placeholder="''" :value="old('fecha_nacimiento')">
+                    <i class='bx bxs-calendar'></i>
+                    </x-modal-form>
+                </div>
+                
                 {{-- <!-- Email --> --}}
                 <x-input-form-modal :name="'email'" :labelText="'Correo Electrónico:'" :type="'email'" :id="'email'"
                     placeholder="Correo electrónico" :maxLength="'255'" required :value="old('email')">
@@ -108,13 +113,23 @@
                     <i class='bx bxs-phone-call' ></i>
                 </x-input-form-modal>
 
-                {{-- <!-- Hora Inicio 
+            <!-- Hora Inicio -->
+            <div class="mb-4">
+                <label for="hora_inicio" class="block text-sm font-medium text-gray-700">Hora de Inicio:</label>
                 <x-input-form-modal :name="'hora_inicio'" :labelText="'Hora Inicio:'" :type="'time'" :id="'hora_inicio'" required
-                    :value="old('hora_inicio')" /> --> --}}
+                placeholder="''" :value="old('hora_inicio')">
+                <i class='bx bxs-time'></i>
+                </x-input-form-modal>
+            </div>
 
-                {{-- <!-- Hora Fin --> 
+            <!-- Hora Fin -->
+            <div class="mb-4">
+                <label for="hora_fin" class="block text-sm font-medium text-gray-700">Hora de Fin:</label>
                 <x-input-form-modal :name="'hora_fin'" :labelText="'Hora Fin:'" :type="'time'" :id="'hora_fin'" required
-                    :value="old('hora_fin')" /> --> --}}
+                placeholder="''" :value="old('hora_fin')">
+                <i class='bx bxs-time-five'></i>
+                </x-input-form-modal>
+            </div>
 
             </x-modal-form>
         @break
@@ -139,9 +154,14 @@
                     <i class='bx bxs-universal-access' ></i>
                 </x-input-form-modal>
 
-                {{-- <!-- Fecha de Nacimiento --> 
-                <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'" required
-                    :value="old('fecha_nacimiento')" />--}}
+                 <!-- Fecha de Nacimiento --> 
+                 <div class="mb-4">
+                    <label for="hora_inicio" class="block text-sm font-medium text-gray-700">Fecha de Nacimiento:</label>
+                    <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'" required
+                    placeholder="''" :value="old('fecha_nacimiento')">
+                    <i class='bx bxs-calendar'></i>
+                    </x-modal-form>
+                </div>
 
                 {{-- <!-- Email --> --}}
                 <x-input-form-modal :name="'email'" :labelText="'Correo Electrónico:'" :type="'email'" :id="'email'"
@@ -210,13 +230,23 @@
                     <i class='bx bxs-phone-call' ></i>
                 </x-input-form-modal>
 
-                {{-- <!-- Hora Inicio --> 
+            <!-- Hora Inicio -->
+            <div class="mb-4">
+                <label for="hora_inicio" class="block text-sm font-medium text-gray-700">Hora de Inicio:</label>
                 <x-input-form-modal :name="'hora_inicio'" :labelText="'Hora Inicio:'" :type="'time'" :id="'hora_inicio'" required
-                    :value="old('hora_inicio')" /> --}}
+                placeholder="''" :value="old('hora_inicio')">
+                <i class='bx bxs-time'></i>
+                </x-input-form-modal>
+            </div>
 
-                {{-- <!-- Hora Fin --> 
+            <!-- Hora Fin -->
+            <div class="mb-4">
+                <label for="hora_fin" class="block text-sm font-medium text-gray-700">Hora de Fin:</label>
                 <x-input-form-modal :name="'hora_fin'" :labelText="'Hora Fin:'" :type="'time'" :id="'hora_fin'" required
-                    :value="old('hora_fin')" />  --}}
+                placeholder="''" :value="old('hora_fin')">
+                <i class='bx bxs-time-five'></i>
+                </x-input-form-modal>
+            </div>
 
             </x-modal-form>
         @break

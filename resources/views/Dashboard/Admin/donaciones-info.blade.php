@@ -1,0 +1,196 @@
+
+<div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
+    <!-- Contenido aquí -->
+    
+    <!-- Contenedor Grid para organizar los rectángulos -->
+        <div class="grid grid-cols-3 gap-6 p-4">
+            <!-- Rectángulos según el diseño -->
+            <div class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] h-[150px] rounded-lg shadow-md p-4">
+    <div class="bg-[#E0E9FF] h-full w-full rounded-lg flex justify-between items-center p-4">
+        <div>
+            <p class="text-gray-700 text-lg font-semibold">Total disponible:</p>
+            <p class="text-gray-900 text-2xl font-bold">$1234</p>
+            <p>Monto total: 11,200$</p>
+        </div>
+        <div>
+            <i class='bx bx-wallet text-4xl text-gray-700'></i>
+            </div>
+        </div>
+    </div>
+
+        
+    <div class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] h-[150px] rounded-lg shadow-md p-4">
+        <div class="bg-[#C2DEFF] h-full w-full rounded-lg flex justify-between items-center p-4">
+            <div>
+                <p class="text-gray-700 text-lg font-semibold">Dinero usado:</p>
+                <p class="text-gray-900 text-2xl font-bold">$500</p>
+            </div>
+            <div>
+                <i class='bx bxs-wallet-alt text-4xl text-gray-700'></i>
+            </div>
+        </div>
+    </div>
+    
+        
+        <!-- Cuadrado grande -->
+        <div class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] h-[340px] rounded-lg shadow-md row-span-2 p-4">
+            <div class="bg-[#BBDEFB] h-full w-full rounded-lg p-4">
+                <h3 class="text-gray-700 text-xl font-semibold text-center mb-4">Top Donadores <i class='bx bxs-crown'></i> </h3>
+                <div class="flex justify-between font-semibold mb-2 text-black">
+                    <span>Nombre</span>
+                    <span>Monto</span>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-800">Ernesto</span>
+                        <span class="text-gray-600 font-bold">$1500</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-800">Isa</span>
+                        <span class="text-gray-600 font-bold">$1200</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] h-[150px] rounded-lg shadow-md p-4">
+            <div class="bg-[#C2DEFF] h-full w-full rounded-lg flex justify-between items-center p-4">
+                <div>
+                    <p class="text-gray-700 text-lg font-semibold">Dinero recaudado la última semana:</p>
+                    <p class="text-gray-900 text-2xl font-bold">$7500</p>
+                </div>
+                <div>
+                    <i class='bx bx-credit-card text-4xl text-gray-700'></i>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] h-[150px] rounded-lg shadow-md p-4">
+            <div class="bg-[#E0E9FF] h-full w-full rounded-lg flex justify-between items-center p-4">
+                <div>
+                    <p class="text-gray-700 text-lg font-semibold">Dinero recaudado el último mes:</p>
+                    <p class="text-gray-900 text-2xl font-bold">$7500</p>
+                </div>
+                <div>
+                    <i class='bx bxs-bank text-4xl text-gray-700'></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="h-full w-full rounded-lg">
+            <div
+                class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-[1380px] h-[290px] p-[20px] rounded-[15px] mt-[20px]">
+                <!-- Título de la tabla -->
+                <div
+                    class="bg-[#232B47] text-center text-[20px] rounded-[15px] text-[#D9D9D9] w-full h-[35px] mx-auto">
+                    <p>Últimas donaciones</p>
+                </div>
+        
+                <!-- Tabla de donaciones -->
+                <div class="mt-6 text-[#D9D9D9]">
+                    <table class="w-full text-center"> <!-- Alinea el texto al centro -->
+                        <thead class="bg-[#232B47] rounded-[15px]">
+                            <tr>
+                                <th class="py-2 px-4 w-1/5">Nombre</th>
+                                <th class="py-2 px-4 w-1/5">Correo Electrónico</th>
+                                <th class="py-2 px-4 w-1/5">País</th>
+                                <th class="py-2 px-4 w-1/5">Fecha Registro</th>
+                                <th class="py-2 px-4 w-1/5">Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4">Ernesto</td>
+                                <td class="py-2 px-4">ejimenez@gmail.com</td>
+                                <td class="py-2 px-4">México</td>
+                                <td class="py-2 px-4">15-10-2024</td>
+                                <td class="py-2 px-4">$1000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                       
+            </div>
+        </div>
+</div>
+
+
+<!--
+        <div
+            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] w-full max-w-[1480px] h-[225px] mt-[20px] rounded-[15px] flex justify-center items-center">
+            <div class="bg-[#F2F8FF] w-full max-w-[1360px] h-[208px] rounded-[15px]">
+                <div class="flex justify-between">
+                    <!-- Título "Gestionar" -->
+<!--                   <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
+                    @if ($errors->any())
+                        <div class="bg-red-500 text-white p-4 mb-4 rounded">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <!-- Contenedor de botones -->
+ <!--                      <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">
+                        <!-- Primer botón -->
+ <!--                          <a href="#">
+                            <div
+                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <p class="text-center text-[20px]">Solicitudes de donación</p>
+                                <x-modal-form :btnTitulo="'Nueva Convocatoria'" :tituloModal="'Agrega Nueva Convocatoria'" :router="route('convocatoria.store')" :btnDanger="'Cancelar'"
+                                    :btnSuccess="'Confirmar'">
+                                    <!-- Nombre -->
+  <!--                                    <x-input-form-modal :name="'nombre'" :labelText="'Nombre:'" :type="'text'"
+                                        :id="'nombre'" :placeholder="'Nombre: '" :maxLength="'255'" required>
+                                    </x-input-form-modal>
+
+                                    <!-- Descripción -->
+   <!--                                    <x-input-form-modal :name="'descripcion'" :labelText="'Descripción:'" :type="'text'"
+                                        :id="'descripcion'" :placeholder="'Descripción: '" required>
+                                    </x-input-form-modal>
+
+                                    <!-- Fecha de Inicio -->
+   <!--                                    <x-input-form-modal :name="'fecha_inicio'" :labelText="'Fecha de Inicio:'" :type="'date'"
+                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')"  :placeholder="'Fecha'"/>
+
+                                    <!-- Fecha de Fin -->
+   <!--                                    <x-input-form-modal :name="'fecha_fin'" :labelText="'Fecha de Fin:'" :type="'date'"
+                                        :id="'fecha_fin'" required :value="old('fecha_fin')" :placeholder="'Fecha'"/>
+
+                                    <!-- Objetivo -->
+   <!--                                    <x-input-form-modal :name="'objetivo'" :labelText="'Objetivo:'" :type="'text'"
+                                        :id="'objetivo'" placeholder="Objetivo: " required>
+                                    </x-input-form-modal>
+
+                                    <!-- Comentarios -->
+   <!--                                    <x-input-form-modal :name="'comentarios'" :labelText="'Comentarios:'" :type="'text'"
+                                        :id="'comentarios'" placeholder="Comentarios: " required>
+                                    </x-input-form-modal>
+
+
+
+                                </x-modal-form>
+                            </div>
+                        </a>
+
+                        <!-- Segundo botón -->
+       <!--                    <a href="#">
+                            <div
+                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <p class="text-center text-[20px]">Gestionar no sé</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div> 
+-->
