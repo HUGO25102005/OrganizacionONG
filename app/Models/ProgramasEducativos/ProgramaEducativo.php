@@ -4,7 +4,6 @@ namespace App\Models\ProgramasEducativos;
 
 use App\Models\Caja\Presupuesto;
 use App\Models\User;
-use App\Models\Usuarios\Trabajadores\Trabajador;
 use App\Models\Usuarios\Trabajadores\Voluntario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -56,15 +55,5 @@ class ProgramaEducativo extends Model
     public function salonesClases()
     {
         return $this->hasMany(SalonesClase::class, 'id_programa_educativo');
-    }
-
-    public function trabajador()
-    {
-        return $this->belongsTo(Trabajador::class, 'id_trabajador'); // Ajusta si es necesario
-    }
-
-    public function usuario()
-    {
-        return $this->belongsTo(User::class, 'id_user'); // Ajusta si es necesario
     }
 }

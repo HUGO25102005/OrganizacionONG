@@ -6,14 +6,9 @@
     @endif
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Programas') }}
-            </h2>
-            <a href="{{ route('pdf.generar') }}">
-                <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
-            </a>        
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Programas') }}
+        </h2>
     </x-slot>
 
 
@@ -46,12 +41,12 @@
                     <tbody class="mt-5"> <!-- Agregar margen superior en tbody -->
                         @foreach ($programas as $programa)
                             <tr class="bg-[#4a607a] rounded-lg">
-                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->nombre_programa }}
+                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->Nombre_Programa }}
                                 </td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->voluntario->trabajador->user->name }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->usuario->name }}</td>
                                 <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Inicio)->format('d-m-Y') }}</td>
                                 <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Termino)->format('d-m-Y') }}</td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->estado == 1 ? 'activo' : 'inactivo' }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->Estado }}</td>
                                 <td class="py-3 px-4 {{ $loop->last ? 'rounded-br-lg' : ''}} text-center">
                                     <i class='bx bx-show text-xl cursor-pointe text-center'></i>
                                     <a href="pro2.html">

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Dashboard\Administrador\DashboardAdminController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
@@ -69,12 +68,6 @@ Route::group(['prefix' => 'terminosCondiciones'], function () {
     Route::get('/',[TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
 
 });
-
-Route::group(['prefix' => 'pdf'], function () {
-    Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
-});
-
-
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';
