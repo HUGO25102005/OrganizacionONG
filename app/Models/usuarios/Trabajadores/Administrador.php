@@ -14,6 +14,9 @@ class Administrador extends Model
         'id_trabajador',
     ];
 
+    public function getRole():string{
+        return 'Administrador';
+    }
     public function trabajador()
     {
         return $this->belongsTo(Trabajador::class, 'id_trabajador');
