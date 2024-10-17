@@ -9,6 +9,8 @@ class Coordinador extends Model
 {
     use HasFactory;
 
+    protected $table = 'coordinadores';
+
     protected $fillable = [
         'id_trabajador',
     ];

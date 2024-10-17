@@ -1,0 +1,17 @@
+<div>
+    <div x-data="{ open: false }">
+        <!-- Botón para abrir el modal -->
+        <button @click="open = true" class="{{ $classButton }}">
+            <i class='bx bx-show'></i>
+        </button>
+
+        <!-- Modal -->
+        <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-30 flex justify-center items-center"
+            @click.away="open = false" style="display: none;">
+            <!-- Contenedor de la carta con scroll en Y -->
+            <div class="max-w-5xl mx-auto mt-10 bg-white shadow-md rounded-lg overflow-y-auto max-h-screen p-8">
+                {{ $slot }}
+            </div>
+        </div>
+    </div>
+</div>

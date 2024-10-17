@@ -6,11 +6,27 @@
     @endif
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Programas') }}
-        </h2>
+        
+        <div class="flex items-center justify-between space-x-7">
+            <div class="flex items-center">
+                <a href="#">
+                    <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('presupuesto') ? 'border-b-4 border-indigo-500' : '' }}">
+                        {{ __('Solicitud de presupuesto') }}
+                    </h2>
+                </a>
+                <a href="#">
+                    <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] hover:text-white p-2 rounded leading-tight {{ request()->routeIs('programas') ? 'border-b-4 border-indigo-500' : '' }}">
+                        {{ __('Programas') }}
+                    </h2>
+                </a>
+            </div>
+            <div class="">        
+                <a href="{{ route('pdf.generar') }}">
+                    <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+                </a> 
+            </div>
+        </div>
     </x-slot>
-
 
 
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
@@ -28,25 +44,25 @@
             <div class="overflow-x-auto">
                 <table class="w-full table-auto">
                     <thead class="bg-[#232B47]"> <!-- Mantener el fondo en el thead -->
-                        <tr>
-                            <th class="bg-gray-100 text-black rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Impartidor</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Fecha Incio</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Fecha Termino</th>
-                            <th class="bg-gray-100 text-black px-4 py-2 text-center ml-2">Estado</th>
-                            <th class="bg-gray-100 text-black rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
+                        <tr class="text-black">
+                            <th class="bg-gray-100 rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Impartidor</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Incio</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Termino</th>
+                            <th class="bg-gray-100 px-4 py-2 text-center ml-2">Estado</th>
+                            <th class="bg-gray-100 rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
                             </th>
                         </tr>
                     </thead>
                     <tbody class="mt-5"> <!-- Agregar margen superior en tbody -->
                         @foreach ($programas as $programa)
                             <tr class="bg-[#4a607a] rounded-lg">
-                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->Nombre_Programa }}
+                                <td class="px-4 py-2 {{ $loop->last ? 'rounded-bl-lg' : '' }} text-white text-lg text-center">{{ $programa->nombre_programa }}
                                 </td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->usuario->name }}</td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Inicio)->format('d-m-Y') }}</td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->Fecha_Termino)->format('d-m-Y') }}</td>
-                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->Estado }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->voluntario->trabajador->user->name }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->fecha_inicio)->format('d-m-Y') }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ \Carbon\Carbon::parse($programa->fecha_termino)->format('d-m-Y') }}</td>
+                                <td class="px-4 py-2 text-white text-lg text-center">{{ $programa->estado == 1 ? 'activo' : 'inactivo' }}</td>
                                 <td class="py-3 px-4 {{ $loop->last ? 'rounded-br-lg' : ''}} text-center">
                                     <i class='bx bx-show text-xl cursor-pointe text-center'></i>
                                     <a href="pro2.html">

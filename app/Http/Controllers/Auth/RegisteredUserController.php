@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Usuarios\AdminRequest;
 use App\Models\User;
 use App\Models\Usuarios\Trabajadores\Administrador;
 use App\Models\Usuarios\Trabajadores\Trabajador;
@@ -11,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -29,27 +30,9 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(AdminRequest $request): RedirectResponse
     {
-        // Validación de los datos
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'apellido_paterno' => ['required', 'string', 'max:255'],
-            'apellido_materno' => ['required', 'string', 'max:255'],
-            'fecha_nacimiento' => ['required', 'date'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'pais' => ['required', 'string', 'max:100'],
-            'estado' => ['required', 'string', 'max:100'],
-            'municipio' => ['required', 'string', 'max:100'],
-            'cp' => ['required', 'string', 'max:100'],
-            'direccion' => ['required', 'string', 'max:255'],
-            'genero' => ['required', 'in:M,F,O'],
-            'telefono' => ['required', 'string', 'max:20'],
-            'hora_inicio' => ['required', 'date_format:H:i'],
-            'hora_fin' => ['required', 'date_format:H:i'],
-        ]);
-
+        //dd($request);
         // Creación del usuario
         $user = User::create([
             'name' => $request->name,

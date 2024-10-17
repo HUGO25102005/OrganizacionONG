@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\usuarios\Beneficiarios\Beneficiario;
 use App\Models\Usuarios\Trabajadores\Administrador;
 use App\Models\Usuarios\Trabajadores\Coordinador;
+use App\Models\Usuarios\Trabajadores\Trabajador;
 use App\Models\Usuarios\Trabajadores\Voluntario;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,8 @@ class DashboardAdminController extends Controller
      */
     public function home()
     {
-        
-        session(['name' => auth()->user()->name, 'rol' => 'Administrador']);
+
+        session(['name' => auth()->user()->name, 'rol' => 'Administrador', 'id' => auth()->user()->id]);
 
         return view('Dashboard.Admin.index');
     }
@@ -36,7 +37,7 @@ class DashboardAdminController extends Controller
         $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
         $actividades_registradas = RegistroActividades::getTotalActividades();
         $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
-    
+
         session(['name' => auth()->user()->name,]);
 
         return view(
@@ -72,38 +73,78 @@ class DashboardAdminController extends Controller
         $search = $request->input('search');
 
         $programas = ProgramaEducativo::when($search, function ($query, $search) {
-            return $query->where('Nombre_Programa', 'LIKE', '%' . $search . '%')
-                ->orWhereHas('usuario', function ($query) use ($search) {
+            return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
+                // Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
+                ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%' . $search . '%');
                 })
-                ->orWhereDate('Fecha_Inicio', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
-                ->orWhereDate('Fecha_Termino', '=', date('Y-m-d', strtotime($search))) // Cambiar a orWhereDate
-                ->orWhere('Estado', 'LIKE', '%' . $search . '%');
+                ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
+                ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
+                ->orWhere('estado', 'LIKE', '%' . $search . '%');
         })
             ->paginate(5);
+
+
+
 
         return view('Dashboard.Admin.programas', compact('programas'));
     }
     public function usuarios(Request $request)
     {
-        $tipo = $request->get('tipo', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los tipos
+        //dd($request);
+        $seccion = $request->get('seccion', 1);
         
-        switch($tipo){
-            case 'Administrador':
-                $datos = Administrador::all();
-                break;
-            case 'Coordinador': 
-                $datos = Coordinador::all();
-                break;
-            case 'Voluntario':
-                $datos = Voluntario::all();
-                break;
-            case 'Beneficiario':
-                $datos = Beneficiario::all();
-                break;
+        if($seccion == 1){
+            $tipo = $request->get('tipo', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los tipos
+        } else {
+            $tipo = $request->get('tipo', 'todos');
         }
 
-        return view('Dashboard.Admin.usuarios', compact('tipo', 'datos')); // Pasa los datos a la vista
+        if ($seccion == 1) {
+            switch ($tipo) {
+                case 'Administrador':
+                    $datos = Administrador::whereHas('trabajador', function ($query){
+                        $query->where('estado', '!=', 3);
+                    })->paginate(10);
+                    break;
+                case 'Coordinador':
+                    $datos = Coordinador::paginate(10);
+                    break;
+                case 'Voluntario':
+                    $datos = Voluntario::paginate(10);
+                    break;
+                case 'Beneficiario':
+                    $datos = Beneficiario::paginate(10);
+                    break;
+            }
+            // Pasa los datos a la vista
+        } else {
+
+            switch ($tipo) {
+                case 'Solicitudes':
+
+                    $datos = Trabajador::where('estado', 3)->paginate(10);
+
+                    break;
+                case 'Administrador':
+                    
+                    $datos = Administrador::whereHas('trabajador', function ($query) {
+                        $query->where('estado', 3); // Aquí filtramos por el campo 'status' en la tabla 'trabajadores'
+                    })->paginate(10);
+
+                    break;
+                case 'Coordinador':
+                    $datos = Coordinador::paginate(10);
+                    break;
+                case 'Voluntario':
+                    $datos = Voluntario::paginate(10);
+                    break;
+                case 'Beneficiario':
+                    $datos = Beneficiario::paginate(10);
+                    break;
+            }
+        }
+
+        return view('Dashboard.Admin.usuarios', compact(['tipo', 'seccion'], 'datos'));
     }
-    
 }

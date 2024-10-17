@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Administrador\DashboardAdminController;
+use App\Http\Controllers\Donaciones\ConvocatoriaController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
 use App\Http\Controllers\Page\NuestroTrabajoController;
 use App\Http\Controllers\Page\TrasparenciaController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
+use App\Http\Controllers\Usuarios\AdminController;
+use App\Http\Controllers\Usuarios\CoordinadorController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -29,22 +33,20 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckAdmin::class])->prefix('dashboard/admin')->group(function () {
         Route::get('/home', [DashboardAdminController::class, 'home'])->name('admin.home');
         Route::get('/panelControl', [DashboardAdminController::class, 'panelControl'])->name('admin.panelControl');
+        
         Route::get('/donaciones', [DashboardAdminController::class, 'donaciones'])->name('admin.donaciones');
+        Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store');
+
         Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
+
         Route::get('/usuarios', [DashboardAdminController::class, 'usuarios'])->name('admin.usuarios');
+        
+        Route::post('/usuarios/adminsList', [AdminController::class, 'store'])->name('admin.store');
+        Route::put('/usuarios/admin', [AdminController::class, 'desactivar'])->name('admin.desactivar');
+
+
+        Route::post('/usuarios/coordis', [CoordinadorController::class, 'store'])->name('coordinador.store');
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
-    });
-
-    Route::middleware([RoleMiddleware::class])->prefix('dashboard/cordi')->group(function () {
-        // Route::get('/home', [DashboardController::class, 'coordiHome'])->name('cordi.home');
-        // Route::get('/profile', [DashboardController::class, 'cordiProfile'])->name('cordi.profile');
-        // Route::get('/settings', [DashboardController::class, 'cordiSettings'])->name('cordi.settings');
-    });
-
-    Route::middleware([RoleMiddleware::class .':Voluntario'])->prefix('dashboard/voluntario')->group(function () {
-        // Route::get('/home', [DashboardController::class, 'voluntarioHome'])->name('voluntario.home');
-        // Route::get('/profile', [DashboardController::class, 'voluntarioProfile'])->name('voluntario.profile');
-        // Route::get('/settings', [DashboardController::class, 'voluntarioSettings'])->name('voluntario.settings');
     });
 });
 
@@ -63,10 +65,14 @@ Route::group(['prefix' => 'page'], function () {
         return redirect()->route('conocenos.index');
     });
 });
+
 Route::group(['prefix' => 'terminosCondiciones'], function () {
 
     Route::get('/',[TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
 
+});
+Route::group(['prefix' => 'pdf'], function () {
+    Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });
 
 require __DIR__ . '/auth.php';

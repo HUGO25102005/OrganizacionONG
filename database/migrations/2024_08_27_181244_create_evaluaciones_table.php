@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('evaluaciones', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId('id_programa')->constrained('programas_educativos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del programa educativo');
+            $table->foreignId('id_programa')
+                                ->constrained('programas_educativos')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea del programa educativo');
             $table->text('metodologia');
             $table->text('resultados_evaluacion')->comment('es una retroalimentacion');
             $table->text('recomendaciones')->nullable();
