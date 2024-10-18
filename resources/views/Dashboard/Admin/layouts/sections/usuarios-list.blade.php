@@ -11,12 +11,9 @@
     @endif
     <div class="container w-full mb-5">
         <h2 class="text-center font-semibold text-3xl">
-            Lista de {{ $tipo }}{{ $tipo === 'Administrador' || $tipo === 'Coordinador' ? 'es' : 's' }}
+            Lista de Usuarios
         </h2>
     </div>
-
-
-
 
     <div class="content w-full">
         <!-- Administradores Tab -->

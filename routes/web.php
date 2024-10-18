@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Middleware\CheckAdmin;
-use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
     return view('auth.login');

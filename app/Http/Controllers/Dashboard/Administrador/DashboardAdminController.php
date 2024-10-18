@@ -91,7 +91,7 @@ class DashboardAdminController extends Controller
     }
     public function usuarios(Request $request)
     {
-        //dd($request);
+        
         $seccion = $request->get('seccion', 1);
         
         if($seccion == 1){
@@ -103,21 +103,19 @@ class DashboardAdminController extends Controller
         if ($seccion == 1) {
             switch ($tipo) {
                 case 'Administrador':
-                    $datos = Administrador::whereHas('trabajador', function ($query){
-                        $query->where('estado', '!=', 3);
-                    })->paginate(10);
+                    $datos = Administrador::getAdministradoresActivos()->paginate(10);
                     break;
                 case 'Coordinador':
-                    $datos = Coordinador::paginate(10);
+                    $datos = Coordinador::getCoordinadoresActivos()->paginate(10);
                     break;
                 case 'Voluntario':
-                    $datos = Voluntario::paginate(10);
+                    $datos = Voluntario::getVoluntariosActivos()->paginate(10);
                     break;
                 case 'Beneficiario':
                     $datos = Beneficiario::paginate(10);
                     break;
             }
-            // Pasa los datos a la vista
+            
         } else {
 
             switch ($tipo) {

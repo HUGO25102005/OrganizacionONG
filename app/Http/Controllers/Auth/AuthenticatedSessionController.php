@@ -16,6 +16,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        if (Auth::check()) {
+            // Redirigir a la ruta del dashboard si ya está autenticado
+            return redirect()->route('admin.home'); // Cambia esto según tu lógica de redirección
+        }
         return view('auth.login');
     }
 
@@ -23,14 +27,18 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
-        $request->session()->regenerate();
-
-        // Obtener el usuario autenticado
-        $user = Auth::user();
-        
-
+    {    
+        //dd($request);
+        if(Auth::check()){
+            $user = Auth::user();
+            dd($user);
+        } else {
+            $request->authenticate();
+            $request->session()->regenerate();
+            // Obtener el usuario autenticado
+            $user = Auth::user();
+        }
+        //dd($user);
         if ($user->trabajador && $user->trabajador->administrador) {
             return redirect()->intended(route('admin.home'));
         } elseif ($user->trabajador && $user->trabajador->coordinador) {
@@ -39,7 +47,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('voluntario.home'));
         } else {
             return redirect()->intended(route('dashboard'));
-        }
+        } 
     }
 
 
