@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('donantes', function (Blueprint $table) {
             $table->id();
             $table->string('payer_id')->comment('id de cuenta paypal');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->enum('Tipo_Donante', ['Individual', 'Corporativo', 'Organizacion', 'Anonimo']);
             $table->string('first_name', 50);
             $table->string('last_name', 70);

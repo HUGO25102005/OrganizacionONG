@@ -53,20 +53,7 @@ class UserController extends Controller
                     'Motivo_Sector_Educativo' => 'nullable|string|max:255',
                 ], [
                     // Mensajes personalizados
-                    'Rol.required' => 'El campo Rol es obligatorio.',
-                    'name.required' => 'El campo Nombre es obligatorio.',
-                    'email.required' => 'El campo Correo Electrónico es obligatorio.',
-                    'email.email' => 'El formato del Correo Electrónico no es válido.',
-                    'email.unique' => 'El Correo Electrónico ya está en uso.',
-                    'password.required' => 'El campo Contraseña es obligatorio.',
-                    'password.min' => 'La Contraseña debe tener al menos :min caracteres.',
-                    'Fecha_Nacimiento.required' => 'El campo Fecha de Nacimiento es obligatorio.',
-                    'Genero.required' => 'El campo Género es obligatorio.',
-                    'Telefono.required' => 'El campo Teléfono es obligatorio.',
-                    'Pais.required' => 'El campo País es obligatorio.',
-                    'Estado.required' => 'El campo Estado es obligatorio.',
-                    'Municipio.required' => 'El campo Municipio es obligatorio.',
-                    'Direccion.required' => 'El campo Dirección es obligatorio.',
+                    
                 ]);
 
                 // Crear el nuevo usuario utilizando el modelo User

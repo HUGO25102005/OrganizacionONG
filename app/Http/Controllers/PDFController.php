@@ -11,7 +11,9 @@ class PDFController extends Controller
     public function generarPDF()
     {
         // Obtener los programas educativos con sus voluntarios
-        $programas = ProgramaEducativo::all();
+        $programas = ProgramaEducativo::with(['voluntario.trabajador.usuario'])
+            ->select('nombre_programa', 'estado', 'fecha_inicio', 'fecha_termino')
+            ->get();
 
         // Título para el PDF
         $titulo = 'Programas Educativos';

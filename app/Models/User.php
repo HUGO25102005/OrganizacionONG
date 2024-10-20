@@ -57,6 +57,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function getFullName(): string
+    {
+        return "{$this->name} {$this->apellido_paterno} {$this->apellido_materno}";
+    }
+
     /**
      * Get the trabajador associated with the user.
      */
@@ -64,5 +69,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Trabajador::class, 'id_user');
     }
-    
 }

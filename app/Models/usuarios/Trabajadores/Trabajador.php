@@ -20,6 +20,25 @@ class Trabajador extends Model
         'hora_fin',
     ];
 
+    public function getEstadoDescripcion(): string
+    {
+        // dd($this->estado);
+        $estado = $this->estado; 
+
+        switch (intval($estado)) {
+            case 1:
+                return 'Activo';
+            case 2:
+                return 'Desactivado';
+            case 3:
+                return 'Solicitado';
+            case 4:
+                return 'Suspendido';
+            default:
+                return 'Sin estado';
+        }
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
@@ -39,5 +58,4 @@ class Trabajador extends Model
     {
         return $this->hasOne(Voluntario::class, 'id_trabajador');
     }
-
 }

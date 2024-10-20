@@ -74,7 +74,7 @@
             @foreach ($programas as $programa)
                 <tr>
                     <td>{{ $programa->nombre_programa }}</td>
-                    <td>{{ $programa->voluntario->trabajador->user->name }}</td>
+                    <td>{{ $programa->voluntario->trabajador->usuario->nombre ?? 'Sin voluntario' }}</td>
                     <td>{{ $programa->fecha_inicio }}</td>
                     <td>{{ $programa->fecha_termino }}</td>
                     <td>{{ $programa->estado }}</td>

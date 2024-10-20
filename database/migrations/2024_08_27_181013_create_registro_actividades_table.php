@@ -14,8 +14,16 @@ return new class extends Migration
         Schema::create('registro_actividades', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId('id_programa')->constrained('programas_educativos')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del programa educativo');
-            $table->foreignId('id_voluntario')->constrained('voluntarios')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea de voluntario');
+            $table->foreignId('id_programa')
+                                ->constrained('programas_educativos')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea del programa educativo');
+            $table->foreignId('id_voluntario')
+                                ->constrained('voluntarios')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de voluntario');
             $table->date('fecha_actividad');
             $table->text('descripcion_actividad');
             $table->text('resultados_actividad');

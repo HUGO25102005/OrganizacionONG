@@ -16,9 +16,30 @@ return new class extends Migration
         Schema::create('donacion', function (Blueprint $table) {
             $table->id();
             $table->string('id_transaccion');
-            $table->foreignId('payer_id')->constrained('donantes')->onDelete('cascade')->onUpdate('cascade')->comment('Clave foranea del donante');
+            $table->foreignId('payer_id')
+                                ->constrained('donantes')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea del donante');
             $table->tinyInteger('currency');
             $table->decimal('monto', 10, 2);
+            $table->timestamps();
+        });
+
+        Schema::create('convocatorias_donacion', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_administrador')->nullable()
+                                ->constrained('administradores')
+                                ->onDelete('set null')
+                                ->onUpdate('cascade')
+                                ->comment('Clave foranea de usuarios');
+            $table->string('nombre', 255);
+            $table->text('descripcion');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->enum('estado', [1,2,3])->comment('1 = activo, 2 = finalizada, 3 = cancelada');
+            $table->text('objetivo');
+            $table->text('comentarios');   
             $table->timestamps();
         });
     }
@@ -29,5 +50,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('donacion');
+        Schema::dropIfExists('convocatorias_donacion');
     }
 };
