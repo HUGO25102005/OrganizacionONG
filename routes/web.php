@@ -68,7 +68,12 @@ Route::group(['prefix' => 'terminosCondiciones'], function () {
 
 });
 Route::group(['prefix' => 'pdf'], function () {
-    Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
+    Route::get('/generar-P', [PDFController::class, 'generarPDF_P'])->name('pdf.generar_P');
+    Route::get('/generar-A', [PDFController::class, 'generarPDF_A'])->name('pdf.generar_A');
+    Route::get('/generar-C', [PDFController::class, 'generarPDF_C'])->name('pdf.generar_C');
+    Route::get('/generar-V', [PDFController::class, 'generarPDF_V'])->name('pdf.generar_V');
+    Route::get('/generar-B', [PDFController::class, 'generarPDF_B'])->name('pdf.generar_B');
+    Route::get('/generar-All', [PDFController::class, 'generarPDF_All'])->name('pdf.generar_All');
 });
 
 require __DIR__ . '/auth.php';

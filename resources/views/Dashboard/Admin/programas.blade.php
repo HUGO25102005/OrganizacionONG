@@ -20,9 +20,9 @@
                     </h2>
                 </a>
             </div>
-            <div class="">        
-                <a href="{{ route('pdf.generar') }}">
-                    <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+            <div class="" title="Generar pdf de programas educativos">    
+                <a href="{{ route('pdf.generar_P') }}">
+                    <i class="bx bxs-file-pdf text-4xl"></i>
                 </a> 
             </div>
         </div>

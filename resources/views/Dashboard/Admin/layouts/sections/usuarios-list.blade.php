@@ -13,6 +13,49 @@
         <h2 class="text-center font-semibold text-3xl">
             Lista de {{ $tipo }}{{ $tipo === 'Administrador' || $tipo === 'Coordinador' ? 'es' : 's' }}
         </h2>
+        @switch($tipo)
+            @case('Administrador')
+                <div class="relative" title="Generar pdf de Administradores del sitio web">    
+                    <div class="absolute bottom-0 right-0">
+                        <a href="{{ route('pdf.generar_A') }}">
+                            <i class="bx bxs-file-pdf text-4xl"></i> <!-- Cambia el tamaño del ícono aquí -->
+                        </a> 
+                    </div>
+                </div>
+                @break
+
+            @case('Coordinador')
+                <div class="relative" title="Generar pdf de Coordinadores del sitio web">    
+                    <div class="absolute bottom-0 right-0">
+                        <a href="{{ route('pdf.generar_C') }}">
+                            <i class="bx bxs-file-pdf text-4xl"></i> <!-- Cambia el tamaño del ícono aquí -->
+                        </a> 
+                    </div>
+                </div>
+                @break
+
+            @case('Voluntario')
+                <div class="relative" title="Generar pdf de Voluntarios del sitio web">    
+                    <div class="absolute bottom-0 right-0">
+                        <a href="{{ route('pdf.generar_V') }}">
+                            <i class="bx bxs-file-pdf text-4xl"></i> <!-- Cambia el tamaño del ícono aquí -->
+                        </a> 
+                    </div>
+                </div>
+                @break
+
+            @case('Beneficiario')
+                <div class="relative" title="Generar pdf de Beneficiarios del sitio web">    
+                    <div class="absolute bottom-0 right-0">
+                        <a href="{{ route('pdf.generar_B') }}">
+                            <i class="bx bxs-file-pdf text-4xl"></i> <!-- Cambia el tamaño del ícono aquí -->
+                        </a> 
+                    </div>
+                </div>
+                @break
+
+            @default
+        @endswitch
     </div>
 
 

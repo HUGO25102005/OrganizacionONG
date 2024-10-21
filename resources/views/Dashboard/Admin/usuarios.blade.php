@@ -33,6 +33,13 @@
                 </h2>
             </a>
         </div>
+        <div class="relative" title="Generar pdf de Usuarios del sitio web">    
+            <div class="absolute bottom-0 right-0">
+                <a href="{{ route('pdf.generar_All') }}">
+                    <i class="bx bxs-file-pdf text-4xl"></i> <!-- Cambia el tamaño del ícono aquí -->
+                </a> 
+            </div>
+        </div>
     </x-slot>
 
     @if ($seccion == 1)
@@ -40,5 +47,4 @@
     @else
         @include('Dashboard.Admin.layouts.sections.usuarios-solicitudes');
     @endif
-
 </x-app-layout>
