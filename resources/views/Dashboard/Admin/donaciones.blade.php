@@ -6,123 +6,143 @@
     @endif
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Donaciones') }}
-        </h2>
+        <div class="flex space-x-4">
+            <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight">
+                {{ __('Donaciones') }}
+            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight">
+                {{ __('Campañas de recaudación') }}
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        <div
-            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-full max-w-[1480px] h-[300px] flex justify-center items-center rounded-[15px]">
-            <!-- Contenido aquí -->
+    <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
+        <div class="flex justify-between items-center mb-[20px]">
+            <h2 class="text-2xl font-semibold">Campañas de Recaudación</h2>
+            <button id="openModalBtn" class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
+                Crear Nueva Campaña
+            </button>
+        </div>
 
-            <!-- Contenido aquí -->
-
-            <div
-                class="bg-[#F2F8FF] w-full max-w-[1360px] h-[280px] rounded-[10px] p-[20px] grid grid-cols-1 sm:grid-cols-2 gap-[40px] items-center">
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col items-start ml-4 sm:ml-[120px]">
-                        <h3 class="text-[24px]">Dinero total de donaciones:</h3>
-                        <p class="text-[24px] ml-[105px]">${{ $monto_total_donaciones }}</p>
-                    </div>
-                    <i class='bx bx-money-withdraw icono text-6xl'></i>
+    
+    <!-- Modal (Formulario de nueva campaña) -->
+<!-- Modal (Formulario de nueva campaña) -->
+<div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50 flex">
+    <div class="bg-white w-full max-w-[600px] p-[20px] rounded-lg shadow-lg relative">
+        <!-- Botón de cerrar -->
+        <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+            <i class='bx bx-x text-3xl'></i>
+        </button>
+    </div>
+</div>
+   
+        
+        <!-- Contenedor principal -->
+        <div class="flex flex-wrap gap-[20px]">
+            <!-- Columna izquierda -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-[20px] flex-1">
+                <!-- Resumen de la campaña -->
+                <div class="bg-white p-[20px] rounded-[20px] shadow-md">
+                    <h3 class="text-lg font-semibold mb-[10px]">Campañas Activas</h3>
+                    <p class="text-4xl font-bold">8</p>
+                    <p class="text-sm text-gray-500">Total en curso actualmente</p>
                 </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col items-start ml-4 sm:ml-[175px]">
-                        <h3 class="text-[24px]">Donaciones recibidas:</h3>
-                        <p class="text-[24px] ml-[105px]">{{ $total_donaciones }}</p>
+                
+                <!-- Progreso de la recaudación -->
+                <div class="bg-white p-[20px] rounded-[20px] shadow-md">
+                    <h3 class="text-lg font-semibold mb-[10px]">Artículos Recaudados</h3>
+                    <p class="text-4xl font-bold">23</p>
+                    <p class="text-sm text-gray-500">meta: 50 artículos</p>
+                    <div class="bg-gray-200 rounded-full h-[10px] mt-[10px]">
+                        <div class="bg-green-500 h-[10px] rounded-full" style="width: 50%;"></div>
                     </div>
-                    <i class='bx bxs-donate-heart icono text-6xl'></i>
                 </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col items-start ml-4 sm:ml-[80px]">
-                        <h3 class="text-[24px]">Dinero recaudado la última semana:</h3>
-                        <p class="text-[24px] ml-[140px]">${{ 0 }}</p>
-                    </div>
-                    <i class='bx bxs-dollar-circle icono text-6xl'></i>
+                
+                <!-- Campañas finalizadas -->
+                <div class="bg-white p-[20px] rounded-[20px] shadow-md">
+                    <h3 class="text-lg font-semibold mb-[10px]">Campañas Finalizadas</h3>
+                    <p class="text-4xl font-bold">15</p>
+                    <p class="text-sm text-gray-500">Desde el inicio del año</p>
                 </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col items-start ml-4 sm:ml-[95px]">
-                        <h3 class="text-[24px]">Donaciones recibidas la última semana:</h3>
-                        <p class="text-[24px] ml-[195px]">{{ $total_donaciones_semana }}</p>
-                    </div>
-                    <i class='bx bxs-dollar-circle icono text-6xl'></i>
+                
+                <!-- Total de voluntarios -->
+                <div class="bg-white p-[20px] rounded-[20px] shadow-md">
+                    <h3 class="text-lg font-semibold mb-[10px]">Total de donantes</h3>
+                    <p class="text-4xl font-bold">35</p>
+                    <p class="text-sm text-gray-500">donantes que han participado</p>
                 </div>
             </div>
-
-        </div>
-        <div
-            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] w-full max-w-[1480px] h-[225px] mt-[20px] rounded-[15px] flex justify-center items-center">
-            <div class="bg-[#F2F8FF] w-full max-w-[1360px] h-[208px] rounded-[15px]">
-                <div class="flex justify-between">
-                    <!-- Título "Gestionar" -->
-                    <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
-                    @if ($errors->any())
-                        <div class="bg-red-500 text-white p-4 mb-4 rounded">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <!-- Contenedor de botones -->
-                    <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">
-                        <!-- Primer botón -->
-                        <a href="#">
-                            <div
-                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
-                                <p class="text-center text-[20px]">Solicitudes de donación</p>
-                                <x-modal-form :btnTitulo="'Nueva Convocatoria'" :tituloModal="'Agrega Nueva Convocatoria'" :router="route('convocatoria.store')" :btnDanger="'Cancelar'"
-                                    :btnSuccess="'Confirmar'">
-                                    <!-- Nombre -->
-                                    <x-input-form-modal :name="'nombre'" :labelText="'Nombre:'" :type="'text'"
-                                        :id="'nombre'" :placeholder="'Nombre: '" :maxLength="'255'" required>
-                                    </x-input-form-modal>
-
-                                    <!-- Descripción -->
-                                    <x-input-form-modal :name="'descripcion'" :labelText="'Descripción:'" :type="'text'"
-                                        :id="'descripcion'" :placeholder="'Descripción: '" required>
-                                    </x-input-form-modal>
-
-                                    <!-- Fecha de Inicio -->
-                                    <x-input-form-modal :name="'fecha_inicio'" :labelText="'Fecha de Inicio:'" :type="'date'"
-                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')"  :placeholder="'Fecha'"/>
-
-                                    <!-- Fecha de Fin -->
-                                    <x-input-form-modal :name="'fecha_fin'" :labelText="'Fecha de Fin:'" :type="'date'"
-                                        :id="'fecha_fin'" required :value="old('fecha_fin')" :placeholder="'Fecha'"/>
-
-                                    <!-- Objetivo -->
-                                    <x-input-form-modal :name="'objetivo'" :labelText="'Objetivo:'" :type="'text'"
-                                        :id="'objetivo'" placeholder="Objetivo: " required>
-                                    </x-input-form-modal>
-
-                                    <!-- Comentarios -->
-                                    <x-input-form-modal :name="'comentarios'" :labelText="'Comentarios:'" :type="'text'"
-                                        :id="'comentarios'" placeholder="Comentarios: " required>
-                                    </x-input-form-modal>
-
-
-
-                                </x-modal-form>
-                            </div>
-                        </a>
-
-                        <!-- Segundo botón -->
-                        <a href="#">
-                            <div
-                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
-                                <p class="text-center text-[20px]">Gestionar no sé</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            
+            <!-- Gráfica -->
+            <div class="bg-white p-[20px] rounded-[20px] shadow-md flex-1 max-w-[600px]">
+                <h3 class="text-lg font-semibold mb-[10px]">Campañas</h3>
+                <canvas id="campaignChart" class="w-full h-[400px]"></canvas>
             </div>
-
-
+        </div>
+    
+        <!-- Sección de detalles -->
+        <div class="mt-[30px]">
+            <h3 class="text-xl font-semibold mb-[10px]">Detalles de Campañas</h3>
+            <table class="w-full bg-white rounded-[20px] shadow-md">
+                <thead>
+                    <tr class="bg-[#BBDEFB] text-center">
+                        <th class="p-[15px] ">Nombre de la Campaña</th>
+                        <th class="p-[15px] ">Recaudación Actual</th>
+                        <th class="p-[15px] ">Objetivo</th>
+                        <th class="p-[15px] ">Acciones</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr class="border-b text-center">
+                        <td class="p-[15px] ">Ayuda para Escuelas</td>
+                        <td class="p-[15px] ">$5,000</td>
+                        <td class="p-[15px] ">$10,000</td>
+                        <td class="p-[15px] flex justify-center space-x-4">
+                            <span class="bg-yellow-200 p-2 rounded-full">
+                                <i class='bx bx-edit text-2xl text-gray-700 cursor-pointer' title="Editar"></i>
+                            </span>
+                            <span class="bg-blue-200 p-2 rounded-full">
+                                <i class='bx bx-show text-2xl text-gray-700 cursor-pointer' title="Visualizar"></i>
+                            </span>
+                            <span class="bg-green-200 p-2 rounded-full">
+                                <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer' title="Estado: activo"></i>
+                            </span>
+                            <span class="bg-red-200 p-2 rounded-full">
+                                <i class='bx bxs-file-pdf text-2xl cursor-pointer' title="Archivo PDF"></i>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>            
         </div>
     </div>
-    </div>
+    
+    <!-- Script para la gráfica -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('campaignChart').getContext('2d');
+        const campaignChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Campañas Activas', 'Campañas Activas', 'Campañas Activas', 'Campañas Activas'],
+                datasets: [{
+                    label: 'Datos de Campañas',
+                    data: [8, 23, 15, 35],
+                    backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+     
+    
+
 </x-app-layout>
