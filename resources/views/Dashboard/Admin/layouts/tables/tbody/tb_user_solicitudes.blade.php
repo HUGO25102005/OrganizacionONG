@@ -1,9 +1,10 @@
+
 @foreach ($datos as $usuario)
     <tr class="border-b border-gray-300">
-        <td class="py-3 px-4 text-center">{{ $usuario->user->name }}</td>
-        <td class="py-3 px-4 text-center">{{ $usuario->user->email }}</td>
-        <td class="py-3 px-4 text-center">{{ $usuario->getTipoRolUsuario() }}</td>
-        <td class="py-3 px-4 text-center">{{ $usuario->getEstadoDescripcion() }}</td>
+        <td class="py-3 px-4 text-center">{{ $usuario->trabajador->user->name }}</td>
+        <td class="py-3 px-4 text-center">{{ $usuario->trabajador->user->email }}</td>
+        <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getTipoRolUsuario() }}</td>
+        <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getEstadoDescripcion() }}</td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl hover'">
@@ -25,67 +26,67 @@
                         <div>
                             <label class="block text-gray-600 mb-1">Nombre del Adminstrador: </label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->getFullName() }}
+                                {{ $usuario->trabajador->user->getFullName() }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Correo Electrónico:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->email }}
+                                {{ $usuario->trabajador->user->email }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Dirección:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->direccion }}
+                                {{ $usuario->trabajador->user->direccion }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Teléfono:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->telefono }}
+                                {{ $usuario->trabajador->user->telefono }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Fecha:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->fecha_nacimiento }}
+                                {{ $usuario->trabajador->user->fecha_nacimiento }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">País:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->pais }}
+                                {{ $usuario->trabajador->user->pais }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Estado:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->estado }}
+                                {{ $usuario->trabajador->user->estado }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Municipio:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->municipio }}
+                                {{ $usuario->trabajador->user->municipio }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Código Postal (CP):</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->cp }}
+                                {{ $usuario->trabajador->user->cp }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Dirección:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->direccion }}
+                                {{ $usuario->trabajador->user->direccion }}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Género:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->user->genero }}
+                                {{ $usuario->trabajador->user->genero }}
                             </div>
                         </div>
                         
@@ -99,19 +100,19 @@
                         <div>
                             <label class="block text-gray-600 mb-1">Estado del Trabajador:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->estado == 1 ? 'Activo' : 'Deshabilitado'}}
+                                {{ $usuario->trabajador->estado == 1 ? 'Activo' : 'Deshabilitado'}}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Hora de Inicio:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$usuario->hora_inicio}}
+                                {{$usuario->trabajador->hora_inicio}}
                             </div>
                         </div>
                         <div>
                             <label class="block text-gray-600 mb-1">Hora de Fin:</label>
                             <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$usuario->hora_fin}}
+                                {{$usuario->trabajador->hora_fin}}
                             </div>
                         </div>
                     </section>
@@ -126,9 +127,16 @@
                     </div>
                 </x-modal-view-info>
 
-                <button class="delete-button text-red-500 text-xl">
-                    <i class='bx bx-trash'></i>
-                </button>
+                <x-button-trash 
+                    :messageAlert="'¿Estás seguro de que deseas rechazar al usuario <b>' .  $usuario->trabajador->user->name .'</b> con el rol solicitado de: '.$usuario->trabajador->getTipoRolUsuario().'?'" 
+                    :router="route('admin.desactivar')" 
+                    :itemId="$usuario->trabajador->id"
+                    :tituloModal="'Confirmar Eliminación'" />
+                <x-button-accept
+                :messageAlert="'¿Estás seguro que deseas aceptar la solicitud del usuario <b>' .  $usuario->trabajador->user->name .'</b> con el rol solicitado de: '.$usuario->trabajador->getTipoRolUsuario().'?'" 
+                    :router="route('admin.aceptarSolicitudTrabajador')" 
+                    :itemId="$usuario->trabajador->id"
+                    :tituloModal="'Confirmar Solicitud'" />
             </div>
         </td>
     </tr>

@@ -1,7 +1,7 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="delete-button text-red-500 text-xl">
-        <i class='bx bx-trash mr-2'></i>
+    <button @click="open = true" class="delete-button text-green-500 text-xl">
+        <i class='bx bx-check'></i>
     </button>
 
     <!-- Modal de confirmación -->
@@ -30,7 +30,7 @@
                         <span>Cancelar</span>
                     </button>
                     <!-- Botón para confirmar eliminación -->
-                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-full flex items-center">
+                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-full flex items-center">
                         <i class='bx bx-trash text-xl'></i>
                         <span>Confirmar</span>
                     </button>

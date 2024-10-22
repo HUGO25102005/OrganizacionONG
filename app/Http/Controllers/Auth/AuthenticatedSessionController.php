@@ -16,10 +16,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        if (Auth::check()) {
-            // Redirigir a la ruta del dashboard si ya está autenticado
-            return redirect()->route('admin.home'); // Cambia esto según tu lógica de redirección
-        }
         return view('auth.login');
     }
 
@@ -28,10 +24,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {    
+
         //dd($request);
         if(Auth::check()){
             $user = Auth::user();
-            dd($user);
+            //dd($user);
         } else {
             $request->authenticate();
             $request->session()->regenerate();

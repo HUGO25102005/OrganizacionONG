@@ -50,7 +50,7 @@ class AdminController extends Controller
         // Creación del trabajador vinculado a este usuario
         $trabajador = Trabajador::create([
             'id_user' => $user->id,  // Relación con el usuario recién creado
-            'estado' => 1,  // Estado activo por defecto
+            'estado' => 3,  // Estado activo por defecto
             'hora_inicio' => $request->hora_inicio,
             'hora_fin' => $request->hora_fin,
         ]);

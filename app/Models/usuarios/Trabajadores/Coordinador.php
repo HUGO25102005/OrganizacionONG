@@ -18,10 +18,18 @@ class Coordinador extends Model
     {
         return 'Coordinador';
     }
-    public static function getCoordinadoresActivos()
+    public static function getCoordinadoresActivos( $estado , $fecha_inicio, $fecha_fin)
     {
-        return self::whereHas('trabajador', function ($query) {
-            $query->where('estado', '!=', 3);
+        return self::whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+            $query->where('estado', '=', intval($estado));
+
+            if ($fecha_inicio) {
+                $query->where('created_at', '>=', $fecha_inicio);
+            }
+        
+            if ($fecha_fin) {
+                $query->where('created_at', '<=', $fecha_fin);
+            }
         });
     }
 

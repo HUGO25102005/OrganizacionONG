@@ -26,11 +26,10 @@
                             <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
                             <select id="rol" name="rol"
                                 class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="">Seleccione rol</option>
-                                <option value="administrador">Administrador</option>
-                                <option value="coordinador">Coordinador</option>
-                                <option value="voluntario">Voluntario</option>
-                                <option value="beneficiario">Beneficiario</option>
+                                <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : ''}}>Administrador</option>
+                                <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : ''}}>Coordinador</option>
+                                <option value="Voluntario" {{ $rol == 'Voluntario' ? 'selected' : ''}}>Voluntario</option>
+                                <option value="Beneficiario" {{ $rol == 'Beneficiario' ? 'selected' : ''}}>Beneficiario</option>
                             </select>
                         </div>
         
@@ -39,16 +38,15 @@
                             <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
                             <select id="estado" name="estado"
                                 class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="">Seleccione estado</option>
-                                <option value="aprobado">Aprobado</option>
-                                <option value="cancelado">Cancelado</option>
-                                <option value="solicitado">Solicitado</option>
+                                <option value="1" {{ $estado == '1' ? 'selected' : ''}}>Activo</option>
+                                <option value="2" {{ $estado == '2' ? 'selected' : ''}}>Desactivado</option>
+                                <option value="4" {{ $estado == '3' ? 'selected' : ''}}>Suspendido</option>
                             </select>
                         </div>
         
                         <!-- Botón de agregar nuevo usuario -->
                         <div>
-                            <button type="button"
+                            <button type="submit"
                                 class="flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
                                 Aplicar Filtros
                             </button>
@@ -56,7 +54,7 @@
                     </div>
                 </form>
                 <div>
-                    @switch($tipo)
+                    @switch($rol)
                         @case('Administrador')
                             <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'"
                                 :btnSuccess="'Confirmar'">

@@ -37,8 +37,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @switch($tipo)
-                        @case('Solicitudes')
+                    @switch($estado)
+                        @case('3')
                             @include('Dashboard.Admin.layouts.tables.tbody.tb_user_solicitudes')
                         @break  
 

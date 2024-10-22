@@ -12,6 +12,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
 use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
+use App\Http\Controllers\Usuarios\TrabajadorController;
+use App\Http\Middleware\AuthSessionActive;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +22,7 @@ use App\Http\Middleware\CheckAdmin;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware(AuthSessionActive::class);
 
 // Rutas de perfil existentes de Breeze
 Route::middleware('auth')->group(function () {
@@ -42,6 +44,7 @@ Route::middleware('auth')->group(function () {
         
         Route::post('/usuarios/adminsList', [AdminController::class, 'store'])->name('admin.store');
         Route::put('/usuarios/admin', [AdminController::class, 'desactivar'])->name('admin.desactivar');
+        Route::put('/usuarios/trabajador', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
 
 
         Route::post('/usuarios/coordis', [CoordinadorController::class, 'store'])->name('coordinador.store');

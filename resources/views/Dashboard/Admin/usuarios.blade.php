@@ -19,7 +19,7 @@
 
     <x-slot name="header">
         <div class="flex space-x-7 items-center">
-            <a href="{{ route('admin.usuarios', ['tipo' => 'Administrador', 'seccion' => 1]) }}">
+            <a href="{{ route('admin.usuarios', ['rol' => 'Administrador', 'seccion' => 1]) }}">
                 <h2
                     class="font-semibold text-xl text-gray-800 hover:bg-slate-400 hover:text-white p-2 rounded leading-tight {{ $seccion == 1 ? 'bg-slate-400' : 'bg-slate-200' }}">
                     {{ __('Lista de Usuarios') }}

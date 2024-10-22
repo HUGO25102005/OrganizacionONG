@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @switch($tipo)
+                    @switch($rol)
                         @case('Administrador')
                             @include('Dashboard.Admin.layouts.tables.tbody.tb_admin')
                         @break
