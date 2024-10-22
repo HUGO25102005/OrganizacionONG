@@ -33,91 +33,9 @@
         <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
             <i class='bx bx-x text-3xl'></i>
         </button>
-
-        <h2 class="text-2xl font-semibold mb-[20px]">Crear Nueva Campaña</h2>
-
-        <form action="/campaigns/store" method="POST" class="space-y-4">
-            <div>
-                <label for="campaignName" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-edit-alt'></i> Nombre de la campaña
-                </label>
-                <input type="text" id="campaignName" name="campaignName" 
-                       class="w-full p-[10px] border rounded-lg" 
-                       placeholder="Ingresa el nombre de la campaña" required>
-            </div>
-
-            <div>
-                <label for="description" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-align-left'></i> Descripción
-                </label>
-                <textarea id="description" name="description" rows="4" 
-                          class="w-full p-[10px] border rounded-lg" 
-                          placeholder="Describe brevemente la campaña" required></textarea>
-            </div>
-
-            <div>
-                <label for="donationType" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-package'></i> Tipo de donación
-                </label>
-                <select id="donationType" name="donationType" 
-                        class="w-full p-[10px] border rounded-lg" required>
-                    <option value="" disabled selected>Selecciona el tipo de donación</option>
-                    <option value="fisica">Donaciones físicas</option>
-                    <option value="monetaria">Donaciones monetarias</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="goal" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-target-lock'></i> Meta de la campaña (opcional)
-                </label>
-                <input type="number" id="goal" name="goal" 
-                       class="w-full p-[10px] border rounded-lg" 
-                       placeholder="Establece una meta (opcional)">
-            </div>
-
-            <div>
-                <label for="startDate" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-calendar'></i> Fecha de inicio
-                </label>
-                <input type="date" id="startDate" name="startDate" 
-                       class="w-full p-[10px] border rounded-lg" required>
-            </div>
-
-            <div>
-                <label for="endDate" class="block text-lg font-semibold mb-2">
-                    <i class='bx bx-calendar'></i> Fecha de finalización
-                </label>
-                <input type="date" id="endDate" name="endDate" 
-                       class="w-full p-[10px] border rounded-lg" required>
-            </div>
-
-            <div class="flex justify-end">
-                <button type="submit" class="bg-green-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-green-600">
-                    <i class='bx bx-save'></i> Guardar Campaña
-                </button>
-            </div>
-        </form>
     </div>
 </div>
-
-    <script>
-    document.getElementById('openModalBtn').addEventListener('click', function() {
-        document.getElementById('modal').classList.remove('hidden');
-    });
-    
-    document.getElementById('closeModalBtn').addEventListener('click', function() {
-        document.getElementById('modal').classList.add('hidden');
-    });
-    
-    // Cierra el modal si el usuario hace clic fuera del contenido del modal
-    window.addEventListener('click', function(event) {
-        var modal = document.getElementById('modal');
-        if (event.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
-    </script>    
+   
         
         <!-- Contenedor principal -->
         <div class="flex flex-wrap gap-[20px]">
