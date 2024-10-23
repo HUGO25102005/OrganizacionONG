@@ -25,7 +25,6 @@
         </div>
 
     
-    <!-- Modal (Formulario de nueva campaña) -->
 <!-- Modal (Formulario de nueva campaña) -->
 <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50 flex">
     <div class="bg-white w-full max-w-[600px] p-[20px] rounded-lg shadow-lg relative">

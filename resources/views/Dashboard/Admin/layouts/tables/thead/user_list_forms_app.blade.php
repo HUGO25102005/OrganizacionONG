@@ -47,13 +47,13 @@
                         <!-- Botón de agregar nuevo usuario -->
                         <div>
                             <button type="submit"
-                                class="flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                class="flex items-center px-4 py-2 bg-blue-400 text-black font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-00">
                                 Aplicar Filtros
                             </button>
                         </div>
                     </div>
                 </form>
-                <div>
+                <div class="">
                     @switch($rol)
                         @case('Administrador')
                             <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'"
