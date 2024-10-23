@@ -56,7 +56,7 @@ class CoordinadorController extends Controller
         // Creación del trabajador vinculado a este usuario
         $trabajador = Trabajador::create([
             'id_user' => $user->id,  // Relación con el usuario recién creado
-            'estado' => 1,  // Estado activo por defecto
+            'estado' => 3,  // Estado solicitado por defecto
             'hora_inicio' => $request->hora_inicio,
             'hora_fin' => $request->hora_fin,
         ]);
@@ -66,7 +66,7 @@ class CoordinadorController extends Controller
             'id_trabajador' => $trabajador->id,  // Relación con el trabajador recién creado
         ]);
 
-        return redirect()->route('admin.usuarios')->with('success', 'Coordinador creado correctamente');
+        return redirect()->route('admin.usuarios')->with('success', 'Coordinador creado exitosamente. Puedes revisarlo en la sección Usuarios > Solicitudes > Rol > Coordinador.');
     }
 
     /**

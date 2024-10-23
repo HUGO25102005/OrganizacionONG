@@ -99,8 +99,8 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @switch(session('rol'))
                         @case('Administrador')
-                            <x-nav-link :href="route('admin.programas')" :active="request()->routeIs('admin.programas')">
-                                {{ __('Programas') }}
+                            <x-nav-link :href="route('admin.recursos')" :active="request()->routeIs('admin.recursos')">
+                                {{ __('Recursos') }}
                             </x-nav-link>
                         @break
 

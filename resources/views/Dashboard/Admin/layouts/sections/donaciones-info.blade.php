@@ -1,10 +1,10 @@
 
 <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
     <div class="flex justify-between items-center mb-[20px]">
-        <h2 class="text-2xl font-semibold">Campañas de Recaudación</h2>
-        <button class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
+        <h2 class="text-2xl font-semibold">Donaciones</h2>
+        {{-- <button class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
             Crear Nueva Campaña
-        </button>
+        </button> --}}
     </div>
         
         <!-- Contenedor Grid para organizar los rectángulos -->

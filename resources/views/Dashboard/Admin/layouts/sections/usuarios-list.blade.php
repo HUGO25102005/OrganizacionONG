@@ -21,7 +21,7 @@
 
             {{-- Encabezado table CONDICION DE MODALS Y FORMS --}}
             @include('Dashboard.Admin.layouts.tables.thead.user_list_forms_app')
-            
+
             {{-- FIN CONDICION DE MODALS Y FORMS --}}
 
             <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
@@ -35,31 +35,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @switch($rol)
-                        @case('Administrador')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_admin')
-                        @break
-
-                        @case('Coordinador')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_coordi')
-                        @break
-
-                        @case('Voluntario')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_voluntario')
-                        @break
-
-                        @case('Beneficiario')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_beneficiario')
-                        @break
-
-                        @default
-                    @endswitch
+                    @if ($rol != 'Beneficiario')
+                        @include('Dashboard.Admin.layouts.tables.tbody.tb_trabajadores')
+                    @else
+                        @include('Dashboard.Admin.layouts.tables.tbody.tb_beneficiario')
+                    @endif
                 </tbody>
             </table>
         </div>
 
         <!-- Coordinadores Tab -->
-        <div id="coordinadores" class="tab-content">
+        {{-- <div id="coordinadores" class="tab-content">
             <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
                 <h2 class="admin-title">Lista de coordinadores</h2>
                 <button
@@ -149,7 +135,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
         {{ $datos->links() }}
     </div>
 </div>
