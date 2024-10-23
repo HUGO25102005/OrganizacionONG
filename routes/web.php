@@ -34,17 +34,19 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckAdmin::class])->prefix('dashboard/admin')->group(function () {
         Route::get('/home', [DashboardAdminController::class, 'home'])->name('admin.home');
         Route::get('/panelControl', [DashboardAdminController::class, 'panelControl'])->name('admin.panelControl');
-        
+        // DONACIONES --------------------------------------------------------------------------------------------------------------------------------------------------
         Route::get('/donaciones', [DashboardAdminController::class, 'donaciones'])->name('admin.donaciones');
         Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store');
 
-        Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
+        Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
+        // Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
 
         Route::get('/usuarios', [DashboardAdminController::class, 'usuarios'])->name('admin.usuarios');
         
+        //  USUARIOS ---------------------------------------------------------------------------------------------------------------------------------------------------
         Route::post('/usuarios/adminsList', [AdminController::class, 'store'])->name('admin.store');
-        Route::put('/usuarios/admin', [AdminController::class, 'desactivar'])->name('admin.desactivar');
-        Route::put('/usuarios/trabajador', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
+        Route::put('/usuarios/trabajadorDesactivar', [TrabajadorController::class, 'desactivarTrabajador'])->name('admin.desactivar');
+        Route::put('/usuarios/trabajadorAceptar', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
 
 
         Route::post('/usuarios/coordis', [CoordinadorController::class, 'store'])->name('coordinador.store');

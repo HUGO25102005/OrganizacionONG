@@ -50,7 +50,7 @@ class AdminController extends Controller
         // Creación del trabajador vinculado a este usuario
         $trabajador = Trabajador::create([
             'id_user' => $user->id,  // Relación con el usuario recién creado
-            'estado' => 3,  // Estado activo por defecto
+            'estado' => 3,  // Estado solicitado por defecto
             'hora_inicio' => $request->hora_inicio,
             'hora_fin' => $request->hora_fin,
         ]);
@@ -61,7 +61,7 @@ class AdminController extends Controller
         ]);
 
 
-        return redirect()->route('admin.usuarios')->with('success', 'Administrador creado correctamente');
+        return redirect()->route('admin.usuarios')->with('success', 'Administrador creado correctamente. Puedes revisarlo en la sección Usuarios > Solicitudes > Rol > Administrador.');
     }
 
     public function desactivar(Request $request)
@@ -77,7 +77,7 @@ class AdminController extends Controller
             $trabajador->update(['estado' => 2]);
 
             // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('admin.usuarios')->with('status', 'Trabajador desactivado correctamente.');
+            return redirect()->route('admin.usuarios')->with('status', 'Trabajador DESACTIVADO correctamente. Puedes encontrarlo en Usuarios > Estado > Deshabilitado');
         }
 
         // Si no se encuentra el trabajador, redirigir con un mensaje de error

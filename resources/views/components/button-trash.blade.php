@@ -1,8 +1,8 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="delete-button text-red-500 text-xl">
-        <i class='bx bx-trash mr-2'></i>
-    </button>
+    <button @click="open = true" class="flex items-center justify-center text-red-600 text-xl bg-red-100 hover:bg-red-500 hover:text-white transition-colors ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+        <i class='bx bx-trash'></i>
+    </button>    
 
     <!-- Modal de confirmación -->
     <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"

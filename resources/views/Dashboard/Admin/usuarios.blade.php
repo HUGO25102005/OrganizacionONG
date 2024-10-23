@@ -36,9 +36,9 @@
     </x-slot>
 
     @if ($seccion == 1)
-        @include('Dashboard.Admin.layouts.sections.usuarios-list');
+        @include('Dashboard.Admin.layouts.sections.usuarios-list')
     @else
-        @include('Dashboard.Admin.layouts.sections.usuarios-solicitudes');
+        @include('Dashboard.Admin.layouts.sections.usuarios-solicitudes')
     @endif
 
 </x-app-layout>

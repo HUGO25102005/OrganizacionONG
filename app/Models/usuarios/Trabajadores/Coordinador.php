@@ -18,7 +18,7 @@ class Coordinador extends Model
     {
         return 'Coordinador';
     }
-    public static function getCoordinadoresActivos( $estado , $fecha_inicio, $fecha_fin)
+    public static function getCoordinadoresActivos( $estado , $fecha_inicio = null, $fecha_fin = null)
     {
         return self::whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
             $query->where('estado', '=', intval($estado));

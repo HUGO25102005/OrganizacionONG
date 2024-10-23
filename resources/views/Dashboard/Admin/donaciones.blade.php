@@ -7,23 +7,30 @@
 
     <x-slot name="header">
         <div class="flex space-x-4">
-            <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight">
-                {{ __('Donaciones') }}
-            </h2>
-            <h2 class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight">
-                {{ __('Campañas de recaudación') }}
-            </h2>
+            <a href="{{ route('admin.donaciones', ['seccion' => 1]) }}">
+                <h2
+                    class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight {{ $seccion == 1 ? 'bg-slate-400' : 'bg-slate-200' }}">
+                    {{ __('Donaciones') }}
+                </h2>
+            </a>
+            <a href="{{ route('admin.donaciones', ['seccion' => 2]) }}">
+                <h2
+                    class="font-semibold text-xl text-gray-800 hover:bg-[#2A334B] cursor-pointer hover:text-white p-2 rounded leading-tight {{ $seccion == 2 ? 'bg-slate-400' : 'bg-slate-200' }}">
+                    {{ __('Campañas de recaudación') }}
+                </h2>
+            </a>
+            @if ($seccion == 2)
+                {{-- <div class="">
+                    <a href="{{ route('pdf.generar') }}">
+                        <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+                    </a>
+                </div> --}}
+            @endif
         </div>
     </x-slot>
 
-    <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        <div class="flex justify-between items-center mb-[20px]">
-            <h2 class="text-2xl font-semibold">Campañas de Recaudación</h2>
-            <button id="openModalBtn" class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
-                Crear Nueva Campaña
-            </button>
-        </div>
 
+<<<<<<< HEAD
     
 <!-- Modal (Formulario de nueva campaña) -->
 <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50 flex">
@@ -143,5 +150,19 @@
     </script>
      
     
+=======
+    @switch($seccion)
+        @case(1)
+            @include('Dashboard.Admin.layouts.sections.donaciones-info');
+        @break
+
+        @case(2)
+            @include('Dashboard.Admin.layouts.sections.donaciones-campañas');
+        @break
+
+        @default
+    @endswitch
+
+>>>>>>> 45d939c1340c01618035bc32001c06e66e455d73
 
 </x-app-layout>
