@@ -1,9 +1,16 @@
 <x-app-layout>
     @if (session('error'))
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <x-alerts-component severity="error" title="Error" message=" Hola mundo " />
         </div>
     @endif
+
+    @if (session('success'))
+        <div class="alert alert-danger">
+            <x-alerts-component severity="success" title="Success" message=" Adios mundo " />
+        </div>
+    @endif
+
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

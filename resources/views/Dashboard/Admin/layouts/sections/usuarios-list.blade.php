@@ -2,11 +2,9 @@
     class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
+
+            
         </div>
     @endif
     <div class="container w-full mb-5">

@@ -4,7 +4,7 @@
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <x-alerts-component severity="error" title="" message=" $error " />
                 @endforeach
             </ul>
         </div>

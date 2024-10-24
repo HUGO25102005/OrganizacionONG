@@ -1,7 +1,7 @@
 <x-app-layout>
     @if (session('error'))
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <x-alerts-component severity="error" title="" message=" $error "/>
         </div>
     @endif
 
@@ -58,12 +58,8 @@
                     <!-- Título "Gestionar" -->
                     <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
                     @if ($errors->any())
-                        <div class="bg-red-500 text-white p-4 mb-4 rounded">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="alert alert-danger">
+                            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
                         </div>
                     @endif
 
