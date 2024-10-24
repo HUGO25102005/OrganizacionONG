@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('donacion', function (Blueprint $table) {
             $table->id();
             $table->string('id_transaccion');
-            $table->foreignId('payer_id')
+            $table->foreignId('id_donante')
                                 ->constrained('donantes')
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade')
                                 ->comment('Clave foranea del donante');
-            $table->tinyInteger('currency');
+            $table->string('currency', 4);
             $table->decimal('monto', 10, 2);
             $table->timestamps();
         });

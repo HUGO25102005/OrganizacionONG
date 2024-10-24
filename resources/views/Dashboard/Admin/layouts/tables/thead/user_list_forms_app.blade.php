@@ -127,7 +127,7 @@
                                     </div>
                                     <select
                                         class="flex-1 bg-transparent border-none outline-none text-black placeholder-gray-500 text-sm px-2"
-                                        style="min-width: 200px;" name="genero" id="genero">
+                                        style="min-width: 200px;" name="genero" id="genero" required>
                                         <option value="" disabled selected hidden>Género</option> <!-- Placeholder -->
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
