@@ -8,7 +8,6 @@
 
 
     <!-- Modal (Formulario de nueva campaña) -->
-    <!-- Modal (Formulario de nueva campaña) -->
     <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50 flex">
         <div class="bg-white w-full max-w-[600px] p-[20px] rounded-lg shadow-lg relative">
             <!-- Botón de cerrar -->
@@ -81,22 +80,22 @@
                     <td class="p-[15px] ">$5,000</td>
                     <td class="p-[15px] ">$10,000</td>
                     <td class="p-[15px] flex justify-center space-x-4">
-                        <span class="bg-yellow-200 p-2 rounded-full">
-                            <i class='bx bx-edit text-2xl text-gray-700 cursor-pointer' title="Editar"></i>
+                        <span class="bg-yellow-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-yellow-300 hover:text-white">
+                            <i class='bx bx-edit text-2xl cursor-pointer' title="Editar"></i>
                         </span>
-                        <span class="bg-blue-200 p-2 rounded-full">
-                            <i class='bx bx-show text-2xl text-gray-700 cursor-pointer' title="Visualizar"></i>
+                        <span class="bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-300 hover:text-white">
+                            <i class='bx bx-show text-2xl cursor-pointer' title="Visualizar"></i>
                         </span>
-                        <span class="bg-green-200 p-2 rounded-full">
-                            <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer'
-                                title="Estado: activo"></i>
+                        <span class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
+                            <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer' title="Estado: activo"></i>
                         </span>
-                        <span class="bg-red-200 p-2 rounded-full">
+                        <span class="bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-300 hover:text-white">
                             <i class='bx bxs-file-pdf text-2xl cursor-pointer' title="Archivo PDF"></i>
                         </span>
                     </td>
                 </tr>
             </tbody>
+            
         </table>
     </div>
 </div>

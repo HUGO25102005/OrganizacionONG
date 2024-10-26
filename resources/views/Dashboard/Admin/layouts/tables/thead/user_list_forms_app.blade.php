@@ -6,43 +6,45 @@
                 <form action="{{ route('admin.usuarios') }}" method="POST" class="flex items-center justify-between mb-4">
                     @csrf
                     @method('GET')
-                    <div class="flex items-center space-x-6">
-                        <div class="w-48">
-                            <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
-                            <select id="rol" name="rol"
-                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : '' }}>
-                                    Administrador</option>
-                                <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : '' }}>Coordinador
-                                </option>
-                                <option value="Voluntario" {{ $rol == 'Voluntario' ? 'selected' : '' }}>Voluntario
-                                </option>
-                                <option value="Beneficiario" {{ $rol == 'Beneficiario' ? 'selected' : '' }}>Beneficiario
-                                </option>
-                            </select>
-                        </div>
+    <div class="flex items-center space-x-6">
+    <!-- Filtro de rol -->
+    <div class="w-48">
+        <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
+        <select id="rol" name="rol"
+            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
+            <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : '' }}>Administrador</option>
+            <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : '' }}>Coordinador</option>
+            <option value="Voluntario" {{ $rol == 'Voluntario' ? 'selected' : '' }}>Voluntario</option>
+            <option value="Beneficiario" {{ $rol == 'Beneficiario' ? 'selected' : '' }}>Beneficiario</option>
+        </select>
+    </div>
 
-                        <!-- Filtro de estado -->
-                        <div class="w-48">
-                            <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-                            <select id="estado" name="estado"
-                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="1" {{ $estado == '1' ? 'selected' : '' }}>Activo</option>
-                                <option value="2" {{ $estado == '2' ? 'selected' : '' }}>Desactivado</option>
-                                <option value="4" {{ $estado == '3' ? 'selected' : '' }}>Suspendido</option>
-                            </select>
-                        </div>
+    <!-- Filtro de estado -->
+    <div class="w-48">
+        <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+        <select id="estado" name="estado"
+            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
+            <option value="1" {{ $estado == '1' ? 'selected' : '' }}>Activo</option>
+            <option value="2" {{ $estado == '2' ? 'selected' : '' }}>Desactivado</option>
+            <option value="3" {{ $estado == '3' ? 'selected' : '' }}>Suspendido</option>
+        </select>
+    </div>
 
-                        <!-- Botón de agregar nuevo usuario -->
-                        <div>
-                            <button type="submit"
-                                class="flex items-center px-4 py-2 bg-blue-400 text-black font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-00">
-                                Aplicar Filtros
-                            </button>
-                        </div>
-                    </div>
+
+    <!-- Botón de aplicar filtro -->
+    <div class="flex justify-center mt-6">
+        <button id="filterButton" type="button"
+            class="w-48 px-4 py-2 bg-blue-400 text-white font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-200 hover:scale-110">
+            Aplicar Filtros
+        </button>
+    </div>
+    
+</div>
+
                 </form>
-                <div class="">
+            </div>
+            <div>
+                <div>
                     @switch($rol)
                         @case('Administrador')
                             <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'"

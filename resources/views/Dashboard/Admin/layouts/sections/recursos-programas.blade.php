@@ -9,17 +9,17 @@
             </div>
         </form>
     </div>
-    <div class="bg-[#232B47] p-5 rounded-[15px] mt-[20px]">
+    <div class="bg-white p-5 rounded-[15px] mt-[20px]">
         <div class="overflow-x-auto">
             <table class="w-full table-auto">
-                <thead class="bg-[#232B47]"> <!-- Mantener el fondo en el thead -->
-                    <tr class="text-black">
-                        <th class="bg-gray-100 rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
-                        <th class="bg-gray-100 px-4 py-2 text-center ml-2">Impartidor</th>
-                        <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Incio</th>
-                        <th class="bg-gray-100 px-4 py-2 text-center ml-2">Fecha Termino</th>
-                        <th class="bg-gray-100 px-4 py-2 text-center ml-2">Estado</th>
-                        <th class="bg-gray-100 rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
+                <thead class="bg-[#BBDEFB]"> <!-- Mantener el fondo en el thead -->
+                    <tr class="text-black bg-[#BBDEFB]">
+                        <th class="rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
+                        <th class="px-4 py-2 text-center ml-2">Impartidor</th>
+                        <th class="px-4 py-2 text-center ml-2">Fecha Incio</th>
+                        <th class="px-4 py-2 text-center ml-2">Fecha Termino</th>
+                        <th class="px-4 py-2 text-center ml-2">Estado</th>
+                        <th class="rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
                         </th>
                     </tr>
                 </thead>
