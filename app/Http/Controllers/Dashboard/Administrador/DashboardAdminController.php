@@ -62,9 +62,10 @@ class DashboardAdminController extends Controller
         }
 
         $monto_total_donaciones = Donacion::getMontoTotal();
-        $total_donaciones = Donacion::all();
+        $total_donaciones = Donacion::paginate(10);
         $total_donaciones_semana = Donacion::getTotalMontoSemana();
-
+        $total_donaciones_mes = Donacion::getTotalMontoMes();
+        // dd($total_donaciones_semana);
         return view(
             'Dashboard.Admin.donaciones',
             compact(
@@ -72,6 +73,7 @@ class DashboardAdminController extends Controller
                     'monto_total_donaciones',
                     'total_donaciones',
                     'total_donaciones_semana',
+                    'total_donaciones_mes',
                     'seccion'
                 ]
             )

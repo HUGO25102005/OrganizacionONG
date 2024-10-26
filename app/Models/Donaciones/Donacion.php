@@ -16,15 +16,17 @@ class Donacion extends Model
     // Define los atributos que se pueden asignar masivamente
     protected $fillable = [
         'id_transaccion',
-        'payer_id',
+        'id_donante',
         'currency',
         'monto',
     ];
 
-    public static function getMontoTotal(){
+    public static function getMontoTotal()
+    {
         return self::sum('monto');
     }
-    public static function getTotalRegistros(){
+    public static function getTotalRegistros()
+    {
         return self::count();
     }
 
@@ -36,12 +38,24 @@ class Donacion extends Model
         $ultimoDia = $dias['ultimo_dia'];
 
         return Donacion::where('created_at', '>=', $primerDia)
-        ->where('created_at', '<=', $ultimoDia)->count();
+            ->where('created_at', '<=', $ultimoDia)->sum('monto');
     }
+    public static function getTotalMontoMes()
+    {
+        // Obtener el primer y último día del mes actual en formato Y-m-d
+        $primerDiaMes = now()->startOfMonth()->format('Y-m-d');
+        $ultimoDiaMes = now()->endOfMonth()->format('Y-m-d');
+
+        // Consultar las donaciones dentro del rango mensual y sumar el monto
+        return Donacion::where('created_at', '>=', $primerDiaMes)
+            ->where('created_at', '<=', $ultimoDiaMes)
+            ->sum('monto');
+    }
+
 
     // Define la relación con el modelo Donante
     public function donante()
     {
-        return $this->belongsTo(Donante::class, 'payer_id');
+        return $this->belongsTo(Donante::class, 'id_donante');
     }
 }

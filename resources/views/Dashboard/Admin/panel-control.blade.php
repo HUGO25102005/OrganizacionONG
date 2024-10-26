@@ -44,14 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($ultimas_donaciones as $donacion)
-                            <tr class="border-b border-gray-600">
-                                <td class="py-2 px-4">{{ $donacion->donante->Nombre_Completo }}</td>
-                                <td class="py-2 px-4">
-                                    {{ \Carbon\Carbon::parse($donacion->Fecha_Registro)->format('d-m-Y') }}</td>
-                                <td class="py-2 px-4">${{ $donacion->Monto_Donacion }}</td>
-                            </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

@@ -25,4 +25,8 @@ class Donante extends Model
     public static $rules = [
         'payer_id' => 'unique:donantes',
     ];
+
+    public function getFullName(){
+        return $this->first_name . ' ' . $this->last_name; 
+    }
 }
