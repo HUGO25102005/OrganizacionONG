@@ -1,11 +1,9 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
+
+            
         </div>
     @endif
     <div class="container w-full mb-5">

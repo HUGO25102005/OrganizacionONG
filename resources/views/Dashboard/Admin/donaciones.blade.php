@@ -1,7 +1,7 @@
 <x-app-layout>
-    @if (session('error'))
+    @if ($errors->any())
         <div class="alert alert-danger">
-            {{ session('error') }}
+            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
         </div>
     @endif
 
