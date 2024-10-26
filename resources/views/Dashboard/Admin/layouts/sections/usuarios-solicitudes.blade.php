@@ -1,5 +1,4 @@
-<div
-    class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -27,7 +26,7 @@
             {{-- FIN Filtros --}}
 
             <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
-                <thead class="bg-[#2A334B] text-white ">
+                <thead class="bg-[#BBDEFB] text-black ">
                     <tr>
                         <th class="py-3 px-4 rounded-l-lg">Nombre completo</th>
                         <th class="py-3 px-4">Correo electrónico</th>
@@ -142,4 +141,3 @@
         </div>
         {{ $datos->links() }}
     </div>
-</div>

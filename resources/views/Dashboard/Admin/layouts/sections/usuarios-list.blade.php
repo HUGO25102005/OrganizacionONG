@@ -1,5 +1,4 @@
-<div
-    class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -24,8 +23,8 @@
 
             {{-- FIN CONDICION DE MODALS Y FORMS --}}
 
-            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
-                <thead class="bg-[#2A334B] text-white ">
+            <table class="admin-table w-full mt-6 bg-white rounded-lg">
+                <thead class="bg-[#bbdefb] text-black ">
                     <tr>
                         <th class="py-3 px-4 rounded-l-lg">Número</th>
                         <th class="py-3 px-4">Nombre completo</th>
@@ -138,4 +137,4 @@
         </div> --}}
         {{ $datos->links() }}
     </div>
-</div>
+
