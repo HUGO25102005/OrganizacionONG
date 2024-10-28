@@ -6,6 +6,7 @@ use App\Models\Apoyo\Funciones;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Donacion extends Model
 {
@@ -50,6 +51,16 @@ class Donacion extends Model
         return Donacion::where('created_at', '>=', $primerDiaMes)
             ->where('created_at', '<=', $ultimoDiaMes)
             ->sum('monto');
+    }
+
+    public static function getTopDonadores(){
+        $topDonantes = Donacion::with('donante')
+                    ->select('id_donante', DB::raw('SUM(monto) as total_donado'))
+                    ->groupBy('id_donante')
+                    ->orderBy('total_donado', 'desc')
+                    ->take(5)
+                    ->get();
+        return $topDonantes;
     }
 
 

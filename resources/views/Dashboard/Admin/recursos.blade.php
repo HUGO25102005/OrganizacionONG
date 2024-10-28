@@ -1,9 +1,7 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
         <div class="flex items-center justify-between space-x-7">

@@ -77,7 +77,7 @@ class AdminController extends Controller
             $trabajador->update(['estado' => 2]);
 
             // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('admin.usuarios')->with('status', 'Trabajador DESACTIVADO correctamente. Puedes encontrarlo en Usuarios > Estado > Deshabilitado');
+            return redirect()->route('admin.usuarios')->with('warning', 'Trabajador DESACTIVADO correctamente. Puedes encontrarlo en Usuarios > Estado > Deshabilitado');
         }
 
         // Si no se encuentra el trabajador, redirigir con un mensaje de error

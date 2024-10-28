@@ -1,9 +1,7 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="" message=" $error " />
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

@@ -37,11 +37,11 @@ class AuthenticatedSessionController extends Controller
         }
         //dd($user);
         if ($user->trabajador && $user->trabajador->administrador) {
-            return redirect()->intended(route('admin.home'));
+            return redirect()->intended(route('admin.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->coordinador) {
-            return redirect()->intended(route('cordi.home'));
+            return redirect()->intended(route('cordi.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->voluntario) {
-            return redirect()->intended(route('voluntario.home'));
+            return redirect()->intended(route('voluntario.home'))->with('success', 'Sesión iniciada correctamente');
         } else {
             return redirect()->intended(route('dashboard'));
         } 

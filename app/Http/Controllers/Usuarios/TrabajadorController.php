@@ -38,7 +38,7 @@ class TrabajadorController extends Controller
             $trabajador->update(['estado' => 2]);
 
             // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('admin.usuarios')->with('success', 'Trabajador desactivado con éxito. Puedes encontrarlo en Usuarios > Estado > Deshabilitado.');
+            return redirect()->route('admin.usuarios')->with('warning', 'Trabajador desactivado con éxito. Puedes encontrarlo en Usuarios > Estado > Deshabilitado.');
         }
 
         // Si no se encuentra el trabajador, redirigir con un mensaje de error

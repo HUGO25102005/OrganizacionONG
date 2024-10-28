@@ -1,18 +1,8 @@
 <x-app-layout>
-    @if (session('success'))
         <div class="alert alert-success">
-            <x-alerts-component severity="success" title="Success" message=" Has ingresado correctamente " />
+            <x-alerts-component />
         </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger">
-            
-            <x-alerts-component severity="error" title="" message=" Ha ocurrido un erro al ingresar " />
-        </div>
-    @endif
-
-
+        
     <x-slot name="header">
         <div class="flex space-x-7 items-center">
             <div class="w-48 p-2 rounded {{ $seccion == 1 ? 'bg-gray-100' : 'bg-white' }} hover:text-black flex justify-center items-center">

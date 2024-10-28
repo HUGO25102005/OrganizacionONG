@@ -13,8 +13,8 @@
             <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
                 <div>
                     <p class="text-gray-700 text-lg font-semibold">Total disponible:</p>
-                    <p class="text-gray-900 text-2xl font-bold">$1234</p>
-                    <p>Monto total: 11,200$</p>
+                    <p class="text-gray-900 text-2xl font-bold">${{ $monto_disponible }}</p>
+                    <p>Monto total: ${{ $monto_total_donaciones }}</p>
                 </div>
                 <div>
                     <i class='bx bx-wallet text-4xl text-[#4CAF50]'></i>
@@ -27,7 +27,7 @@
             <div class="bg-white h-full w-full rounded-lg flex justify-between items-center p-4">
                 <div>
                     <p class="text-gray-700 text-lg font-semibold">Dinero usado:</p>
-                    <p class="text-gray-900 text-2xl font-bold">$500</p>
+                    <p class="text-gray-900 text-2xl font-bold">${{ $monto_usado }}</p>
                 </div>
                 <div>
                     <i class='bx bxs-wallet-alt text-4xl text-[#FF9800]'></i>
@@ -46,14 +46,12 @@
                     <span>Monto</span>
                 </div>
                 <ul class="space-y-2">
-                    <li class="flex justify-between items-center">
-                        <span class="text-gray-800">Ernesto</span>
-                        <span class="text-gray-600 font-bold">$1500</span>
-                    </li>
-                    <li class="flex justify-between items-center">
-                        <span class="text-gray-800">Isa</span>
-                        <span class="text-gray-600 font-bold">$1200</span>
-                    </li>
+                    @foreach ($topDonadantes as $donacion)
+                        <li class="flex justify-between items-center">
+                            <span class="text-gray-800">{{$donacion->donante->getFullName()}}</span>
+                            <span class="text-gray-600 font-bold">${{$donacion->total_donado}}</span>
+                        </li>
+                    @endforeach
 
                 </ul>
             </div>
@@ -132,14 +130,14 @@
                     <!-- Título "Gestionar" -->
     <!--                   <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
                     @if ($errors->any())
-                        <div class="bg-red-500 text-white p-4 mb-4 rounded">
+<div class="bg-red-500 text-white p-4 mb-4 rounded">
                             <ul>
                                 @foreach ($errors->all() as $error)
 <li>{{ $error }}</li>
 @endforeach
                             </ul>
                         </div>
-                    @endif
+@endif
 
                     <!-- Contenedor de botones -->
     <!--                      <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">

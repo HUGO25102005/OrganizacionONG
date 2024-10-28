@@ -1,11 +1,4 @@
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
-
-            
-        </div>
-    @endif
     <div class="container w-full mb-5">
         <h2 class="text-center font-semibold text-3xl">
             Lista de Usuarios

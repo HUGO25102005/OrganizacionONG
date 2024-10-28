@@ -1,9 +1,7 @@
 <x-app-layout>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
         <div class="flex space-x-4">

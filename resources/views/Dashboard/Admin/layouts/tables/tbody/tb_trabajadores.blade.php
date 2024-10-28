@@ -126,7 +126,9 @@
                     </div>
                 </x-modal-view-info>
                 @if ($user->trabajador->estado != 2)
-                    <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' . $user->trabajador->user->name . '?'" :router="route('admin.desactivar')" :itemId="$user->trabajador->id" :tituloModal="'Confirmar Eliminación'" />
+                    @if ($user->trabajador->id != auth()->user()->trabajador->id)
+                        <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' . $user->trabajador->user->name . '?'" :router="route('admin.desactivar')" :itemId="$user->trabajador->id" :tituloModal="'Confirmar Eliminación'" />
+                    @endif
                 @endif
 
                 @if ($user->trabajador->estado == 2)
