@@ -14,6 +14,16 @@ class Coordinador extends Model
     protected $fillable = [
         'id_trabajador',
     ];
+    public function getRole(): string
+    {
+        return 'Coordinador';
+    }
+    public static function getCoordinadoresActivos()
+    {
+        return self::whereHas('trabajador', function ($query) {
+            $query->where('estado', '!=', 3);
+        });
+    }
 
     public function trabajador()
     {
