@@ -64,6 +64,27 @@ class AdminController extends Controller
         return redirect()->route('admin.usuarios')->with('success', 'Administrador creado correctamente');
     }
 
+    public function desactivar(Request $request)
+    {
+        // Obtener el ID del trabajador del request
+        $id = $request->id;
+
+        // Encontrar el trabajador por su ID
+        $trabajador = Trabajador::find($id);
+
+        if ($trabajador) {
+            // Actualizar el estado del trabajador, asumiendo que el campo se llama 'activo'
+            $trabajador->update(['estado' => 2]);
+
+            // Redirigir de vuelta con un mensaje de éxito
+            return redirect()->route('admin.usuarios')->with('status', 'Trabajador desactivado correctamente.');
+        }
+
+        // Si no se encuentra el trabajador, redirigir con un mensaje de error
+        return redirect()->route('admin.usuarios')->with('error', 'Trabajador no encontrado.');
+    }
+
+
     /**
      * Display the specified resource.
      */

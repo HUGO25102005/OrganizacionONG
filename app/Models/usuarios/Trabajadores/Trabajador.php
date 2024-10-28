@@ -20,10 +20,23 @@ class Trabajador extends Model
         'hora_fin',
     ];
 
+    public function getTipoRolUsuario():string
+    {
+        if (Administrador::where('id_trabajador', $this->id)->exists()) {
+            return 'Administrador';
+        } elseif (Coordinador::where('id_trabajador', $this->id)->exists()) {
+            return 'Coordinador';
+        } elseif (Voluntario::where('id_trabajador', $this->id)->exists()) {
+            return 'Voluntario';
+        }
+
+        return ''; 
+    }
+
     public function getEstadoDescripcion(): string
     {
         // dd($this->estado);
-        $estado = $this->estado; 
+        $estado = $this->estado;
 
         switch (intval($estado)) {
             case 1:

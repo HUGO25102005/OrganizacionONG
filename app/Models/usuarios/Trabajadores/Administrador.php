@@ -17,6 +17,12 @@ class Administrador extends Model
     public function getRole():string{
         return 'Administrador';
     }
+    public static function getAdministradoresActivos(){
+        return self::whereHas('trabajador', function ($query) {
+            $query->where('estado', '!=', 3);
+        });
+    }
+    
     public function trabajador()
     {
         return $this->belongsTo(Trabajador::class, 'id_trabajador');

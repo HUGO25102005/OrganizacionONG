@@ -2,11 +2,11 @@
     <tr class="border-b border-gray-300">
         <td class="py-3 px-4 text-center">{{ $usuario->user->name }}</td>
         <td class="py-3 px-4 text-center">{{ $usuario->user->email }}</td>
-        <td class="py-3 px-4 text-center">{{ $usuario->administrador->getRole() }}</td>
+        <td class="py-3 px-4 text-center">{{ $usuario->getTipoRolUsuario() }}</td>
         <td class="py-3 px-4 text-center">{{ $usuario->getEstadoDescripcion() }}</td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
-                <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
+                <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl hover'">
                     <!-- Encabezado con foto -->
                     <header class="mb-6 border-b border-gray-200 pb-4 flex items-center">
                         <!-- Campo para la foto -->
