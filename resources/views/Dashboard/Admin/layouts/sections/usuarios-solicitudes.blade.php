@@ -1,18 +1,4 @@
 
-    <div class="container w-full mb-5">
-        <h2 class="text-center font-semibold text-3xl">
-            Solicitudes de Trabajadores
-        </h2>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="container w-full mb-5">
     <h2 class="text-center font-semibold text-2xl md:text-3xl">
         Solicitudes de Trabajadores

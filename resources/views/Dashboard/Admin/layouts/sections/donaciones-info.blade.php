@@ -1,5 +1,5 @@
 <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-[20px]">
+    <div class="flex justify-between items-center mb-[20px]">
         <h2 class="text-2xl font-semibold">Donaciones</h2>
         {{-- <button class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
             Crear Nueva Campaña
@@ -8,9 +8,6 @@
 
     <!-- Contenedor Grid para organizar los rectángulos -->
     <div class="grid grid-cols-3 gap-6 p-4">
-        
-    <!-- Contenedor Grid para organizar los rectángulos -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         <!-- Rectángulos según el diseño -->
         <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
             <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
@@ -26,9 +23,8 @@
         </div>
 
 
-    
         <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
-            <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
+            <div class="bg-white h-full w-full rounded-lg flex justify-between items-center p-4">
                 <div>
                     <p class="text-gray-700 text-lg font-semibold">Dinero usado:</p>
                     <p class="text-gray-900 text-2xl font-bold">${{ $monto_usado }}</p>
@@ -125,3 +121,80 @@
         </div>
     </div>
     {{ $total_donaciones->links() }}
+
+    <!--
+        <div
+            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] w-full max-w-[1480px] h-[225px] mt-[20px] rounded-[15px] flex justify-center items-center">
+            <div class="bg-[#F2F8FF] w-full max-w-[1360px] h-[208px] rounded-[15px]">
+                <div class="flex justify-between">
+                    <!-- Título "Gestionar" -->
+    <!--                   <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
+                    @if ($errors->any())
+<div class="bg-red-500 text-white p-4 mb-4 rounded">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+                            </ul>
+                        </div>
+@endif
+
+                    <!-- Contenedor de botones -->
+    <!--                      <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">
+                        <!-- Primer botón -->
+    <!--                          <a href="#">
+                            <div
+                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <p class="text-center text-[20px]">Solicitudes de donación</p>
+                                <x-modal-form :btnTitulo="'Nueva Convocatoria'" :tituloModal="'Agrega Nueva Convocatoria'" :router="route('convocatoria.store')" :btnDanger="'Cancelar'"
+                                    :btnSuccess="'Confirmar'">
+                                    <!-- Nombre -->
+    <!--                                    <x-input-form-modal :name="'nombre'" :labelText="'Nombre:'" :type="'text'"
+                                        :id="'nombre'" :placeholder="'Nombre: '" :maxLength="'255'" required>
+                                    </x-input-form-modal>
+
+                                    <!-- Descripción -->
+    <!--                                    <x-input-form-modal :name="'descripcion'" :labelText="'Descripción:'" :type="'text'"
+                                        :id="'descripcion'" :placeholder="'Descripción: '" required>
+                                    </x-input-form-modal>
+
+                                    <!-- Fecha de Inicio -->
+    <!--                                    <x-input-form-modal :name="'fecha_inicio'" :labelText="'Fecha de Inicio:'" :type="'date'"
+                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')"  :placeholder="'Fecha'"/>
+
+                                    <!-- Fecha de Fin -->
+    <!--                                    <x-input-form-modal :name="'fecha_fin'" :labelText="'Fecha de Fin:'" :type="'date'"
+                                        :id="'fecha_fin'" required :value="old('fecha_fin')" :placeholder="'Fecha'"/>
+
+                                    <!-- Objetivo -->
+    <!--                                    <x-input-form-modal :name="'objetivo'" :labelText="'Objetivo:'" :type="'text'"
+                                        :id="'objetivo'" placeholder="Objetivo: " required>
+                                    </x-input-form-modal>
+
+                                    <!-- Comentarios -->
+    <!--                                    <x-input-form-modal :name="'comentarios'" :labelText="'Comentarios:'" :type="'text'"
+                                        :id="'comentarios'" placeholder="Comentarios: " required>
+                                    </x-input-form-modal>
+
+
+
+                                </x-modal-form>
+                            </div>
+                        </a>
+
+                        <!-- Segundo botón -->
+    <!--                    <a href="#">
+                            <div
+                                class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <p class="text-center text-[20px]">Gestionar no sé</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+-->

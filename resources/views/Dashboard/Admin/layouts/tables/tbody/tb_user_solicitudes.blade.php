@@ -26,70 +26,70 @@
                         <div class="w-[250px] overflow-hidden">
                             <label class="block text-gray-600 mb-1">Nombre del Administrador:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->getFullName() }}
+                                {{ $usuario->trabajador->user->getFullName() }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Correo Electrónico:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->email }}
+                                {{ $usuario->trabajador->user->email }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Dirección:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->direccion }}
+                                {{ $usuario->trabajador->user->direccion }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Teléfono:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->telefono }}
+                                {{ $usuario->trabajador->user->telefono }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Fecha:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->fecha_nacimiento }}
+                                {{ $usuario->trabajador->user->fecha_nacimiento }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">País:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->pais }}
+                                {{ $usuario->trabajador->user->pais }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Estado:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->estado }}
+                                {{ $usuario->trabajador->user->estado }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Municipio:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->municipio }}
+                                {{ $usuario->trabajador->user->municipio }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Código Postal (CP):</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->cp }}
+                                {{ $usuario->trabajador->user->cp }}
                             </div>
                         </div>
                         
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Género:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
-                                {{ $user->trabajador->user->genero }}
+                                {{ $usuario->trabajador->user->genero }}
                             </div>
                         </div>
                         
