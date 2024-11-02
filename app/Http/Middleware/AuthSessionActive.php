@@ -25,7 +25,7 @@ class AuthSessionActive
                 } elseif ($user->trabajador->coordinador) {
                     return redirect()->route('cordi.home');
                 } elseif ($user->trabajador->voluntario) {
-                    return redirect()->route('voluntario.home');
+                    return redirect()->route('vol.home');
                 }
             }
         }

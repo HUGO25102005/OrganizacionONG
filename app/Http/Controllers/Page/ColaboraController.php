@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Usuarios\VoluntarioController;
+use App\Http\Requests\Usuarios\StoreVoluntarioRequest;
 use Illuminate\Http\Request;
 
 class ColaboraController extends Controller
@@ -27,9 +29,12 @@ class ColaboraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeVoluntario(StoreVoluntarioRequest $request)
     {
-        //
+        $volController = new VoluntarioController();
+        $volController->store($request);
+
+        return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
 
     /**

@@ -25,7 +25,7 @@
             <!-- Resumen de la campaña -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Campañas Activas</h3>
-                <p class="text-4xl font-bold">8</p>
+                <p class="text-4xl font-bold">{{$convocatoriasActivas}}</p>
                 <p class="text-sm text-gray-500">Total en curso actualmente</p>
             </div>
 
@@ -42,7 +42,7 @@
             <!-- Campañas finalizadas -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Campañas Finalizadas</h3>
-                <p class="text-4xl font-bold">15</p>
+                <p class="text-4xl font-bold">{{ $convocatoriasFinalizadas }}</p>
                 <p class="text-sm text-gray-500">Desde el inicio del año</p>
             </div>
 
@@ -107,10 +107,10 @@
     const campaignChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Campañas Activas', 'Campañas Activas', 'Campañas Activas', 'Campañas Activas'],
+            labels: ['Campañas Activas', 'Campañas Finalizadas', 'Campañas Canceladas'],
             datasets: [{
                 label: 'Datos de Campañas',
-                data: [8, 23, 15, 35],
+                data: [{{$convocatoriasActivas}}, {{ $convocatoriasFinalizadas }}, 15],
                 backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'],
                 borderWidth: 1
             }]

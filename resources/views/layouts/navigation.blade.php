@@ -14,6 +14,7 @@
                             @break
 
                             @case('Voluntario')
+                            <a href="{{ route('vol.home') }}">
                             @break
 
                             @default

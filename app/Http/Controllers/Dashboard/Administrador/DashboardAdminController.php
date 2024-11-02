@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Administrador;
 use App\Http\Controllers\Controller;
 use App\Models\Caja\CajaFondo;
 use App\Models\Caja\Presupuesto;
+use App\Models\Donaciones\Convocatoria;
 use App\Models\Donaciones\Donacion;
 use App\Models\ProgramasEducativos\InformesSeguimientos;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
@@ -63,30 +64,47 @@ class DashboardAdminController extends Controller
             $seccion = $request->seccion;
         }
 
-        $monto_disponible = CajaFondo::getMontoDisponible();
-        $monto_usado = Presupuesto::getMontoTotal();
-        $monto_total_donaciones = Donacion::getMontoTotal();
-        $total_donaciones = Donacion::paginate(10);
-        $total_donaciones_semana = Donacion::getTotalMontoSemana();
-        $total_donaciones_mes = Donacion::getTotalMontoMes();
-        $topDonadantes = Donacion::getTopDonadores();
-        // dd($topDonadantes);
-        // dd($total_donaciones_semana);
-        return view(
-            'Dashboard.Admin.donaciones',
-            compact(
-                [
-                    'topDonadantes',
-                    'monto_usado',
-                    'monto_disponible',
-                    'monto_total_donaciones',
-                    'total_donaciones',
-                    'total_donaciones_semana',
-                    'total_donaciones_mes',
-                    'seccion'
-                ]
-            )
-        );
+        if($seccion == 1){
+            $monto_disponible = CajaFondo::getMontoDisponible();
+            $monto_usado = Presupuesto::getMontoTotal();
+            $monto_total_donaciones = Donacion::getMontoTotal();
+            $total_donaciones = Donacion::paginate(10);
+            $total_donaciones_semana = Donacion::getTotalMontoSemana();
+            $total_donaciones_mes = Donacion::getTotalMontoMes();
+            $topDonadantes = Donacion::getTopDonadores();
+            // dd($topDonadantes);
+            // dd($total_donaciones_semana);
+            return view(
+                'Dashboard.Admin.donaciones',
+                compact(
+                    [
+                        'topDonadantes',
+                        'monto_usado',
+                        'monto_disponible',
+                        'monto_total_donaciones',
+                        'total_donaciones',
+                        'total_donaciones_semana',
+                        'total_donaciones_mes',
+                        'seccion'
+                    ]
+                )
+            );
+        } else {
+            $convocatoriasActivas = Convocatoria::getTotalConvocatoriasActivas(1);
+            $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasActivas(2);
+            $convocatorias = Convocatoria::getConvocatoriaPorEstado(1); 
+
+            return view(
+                'Dashboard.Admin.donaciones',
+                compact(
+                    [
+                        'seccion',
+                        'convocatoriasActivas',
+                        'convocatoriasFinalizadas',
+                    ]
+                )
+            );
+        }
     }
     public function recursos(Request $request)
     {

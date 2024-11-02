@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -7,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckVoluntario
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -17,8 +16,8 @@ class CheckAdmin
             if ($trabajador && // Verificamos que trabajador no sea null
                 Auth::user()->id == $trabajador->id_user &&
                 $trabajador->estado == "1" &&
-                $trabajador->administrador && // Verificamos que administrador no sea null
-                $trabajador->id == $trabajador->administrador->id_trabajador
+                $trabajador->voluntario && // Verificamos que voluntario no sea null
+                $trabajador->id == $trabajador->voluntario->id_trabajador
             ) {
                 return $next($request);
             }
