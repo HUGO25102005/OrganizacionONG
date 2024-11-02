@@ -7,6 +7,15 @@
         <h1><b>Se parte de nuestro equipo</b></h1>
         <img src="{{ asset('images/amigos.png') }}" alt="">
     </section>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <section class="experience">
         <div class="content">
@@ -170,162 +179,128 @@
         }
     </script>
 
-    
+
 
     <!-- Modal para voluntario -->
     <!-- Modal para voluntario -->
     <div id="volunteerModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 z-50 bg-opacity-50 hidden">
-        <form action="{{ route('vol.store') }}" method="POST" class="bg-blue-50 rounded-lg p-6 w-full max-w-lg shadow-xl" style="width: 900px; height: 750px;">
+        <form action="{{ route('vol.store') }}" method="POST" class="bg-white rounded-lg p-8 w-full max-w-4xl shadow-xl overflow-y-auto" style="max-height: 90vh;">
             @csrf
-            <h2 class="text-xl font-bold mb-4 text-[#3B3636]">Solicitud a Voluntariado</h2>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Solicitud a Voluntariado</h2>
+            
             <!-- Formulario de entrada -->
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Nombre completo -->
-                <div class="relative mb-2">
-                    <i class='bx bx-user absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="name" placeholder="Nombre"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="name" placeholder="Nombre" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
-                <div class="relative mb-2">
-                    <i class='bx bx-user absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="apellido_paterno" placeholder="Nombre"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+    
+                <div class="mb-4">
+                    <input type="text" name="apellido_paterno" placeholder="Apellido Paterno" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
-                <div class="relative mb-2">
-                    <i class='bx bx-user absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="apellido_materno" placeholder="Nombre"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+    
+                <div class="mb-4">
+                    <input type="text" name="apellido_materno" placeholder="Apellido Materno" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Fecha de nacimiento -->
-                <div class="relative mb-2">
-                    <i class='bx bx-calendar absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs placeholder:text-[#3B3636]">
+                <div class="mb-4">
+                    <input type="date" name="fecha_nacimiento" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Correo electrónico -->
-                <div class="relative mb-2">
-                    <i class='bx bx-envelope absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="email" name="email" placeholder="Correo electrónico"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="email" name="email" placeholder="Correo electrónico" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Días disponibles -->
-                <div class="relative mb-2">
-                    <i class='bx bx-calendar-alt absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="dias_disponibles" placeholder="Días disponibles"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="dias_disponibles" placeholder="Días disponibles" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
-                
+    
                 <!-- Género -->
-                <div class="relative mb-2">
-                    <i class='bx bx-male-female absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="genero" placeholder="Género"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="genero" placeholder="Género" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Teléfono -->
-                <div class="relative mb-2">
-                    <i class='bx bx-phone absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="tel" name="telefono" placeholder="Teléfono"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="tel" name="telefono" placeholder="Teléfono" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Dirección -->
-                <div class="relative">
-                    <i class='bx bx-home absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="direccion" placeholder="Dirección"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="direccion" placeholder="Dirección" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- País -->
-                <div class="relative mb-2">
-                    <i class='bx bx-world absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="pais" placeholder="País"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="pais" placeholder="País" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Estado -->
-                <div class="relative mb-2">
-                    <i class='bx bx-map absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="estado" placeholder="Estado"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="estado" placeholder="Estado" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Municipio -->
-                <div class="relative mb-2">
-                    <i class='bx bx-buildings absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="municipio" placeholder="Municipio"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="municipio" placeholder="Municipio" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- CP -->
-                <div class="relative mb-2">
-                    <i class='bx bx-buildings absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="number" name="cp" placeholder="Codigo Postal"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="number" name="cp" placeholder="Código Postal" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
-                 <!-- Preferencia de colaboración -->
-                 <div class="relative mb-2">
-                    <i class='bx bx-handshake absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="preferencia_colaboracion" placeholder="Preferencia de colaboración"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+    
+                <!-- Preferencia de colaboración -->
+                <div class="mb-4">
+                    <input type="text" name="preferencia_colaboracion" placeholder="Preferencia de colaboración" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Experiencia previa -->
-                <div class="relative mb-2">
-                    <i class='bx bx-history absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="experiencia_previa" placeholder="Experiencia previa"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="experiencia_previa" placeholder="Experiencia previa" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Horario preferible -->
-                <div class="relative mb-2">
-                    <i class='bx bx-time-five absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="horario_preferible" placeholder="Horario preferible"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="horario_preferible" placeholder="Horario preferible" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
+    
                 <!-- Habilidades y conocimientos -->
-                <div class="relative mb-2">
-                    <i class='bx bx-brain absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="habilidades_conocimientos" placeholder="Habilidades y conocimientos"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <input type="text" name="habilidades_conocimientos" placeholder="Habilidades y conocimientos" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
+                </div>
+    
+                <!-- Área de interés -->
+                <div class="mb-4">
+                    <input type="" name="area_interes" placeholder="Área de interés" class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 placeholder:text-gray-400">
                 </div>
                 
-                <!-- Área de interés -->
-                <div class="relative mb-2">
-                    <i class='bx bx-bullseye absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="text" name="area_interes" placeholder="Área de interés"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
+                <div class="mb-4">
+                    <label for="fecha_inicio" class="block text-gray-700 font-bold mb-2">Fecha de inicio</label>
+                    <input type="date" id="fecha_inicio" name="fecha_inicio" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 
-                <!-- Comentarios adicionales -->
-                <div class="relative col-span-2">
-                    <i class='bx bx-comment absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <textarea name="comentarios" placeholder="Motivo de voluntariado"
-                        class="pl-8 py-2 bg-[#E6ECF8] rounded-lg w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs"></textarea>
+                <div class="mb-4">
+                    <label for="fecha_termino" class="block text-gray-700 font-bold mb-2">Fecha de término</label>
+                    <input type="date" id="fecha_termino" name="fecha_termino" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
-                {{--  --}}
-                <div class="relative mb-2">
-                    <i class='bx bx-calendar absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="date" name="fecha_inicio" placeholder="Fecha de nacimiento"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs placeholder:text-[#3B3636]">
+                
+                <div class="mb-4">
+                    <label for="hrs_dedicadas_semana" class="block text-gray-700 font-bold mb-2">Horas dedicadas por semana</label>
+                    <input type="number" id="hrs_dedicadas_semana" name="hrs_dedicadas_semana" min="1" max="40" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
-                {{--  --}}
-                <div class="relative mb-2">
-                    <i class='bx bx-calendar absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="date" name="fecha_termino" placeholder="Fecha de nacimiento"
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs placeholder:text-[#3B3636]">
-                </div>
-                <!-- Área de interés -->
-                <div class="relative mb-2">
-                    <i class='bx bx-bullseye absolute left-2 top-2.5 text-[#3B3636]'></i>
-                    <input type="number" name="hrs_dedicadas_semana" placeholder="Horas "
-                        class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-                </div>
-
             </div>
-            <!-- Botón de enviar -->
-            <div class="flex justify-center mt-4">
-                <button onclick="closeVolunteerModal()"
-                    class="bg-blue-100 text-black px-4 py-2 rounded-full mr-2 shadow-inner">Cerrar</button>
-                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-blue-600">
-                    Enviar solicitud
-                </button>
+    
+            <!-- Botones -->
+            <div class="flex justify-between mt-6">
+                <button type="submit" class="bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">Enviar</button>
+                <button type="button" onclick="closeModal()" class="text-red-600 hover:underline">Cancelar</button>
             </div>
         </form>
     </div>
-
 
 
 

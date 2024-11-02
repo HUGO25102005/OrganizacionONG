@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
+        Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
+        Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
     });
 });
 
@@ -68,14 +70,21 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'page'], function () {
     
     Route::resources([
-        'conocenos' => ConocenosController::class,
+        
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
-        'colabora' => ColaboraController::class,
         'donar' => DonarController::class,
     ]);
 
-    Route::post('/solicitudes/voluntario', [ColaboraController::class, 'storeVoluntario'])->name('vol.store');
+    Route::prefix('conocenos')->group(function () {
+        Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
+    });
+
+    Route::prefix('colabora')->group(function () {
+        Route::get('/', [ColaboraController::class, 'index'])->name('colabora.index');
+        Route::post('/solicitudes/voluntario', [ColaboraController::class, 'storeVoluntario'])->name('vol.store');
+    });
+
 
     Route::get('/', function () {
         return redirect()->route('conocenos.index');

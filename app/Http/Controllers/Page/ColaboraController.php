@@ -29,8 +29,13 @@ class ColaboraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function store(Request $request)
+    {
+        //
+    }
     public function storeVoluntario(StoreVoluntarioRequest $request)
     {
+
         $volController = new VoluntarioController();
         $volController->store($request);
 

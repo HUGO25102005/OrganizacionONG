@@ -14,4 +14,20 @@ class DashboardVolunController extends Controller
 
         return view('Dashboard.Voluntario.index');
     }
+    public function misClases()
+    {
+
+        
+
+        $seccion = 1;
+
+        return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
+    }
+    public function nuevaClase()
+    {
+
+        
+        $seccion = 1;
+        return view('Dashboard.Voluntario.nueva_clase', compact(['seccion']));
+    }
 }
