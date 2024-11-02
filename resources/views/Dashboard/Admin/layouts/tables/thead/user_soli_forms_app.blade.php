@@ -29,11 +29,11 @@
                 value="{{$fecha_fin}}">
         </div>
         <!-- Botón de aplicar filtros -->
-        <div class="mx-2">
+        <div class="mx-2 sm:mx-4 md:mx-6 lg:mx-8 my-4">
             <button type="submit"
-                class="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-transform duration-200 hover:scale-110">
+                class="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-transform duration-200 hover:scale-105 sm:hover:scale-110">
                 Aplicar Filtros
             </button>
-        </div>
+        </div>        
     </form>
 </div>

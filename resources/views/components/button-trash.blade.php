@@ -1,6 +1,6 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="flex items-center justify-center text-red-600 text-xl bg-red-100 hover:bg-red-500 hover:text-white transition-colors ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+    <button @click="open = true" class="text-black text-2xl bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-500">
         <i class='bx bx-trash'></i>
     </button>    
 

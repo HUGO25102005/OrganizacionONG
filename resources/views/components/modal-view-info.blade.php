@@ -2,7 +2,7 @@
     <div x-data="{ open: false }">
         <!-- Botón para abrir el modal -->
         <button @click="open = true" class="{{ $classButton }}">
-            <i class='bx bx-show'></i>
+            <i class='bx bx-show text-black text-2xl bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-500'></i>
         </button>
 
         <!-- Modal -->
