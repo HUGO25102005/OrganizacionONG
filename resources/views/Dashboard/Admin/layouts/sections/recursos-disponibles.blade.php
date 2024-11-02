@@ -58,9 +58,9 @@
     
 
     <!-- Sección: Asignación de recursos -->
-    <div class="mt-[30px]">
+    <div class="mt-[30px] overflow-x-auto">
         <h3 class="text-xl font-semibold mb-[10px]">Asignación de recursos</h3>
-        <table class="w-full bg-white rounded-[20px] shadow-md">
+        <table class="w-full bg-white rounded-[20px] shadow-md min-w-[600px]">
             <thead>
                 <tr class="bg-[#BBDEFB] text-center">
                     <th class="p-[15px] ">Nombre del programa</th>

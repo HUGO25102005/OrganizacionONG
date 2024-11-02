@@ -1,31 +1,29 @@
-
 <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-    <div class="flex justify-between items-center mb-[20px]">
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-[20px]">
         <h2 class="text-2xl font-semibold">Donaciones</h2>
         {{-- <button class="bg-blue-500 text-white px-[20px] py-[10px] rounded-lg hover:bg-blue-600">
             Crear Nueva Campaña
         </button> --}}
     </div>
         
-        <!-- Contenedor Grid para organizar los rectángulos -->
-            <div class="grid grid-cols-3 gap-6 p-4">
-                <!-- Rectángulos según el diseño -->
-                <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
-        <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
-            <div>
-                <p class="text-gray-700 text-lg font-semibold">Total disponible:</p>
-                <p class="text-gray-900 text-2xl font-bold">$1234</p>
-                <p>Monto total: 11,200$</p>
-            </div>
-            <div>
-                <i class='bx bx-wallet text-4xl text-[#4CAF50]'></i>
+    <!-- Contenedor Grid para organizar los rectángulos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        <!-- Rectángulos según el diseño -->
+        <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
+            <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
+                <div>
+                    <p class="text-gray-700 text-lg font-semibold">Total disponible:</p>
+                    <p class="text-gray-900 text-2xl font-bold">$1234</p>
+                    <p>Monto total: 11,200$</p>
+                </div>
+                <div>
+                    <i class='bx bx-wallet text-4xl text-[#4CAF50]'></i>
                 </div>
             </div>
         </div>
     
-            
         <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
-            <div class="bg-white h-full w-full rounded-lg flex justify-between items-center p-4">
+            <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
                 <div>
                     <p class="text-gray-700 text-lg font-semibold">Dinero usado:</p>
                     <p class="text-gray-900 text-2xl font-bold">$500</p>
@@ -36,91 +34,83 @@
             </div>
         </div>
         
-            
-            <!-- Cuadrado grande -->
-            <div class="bg-white h-[340px] rounded-lg shadow-md row-span-2 p-4">
-                <div class="h-full w-full rounded-lg p-4">
-                    <h3 class="text-gray-700 text-xl font-semibold text-center mb-4">Top Donadores <i class='bx bxs-crown text-[#FFC107]'></i> </h3>
-                    <div class="flex justify-between font-semibold mb-2 text-black">
-                        <span>Nombre</span>
-                        <span>Monto</span>
-                    </div>
-                    <ul class="space-y-2">
-                        <li class="flex justify-between items-center">
-                            <span class="text-gray-800">Ernesto</span>
-                            <span class="text-gray-600 font-bold">$1500</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <span class="text-gray-800">Isa</span>
-                            <span class="text-gray-600 font-bold">$1200</span>
-                        </li>
-    
-                    </ul>
+        <!-- Cuadrado grande -->
+        <div class="bg-white h-[340px] rounded-lg shadow-md row-span-2 p-4 sm:col-span-1 lg:col-span-1">
+            <div class="h-full w-full rounded-lg p-4">
+                <h3 class="text-gray-700 text-xl font-semibold text-center mb-4">Top Donadores <i class='bx bxs-crown text-[#FFC107]'></i> </h3>
+                <div class="flex justify-between font-semibold mb-2 text-black">
+                    <span>Nombre</span>
+                    <span>Monto</span>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-800">Ernesto</span>
+                        <span class="text-gray-600 font-bold">$1500</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-800">Isa</span>
+                        <span class="text-gray-600 font-bold">$1200</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
+            <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
+                <div>
+                    <p class="text-gray-700 text-lg font-semibold">Dinero recaudado la última semana:</p>
+                    <p class="text-gray-900 text-2xl font-bold">$7500</p>
+                </div>
+                <div>
+                    <i class='bx bx-credit-card text-4xl text-[#FFC107]'></i>
                 </div>
             </div>
-            
-            
-            <div class="bg-white rounded-lg shadow-md p-4">
-                <div class="bg-white h-full w-full rounded-lg flex justify-between items-center p-4">
-                    <div>
-                        <p class="text-gray-700 text-lg font-semibold">Dinero recaudado la última semana:</p>
-                        <p class="text-gray-900 text-2xl font-bold">$7500</p>
-                    </div>
-                    <div>
-                        <i class='bx bx-credit-card text-4xl text-[#FFC107]'></i>
-                    </div>
+        </div>
+        
+        <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
+            <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
+                <div>
+                    <p class="text-gray-700 text-lg font-semibold">Dinero recaudado el último mes:</p>
+                    <p class="text-gray-900 text-2xl font-bold">$7500</p>
+                </div>
+                <div>
+                    <i class='bx bxs-bank text-4xl text-[#2196F3]'></i>
                 </div>
             </div>
-            
-            
-            <div class="bg-white h-[150px] rounded-lg shadow-md p-4">
-                <div class="h-full w-full rounded-lg flex justify-between items-center p-4">
-                    <div>
-                        <p class="text-gray-700 text-lg font-semibold">Dinero recaudado el último mes:</p>
-                        <p class="text-gray-900 text-2xl font-bold">$7500</p>
-                    </div>
-                    <div>
-                        <i class='bx bxs-bank text-4xl text-[#2196F3]'></i>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Tabla de últimas donaciones -->
+        <div class="bg-white w-full h-auto rounded-lg shadow-md mt-4 p-4 sm:col-span-2 lg:col-span-3 overflow-x-auto">
+            <div class="bg-[#BBDEFB] text-center text-[20px] rounded-[15px] text-black w-full h-[35px] mx-auto mb-4">
+                <p>Últimas donaciones</p>
             </div>
             
-            <div class="h-full w-full rounded-lg">
-                <div
-                    class="bg-white w-[1380px] h-[290px] p-[20px] rounded-[15px] mt-[20px]">
-                    <!-- Título de la tabla -->
-                    <div
-                        class="bg-[#BBDEFB] text-center text-[20px] rounded-[15px] text-black w-full h-[35px] mx-auto">
-                        <p>Últimas donaciones</p>
-                    </div>
-            
-                    <!-- Tabla de donaciones -->
-                    <div class="mt-6 text-[#D9D9D9]">
-                        <table class="w-full text-center"> <!-- Alinea el texto al centro -->
-                            <thead class="bg-[#BBDEFB] rounded-[15px] text-black">
-                                <tr>
-                                    <th class="py-2 px-4 w-1/5">Nombre</th>
-                                    <th class="py-2 px-4 w-1/5">Correo Electrónico</th>
-                                    <th class="py-2 px-4 w-1/5">País</th>
-                                    <th class="py-2 px-4 w-1/5">Fecha Registro</th>
-                                    <th class="py-2 px-4 w-1/5">Monto</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-black">
-                                <tr>
-                                    <td class="py-2 px-4">Ernesto</td>
-                                    <td class="py-2 px-4">ejimenez@gmail.com</td>
-                                    <td class="py-2 px-4">México</td>
-                                    <td class="py-2 px-4">15-10-2024</td>
-                                    <td class="py-2 px-4">$1000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                           
-                </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-center">
+                    <thead class="bg-[#BBDEFB] rounded-[15px] text-black">
+                        <tr>
+                            <th class="py-2 px-4 w-1/5">Nombre</th>
+                            <th class="py-2 px-4 w-1/5">Correo Electrónico</th>
+                            <th class="py-2 px-4 w-1/5">País</th>
+                            <th class="py-2 px-4 w-1/5">Fecha Registro</th>
+                            <th class="py-2 px-4 w-1/5">Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-black">
+                        <tr>
+                            <td class="py-2 px-4">Ernesto</td>
+                            <td class="py-2 px-4">ejimenez@gmail.com</td>
+                            <td class="py-2 px-4">México</td>
+                            <td class="py-2 px-4">15-10-2024</td>
+                            <td class="py-2 px-4">$1000</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
     </div>
+</div>
+
 
 <!--
         <div

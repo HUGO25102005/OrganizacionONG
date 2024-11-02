@@ -23,72 +23,76 @@
                     <!-- Información del usuario en estilo de credencial -->
                     <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Datos del Usuario</h4> <!-- Encabezado -->
                     <section class="mb-6 grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-600 mb-1">Nombre del Adminstrador: </label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->getFullName() }}
+                        <div class="w-[250px] overflow-hidden">
+                            <label class="block text-gray-600 mb-1">Nombre del Administrador:</label>
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->getFullName() }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Correo Electrónico:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->email }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->email }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Dirección:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->direccion }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->direccion }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Teléfono:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->telefono }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->telefono }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Fecha:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->fecha_nacimiento }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->fecha_nacimiento }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">País:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->pais }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->pais }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Estado:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->estado }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->estado }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Municipio:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->municipio }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->municipio }}
                             </div>
                         </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Código Postal (CP):</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->cp }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->cp }}
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-gray-600 mb-1">Dirección:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->direccion }}
-                            </div>
-                        </div>
-                        <div>
+                        
+                        <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Género:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->user->genero }}
+                            <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black">
+                                {{ $user->trabajador->user->genero }}
                             </div>
                         </div>
+                        
                         
                         
                     </section>
