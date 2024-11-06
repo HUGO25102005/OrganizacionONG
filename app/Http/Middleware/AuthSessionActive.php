@@ -23,7 +23,7 @@ class AuthSessionActive
                 if ($user->trabajador->administrador) {
                     return redirect()->route('admin.home');
                 } elseif ($user->trabajador->coordinador) {
-                    return redirect()->route('cordi.home');
+                    return redirect()->route('coordinador.home');
                 } elseif ($user->trabajador->voluntario) {
                     return redirect()->route('vol.home');
                 }
