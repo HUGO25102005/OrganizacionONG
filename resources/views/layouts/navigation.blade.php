@@ -10,14 +10,15 @@
                             <a href="{{ route('admin.home') }}">
                             @break
 
-                            @case('Coordinador')
+                        @case('Coordinador')
+                            <a href="{{ route('coordinador.home') }}">
                             @break
 
-                            @case('Voluntario')
+                        @case('Voluntario')
                             @break
 
                             @default
-                        @endswitch
+                    @endswitch
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -32,7 +33,7 @@
                         @break
 
                         @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
+                            <x-nav-link :href="route('coordinador.home')" :active="request()->routeIs('coordinador.home')">
                                 {{ __('Home') }}
                             </x-nav-link>
                         @break
@@ -56,7 +57,7 @@
                         @break
 
                         @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
+                            <x-nav-link :href="route('coordinador.panelControl')" :active="request()->routeIs('coordinador.panelControl')">
                                 {{ __('Panel de Control') }}
                             </x-nav-link>
                         @break
@@ -81,8 +82,8 @@
                         @break
 
                         @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
+                            <x-nav-link :href="route('coordinador.beneficiarios')" :active="request()->routeIs('coordinador.beneficiarios')">
+                                {{ __('Beneficiarios') }}
                             </x-nav-link>
                         @break
 
@@ -105,8 +106,8 @@
                         @break
 
                         @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
+                            <x-nav-link :href="route('coordinador.programas')" :active="request()->routeIs('coordinador.programas')">
+                                {{ __('Programas') }}
                             </x-nav-link>
                         @break
 
@@ -127,11 +128,11 @@
                             </x-nav-link>
                         @break
 
-                        @case('Coordinador')
+                        {{-- @case('Coordinador')
                             <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
                                 {{ __('Panel de Control') }}
                             </x-nav-link>
-                        @break
+                        @break --}}
 
                         @case('Voluntario')
                             <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
@@ -209,7 +210,7 @@
                 @break
 
                 @case('Coordinador')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
+                    <x-responsive-nav-link :href="route('coordinador.home')" :active="request()->routeIs('coordinador.home')">
                         {{ __('Home') }}
                     </x-responsive-nav-link>
                 @break

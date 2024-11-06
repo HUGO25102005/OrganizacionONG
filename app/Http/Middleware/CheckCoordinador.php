@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckCoordinador
 {
-    
+
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
@@ -18,8 +18,8 @@ class CheckAdmin
             if ($trabajador &&
                 Auth::user()->id == $trabajador->id_user &&
                 $trabajador->estado == "1" &&
-                $trabajador->administrador &&
-                $trabajador->id == $trabajador->administrador->id_trabajador) {
+                $trabajador->coordinador &&
+                $trabajador->id == $trabajador->coordinador->id_trabajador) {
                 return $next($request);
             }             
         }
