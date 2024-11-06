@@ -3,13 +3,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <a href="{{ route('admin.home') }}">
-                            @break
+                @switch(session('rol'))
+                    @case('Administrador')
+                        @include('layouts.sections.nav_admin')
+                    @break
 
+<<<<<<< HEAD
                         @case('Coordinador')
                             <a href="{{ route('coordinador.home') }}">
                             @break
@@ -143,6 +142,16 @@
                         @default
                     @endswitch
                 </div>
+=======
+                    @case('Coordinador')
+                    @break
+
+                    @case('Voluntario')
+                        @include('layouts.sections.nav_voluntario')
+                        @break
+                    @endswitch
+
+>>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
             </div>
 
             <!-- Settings Dropdown -->
@@ -204,9 +213,7 @@
         <div class="pt-2 pb-3 space-y-1">
             @switch(session('rol'))
                 @case('Administrador')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_admin')
                 @break
 
                 @case('Coordinador')

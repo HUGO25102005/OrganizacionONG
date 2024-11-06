@@ -1,16 +1,33 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Donaciones') }}
-        </h2>
+        <div class="flex space-x-4">
+            <a href="{{ route('admin.donaciones', ['seccion' => 1]) }}">
+                <h2
+                    class="font-semibold text-xl flex justify-center items-center transition-transform duration-200 hover:scale-110 text-gray-800 hover:bg-gray-100 cursor-pointer hover:text-black p-2 rounded leading-tight min-w-[200px] {{ $seccion == 1 ? 'bg-gray-100' : 'bg-white' }}">
+                    {{ __('Donaciones') }}
+                </h2>
+            </a>
+            <a href="{{ route('admin.donaciones', ['seccion' => 2]) }}">
+                <h2
+                    class="font-semibold text-xl text-gray-800 hover:bg-gray-100 transition-transform duration-200 hover:scale-110 cursor-pointer hover:text-black p-2 rounded leading-tight min-w-[200px] {{ $seccion == 2 ? 'bg-gray-100' : 'bg-white' }}">
+                    {{ __('Campañas de recaudación') }}
+                </h2>
+            </a>
+            @if ($seccion == 2)
+                {{-- <div class="">
+                    <a href="{{ route('pdf.generar') }}">
+                        <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+                    </a>
+                </div> --}}
+            @endif
+        </div>
     </x-slot>
 
+<<<<<<< HEAD
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
         <div
             class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-full max-w-[1480px] h-[300px] flex justify-center items-center rounded-[15px]">
@@ -126,3 +143,20 @@
     </div>
     </div>
 </x-app-layout>
+=======
+
+    @switch($seccion)
+        @case(1)
+            @include('Dashboard.Admin.layouts.sections.donaciones-info');
+        @break
+
+        @case(2)
+            @include('Dashboard.Admin.layouts.sections.donaciones-campañas');
+        @break
+
+        @default
+    @endswitch
+
+
+</x-app-layout>
+>>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f

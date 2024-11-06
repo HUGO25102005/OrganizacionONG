@@ -20,10 +20,17 @@ class Voluntario extends Model
     {
         return 'Voluntario';
     }
+<<<<<<< HEAD
     public static function getVoluntariosActivos()
     {
         return self::whereHas('trabajador', function ($query) {
             $query->where('estado', '!=', 3);
+=======
+    public static function getVoluntariosActivos( $estado )
+    {
+        return self::whereHas('trabajador', function ($query) use ($estado) {
+            $query->where('estado', '=', intval($estado));
+>>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
         });
     }
     public function trabajador()

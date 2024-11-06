@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Models\Caja\CajaFondo;
+use App\Models\Caja\Presupuesto;
+use App\Models\Donaciones\Convocatoria;
 use App\Models\Donaciones\Donacion;
 use App\Models\ProgramasEducativos\InformesSeguimientos;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
@@ -52,97 +55,169 @@ class DashboardAdminController extends Controller
             )
         );
     }
-    public function donaciones()
+    public function donaciones(Request $request)
     {
 
-        $monto_total_donaciones = Donacion::getMontoTotal();
-        $total_donaciones = Donacion::all();
-        $total_donaciones_semana = Donacion::getTotalMontoSemana();
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+        } else {
+            $seccion = $request->seccion;
+        }
 
-        return view(
-            'Dashboard.Admin.donaciones',
-            compact(
-                'monto_total_donaciones',
-                'total_donaciones',
-                'total_donaciones_semana',
-            )
-        );
+        if($seccion == 1){
+            $monto_disponible = CajaFondo::getMontoDisponible();
+            $monto_usado = Presupuesto::getMontoTotal();
+            $monto_total_donaciones = Donacion::getMontoTotal();
+            $total_donaciones = Donacion::paginate(10);
+            $total_donaciones_semana = Donacion::getTotalMontoSemana();
+            $total_donaciones_mes = Donacion::getTotalMontoMes();
+            $topDonadantes = Donacion::getTopDonadores();
+            // dd($topDonadantes);
+            // dd($total_donaciones_semana);
+            return view(
+                'Dashboard.Admin.donaciones',
+                compact(
+                    [
+                        'topDonadantes',
+                        'monto_usado',
+                        'monto_disponible',
+                        'monto_total_donaciones',
+                        'total_donaciones',
+                        'total_donaciones_semana',
+                        'total_donaciones_mes',
+                        'seccion'
+                    ]
+                )
+            );
+        } else {
+            $convocatoriasActivas = Convocatoria::getTotalConvocatoriasActivas(1);
+            $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasActivas(2);
+            $convocatorias = Convocatoria::getConvocatoriaPorEstado(1); 
+
+            return view(
+                'Dashboard.Admin.donaciones',
+                compact(
+                    [
+                        'seccion',
+                        'convocatoriasActivas',
+                        'convocatoriasFinalizadas',
+                    ]
+                )
+            );
+        }
     }
-    public function programas(Request $request)
+    public function recursos(Request $request)
     {
-        $search = $request->input('search');
 
-        $programas = ProgramaEducativo::when($search, function ($query, $search) {
-            return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
-                // Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
-                ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
-                    $query->where('name', 'LIKE', '%' . $search . '%');
-                })
-                ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
-                ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
-                ->orWhere('estado', 'LIKE', '%' . $search . '%');
-        })
-            ->paginate(5);
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+        } else {
+            $seccion = $request->seccion;
+        }
+        if ($seccion == 1) {
+            $monto_total_donaciones = Donacion::getMontoTotal();
+            $total_donaciones = Donacion::all();
+            $total_donaciones_semana = Donacion::getTotalMontoSemana();
+
+            return view(
+                'Dashboard.Admin.recursos',
+                compact(
+                    [
+                        'monto_total_donaciones',
+                        'total_donaciones',
+                        'total_donaciones_semana',
+                        'seccion'
+                    ]
+                )
+            );
+        } else {
+            $search = $request->input('search');
+
+            $programas = ProgramaEducativo::when($search, function ($query, $search) {
+                return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
+                    //Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
+                    ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
+                        $query->where('name', 'LIKE', '%' . $search . '%');
+                    })
+                    ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
+                    ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
+                    ->orWhere('estado', 'LIKE', '%' . $search . '%');
+            })
+                ->paginate(5);
 
 
+            if (empty($request->seccion)) {
+                $seccion = $request->get('seccion', 1);
+            } else {
+                $seccion = $request->seccion;
+            }
 
 
-        return view('Dashboard.Admin.programas', compact('programas'));
+            return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
+        }
     }
     public function usuarios(Request $request)
     {
-        
-        $seccion = $request->get('seccion', 1);
-        
-        if($seccion == 1){
-            $tipo = $request->get('tipo', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los tipos
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
         } else {
-            $tipo = $request->get('tipo', 'todos');
+            $seccion = $request->seccion;
         }
 
         if ($seccion == 1) {
-            switch ($tipo) {
+
+            if (empty($request->rol)) {
+                $rol = $request->get('rol', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
+            } else {
+                $rol = $request->rol;
+            }
+
+            $estado = $request->get('estado', '1');
+            switch ($rol) {
                 case 'Administrador':
-                    $datos = Administrador::getAdministradoresActivos()->paginate(10);
+                    $datos = Administrador::getAdministradoresActivos($estado)->paginate(10);
                     break;
                 case 'Coordinador':
-                    $datos = Coordinador::getCoordinadoresActivos()->paginate(10);
+                    $datos = Coordinador::getCoordinadoresActivos($estado)->paginate(10);
                     break;
                 case 'Voluntario':
-                    $datos = Voluntario::getVoluntariosActivos()->paginate(10);
+                    $datos = Voluntario::getVoluntariosActivos($estado)->paginate(10);
                     break;
                 case 'Beneficiario':
                     $datos = Beneficiario::paginate(10);
                     break;
+                default:
             }
-            
+
+            return view('Dashboard.Admin.usuarios', compact(['rol', 'estado', 'seccion'], 'datos'));
         } else {
 
-            switch ($tipo) {
-                case 'Solicitudes':
+            $rol = $request->get('rol', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
 
-                    $datos = Trabajador::where('estado', 3)->paginate(10);
+            $estado = '3';
 
-                    break;
+            if (!$request->fecha_inicio) {
+                $fecha_inicio = date('Y-m-d', strtotime('-1 month'));
+            } else {
+                $fecha_inicio = $request->fecha_inicio;
+            }
+
+            if (!$request->fecha_fin) {
+                $fecha_fin = date('Y-m-d', strtotime('+1 week'));
+            } else {
+                $fecha_fin = $request->fecha_fin;
+            }
+
+            switch ($rol) {
                 case 'Administrador':
-                    
-                    $datos = Administrador::whereHas('trabajador', function ($query) {
-                        $query->where('estado', 3); // Aquí filtramos por el campo 'status' en la tabla 'trabajadores'
-                    })->paginate(10);
-
+                    $datos = Administrador::getAdministradoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
                     break;
                 case 'Coordinador':
-                    $datos = Coordinador::paginate(10);
-                    break;
-                case 'Voluntario':
-                    $datos = Voluntario::paginate(10);
-                    break;
-                case 'Beneficiario':
-                    $datos = Beneficiario::paginate(10);
+                    $datos = Coordinador::getCoordinadoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
                     break;
             }
-        }
 
-        return view('Dashboard.Admin.usuarios', compact(['tipo', 'seccion'], 'datos'));
+            return view('Dashboard.Admin.usuarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado'], 'datos'));
+        }
     }
 }

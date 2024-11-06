@@ -14,10 +14,13 @@ class Presupuesto extends Model
         'porque',
     ];
 
-    public function programasEducativos()
-    {
-        return $this->hasMany(ProgramaEducativo::class, 'id_presupuesto');
+    public static function getMontoTotal(){
+        return self::sum('monto');
     }
+    // public static function programasEducativos()
+    // {
+    //     return $this->hasMany(ProgramaEducativo::class, 'id_presupuesto');
+    // }
 
     public function aprobacionPresupuestos()
     {

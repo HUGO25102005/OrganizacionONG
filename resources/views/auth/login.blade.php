@@ -25,7 +25,7 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
-            <!-- Recordar sesión 
+            <!-- Recordar sesión
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox"
@@ -44,10 +44,10 @@
                 class="w-full py-2 text-white bg-[#283859] rounded-[15px] shadow-inner transform transition-transform duration-300 hover:scale-105">
                 Iniciar Sesión
             </button>
-             
+
             <!-- Enlace de "¿Olvidaste tu contraseña?" -->
             @if (Route::has('password.request'))
-            <!--
+                <!--
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-4 inline-block"
                     href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}

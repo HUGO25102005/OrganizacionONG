@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('payer_id')->comment('id de cuenta paypal');
             $table->string('email')->unique();
-            $table->enum('Tipo_Donante', ['Individual', 'Corporativo', 'Organizacion', 'Anonimo']);
             $table->string('first_name', 50);
             $table->string('last_name', 70);
             $table->string('country_code', 10);

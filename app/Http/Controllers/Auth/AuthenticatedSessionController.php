@@ -28,10 +28,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {    
+
         //dd($request);
         if(Auth::check()){
             $user = Auth::user();
-            dd($user);
+            //dd($user);
         } else {
             $request->authenticate();
             $request->session()->regenerate();
@@ -40,11 +41,11 @@ class AuthenticatedSessionController extends Controller
         }
         //dd($user);
         if ($user->trabajador && $user->trabajador->administrador) {
-            return redirect()->intended(route('admin.home'))->with('sucess', 'Sesión iniciada correctamente');
+            return redirect()->intended(route('admin.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->coordinador) {
-            return redirect()->intended(route('coordinador.home'))->with('sucess', 'Sesión iniciada correctamente');
+            return redirect()->intended(route('coordinador.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->voluntario) {
-            return redirect()->intended(route('voluntario.home'))->with('sucess', 'Sesión iniciada correctamente');
+            return redirect()->intended(route('vol.home'))->with('success', 'Sesión iniciada correctamente');
         } else {
             return redirect()->intended(route('dashboard'));
         } 
