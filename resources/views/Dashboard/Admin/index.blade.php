@@ -1,12 +1,10 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="" message=" $error " />
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gray-100 rounded inline-block px-4 py-2 cursor-pointer transition-transform duration-200 hover:scale-110">
             {{ __('Home') }}
         </h2>
 
@@ -15,7 +13,7 @@
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
         
         <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
-            <h1 class="text-[45px] font-sans font-medium">Bienvenido</h1>
+            <h1 class="text-[45px] font-sans font-medium">InspireUp te da la bienvenida.</h1>
         </div>
         <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
             <h2 class="text-[24px] font-sans font-extralight">Buen día, {{ session('name') }}!</h2>

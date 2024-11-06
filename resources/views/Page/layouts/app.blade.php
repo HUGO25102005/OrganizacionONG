@@ -21,6 +21,9 @@
         @include('Page.layouts.navigation')
     </header>
 
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
     
     @yield('content')
 

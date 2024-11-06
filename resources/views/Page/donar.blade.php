@@ -192,7 +192,7 @@
             <p class="text-justify text-slate-900">Las donaciones permitirían asegurar el suministro de materiales esenciales y facilitar la implementación de talleres y capacitaciones educativas. De este modo, nuestra ONG podría empoderar a las comunidades que atendemos, promoviendo su desarrollo personal y profesional y contribuyendo a la construcción de un futuro más equitativo y próspero.</p>
 
             <!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
-            <div id="donate-button-container"></div>
+            <!--<div id="donate-button-container"></div>
             <div id="donate-button"></div>
             <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
             <script>
@@ -203,12 +203,28 @@
                         shape: 'pill',
                     },
                     image: {
-                        src: "{{asset('images/donar.png')}}",
+                        src: "",
                         alt: 'Donar con el botón PayPal',
                         title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
                     }
                 }).render('#donate-button');
-            </script>
+            </script>-->
+            <!-- Botón de donar con sandbox -->
+            <div id="donate-button-container">
+              <div id="donate-button"></div>
+              <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+              <script>
+                PayPal.Donation.Button({
+                  env:'sandbox',
+                  hosted_button_id:'ZL8G9R6KRJUSN',
+                  image: {
+                    src: "{{asset('images/donar.png')}}",
+                    alt:'Donar con el botón PayPal',
+                    title:'PayPal - La forma mas fácil y segura de pagar en línea!',
+                  }
+                }).render('#donate-button');
+              </script>
+            </div>              
         </div>
         </div>
     </section>

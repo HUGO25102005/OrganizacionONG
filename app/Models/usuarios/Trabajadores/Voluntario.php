@@ -16,6 +16,16 @@ class Voluntario extends Model
         'comentarios',
     ];
 
+    public function getRole(): string
+    {
+        return 'Voluntario';
+    }
+    public static function getVoluntariosActivos( $estado )
+    {
+        return self::whereHas('trabajador', function ($query) use ($estado) {
+            $query->where('estado', '=', intval($estado));
+        });
+    }
     public function trabajador()
     {
         return $this->belongsTo(Trabajador::class, 'id_trabajador');

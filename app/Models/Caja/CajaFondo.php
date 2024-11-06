@@ -2,6 +2,7 @@
 
 namespace App\Models\Caja;
 
+use App\Models\Donaciones\Donacion;
 use App\Models\Registros\RegistroEgreso;
 use App\Models\Registros\RegistroIngreso;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,19 @@ class CajaFondo extends Model
         'id_ingreso',
         'id_egresos',
     ];
+
+
+    public static function getMontoDisponible(){
+
+        $montoTotal = Donacion::getMontoTotal();
+        $montoEgresos = Presupuesto::getMontoTotal();
+
+        $montoDisponible = $montoTotal - $montoEgresos;
+
+        return $montoDisponible;
+    }
+
+
 
     // Define la relación con el modelo RegistroIngreso
     public function registroIngreso()

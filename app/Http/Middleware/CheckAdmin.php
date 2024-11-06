@@ -9,21 +9,23 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckAdmin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+    
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && 
-            Auth::user()->id == Auth::user()->trabajador->id_user &&  
-            Auth::user()->trabajador->estado == "1" && 
-            Auth::user()->trabajador->id == Auth::user()->trabajador->administrador->id_trabajador) {
-                // dd($request);
+        if (Auth::check()) {
+            $trabajador = Auth::user()->trabajador;
+
+            if ($trabajador && // Verificamos que trabajador no sea null
+                Auth::user()->id == $trabajador->id_user &&
+                $trabajador->estado == "1" &&
+                $trabajador->administrador && // Verificamos que administrador no sea null
+                $trabajador->id == $trabajador->administrador->id_trabajador
+            ) {
                 return $next($request);
             }
-            
-        return redirect()->route('login');
+        }
+
+        // Redirigir o manejar el acceso denegado
+        return redirect()->route('login')->withErrors('No tienes permisos para acceder a esta sección.');
     }
 }

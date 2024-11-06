@@ -8,14 +8,10 @@ use Illuminate\View\Component;
 
 class AlertsComponent extends Component
 {
-    public $severity;
-    public $title;
     public $message;
 
-    public function __construct($severity, $title, $message)
+    public function __construct($message = [])
     {
-        $this->severity = $severity;
-        $this->title = $title;
         $this->message = $message;
     }
 
@@ -24,4 +20,3 @@ class AlertsComponent extends Component
         return view('components.alerts-component');
     }
 }
-

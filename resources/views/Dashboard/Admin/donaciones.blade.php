@@ -1,14 +1,30 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="" message=" $error "/>
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Donaciones') }}
-        </h2>
+        <div class="flex space-x-4">
+            <a href="{{ route('admin.donaciones', ['seccion' => 1]) }}">
+                <h2
+                    class="font-semibold text-xl flex justify-center items-center transition-transform duration-200 hover:scale-110 text-gray-800 hover:bg-gray-100 cursor-pointer hover:text-black p-2 rounded leading-tight min-w-[200px] {{ $seccion == 1 ? 'bg-gray-100' : 'bg-white' }}">
+                    {{ __('Donaciones') }}
+                </h2>
+            </a>
+            <a href="{{ route('admin.donaciones', ['seccion' => 2]) }}">
+                <h2
+                    class="font-semibold text-xl text-gray-800 hover:bg-gray-100 transition-transform duration-200 hover:scale-110 cursor-pointer hover:text-black p-2 rounded leading-tight min-w-[200px] {{ $seccion == 2 ? 'bg-gray-100' : 'bg-white' }}">
+                    {{ __('Campañas de recaudación') }}
+                </h2>
+            </a>
+            @if ($seccion == 2)
+                {{-- <div class="">
+                    <a href="{{ route('pdf.generar') }}">
+                        <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
+                    </a>
+                </div> --}}
+            @endif
+        </div>
     </x-slot>
 
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
@@ -58,8 +74,12 @@
                     <!-- Título "Gestionar" -->
                     <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <x-alerts-component severity="error" title="Error" :message="$errors->all()" />
+                        <div class="bg-red-500 text-white p-4 mb-4 rounded">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
 
@@ -121,4 +141,19 @@
         </div>
     </div>
     </div>
+</x-app-layout>
+
+    @switch($seccion)
+        @case(1)
+            @include('Dashboard.Admin.layouts.sections.donaciones-info');
+        @break
+
+        @case(2)
+            @include('Dashboard.Admin.layouts.sections.donaciones-campañas');
+        @break
+
+        @default
+    @endswitch
+
+
 </x-app-layout>

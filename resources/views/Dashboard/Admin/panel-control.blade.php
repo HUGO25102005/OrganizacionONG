@@ -1,99 +1,148 @@
 <x-app-layout>
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <x-alerts-component severity="error" title="" message=" $error " />
-        </div>
-    @endif
+    <div class="alert alert-success">
+        <x-alerts-component />
+    </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gray-100 rounded inline-block px-4 py-2 cursor-pointer transition-transform duration-200 hover:scale-110">
             {{ __('Panel de Control') }}
         </h2>
 
     </x-slot>
-
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        <!-- Cuadrado uno -->
-        <div
-            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-full max-w-[650px] h-[110px] p-[20px] rounded-[15px]">
-            <div
-                class="bg-[#D9D9D9] w-full max-w-[610px] h-[90px] p-[20px] rounded-[15px] mt-[-10px] flex items-center justify-between">
-                <p class="ml-[20px] mt-[-0px] text-[20px]">Monto total por donaciones:</p>
-                <p class="ml-[20px] mt-[-0px] text-[40px]">${{ number_format($total_ingresos, 2) }}</p>
-                <i class='bx bx-money text-7xl'></i> <!-- Cambia el ícono según sea necesario -->
+        <!-- Título -->
+        <h2 class="text-2xl font-bold mb-6">Donaciones</h2>
+    
+        <!-- Fila superior: Total disponible y Dinero usado -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Total disponible -->
+            <div class="bg-white shadow-md p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-2">Total disponible:</h3>
+                <p class="text-3xl font-bold text-green-600">$1234</p>
+                <p class="text-sm text-gray-500">Monto total: $11,200</p>
+            </div>
+    
+            <!-- Dinero usado -->
+            <div class="bg-white shadow-md p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-2">Dinero usado:</h3>
+                <p class="text-3xl font-bold text-red-600">$500</p>
             </div>
         </div>
-
-        <!-- Cuadrado dos -->
-        <div
-            class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-full max-w-[650px] h-[390px] p-[20px] rounded-[15px] mt-[20px]">
-            <!-- Título de la tabla -->
-            <div
-                class="bg-[#232B47] text-center text-[20px] rounded-[15px] text-[#D9D9D9] w-full max-w-[450px] h-[35px] mx-auto">
-                <p>Últimas donaciones</p>
-            </div>
-
-            <!-- Tabla de donaciones -->
-            <div class="mt-6 text-[#D9D9D9]">
-                <table class="w-full text-left">
-                    <thead class="bg-[#232B47] rounded-[15px]">
+    
+        <!-- Fila intermedia: Últimas Donaciones y Campañas Activas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Últimas Donaciones (expandido para 10 registros) -->
+            <div class="bg-white shadow-md p-6 rounded-lg h-[250px] overflow-y-auto">
+                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Últimas Donaciones</h3>
+                <table class="w-full">
+                    <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="py-2 px-4">Nombre</th>
-                            <th class="py-2 px-4">Fecha Registro</th>
-                            <th class="py-2 px-4">Monto</th>
+                            <th class="text-left">Nombre</th>
+                            <th class="text-right">Monto</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($ultimas_donaciones as $donacion)
-                            <tr class="border-b border-gray-600">
-                                <td class="py-2 px-4">{{ $donacion->donante->Nombre_Completo }}</td>
-                                <td class="py-2 px-4">
-                                    {{ \Carbon\Carbon::parse($donacion->Fecha_Registro)->format('d-m-Y') }}</td>
-                                <td class="py-2 px-4">${{ $donacion->Monto_Donacion }}</td>
-                            </tr>
-                        @endforeach
+                        <tr><td>Ernesto</td><td class="text-right">$1500</td></tr>
+                        <tr><td>Isa</td><td class="text-right">$1200</td></tr>
+                        <tr><td>Juan</td><td class="text-right">$900</td></tr>
+                        <tr><td>Ana</td><td class="text-right">$800</td></tr>
+                        <tr><td>Carlos</td><td class="text-right">$700</td></tr>
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- Campañas Activas con metas -->
+            <div class="bg-white shadow-md p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Campañas Activas</h3>
+                <table class="w-full">
+                    <thead class="bg-[#BBDEFB]">
+                        <tr>
+                            <th class="text-left">Campaña</th>
+                            <th class="text-right">Meta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Campaña A</td><td class="text-right">$5000</td></tr>
+                        <tr><td>Campaña B</td><td class="text-right">$10000</td></tr>
+                        <tr><td>Campaña C</td><td class="text-right">$7500</td></tr>
+                        <tr><td>Campaña D</td><td class="text-right">$12000</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <!-- Cuadrados -->
-        <div onclick="window.location.href='#'"
-            class="relative w-full max-w-[620px] h-[120px] p-[20px] rounded-[24px] bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] mt-[20px] lg:absolute lg:top-[150px] lg:left-[980px] cursor-pointer hover:scale-105 transition-transform duration-300"
-            id="cuadrado1">
-            <div class="bg-[#E0E9FF] w-full h-[90px] rounded-[14px] mt-[-5px] flex items-center justify-between">
-                <p class="ml-[55px] text-[20px]">Programas educativos en curso: <span class="text-[30px] font-bold">{{ $programas_activos }}</span></p>
-                <i class='bx bx-book-open text-7xl ml-auto mr-[20px]'></i>
+    
+        <!-- Fila inferior: Gráficas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Gráfico de Campañas Activas -->
+            <div class="bg-white shadow-md p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4">Gráfico de Campañas Activas</h3>
+                <div style="max-width: 700px; max-height: 400px;">
+                    <canvas id="campaignChart"></canvas>
+                </div>
+            </div>
+    
+            <!-- Gráfico de Ingresos Mensuales -->
+            <div class="bg-white shadow-md p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4">Gráfico de Ingresos Mensuales</h3>
+                <div style="max-width: 700px; max-height: 400px;">
+                    <canvas id="incomeChart"></canvas>
+                </div>
             </div>
         </div>
-
-        <div onclick="window.location.href='#'"
-            class="relative w-full max-w-[620px] h-[120px] p-[20px] rounded-[24px] bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] mt-[20px] lg:absolute lg:top-[285px] lg:left-[980px] cursor-pointer hover:scale-105 transition-transform duration-300"
-            id="cuadrado2">
-            <div class="bg-[#C2DEFF] w-full h-[90px] rounded-[14px] mt-[-5px] flex items-center">
-                <p class="ml-[55px] text-[20px]">Informes de seguimiento: <span class="text-[30px] font-bold">{{ $informes_seguimiento }}</p>
-                <i class='bx bxs-bookmark-alt-minus text-7xl ml-auto mr-[20px]'></i>
-            </div>
-        </div>
-
-        <div onclick="window.location.href='#'"
-            class="relative w-full max-w-[620px] h-[120px] p-[20px] rounded-[24px] bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] mt-[20px] lg:absolute lg:top-[420px] lg:left-[980px] cursor-pointer hover:scale-105 transition-transform duration-300"
-            id="cuadrado3">
-            <div class="bg-[#E0E9FF] w-full h-[90px] rounded-[14px] mt-[-5px] flex items-center">
-                <p class="ml-[55px] text-[20px]">Actividades registradas: <span class="text-[30px] font-bold">{{ $actividades_registradas }}</p>
-                <i class='bx bx-list-check text-7xl ml-auto mr-[20px]'></i>
-            </div>
-        </div>
-
-        <div onclick="window.location.href='#'"
-            class="relative w-full max-w-[620px] h-[120px] p-[20px] rounded-[24px] bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] mt-[20px] lg:absolute lg:top-[560px] lg:left-[980px] cursor-pointer hover:scale-105 transition-transform duration-300"
-            id="cuadrado4">
-            <div class="bg-[#C2DEFF] w-full h-[90px] rounded-[14px] mt-[-5px] flex items-center">
-                <p class="ml-[55px] text-[20px]">Total de beneficiarios: <span class="text-[30px] font-bold">{{ $total_beneficiarios }}</p>
-                <i class='bx bxs-user-detail text-7xl ml-auto mr-[20px]'></i>
-            </div>
-        </div>
-
-
     </div>
+    
+    <!-- Script para las gráficas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Gráfico de Campañas Activas
+        const ctx = document.getElementById('campaignChart').getContext('2d');
+        const campaignChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Campañas Activas 1', 'Campañas Activas 2', 'Campañas Activas 3', 'Campañas Activas 4'],
+                datasets: [{
+                    label: 'Datos de Campañas',
+                    data: [8, 23, 15, 35],
+                    backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        // Gráfico de Ingresos Mensuales
+        const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+        const incomeChart = new Chart(ctxIncome, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                datasets: [{
+                    label: 'Ingresos Mensuales',
+                    data: [12000, 15000, 10000, 17000, 20000, 25000],
+                    backgroundColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    
+        
 </x-app-layout>

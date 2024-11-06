@@ -1,8 +1,8 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="delete-button text-red-500 text-xl">
-        <i class='bx bx-trash mr-2'></i>
-    </button>
+    <button @click="open = true" class="text-black text-2xl bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-500">
+        <i class='bx bx-trash'></i>
+    </button>    
 
     <!-- Modal de confirmación -->
     <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"
@@ -19,7 +19,7 @@
                 <input type="hidden" name="id" value="{{ $itemId }}">
 
                 <!-- Mensaje de alerta -->
-                <p class="text-center text-xl"><b>{{ $messageAlert }}</b></p>
+                <p class="text-center text-xl"><b>{!! $messageAlert !!}</b></p>
 
                 <!-- Botones de acción -->
                 <div class="flex justify-end mt-6">

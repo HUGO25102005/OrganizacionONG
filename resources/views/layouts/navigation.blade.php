@@ -3,145 +3,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <a href="{{ route('admin.home') }}">
-                            @break
-
-                            @case('Coordinador')
-                            @break
-
-                            @case('Voluntario')
-                            @break
-
-                            @default
-                        @endswitch
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                                {{ __('Home') }}
-                            </x-nav-link>
+                @switch(session('rol'))
+                    @case('Administrador')
+                        @include('layouts.sections.nav_admin')
                         @break
-
-                        @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                                {{ __('Home') }}
-                            </x-nav-link>
+                    @case('Coordinador')
+                        @include('layouts.sections.nav_coordinador')
                         @break
-
-                        @case('Voluntario')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                                {{ __('Home') }}
-                            </x-nav-link>
+                    @case('Voluntario')
+                        @include('layouts.sections.nav_voluntario')
                         @break
-
-                        @default
                     @endswitch
-
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <x-nav-link :href="route('admin.panelControl')" :active="request()->routeIs('admin.panelControl')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Voluntario')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @default
-                    @endswitch
-
-
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <x-nav-link :href="route('admin.donaciones')" :active="request()->routeIs('admin.donaciones')">
-                                {{ __('Donaciones') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Voluntario')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @default
-                    @endswitch
-                </div>
-                
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <x-nav-link :href="route('admin.programas')" :active="request()->routeIs('admin.programas')">
-                                {{ __('Programas') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Voluntario')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @default
-                    @endswitch
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @switch(session('rol'))
-                        @case('Administrador')
-                            <x-nav-link :href="route('admin.usuarios')" :active="request()->routeIs('admin.usuarios')">
-                                {{ __('Usuarios') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Coordinador')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @case('Voluntario')
-                            <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
-                                {{ __('Panel de Control') }}
-                            </x-nav-link>
-                        @break
-
-                        @default
-                    @endswitch
-                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -203,13 +75,11 @@
         <div class="pt-2 pb-3 space-y-1">
             @switch(session('rol'))
                 @case('Administrador')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_admin')
                 @break
 
                 @case('Coordinador')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
+                    <x-responsive-nav-link :href="route('coordinador.home')" :active="request()->routeIs('coordinador.home')">
                         {{ __('Home') }}
                     </x-responsive-nav-link>
                 @break
