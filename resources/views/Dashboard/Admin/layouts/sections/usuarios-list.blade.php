@@ -1,61 +1,3 @@
-<<<<<<< HEAD
-<div
-    class="bg-[#F6F8FF] w-full max-w-[1600px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px] flex flex-col items-center">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="container w-full mb-5">
-        <h2 class="text-center font-semibold text-3xl">
-            Lista de Usuarios
-        </h2>
-    </div>
-
-    <div class="content w-full">
-        <!-- Administradores Tab -->
-        <div id="administradores" class="tab-content active">
-
-            {{-- Encabezado table CONDICION DE MODALS Y FORMS --}}
-            @include('Dashboard.Admin.layouts.tables.thead.user_list_forms_app')
-            
-            {{-- FIN CONDICION DE MODALS Y FORMS --}}
-
-            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
-                <thead class="bg-[#2A334B] text-white ">
-                    <tr>
-                        <th class="py-3 px-4 rounded-l-lg">Número</th>
-                        <th class="py-3 px-4">Nombre completo</th>
-                        <th class="py-3 px-4">Correo electrónico</th>
-                        <th class="py-3 px-4">Estado</th>
-                        <th class="py-3 px-4 rounded-r-lg">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @switch($tipo)
-                        @case('Administrador')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_admin')
-                        @break
-
-                        @case('Coordinador')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_coordi')
-                        @break
-
-                        @case('Voluntario')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_voluntario')
-                        @break
-
-                        @case('Beneficiario')
-                            @include('Dashboard.Admin.layouts.tables.tbody.tb_beneficiario')
-                        @break
-
-                        @default
-                    @endswitch
-=======
 <div class="container w-full mb-5">
     <h2 class="text-center font-semibold text-2xl md:text-3xl">
         Lista de Usuarios
@@ -86,17 +28,12 @@
                     @else
                         @include('Dashboard.Admin.layouts.tables.tbody.tb_beneficiario')
                     @endif
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
                 </tbody>
             </table>
         </div>
 
         <!-- Coordinadores Tab -->
-<<<<<<< HEAD
-        <div id="coordinadores" class="tab-content">
-=======
         {{-- <div id="coordinadores" class="tab-content">
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
             <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
                 <h2 class="admin-title">Lista de coordinadores</h2>
                 <button
@@ -186,14 +123,7 @@
                     </tr>
                 </tbody>
             </table>
-<<<<<<< HEAD
-        </div>
-        {{ $datos->links() }}
-    </div>
-</div>
-=======
         </div> --}}
         {{ $datos->links() }}
-    </div>
+</div>
 
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f

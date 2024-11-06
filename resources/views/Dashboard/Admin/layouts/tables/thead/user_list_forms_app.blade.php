@@ -1,64 +1,3 @@
-<<<<<<< HEAD
-    {{-- <a href="{{ route('admin.usuarios', ['tipo' => 'Administrador']) }}"
-        class="tab-a {{ $tipo === 'Administrador' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-        Administradores
-    </a>
-    <a href="{{ route('admin.usuarios', ['tipo' => 'Coordinador']) }}"
-        class="tab-a {{ $tipo === 'Coordinador' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-        Coordinadores
-    </a>
-    <a href="{{ route('admin.usuarios', ['tipo' => 'Voluntario']) }}"
-        class="tab-a {{ $tipo === 'Voluntario' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-        Voluntarios
-    </a>
-    <a href="{{ route('admin.usuarios', ['tipo' => 'Beneficiario']) }}"
-        class="tab-a {{ $tipo === 'Beneficiario' ? 'active' : '' }} add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-        Beneficiarios
-    </a> --}}
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-        <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-6">
-                <!-- Filtro de rol -->
-                <form action="{{route('admin.usuarios')}}" method="POST" class="flex items-center justify-between mb-4">
-                    @csrf
-                    @method('GET')
-                    <div class="flex items-center space-x-6">
-                        <div class="w-48">
-                            <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
-                            <select id="rol" name="rol"
-                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="">Seleccione rol</option>
-                                <option value="administrador">Administrador</option>
-                                <option value="coordinador">Coordinador</option>
-                                <option value="voluntario">Voluntario</option>
-                                <option value="beneficiario">Beneficiario</option>
-                            </select>
-                        </div>
-        
-                        <!-- Filtro de estado -->
-                        <div class="w-48">
-                            <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-                            <select id="estado" name="estado"
-                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="">Seleccione estado</option>
-                                <option value="aprobado">Aprobado</option>
-                                <option value="cancelado">Cancelado</option>
-                                <option value="solicitado">Solicitado</option>
-                            </select>
-                        </div>
-        
-                        <!-- Botón de agregar nuevo usuario -->
-                        <div>
-                            <button type="button"
-                                class="flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                Aplicar Filtros
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <div>
-                    @switch($tipo)
-=======
 <div class="bg-white p-4 rounded-lg shadow-md mb-6">
     <div class="flex flex-wrap items-center justify-between mb-4 space-y-4 md:space-y-0">
         <div class="flex flex-col md:flex-row items-center space-x-6 space-y-4 md:space-y-0 w-full md:w-auto">
@@ -101,7 +40,6 @@
             <div>
                 <div>
                     @switch($rol)
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
                         @case('Administrador')
                             <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'"
                                 :btnSuccess="'Confirmar'">
@@ -239,12 +177,6 @@
                                     :value="old('apellido_materno')">
                                     <i class='bx bxs-universal-access'></i>
                                 </x-input-form-modal>
-<<<<<<< HEAD
-
-                                {{-- <!-- Fecha de Nacimiento --> 
-                                        <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'" required
-                                            :value="old('fecha_nacimiento')" /> --}}
-=======
                                 {{-- <!-- Fecha de Nacimiento 
                                    --> --}}
 
@@ -252,7 +184,6 @@
                                     :id="'fecha_nacimiento'" required :placeholder="'fecha_nacimiento'" :value="old('fecha_nacimiento')">
                                     <i class='bx bxs-universal-access'></i>
                                 </x-input-form-modal>
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
 
                                 {{-- <!-- Email --> --}}
                                 <x-input-form-modal :name="'email'" :labelText="'Correo Electrónico:'" :type="'email'"
@@ -315,38 +246,6 @@
                                         class="flex-1 bg-transparent border-none outline-none text-black placeholder-gray-500 text-sm px-2"
                                         style="min-width: 200px;" name="genero" id="genero">
                                         <option value="" disabled selected hidden>Género</option> <!-- Placeholder -->
-<<<<<<< HEAD
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
-                                        <option value="Prefiero no especificar">Prefiero no especificar</option>
-                                    </select>
-                                </div>
-
-                                {{-- <!-- Teléfono --> --}}
-                                <x-input-form-modal :name="'telefono'" :labelText="'Teléfono:'" :type="'text'"
-                                    :id="'telefono'" placeholder="Teléfono" :maxLength="'20'" required :value="old('telefono')">
-                                    <i class='bx bxs-phone-call'></i>
-                                </x-input-form-modal>
-
-                                {{-- <!-- Hora Inicio --> 
-                                        <x-input-form-modal :name="'hora_inicio'" :labelText="'Hora Inicio:'" :type="'time'" :id="'hora_inicio'" required
-                                            :value="old('hora_inicio')" /> --}}
-
-                                {{-- <!-- Hora Fin --> 
-                                        <x-input-form-modal :name="'hora_fin'" :labelText="'Hora Fin:'" :type="'time'" :id="'hora_fin'" required
-                                            :value="old('hora_fin')" />  --}}
-
-                            </x-modal-form>
-                        @break
-
-                        @default
-                    @endswitch
-                </div>
-            </div>
-
-            <!-- Formulario de búsqueda -->
-            <form action="{{ route('admin.programas') }}" method="GET" id="search-form" class="flex items-center">
-=======
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
                                         <option value="O">Prefiero no especificar</option>
@@ -387,20 +286,12 @@
 
         <!-- Formulario de búsqueda -->
         {{-- <form action="{{ route('admin.programas') }}" method="GET" id="search-form" class="flex items-center">
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
                 <div class="relative">
                     <input type="text" name='search' placeholder="Buscar"
                         class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
                 </div>
-<<<<<<< HEAD
-            </form>
-
-        </div>
-    </div>
-=======
             </form> --}}
 
     </div>
 </div>
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f

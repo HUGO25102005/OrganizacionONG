@@ -6,10 +6,17 @@
                 @switch(session('rol'))
                     @case('Administrador')
                         @include('layouts.sections.nav_admin')
-                    @break
+                        @break
+                    @case('Coordinador')
+                        @include('layouts.sections.nav_coordinador')
+                        @break
+                    @case('Voluntario')
+                        @include('layouts.sections.nav_voluntario')
+                        @break
+                    @endswitch
+            </div>
 
-<<<<<<< HEAD
-                        @case('Coordinador')
+                       {{--  @case('Coordinador')
                             <a href="{{ route('coordinador.home') }}">
                             @break
 
@@ -133,7 +140,7 @@
                             </x-nav-link>
                         @break --}}
 
-                        @case('Voluntario')
+                        {{--@case('Voluntario')
                             <x-nav-link :href="route('admin.home')" :active="request()->routeIs('panel-control.index')">
                                 {{ __('Panel de Control') }}
                             </x-nav-link>
@@ -141,18 +148,8 @@
 
                         @default
                     @endswitch
-                </div>
-=======
-                    @case('Coordinador')
-                    @break
+                </div> --}}
 
-                    @case('Voluntario')
-                        @include('layouts.sections.nav_voluntario')
-                        @break
-                    @endswitch
-
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
-            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

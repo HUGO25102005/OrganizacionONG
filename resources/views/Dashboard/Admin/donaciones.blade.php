@@ -27,7 +27,6 @@
         </div>
     </x-slot>
 
-<<<<<<< HEAD
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
         <div
             class="bg-gradient-to-r from-[#2A334B] via-[#46567E] via-[16%] via-[#546797] via-[31%] via-[#5B70A4] via-[47.5%] via-[#546797] via-[63%] via-[#46567E] via-[77.5%] to-[#2A334B] w-full max-w-[1480px] h-[300px] flex justify-center items-center rounded-[15px]">
@@ -143,7 +142,6 @@
     </div>
     </div>
 </x-app-layout>
-=======
 
     @switch($seccion)
         @case(1)
@@ -159,4 +157,3 @@
 
 
 </x-app-layout>
->>>>>>> 08762f89dda1e4f821e89fd993db7e4fea1d9b4f
