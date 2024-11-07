@@ -6,16 +6,6 @@
                 @csrf
                 @method('GET')
 
-                <div class="w-full md:w-48">
-                    <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
-                    <select id="rol" name="rol"
-                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
-                        <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : '' }}>Administrador</option>
-                        <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : '' }}>Coordinador</option>
-                        <option value="Voluntario" {{ $rol == 'Voluntario' ? 'selected' : '' }}>Voluntario</option>
-                        <option value="Beneficiario" {{ $rol == 'Beneficiario' ? 'selected' : '' }}>Beneficiario</option>
-                    </select>
-                </div>
 
                 <!-- Filtro de estado -->
                 <div class="w-full md:w-48">
@@ -156,7 +146,7 @@
                         @break
 
                         @case('Coordinador')
-                            <x-modal-form :btnTitulo="'Nuevo Coordinador'" :tituloModal="'Agrega Nuevo Coordinador'" :router="route('coordinador.store')" :btnDanger="'Cancelar'"
+                            <x-modal-form :btnTitulo="'Nuevo Beneficiario'" :tituloModal="'Agrega Nuevo Beneficiario'" :router="route('coordinador.store')" :btnDanger="'Cancelar'"
                                 :btnSuccess="'Confirmar'">
                                 <!-- Nombre -->
                                 <x-input-form-modal :name="'name'" :labelText="'Nombre:'" :type="'text'"

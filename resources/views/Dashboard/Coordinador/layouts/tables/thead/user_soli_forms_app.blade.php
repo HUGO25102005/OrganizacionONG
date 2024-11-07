@@ -4,15 +4,6 @@
         <!-- Filtro de rol (Administrador o Coordinador) -->
         @csrf
         @method('GET')
-        <div class="flex-1 mr-2">
-            <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
-            <select id="rol" name="rol"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-transform duration-200 hover:scale-110">
-                <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : ''}}>Administrador</option>
-                <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : ''}}>Coordinador</option>
-            </select>
-        </div>
-
         <!-- Filtro de día de inicio -->
         <div class="flex-1 mx-2">
             <label for="fecha_inicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio</label>

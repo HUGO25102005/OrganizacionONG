@@ -1,6 +1,6 @@
 <div class="container w-full mb-5">
     <h2 class="text-center font-semibold text-2xl md:text-3xl">
-        Lista de Usuarios
+        Beneficiarios
     </h2>
 </div>
 
@@ -15,10 +15,9 @@
             <table class="admin-table w-full mt-6 bg-white rounded-lg">
                 <thead class="bg-[#bbdefb] text-black">
                     <tr>
-                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Número</th>
                         <th class="py-3 px-2 md:px-4">Nombre completo</th>
                         <th class="py-3 px-2 md:px-4">Correo electrónico</th>
-                        <th class="py-3 px-2 md:px-4">Estado</th>
+                        <th class="py-3 px-2 md:px-4">Nivel Educativo</th>
                         <th class="py-3 px-2 md:px-4 rounded-r-lg">Acciones</th>
                     </tr>
                 </thead>

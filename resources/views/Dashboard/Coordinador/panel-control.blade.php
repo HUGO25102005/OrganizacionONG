@@ -4,21 +4,21 @@
     </div>
 
 
-    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] px-12 shadow-lg rounded-[30px]">
+    <div class="bg-[#F6F8FF] w-full max-w-6xl m-12 mx-auto h-auto  px-12 shadow-lg rounded-[30px]">
     
         <!-- Contenedor principal para alinear los elementos horizontalmente -->
         <div class="flex flex-wrap gap-8 mt-8 mb-4 items-start">
             
             <!-- Gráfico de Campañas Activas -->
-            <div class="bg-white w-1/2 shadow-md p-6 rounded-lg" style="height: 320px;">
+            <div class="bg-white w-full lg:w-1/2 shadow-md p-6 rounded-lg h-[320px]">
                 <h3 class="text-lg font-bold mb-4">Gráfico de Programas Activos</h3>
-                <div style="max-width: 700px; max-height: 400px;">
+                <div class="max-w-[700px] max-h-[400px]">
                     <canvas id="campaignChart"></canvas>
                 </div>
             </div>
     
             <!-- Programas y Beneficiarios Activos -->
-            <div class="grid w-96 gap-8 mb-8">
+            <div class="grid gap-8 w-full lg:w-[230px] mb-8 cuadros">
                 <!-- Programas -->
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
@@ -40,12 +40,12 @@
                         </button>
                     </div>
                     <p class="text-3xl font-bold mt-4 text-green-500">24</p>
-                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3> 
+                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS</h3> 
                 </div>
             </div>
     
             <!-- Programas y Beneficiarios Pendientes -->
-            <div class="grid w-56 gap-8 mb-8">
+            <div class="grid gap-8 w-full lg:w-[230px] mb-8 c">
                 <!-- Programas Pendientes -->
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
@@ -74,7 +74,7 @@
         </div>
     
         <!-- Fila intermedia: Últimas Donaciones y Campañas Activas -->
-        <div class="grid grid-cols-2 px gap-2 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             
             <!-- Tabla de Beneficiarios Activos -->
             <div class="bg-white shadow-md w-full p-6 rounded-lg h-[250px] overflow-y-auto">
@@ -87,19 +87,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Ernesto</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Isa</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Manuel</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Karen</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Carlos</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        <tr><td>Ernesto</td><td class="text-right"><i class='bx bx-check'></i></td></tr>
+                        <tr><td>Isa</td><td class="text-right"><i class='bx bx-check'></i></td></tr>
+                        <tr><td>Manuel</td><td class="text-right"><i class='bx bx-check'></i></td></tr>
+                        <tr><td>Karen</td><td class="text-right"><i class='bx bx-check'></i></td></tr>
+                        <tr><td>Carlos</td><td class="text-right"><i class='bx bx-check'></i></td></tr>
                     </tbody>
                 </table>
             </div>
     
             <!-- Segundo gráfico al lado de la tabla -->
-            <div class="bg-white shadow-md w-full ml-8 p-6 rounded-lg" style="height: 250px;">
+            <div class="bg-white shadow-md p-6 rounded-lg h-[250px]">
                 <h3 class="text-lg font-bold mb-4">Gráfico de Actividad de Beneficiarios</h3>
-                <div style="max-width: 700px; max-height: 400px;">
+                <div class="max-w-[700px] max-h-[400px]">
                     <canvas id="campaignChart"></canvas>
                 </div>
             </div>
@@ -107,6 +107,7 @@
         </div>
     
     </div>
+    
     
     <!-- Script para las gráficas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
