@@ -3,93 +3,109 @@
         <x-alerts-component />
     </div>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gray-100 rounded inline-block px-4 py-2 cursor-pointer transition-transform duration-200 hover:scale-110">
-            {{ __('Panel de Control') }}
-        </h2>
 
-    </x-slot>
-
-    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        <!-- Título -->
-        <h2 class="text-2xl font-bold mb-6">Donaciones</h2>
+    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] px-12 shadow-lg rounded-[30px]">
     
-        <!-- Fila superior: Total disponible y Dinero usado -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Total disponible -->
-            <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-2">Total disponible:</h3>
-                <p class="text-3xl font-bold text-green-600">$1234</p>
-                <p class="text-sm text-gray-500">Monto total: $11,200</p>
-            </div>
-    
-            <!-- Dinero usado -->
-            <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-2">Dinero usado:</h3>
-                <p class="text-3xl font-bold text-red-600">$500</p>
-            </div>
-        </div>
-    
-        <!-- Fila intermedia: Últimas Donaciones y Campañas Activas -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Últimas Donaciones (expandido para 10 registros) -->
-            <div class="bg-white shadow-md p-6 rounded-lg h-[250px] overflow-y-auto">
-                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Últimas Donaciones</h3>
-                <table class="w-full">
-                    <thead class="bg-[#BBDEFB]">
-                        <tr>
-                            <th class="text-left">Nombre</th>
-                            <th class="text-right">Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Ernesto</td><td class="text-right">$1500</td></tr>
-                        <tr><td>Isa</td><td class="text-right">$1200</td></tr>
-                        <tr><td>Juan</td><td class="text-right">$900</td></tr>
-                        <tr><td>Ana</td><td class="text-right">$800</td></tr>
-                        <tr><td>Carlos</td><td class="text-right">$700</td></tr>
-                    </tbody>
-                </table>
-            </div>
-    
-            <!-- Campañas Activas con metas -->
-            <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Campañas Activas</h3>
-                <table class="w-full">
-                    <thead class="bg-[#BBDEFB]">
-                        <tr>
-                            <th class="text-left">Campaña</th>
-                            <th class="text-right">Meta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Campaña A</td><td class="text-right">$5000</td></tr>
-                        <tr><td>Campaña B</td><td class="text-right">$10000</td></tr>
-                        <tr><td>Campaña C</td><td class="text-right">$7500</td></tr>
-                        <tr><td>Campaña D</td><td class="text-right">$12000</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    
-        <!-- Fila inferior: Gráficas -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Contenedor principal para alinear los elementos horizontalmente -->
+        <div class="flex flex-wrap gap-8 mt-8 mb-4 items-start">
+            
             <!-- Gráfico de Campañas Activas -->
-            <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Campañas Activas</h3>
+            <div class="bg-white w-1/2 shadow-md p-6 rounded-lg" style="height: 320px;">
+                <h3 class="text-lg font-bold mb-4">Gráfico de Programas Activos</h3>
                 <div style="max-width: 700px; max-height: 400px;">
                     <canvas id="campaignChart"></canvas>
                 </div>
             </div>
     
-            <!-- Gráfico de Ingresos Mensuales -->
-            <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Ingresos Mensuales</h3>
-                <div style="max-width: 700px; max-height: 400px;">
-                    <canvas id="incomeChart"></canvas>
+            <!-- Programas y Beneficiarios Activos -->
+            <div class="grid w-96 gap-8 mb-8">
+                <!-- Programas -->
+                <div class="bg-white shadow-md p-2 px-6 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <i class='bx bx-detail text-blue-400 text-4xl'></i>
+                        <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+                    <p class="text-3xl font-bold mt-4 text-blue-400">24</p>
+                    <h3 class="text-lg font-bold mb-2">PROGRAMAS</h3> 
+                </div>
+    
+                <!-- Beneficiarios Activos -->
+                <div class="bg-white shadow-md p-2 px-6 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <i class='bx bx-user text-green-500 text-4xl'></i>
+                        <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+                    <p class="text-3xl font-bold mt-4 text-green-500">24</p>
+                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3> 
                 </div>
             </div>
+    
+            <!-- Programas y Beneficiarios Pendientes -->
+            <div class="grid w-56 gap-8 mb-8">
+                <!-- Programas Pendientes -->
+                <div class="bg-white shadow-md p-2 px-6 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <i class='bx bx-detail text-blue-400 text-4xl'></i>
+                        <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+                    <p class="text-3xl font-bold mt-4 text-blue-400">15</p>
+                    <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
+                </div>
+    
+                <!-- Beneficiarios Pendientes -->
+                <div class="bg-white shadow-md p-2 px-6 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <i class='bx bx-user text-green-500 text-4xl'></i>
+                        <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+                    <p class="text-3xl font-bold mt-4 text-green-500">18</p>
+                    <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
+                </div>
+            </div>
+    
         </div>
+    
+        <!-- Fila intermedia: Últimas Donaciones y Campañas Activas -->
+        <div class="grid grid-cols-2 px gap-2 mb-8">
+            
+            <!-- Tabla de Beneficiarios Activos -->
+            <div class="bg-white shadow-md w-full p-6 rounded-lg h-[250px] overflow-y-auto">
+                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Beneficiarios Activos</h3>
+                <table class="w-full">
+                    <thead class="bg-[#BBDEFB]">
+                        <tr>
+                            <th class="text-left">Nombre</th>
+                            <th class="text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ernesto</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        <tr><td>Isa</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        <tr><td>Manuel</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        <tr><td>Karen</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        <tr><td>Carlos</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- Segundo gráfico al lado de la tabla -->
+            <div class="bg-white shadow-md w-full ml-8 p-6 rounded-lg" style="height: 250px;">
+                <h3 class="text-lg font-bold mb-4">Gráfico de Actividad de Beneficiarios</h3>
+                <div style="max-width: 700px; max-height: 400px;">
+                    <canvas id="campaignChart"></canvas>
+                </div>
+            </div>
+    
+        </div>
+    
     </div>
     
     <!-- Script para las gráficas -->
@@ -144,4 +160,5 @@
             }
         });
     </script>
-</x-app-layout>
+    </x-app-layout>
+    

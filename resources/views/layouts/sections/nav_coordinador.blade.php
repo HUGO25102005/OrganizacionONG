@@ -17,13 +17,13 @@
 </div>
 
 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('coordinador.beneficiarios')" :active="request()->routeIs('coordinador.beneficiarios')">
-                {{ __('Beneficiarios') }}
+            <x-nav-link :href="route('coordinador.programas')" :active="request()->routeIs('coordinador.programas')">
+                {{ __('Programas') }}
             </x-nav-link>
 </div>
 
 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('coordinador.programas')" :active="request()->routeIs('coordinador.programas')">
-                {{ __('Programas') }}
-            </x-nav-link>
+    <x-nav-link :href="route('coordinador.beneficiarios')" :active="request()->routeIs('coordinador.beneficiarios')">
+        {{ __('Beneficiarios') }}
+    </x-nav-link>
 </div>
