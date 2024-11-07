@@ -33,8 +33,19 @@ class ProgramaEducativo extends Model
     ];
 
 
-    public static function getTotalProgramasActivos(){
-        return self::where('estado', 6)->count();
+    public static function getProgramasActivos(){
+        return self::where('estado', 4)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+    }
+
+    public static function getTotalProgramas($estado){
+        return self::where('estado', $estado)->count();
+    }
+    
+    public static function getTotalSolicitudesProgramas(){
+        return self::whereIn('estado', [1, 2])->count();
     }
 
     public function voluntario()

@@ -27,10 +27,22 @@ class DashboardCoordinadorController extends Controller
     {
         $total_ingresos = Donacion::getMontoTotal();
         $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getTotalProgramasActivos();
+        $programas_activos = ProgramaEducativo::getProgramasActivos();
+        $total_PS = ProgramaEducativo::getTotalProgramas(1);
+        $total_PR = ProgramaEducativo::getTotalProgramas(2);
+        $total_PAP = ProgramaEducativo::getTotalProgramas(3);
+        $total_PA = ProgramaEducativo::getTotalProgramas(4);
+        $total_PT = ProgramaEducativo::getTotalProgramas(5);
+        $total_PC = ProgramaEducativo::getTotalProgramas(6);
+        $solicitudes_P = ProgramaEducativo::getTotalSolicitudesProgramas();
         $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
         $actividades_registradas = RegistroActividades::getTotalActividades();
         $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
+        $beneficiarios = Beneficiario::getBeneficiariosActivos();
+        $total_BA = Beneficiario::getTotalBeneficiariosActivos(1);
+        $total_BI = Beneficiario::getTotalBeneficiariosActivos(2);
+        $total_BSO = Beneficiario::getTotalBeneficiariosActivos(3);
+        $total_BSU = Beneficiario::getTotalBeneficiariosActivos(4);
 
         session(['name' => auth()->user()->name,]);
 
@@ -43,6 +55,18 @@ class DashboardCoordinadorController extends Controller
                 'informes_seguimiento',
                 'actividades_registradas',
                 'total_beneficiarios',
+                'beneficiarios',
+                'total_BA',
+                'total_PA',
+                'solicitudes_P',
+                'total_PS',
+                'total_PR',
+                'total_PAP',
+                'total_PT',
+                'total_PC',
+                'total_BI',
+                'total_BSO',
+                'total_BSU'
             )
         );
     }
