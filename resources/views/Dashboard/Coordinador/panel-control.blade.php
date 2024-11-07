@@ -11,50 +11,56 @@
             
             <!-- Gráfico de Campañas Activas -->
             <div class="bg-white w-1/2 shadow-md p-6 rounded-lg" style="height: 320px;">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Programas Activos</h3>
+                <h3 class="text-lg font-bold mb-4">Gráfico de Programas Educativos</h3>
                 <div style="max-width: 700px; max-height: 400px;">
-                    <canvas id="campaignChart"></canvas>
+                    <canvas id="programasChart"></canvas>
                 </div>
             </div>
     
             <!-- Programas y Beneficiarios Activos -->
-            <div class="grid w-96 gap-8 mb-8">
+            <div class="grid gap-8 mb-8" style="width: 305px">
                 <!-- Programas -->
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
                         <i class='bx bx-detail text-blue-400 text-4xl'></i>
-                        <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
-                            <i class='bx bx-right-arrow-alt'></i>
-                        </button>
+                        <a href="{{ route('coordinador.programas', ['seccion' => 1]) }}">
+                            <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
+                                <i class='bx bx-right-arrow-alt'></i>
+                            </button>
+                        </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-blue-400">24</p>
-                    <h3 class="text-lg font-bold mb-2">PROGRAMAS</h3> 
+                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $total_PA }}</p>
+                    <h3 class="text-lg font-bold mb-2">PROGRAMAS ACTIVOS</h3> 
                 </div>
     
                 <!-- Beneficiarios Activos -->
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
                         <i class='bx bx-user text-green-500 text-4xl'></i>
-                        <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
-                            <i class='bx bx-right-arrow-alt'></i>
-                        </button>
+                        <a href="{{ route('coordinador.beneficiarios', ['rol' => 'Coordinador', 'seccion' => 1]) }}">
+                            <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
+                                <i class='bx bx-right-arrow-alt'></i>
+                            </button>
+                        </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-green-500">24</p>
+                    <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BA }}</p>
                     <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3> 
                 </div>
             </div>
     
             <!-- Programas y Beneficiarios Pendientes -->
-            <div class="grid w-56 gap-8 mb-8">
+            <div class="grid gap-8 mb-8" style="width: 305px">
                 <!-- Programas Pendientes -->
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
                         <i class='bx bx-detail text-blue-400 text-4xl'></i>
-                        <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
-                            <i class='bx bx-right-arrow-alt'></i>
-                        </button>
+                        <a href="{{ route('coordinador.programas', ['seccion' => 2]) }}">
+                            <button class="flex items-center justify-center w-8 h-8 border-4 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white rounded-full text-lg font-bold">
+                                <i class='bx bx-right-arrow-alt'></i>
+                            </button>
+                        </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-blue-400">15</p>
+                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $solicitudes_P }}</p>
                     <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
                 </div>
     
@@ -62,11 +68,13 @@
                 <div class="bg-white shadow-md p-2 px-6 rounded-lg">
                     <div class="flex justify-between items-center">
                         <i class='bx bx-user text-green-500 text-4xl'></i>
-                        <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
-                            <i class='bx bx-right-arrow-alt'></i>
-                        </button>
+                        <a href="{{ route('coordinador.beneficiarios', ['tipo' => 'Solicitudes', 'seccion' => 2]) }}">                 
+                            <button class="flex items-center justify-center w-8 h-8 border-4 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full text-lg font-bold">
+                                <i class='bx bx-right-arrow-alt'></i>
+                            </button>
+                        </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-green-500">18</p>
+                    <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BSO }}</p>
                     <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
                 </div>
             </div>
@@ -82,25 +90,26 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-left">Nombre</th>
-                            <th class="text-right">Status</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Ernesto</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Isa</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Manuel</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Karen</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
-                        <tr><td>Carlos</td><td class="text-right"><i class='bx bx-check' ></i></td></tr>
+                        @foreach ($beneficiarios as $beneficiario)
+                            <tr>
+                                <td class="text-center">{{ $beneficiario->user->name . ' ' . $beneficiario->user->apellido_materno . ' ' . $beneficiario->user->apellido_paterno }}</td>
+                                <td class="text-center"><i class='bx bx-check'></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
     
             <!-- Segundo gráfico al lado de la tabla -->
-            <div class="bg-white shadow-md w-full ml-8 p-6 rounded-lg" style="height: 250px;">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Actividad de Beneficiarios</h3>
-                <div style="max-width: 700px; max-height: 400px;">
-                    <canvas id="campaignChart"></canvas>
+            <div class="bg-white shadow-md ml-8 p-6 rounded-lg" style="height: 250px; width: 640px">
+                <h3 class="text-lg font-bold mb-4">Gráfico de Beneficiarios</h3>
+                <div style="max-width: 600px; max-height: 400px;">
+                    <canvas id="beneficiariosChart"></canvas>
                 </div>
             </div>
     
@@ -111,16 +120,16 @@
     <!-- Script para las gráficas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Gráfico de Campañas Activas
-        const ctx = document.getElementById('campaignChart').getContext('2d');
-        const campaignChart = new Chart(ctx, {
+        // Gráfico de programas
+        const ctx = document.getElementById('programasChart').getContext('2d');
+        const programasChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Campañas Activas 1', 'Campañas Activas 2', 'Campañas Activas 3', 'Campañas Activas 4'],
+                labels: ['Solicitud', 'En Revision', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'],
                 datasets: [{
-                    label: 'Datos de Campañas',
-                    data: [8, 23, 15, 35],
-                    backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'],
+                    label: 'Estatus de Programas Educativos',
+                    data: [ {{ $total_PS }}, {{ $total_PR }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PT }}, {{ $total_PC }}],
+                    backgroundColor: ['#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50'],
                     borderWidth: 1
                 }]
             },
@@ -135,15 +144,15 @@
             }
         });
     
-        // Gráfico de Ingresos Mensuales
-        const ctxIncome = document.getElementById('incomeChart').getContext('2d');
-        const incomeChart = new Chart(ctxIncome, {
+        // Gráfico de beneficiarios
+        const ctxIncome = document.getElementById('beneficiariosChart').getContext('2d');
+        const beneficiariosChart = new Chart(ctxIncome, {
             type: 'bar',
             data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                labels: ['Activo', 'Inactivo', 'Solicitado', 'Suspendido'],
                 datasets: [{
-                    label: 'Ingresos Mensuales',
-                    data: [12000, 15000, 10000, 17000, 20000, 25000],
+                    label: 'Estatus de Beneficiarios',
+                    data: [ {{ $total_BA }}, {{ $total_BI }}, {{ $total_BSO }}, {{ $total_BSU }} ],
                     backgroundColor: 'rgba(54, 162, 235, 1)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
