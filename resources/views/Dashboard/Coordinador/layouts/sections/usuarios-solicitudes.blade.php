@@ -1,7 +1,7 @@
 
 <div class="container w-full mb-5">
     <h2 class="text-center font-semibold text-2xl md:text-3xl">
-        Solicitudes de Trabajadores
+        Solicitudes de Beneficiarios
     </h2>
 </div>
 
@@ -18,8 +18,7 @@
                     <tr>
                         <th class="py-3 px-2 md:px-4 rounded-l-lg">Nombre completo</th>
                         <th class="py-3 px-2 md:px-4">Correo electrónico</th>
-                        <th class="py-3 px-2 md:px-4">Rol Solicitado</th>
-                        <th class="py-3 px-2 md:px-4">Estado</th>
+                        <th class="py-3 px-2 md:px-4">Nivel Educativo</th>
                         <th class="py-3 px-2 md:px-4 rounded-r-lg">Acciones</th>
                     </tr>
                 </thead>
@@ -38,7 +37,7 @@
     <!-- Coordinadores Tab -->
     <div id="coordinadores" class="tab-content">
         <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-4 md:px-6 rounded-lg">
-            <h2 class="admin-title text-lg md:text-xl">Lista de coordinadores</h2>
+            <h2 class="admin-title text-lg md:text-xl">Lista de beneficiario</h2>
             <button class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-3 md:px-4 rounded-full shadow-md hover:bg-gray-100">
                 <i class='bx bx-user-plus mr-2'></i> Agregar coordinador
             </button>
