@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\Administrador\DashboardAdminController;
 use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
+use App\Http\Controllers\Donaciones\RecaudacionController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
@@ -27,20 +28,23 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware(AuthSessionActive::class);
 
-// Rutas de perfil existentes de Breeze
+//*Rutas de perfil existentes de Breeze
+//TODO: RUTAS DE DASHBOARDS
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     
-    // Rutas del Dashboard
+    //* Rutas del Dashboard Administrador
     Route::middleware([CheckAdmin::class])->prefix('dashboard/admin')->group(function () {
         Route::get('/home', [DashboardAdminController::class, 'home'])->name('admin.home');
         Route::get('/panelControl', [DashboardAdminController::class, 'panelControl'])->name('admin.panelControl');
+        
         // DONACIONES --------------------------------------------------------------------------------------------------------------------------------------------------
         Route::get('/donaciones', [DashboardAdminController::class, 'donaciones'])->name('admin.donaciones');
         Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store');
+        Route::post('/donaciones/convocatorias/recaudacion', [RecaudacionController::class, 'store'])->name('recaudacion.store');
 
         Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
         // Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
@@ -59,6 +63,7 @@ Route::middleware('auth')->group(function () {
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
     });
 
+    //* Rutas del Dashboard Voluntario
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
@@ -66,7 +71,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-
+//TODO: RUTAS DE LINING PAGE
 Route::group(['prefix' => 'page'], function () {
     
     Route::resources([

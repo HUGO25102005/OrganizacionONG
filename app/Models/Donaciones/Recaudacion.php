@@ -18,6 +18,18 @@ class Recaudacion extends Model
         'comentarios'
     ];
 
+
+    public static function getTotalProductosRecaudados():int {
+        return self::sum('cantidad');
+    }
+    public static function getTotalRegistros():int {
+        return self::count();
+    }
+
+    public static function getTotalDonadoPorConvocatoria($id_convocatoria): int{
+        return self::where('id', $id_convocatoria)->sum('cantidad');
+    }
+
     /**
      * Relación con Convocatoria (muchos a uno).
      */

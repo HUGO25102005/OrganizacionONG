@@ -7,6 +7,7 @@ use App\Models\Caja\CajaFondo;
 use App\Models\Caja\Presupuesto;
 use App\Models\Donaciones\Convocatoria;
 use App\Models\Donaciones\Donacion;
+use App\Models\Donaciones\Recaudacion;
 use App\Models\ProgramasEducativos\InformesSeguimientos;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
 use App\Models\Registros\RegistroActividades;
@@ -92,8 +93,13 @@ class DashboardAdminController extends Controller
         } else {
             $convocatoriasActivas = Convocatoria::getTotalConvocatoriasActivas(1);
             $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasActivas(2);
-            $convocatorias = Convocatoria::getConvocatoriaPorEstado(1); 
-
+            $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasActivas(3);
+            $convocatorias = Convocatoria::getConvocatoriaList(1)->paginate(10);
+            $totProductSolici = Convocatoria::getTotalProductosSolicitdos();
+            $totProductRecaudados = Recaudacion::getTotalProductosRecaudados();
+            $totRegisRecau = Recaudacion::getTotalRegistros();
+            $porcentajeRecaudacion = ($totProductRecaudados * 100) / $totProductSolici;
+            // dd($totProductSolici);
             return view(
                 'Dashboard.Admin.donaciones',
                 compact(
@@ -101,6 +107,12 @@ class DashboardAdminController extends Controller
                         'seccion',
                         'convocatoriasActivas',
                         'convocatoriasFinalizadas',
+                        'convocatoriasCanceladas',
+                        'convocatorias',
+                        'totProductSolici',
+                        'totProductRecaudados',
+                        'porcentajeRecaudacion',
+                        'totRegisRecau',
                     ]
                 )
             );
