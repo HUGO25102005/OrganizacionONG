@@ -82,7 +82,7 @@ class DashboardCoordinadorController extends Controller
         if ($seccion == 1) {
 
             if (empty($request->rol)) {
-                $rol = $request->get('rol', 'Coordinador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
+                $rol = $request->get('rol', 'Beneficiario');
             } else {
                 $rol = $request->rol;
             }
@@ -99,7 +99,7 @@ class DashboardCoordinadorController extends Controller
                     $datos = Voluntario::getVoluntariosActivos($estado)->paginate(10);
                     break;
                 case 'Beneficiario':
-                    $datos = Beneficiario::paginate(10);
+                    $datos = Beneficiario::getBeneficiarios()->paginate(10);
                     break;
                 default:
             }

@@ -84,7 +84,7 @@ return new class extends Migration
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade')
                                 ->comment('Clave foranea de usuarios');
-            $table->enum('estado', [1, 2, 3, 4])->comment('1 = Activo, 2 = Inactivado, 3 = Solicitado, 4 = Suspendido');
+            $table->enum('estado', [1, 2, 3, 4])->comment('1 = Activo, 2 = Inactivado, 3 = Solicitado, 4 = Cancelado');
             $table->time('hora_inicio')->comment('hora de ingreso del trabajador');
             $table->time('hora_fin')->comment('hora de salida del trabajador');
             $table->timestamps();

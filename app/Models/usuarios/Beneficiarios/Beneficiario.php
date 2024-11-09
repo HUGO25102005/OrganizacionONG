@@ -28,14 +28,18 @@ class Beneficiario extends Model
         return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
         ->where('trabajadores.estado', 1) // Filtrar por el estado del trabajador
         ->orderBy('beneficiarios.created_at', 'desc') // Ordenar por la fecha de creación de los beneficiarios
-        ->take(5) // Limitar a los primeros 5 resultados
-        ->get(['beneficiarios.*']);
+        ->take(5); // Limitar a los primeros 5 resultados;
     }
 
     public static function getTotalBeneficiariosActivos($estado){
         return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
         ->where('trabajadores.estado', $estado) // Filtrar por el estado del trabajador
         ->count();
+    }
+
+    public static function getBeneficiarios(){
+        return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
+        ->whereIn('estado', [1, 2, 4]);
     }
     
     public function user()

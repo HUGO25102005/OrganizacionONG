@@ -22,11 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($rol != 'Beneficiario')
-                        @include('Dashboard.Coordinador.layouts.tables.tbody.tb_trabajadores')
-                    @else
                         @include('Dashboard.Coordinador.layouts.tables.tbody.tb_beneficiario')
-                    @endif
                 </tbody>
             </table>
         </div>
