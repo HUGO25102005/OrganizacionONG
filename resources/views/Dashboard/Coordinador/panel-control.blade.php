@@ -36,7 +36,7 @@
                         </a>
                     </div>
                     <p class="text-3xl font-bold mt-4 text-blue-400">{{ $total_PA }}</p>
-                    <h3 class="text-lg font-bold mb-2">PROGRAMAS ACTIVOS</h3> 
+                    <h3 class="text-lg font-bold mb-2">PROGRAMAS</h3> 
                 </div>
     
                 <!-- Beneficiarios Activos -->
@@ -53,7 +53,7 @@
 {{--                     <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BA }}</p>
                     <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3>  --}}
                     <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BA }}</p>
-                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3> 
+                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS</h3> 
                 </div>
             </div>
     
@@ -106,7 +106,7 @@
                     <tbody>
                         @foreach ($beneficiarios as $beneficiario)
                             <tr>
-                                <td class="text-center">{{ $beneficiario->user->name . ' ' . $beneficiario->user->apellido_materno . ' ' . $beneficiario->user->apellido_paterno }}</td>
+                                <td class="text-center">{{ $beneficiario->user->name . ' ' . $beneficiario->user->apellido_paterno . ' ' . $beneficiario->user->apellido_materno }}</td>
                                 <td class="text-center"><i class='bx bx-check'></td>
                             </tr>
                         @endforeach
