@@ -8,15 +8,15 @@
         <div class="w-full md:w-48 p-2 rounded {{ $seccion == 1 ? 'bg-gray-100' : 'bg-white' }} hover:text-black flex justify-center items-center">
             <a href="{{ route('coordinador.beneficiarios', ['rol' => 'Coordinador', 'seccion' => 1]) }}">
                 <h2 class="font-semibold text-lg md:text-xl text-gray-800 leading-tight text-center transition-transform duration-200 hover:scale-110">
-                    {{ __('Lista de Usuarios') }}
+                    {{ __('Beneficiarios') }}
                 </h2>
             </a>
         </div>
         
-        <div class="w-full md:w-48 p-2 rounded {{ $seccion == 2 ? 'bg-gray-100' : 'bg-white' }} hover:text-black flex justify-center items-center">
+        <div class="w-full md:w-64 p-2 rounded {{ $seccion == 2 ? 'bg-gray-100' : 'bg-white' }} hover:text-black flex justify-center items-center">
             <a href="{{ route('coordinador.beneficiarios', ['tipo' => 'Solicitudes', 'seccion' => 2]) }}">
                 <h2 class="font-semibold text-lg md:text-xl text-gray-800 leading-tight text-center transition-transform duration-200 hover:scale-110">
-                    {{ __('Solicitudes') }}
+                    {{ __('Solicitud de Beneficiarios') }}
                 </h2>
             </a>
         </div>

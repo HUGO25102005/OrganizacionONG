@@ -1,7 +1,34 @@
-<div class="container w-full mb-5">
-    <h2 class="text-center font-semibold text-2xl md:text-3xl">
+<!-- Sección: Visualización de gráficos de flujo de caja -->
+<div class="mb-6">
+    <h2 class="text-2xl text-center font-bold mb-4">Nivel de exito de Beneficiarios</h2>
+    <br>
+    <!-- Gráficos en un contenedor flex -->
+    <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+        <!-- Gráfico 1: Ingresos mensuales -->
+        <div class="w-full lg:w-1/2 h-64 bg-gray-100 flex items-center justify-center">
+            <canvas id="programasChart"></canvas>
+        </div>
+        
+        <!-- Gráfico 2: Gastos mensuales -->
+        <div class="w-full lg:w-1/2 h-64 bg-gray-100 flex items-center justify-center">
+            <canvas id="programasChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+</script>
+<div class="container w-full mb-5 flex items-center justify-between">
+    <h2 class="text-left ml-20 font-semibold text-2xl md:text-3xl flex-grow">
         Beneficiarios
     </h2>
+    <form action="{{ route('coordinador.programas') }}" method="GET" id="search-form" class="relative">
+        <input type="text" name="search" placeholder="Buscar"
+            class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <i class="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+    </form>
 </div>
 
 <div class="content w-full px-2 sm:px-4 lg:px-6">
@@ -18,9 +45,11 @@
                         <th class="py-3 px-2 md:px-4">Nombre completo</th>
                         <th class="py-3 px-2 md:px-4">Correo electrónico</th>
                         <th class="py-3 px-2 md:px-4">Nivel Educativo</th>
+                        <th class="py-3 px-2 md:px-4">Estado</th>
                         <th class="py-3 px-2 md:px-4 rounded-r-lg">Acciones</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                         @include('Dashboard.Coordinador.layouts.tables.tbody.tb_beneficiario')
                 </tbody>

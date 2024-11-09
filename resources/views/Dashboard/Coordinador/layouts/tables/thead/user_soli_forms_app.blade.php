@@ -1,5 +1,5 @@
 <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-    <h2 class="text-xl font-semibold mb-4 text-center">Filtros</h2>
+    <h2 class="text-xl font-semibold  text-center">Filtros</h2>
     <form action="{{route('admin.usuarios', ['seccion' => 2]) }}" method="POST" class="flex flex-wrap items-center">
         <!-- Filtro de rol (Administrador o Coordinador) -->
         @csrf
@@ -22,7 +22,7 @@
         <!-- Botón de aplicar filtros -->
         <div class="mx-2 sm:mx-4 md:mx-6 lg:mx-8 my-4">
             <button type="submit"
-                class="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-transform duration-200 hover:scale-105 sm:hover:scale-110">
+                class="w-full sm:w-auto px-4 py-2 mt-6 bg-blue-400 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-transform duration-200 hover:scale-105 sm:hover:scale-110">
                 Aplicar Filtros
             </button>
         </div>        

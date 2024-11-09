@@ -96,30 +96,6 @@
                         
                         
                     </section>
-                    {{-- separacion --}}
-                    <hr class="my-4 border-gray-300"> <!-- Línea separadora -->
-                    <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Datos del Trabajador</h4> <!-- Encabezado -->
-                    {{-- separacion --}}
-                    <section class="mb-6 grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-600 mb-1">Estado del Trabajador:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{ $usuario->trabajador->estado == 1 ? 'Activo' : 'Deshabilitado'}}
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-gray-600 mb-1">Hora de Inicio:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$usuario->trabajador->hora_inicio}}
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-gray-600 mb-1">Hora de Fin:</label>
-                            <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
-                                {{$usuario->trabajador->hora_fin}}
-                            </div>
-                        </div>
-                    </section>
 
                     <!-- Botón de cerrar modal alineado a la izquierda -->
                     <div class="flex justify-start mt-6">
