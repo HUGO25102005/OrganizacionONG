@@ -1,6 +1,5 @@
-
 <div class="container w-full mb-5 flex items-center justify-between relative">
-    <h2 class="text-center ml-20 font-semibold text-2xl mb-2 flex-grow">
+    <h2 class="text-center font-semibold text-2xl mb-2 flex-grow">
         Solicitudes de Beneficiarios
     </h2>
     <form action="{{ route('coordinador.beneficiarios') }}" method="GET" id="search-form" class="absolute right-6">

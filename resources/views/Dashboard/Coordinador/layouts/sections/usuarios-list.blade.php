@@ -76,6 +76,7 @@
     </script>
 </div>
 <br><br><br><br>
+
 <div class="container w-full mb-5 flex relative">
     <form action="{{ route('coordinador.beneficiarios') }}" method="GET" id="search-form" class="absolute right-6 bottom-2">
         <input type="text" id="search" name="search" placeholder="Buscar"
@@ -124,6 +125,7 @@
         @if ($beneficiariosearch)
             {{ $beneficiariosearch->links() }}
         @endif
+    </div>
 </div>
 
 <script>

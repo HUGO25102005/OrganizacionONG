@@ -149,6 +149,13 @@ class DashboardCoordinadorController extends Controller
         } else {
             $seccion = $request->seccion;
         }
+
+        if (empty($request->estado)) {
+            $estado = $request->get('estado', '0');
+        } else {
+            $estado = $request->estado;
+        }
+
         if ($seccion == 1) {
             $monto_total_donaciones = Donacion::getMontoTotal();
             $total_donaciones = Donacion::all();
@@ -163,12 +170,23 @@ class DashboardCoordinadorController extends Controller
                         'total_donaciones',
                         'total_donaciones_semana',
                         'seccion',
-                        'programas'
+                        'programas',
+                        'estado'
                     ]
                 )
             );
         } else {
             $search = $request->input('search');
+            
+            
+
+            if (empty($request->estado)) {
+                $estado = $request->get('estado', '0');
+            } else {
+                $estado = $request->estado;
+            }
+
+            $seccion = $request->get('seccion', 2);
 
             $programas = ProgramaEducativo::when($search, function ($query, $search) {
                 return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
@@ -181,15 +199,8 @@ class DashboardCoordinadorController extends Controller
                     ->orWhere('estado', 'LIKE', '%' . $search . '%');
                 })
                     ->paginate(5);
-
-
-                if (empty($request->seccion)) {
-                    $seccion = $request->get('seccion', 1);
-                } else {
-                    $seccion = $request->seccion;
-                }
                 
-                return view('Dashboard.Coordinador.programas', compact(['seccion', 'programas']));
+                return view('Dashboard.Coordinador.programas', compact('seccion', 'programas', 'estado'));
         }
     }
     
