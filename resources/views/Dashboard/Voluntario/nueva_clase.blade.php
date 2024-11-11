@@ -1,3 +1,5 @@
+<!--solicitudes-->
+
 <x-app-layout>
     <div class="alert alert-success">
         <x-alerts-component />
@@ -23,22 +25,42 @@
         </div>
     </x-slot>
 
-    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        
-        <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
-            <h1 class="text-[45px] font-sans font-medium">InspierUp te da la bienvenida.</h1>
-        </div>
-        <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
-            <h2 class="text-[24px] font-sans font-extralight">Buen día, {{ session('name') }}!</h2>
-        </div>
-        <div class="flex justify-center items-center gap-[10px] pb-[10px]"> 
-            <img src="{{ asset('images/logo_n.png') }}" alt="Logo" class="w-[100px] h-[100px]">
-        </div>
-        <div class="flex justify-center items-center gap-[10px] pb-[10px]"> 
-            <h3 class="text-[15px] font-sans font-[100]">By InnovateSoft</h3>
-        </div>
-        
-        
-
+    <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[40px] shadow-lg rounded-[30px] flex gap-10">
+        <table class="w-full bg-white shadow-md rounded-lg overflow-x-auto text-center">
+            <thead class="bg-[#BBDEFB] text-black font-semibold">
+                <tr>
+                    <th class="px-3 py-4">Id</th>
+                    <th class="px-6 py-4">Nombre</th>
+                    <th class="px-6 py-4">Fecha envío</th>
+                    <th class="px-6 py-4">Estado</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                <tr class="border-b hover:bg-blue-50">
+                    <td class="px-3 py-4 text">1</td>
+                    <td class="px-6 py-4">Aprendiendo divertido</td>
+                    <td class="px-6 py-4">2024-10-15</td>
+                    <td class="px-6 py-4">
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aceptado</span>
+                    </td>
+                </tr>
+                <tr class="border-b hover:bg-blue-50">
+                    <td class="px-3 py-4">2</td>
+                    <td class="px-6 py-4">Follando</td>
+                    <td class="px-6 py-4">2024-10-20</td>
+                    <td class="px-6 py-4">
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">En espera</span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-blue-50">
+                    <td class="px-3 py-4">3</td>
+                    <td class="px-6 py-4">Código al aire libre</td>
+                    <td class="px-6 py-4">2024-10-25</td>
+                    <td class="px-6 py-4">
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Rechazado</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
     </div>
 </x-app-layout>
