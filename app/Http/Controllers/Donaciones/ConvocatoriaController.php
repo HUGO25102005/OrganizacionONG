@@ -20,7 +20,7 @@ class ConvocatoriaController extends Controller
         if ($userExists) {
 
             $prodExiste = ProductoSolicitado::where('nombre', $request->nombre)->first();
-            if( !$prodExiste ){
+            if (!$prodExiste) {
                 $producto = ProductoSolicitado::create([
                     'nombre' => $request->nombre,
                     'estado' => 1,
@@ -48,8 +48,44 @@ class ConvocatoriaController extends Controller
 
             $seccion = 2;
             return redirect()
-                    ->route('admin.donaciones', compact(['seccion']))
-                    ->with('success', 'Convocatoria creada exitosamente.');
+                ->route('admin.donaciones', compact(['seccion']))
+                ->with('success', 'Convocatoria creada exitosamente.');
         }
+    }
+
+    public function update(ConvocatoriaRequest $request)
+    {
+        // dd(intval($request->id_convocatoria));
+
+        // Encuentra la convocatoria por su ID
+        $convocatoria = Convocatoria::findOrFail(intval($request->id_convocatoria));
+
+        // Actualiza los datos de la convocatoria con los datos validados del request
+        $convocatoria->update($request->validated());
+
+        $seccion = 2;
+            return redirect()
+                ->route('admin.donaciones', compact(['seccion']))
+                ->with('success', 'Convocatoria actualizada exitosamente.');
+    }
+
+    public function desactivar(Request $request){
+
+        $id = $request->id;
+        $seccion = 2;
+        
+        $convocatoria = Convocatoria::find($id);
+
+        if ($convocatoria) {
+      
+            $convocatoria->update(['estado' => 3]);
+
+            return redirect()->route('admin.donaciones', compact(['seccion']))
+                            ->with('warning', "La campaña ha sido cancelada. Esta acción es irreversible.");
+        }
+    
+        
+        return redirect()->route('admin.donaciones', compact(['seccion']))
+                        ->with('error', 'Campaña no encontrada.');
     }
 }

@@ -58,6 +58,7 @@
                                                     value="{{ old('titulo') }}"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     placeholder="Ingrese el título" required>
+                                                <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
                                             </div>
 
                                             <!-- Descripción -->
@@ -125,8 +126,8 @@
                                             <div class="col-span-2">
                                                 <label for="descript"
                                                     class="block text-sm font-medium text-gray-700">Descripción:</label>
-                                                <textarea id="descript" name="descript" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3"
-                                                    placeholder="Ingrese la descripción" required>{{ old('descript') }}</textarea>
+                                                <textarea id="descript" name="descript" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                                    rows="3" placeholder="Ingrese la descripción" required>{{ old('descript') }}</textarea>
                                             </div>
 
                                             <!-- Cantidad de Artículos -->
@@ -179,7 +180,8 @@
                 <p class="text-4xl font-bold">{{ $totProductRecaudados }}</p>
                 <p class="text-sm text-gray-500">meta: {{ $totProductSolici }} artículos</p>
                 <div class="bg-gray-200 rounded-full h-[10px] mt-[10px]">
-                    <div class="bg-green-500 h-[10px] rounded-full" style="width: {{ $porcentajeRecaudacion }}%;"></div>
+                    <div class="bg-green-500 h-[10px] rounded-full" style="width: {{ $porcentajeRecaudacion }}%;">
+                    </div>
                 </div>
             </div>
 
@@ -193,7 +195,7 @@
             <!-- Total de voluntarios -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Total de donaciones</h3>
-                <p class="text-4xl font-bold">{{$totRegisRecau}}</p>
+                <p class="text-4xl font-bold">{{ $totRegisRecau }}</p>
                 <p class="text-sm text-gray-500">donaciones de productos</p>
             </div>
         </div>
@@ -207,7 +209,43 @@
 
     <!-- Sección de detalles -->
     <div class="mt-[30px] overflow-x-auto">
-        <h3 class="text-xl font-semibold mb-[10px]">Detalles de Campañas</h3>
+        <div class="flex items-center space-x-5 pb-4 bg-white p-4 rounded-lg shadow-md mb-6">
+            <!-- Contenedor del Título -->
+            <div class="flex-shrink-0">
+                <h3 class="text-xl font-semibold">Detalles de Campañas</h3>
+            </div>
+
+            <!-- Contenedor del Formulario de Filtros -->
+            <form action="{{ route('admin.donaciones', ['seccion' => 2]) }}" method="POST"
+                class="flex items-center space-x-6">
+                @csrf
+                @method('GET')
+
+                <!-- Filtro de Estado -->
+                <div class="w-48">
+                    <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                    <select id="estado" name="estado"
+                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
+                        <option value="0" {{ $estado == 0 ? 'selected' : '' }}>Todos</option>
+                        <option value="1" {{ $estado == 1 ? 'selected' : '' }}>Activo</option>
+                        <option value="2" {{ $estado == 2 ? 'selected' : '' }}>Finalizado</option>
+                        <option value="3" {{ $estado == 3 ? 'selected' : '' }}>Cancelado</option>
+                    </select>
+                </div>
+
+                <!-- Botón de Aplicar Filtro -->
+                <div class="flex justify-center">
+                    <button id="filterButton" type="submit"
+                        class="w-48 px-4 py-2 bg-blue-400 text-white font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-200 hover:scale-110">
+                        Aplicar Filtros
+                    </button>
+                </div>
+            </form>
+
+            <!-- Contenedor para search -->
+            <div class="flex-grow"></div>
+        </div>
+
         <table class="w-full bg-white rounded-[20px] shadow-md ">
             <thead>
                 <tr class="bg-[#BBDEFB] text-center">
@@ -217,6 +255,7 @@
                     <th class="p-[15px] ">Objetivo</th>
                     <th class="p-[15px] ">Fecha Incio</th>
                     <th class="p-[15px] ">Fecha Fin</th>
+                    <th class="p-[15px] ">Estado</th>
                     <th class="p-[15px] ">Acciones</th>
                 </tr>
             </thead>
@@ -230,28 +269,70 @@
                         <td class="p-[15px] ">{{ $conv->cantarticulos }}</td>
                         <td class="p-[15px] ">{{ \Carbon\Carbon::parse($conv->fecha_inicio)->format('d-m-Y') }}</td>
                         <td class="p-[15px] ">{{ \Carbon\Carbon::parse($conv->fecha_fin)->format('d-m-Y') }}</td>
+                        <td class="p-[15px] ">
+                            @switch($conv->estado)
+                                @case(1)
+                                    <span
+                                        class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Activo</span>
+                                @break
+
+                                @case(2)
+                                    <span
+                                        class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">Finalizado</span>
+                                @break
+
+                                @case(3)
+                                    <span
+                                        class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Cancelado</span>
+                                @break
+                            @endswitch
+                        </td>
                         <td class="p-[15px]  flex justify-center space-x-3 ">
 
                             {{-- MODAL DE RECAUDACION --}}
-                            @include('Dashboard.Admin.layouts.modales.donaciones.modal_recaudacion')
+                            @if ($conv->estado == 1)
+                                @include('Dashboard.Admin.layouts.modales.donaciones.modal_recaudacion')
+                            @endif
 
-                            <span
-                                class="bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-300 hover:text-white">
-                                <i class='bx bx-show text-2xl cursor-pointer' title="Visualizar"></i>
-                            </span>
-                            <span
-                                class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
-                                <i class='bx bx-chevron-up-circle text-2xl text-green-500 cursor-pointer'
-                                    title="Estado: activo"></i>
-                            </span>
-                            <span
-                                class="bg-yellow-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-yellow-300 hover:text-white">
-                                <i class='bx bx-edit text-2xl cursor-pointer' title="Editar"></i>
-                            </span>
-                            <span
+
+                            @include('Dashboard.Admin.layouts.modales.donaciones.modal_vista_recaudacion')
+
+                            @if ($conv->estado == 1)
+                                @if ($conv->isInPage != 1)
+                                    <span onclick="submitFormulario('formCam{{ $conv->id }}')"
+                                        class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
+                                        <i class='bx bx-chevron-up-circle text-2xl text-green-500 cursor-pointer'
+                                            title="Subir de página"></i>
+                                    </span>
+                                    <form class="hidden" id="formCam{{ $conv->id }}"
+                                        action="{{ route('campanias.store', ['id_convocatoria' => $conv->id, 'id_administrador' => auth()->user()->trabajador->administrador->id]) }}"
+                                        method="POST"> @csrf </form>
+                                @else
+                                    <span onclick="submitFormulario('formCamD{{ $conv->id }}')"
+                                        class="bg-gray-200 p-2 rounded-full transition duration-300 ease-in-out hover:bg-gray-400 hover:text-white">
+                                        <i class='bx bx-chevron-down-circle text-2xl text-gray-600 cursor-pointer'
+                                            title="Bajar de página"></i>
+                                    </span>
+
+                                    <form class="hidden" id="formCamD{{ $conv->id }}"
+                                        action="{{ route('campanias.destroy', $conv->id) }}"method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                @endif
+
+                                @include('Dashboard.Admin.layouts.modales.donaciones.modal_editar_convocatoria')
+                            @endif
+
+                            {{-- <span
                                 class="bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-300 hover:text-white">
                                 <i class='bx bxs-file-pdf text-2xl cursor-pointer' title="Archivo PDF"></i>
-                            </span>
+                            </span> --}}
+
+                            @if ($conv->estado == 1)
+                                <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar la campaña ' . $conv->titulo . '?'" :router="route('convocatoria.desactivar')" :itemId="$conv->id"
+                                    :tituloModal="'Confirmar Eliminación'" />
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -272,7 +353,9 @@
             labels: ['Campañas Activas', 'Campañas Finalizadas', 'Campañas Canceladas'],
             datasets: [{
                 label: 'Datos de Campañas',
-                data: [{{ $convocatoriasActivas }}, {{ $convocatoriasFinalizadas }}, {{ $convocatoriasCanceladas }}],
+                data: [{{ $convocatoriasActivas }}, {{ $convocatoriasFinalizadas }},
+                    {{ $convocatoriasCanceladas }}
+                ],
                 backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#FFC107'],
                 borderWidth: 1
             }]

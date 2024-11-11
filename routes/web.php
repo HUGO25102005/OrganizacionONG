@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\Administrador\DashboardAdminController;
 use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
+use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
 use App\Http\Controllers\Donaciones\RecaudacionController;
 use App\Http\Controllers\Page\ColaboraController;
@@ -35,21 +36,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    
+
     //* Rutas del Dashboard Administrador
     Route::middleware([CheckAdmin::class])->prefix('dashboard/admin')->group(function () {
         Route::get('/home', [DashboardAdminController::class, 'home'])->name('admin.home');
         Route::get('/panelControl', [DashboardAdminController::class, 'panelControl'])->name('admin.panelControl');
-        
+
         // DONACIONES --------------------------------------------------------------------------------------------------------------------------------------------------
         Route::get('/donaciones', [DashboardAdminController::class, 'donaciones'])->name('admin.donaciones');
         Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store');
+        Route::put('/donaciones/convocatorias/editar', [ConvocatoriaController::class, 'update'])->name('convocatoria.update');
+        Route::post('/campanias', [CargarCampaniasPageController::class, 'store'])->name('campanias.store');
+        Route::delete('/campanias/{id}', [CargarCampaniasPageController::class, 'destroy'])->name('campanias.destroy');
+        Route::put('/donaciones/convocatorias/desactivar', [ConvocatoriaController::class, 'desactivar'])->name('convocatoria.desactivar');
         Route::post('/donaciones/convocatorias/recaudacion', [RecaudacionController::class, 'store'])->name('recaudacion.store');
 
         Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
         // Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
 
-        
+
         //  USUARIOS ---------------------------------------------------------------------------------------------------------------------------------------------------
         Route::get('/usuarios', [DashboardAdminController::class, 'usuarios'])->name('admin.usuarios');
 
@@ -58,7 +63,7 @@ Route::middleware('auth')->group(function () {
 
         Route::put('/usuarios/trabajadorDesactivar', [TrabajadorController::class, 'desactivarTrabajador'])->name('admin.desactivar');
         Route::put('/usuarios/trabajadorAceptar', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
-        
+
 
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
     });
@@ -73,9 +78,9 @@ Route::middleware('auth')->group(function () {
 
 //TODO: RUTAS DE LINING PAGE
 Route::group(['prefix' => 'page'], function () {
-    
+
     Route::resources([
-        
+
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
         'donar' => DonarController::class,
@@ -98,8 +103,7 @@ Route::group(['prefix' => 'page'], function () {
 
 Route::group(['prefix' => 'terminosCondiciones'], function () {
 
-    Route::get('/',[TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
-
+    Route::get('/', [TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
 });
 Route::group(['prefix' => 'pdf'], function () {
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');

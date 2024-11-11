@@ -91,10 +91,16 @@ class DashboardAdminController extends Controller
                 )
             );
         } else {
-            $convocatoriasActivas = Convocatoria::getTotalConvocatoriasActivas(1);
-            $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasActivas(2);
-            $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasActivas(3);
-            $convocatorias = Convocatoria::getConvocatoriaList(1)->paginate(10);
+
+            if(empty($request->estado)){
+                $estado = 0;
+            } else {
+                $estado = $request->estado;
+            }
+            $convocatoriasActivas = Convocatoria::getTotalConvocatoriasPorEstado(1);
+            $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasPorEstado(2);
+            $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasPorEstado(3);
+            $convocatorias = Convocatoria::getConvocatoriaList($estado)->paginate(10);
             $totProductSolici = Convocatoria::getTotalProductosSolicitdos();
             $totProductRecaudados = Recaudacion::getTotalProductosRecaudados();
             $totRegisRecau = Recaudacion::getTotalRegistros();
@@ -105,6 +111,7 @@ class DashboardAdminController extends Controller
                 compact(
                     [
                         'seccion',
+                        'estado',
                         'convocatoriasActivas',
                         'convocatoriasFinalizadas',
                         'convocatoriasCanceladas',
@@ -143,6 +150,7 @@ class DashboardAdminController extends Controller
                 )
             );
         } else {
+            
             $search = $request->input('search');
 
             $programas = ProgramaEducativo::when($search, function ($query, $search) {

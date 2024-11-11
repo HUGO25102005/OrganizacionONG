@@ -19,14 +19,19 @@ class Recaudacion extends Model
     ];
 
 
-    public static function getTotalProductosRecaudados():int {
-        return self::sum('cantidad');
+    public static function getTotalProductosRecaudados(): int
+    {
+        return self::whereHas('convocatoria', function ($query) {
+            $query->where('estado', '!=', 3);
+        })->sum('cantidad');
     }
-    public static function getTotalRegistros():int {
+    public static function getTotalRegistros(): int
+    {
         return self::count();
     }
 
-    public static function getTotalDonadoPorConvocatoria($id_convocatoria): int{
+    public static function getTotalDonadoPorConvocatoria($id_convocatoria): int
+    {
         return self::where('id', $id_convocatoria)->sum('cantidad');
     }
 
