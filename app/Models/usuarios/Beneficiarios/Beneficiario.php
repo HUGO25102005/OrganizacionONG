@@ -17,6 +17,7 @@ class Beneficiario extends Model
     // Atributos que se pueden asignar masivamente
     protected $fillable = [
         'id_user',
+        'estado',
         'nivel_educativo',
         'ocupacion',
         'num_dependientes',
@@ -25,22 +26,86 @@ class Beneficiario extends Model
     public $timestamps = true;
 
     public static function getBeneficiariosActivos(){
-        return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
-        ->where('trabajadores.estado', 1) // Filtrar por el estado del trabajador
-        ->orderBy('beneficiarios.created_at', 'desc') // Ordenar por la fecha de creación de los beneficiarios
-        ->take(5); // Limitar a los primeros 5 resultados;
+        return self::where('beneficiarios.estado', 1) // Filtrar por el estado del trabajador
+        ->orderBy('beneficiarios.created_at', 'asc') // Ordenar por la fecha de creación de los beneficiarios
+        ->take(6) // Limitar a los primeros 5 resultados;
+        ->get();
+    }
+
+    public function getEstadoDescripcion(): string
+    {
+        // dd($this->estado);
+        $estado = $this->estado;
+
+        switch (intval($estado)) {
+            case 1:
+                return 'Activo';
+            case 2:
+                return 'Inactivo';
+            case 3:
+                return 'Solicitado';
+            case 4:
+                return 'Cancelado';
+            default:
+                return 'Sin estado';
+        }
+    }
+
+    public function getNivelEducativo(): string
+    {
+        // dd($this->estado);
+        $nivel_educativo = $this->nivel_educativo;
+
+        switch (intval($nivel_educativo)) {
+            case 1:
+                return 'Primaria';
+            case 2:
+                return 'Secunadaria';
+            case 3:
+                return 'Bachillerato';
+            case 4:
+                return 'Universidad';
+            default:
+                return 'Sin estado';
+        }
     }
 
     public static function getTotalBeneficiariosActivos($estado){
-        return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
-        ->where('trabajadores.estado', $estado) // Filtrar por el estado del trabajador
+        return self::where('beneficiarios.estado', $estado) // Filtrar por el estado del trabajador
         ->count();
     }
-
-    public static function getBeneficiarios(){
-        return self::join('trabajadores', 'beneficiarios.id_user', '=', 'trabajadores.id_user') // Relación entre las tablas
-        ->whereIn('estado', [1, 2, 4]);
+    
+    public static function getTotalNivelE($nivel){
+        return self::where('beneficiarios.nivel_educativo', $nivel) // Filtrar por el estado del trabajador
+        ->count();
     }
+    
+    public static function getBeneficiariosE($estado){
+        return self::where('beneficiarios.estado', $estado); // Filtrar por el estado del trabajador
+    }
+
+    public static function getBeneficiarios($search = null)
+    {
+        return self::whereIn('estado', [1, 2])
+        ->when($search, function ($query, $search) {
+            $query->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
+        });
+
+    }
+
+    public static function getBeneficiarios2($search = null)
+    {
+        return self::whereIn('estado', [3, 4])
+        ->when($search, function ($query, $search) {
+            $query->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
+        });
+
+    }
+
     
     public function user()
     {

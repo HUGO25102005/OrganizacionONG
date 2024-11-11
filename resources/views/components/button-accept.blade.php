@@ -1,8 +1,8 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="text-green-600 text-xl bg-green-100 hover:bg-green-500 hover:text-white transition-colors ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+    <button @click="open = true" class="text-black text-2xl bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-500">
         <i class='bx bx-check'></i>
-    </button>
+    </button>   
 
     <!-- Modal de confirmación -->
     <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"
@@ -20,7 +20,7 @@
 
                 <!-- Mensaje de alerta -->
                 <p class="text-center text-xl"><b>{!! $messageAlert !!}</b></p>
-
+                <br><br>
                 <!-- Botones de acción -->
                 <div class="flex justify-end mt-6">
                     <!-- Botón para cancelar -->
@@ -31,7 +31,7 @@
                     </button>
                     <!-- Botón para confirmar eliminación -->
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-full flex items-center">
-                        <i class='bx bx-trash text-xl'></i>
+                        <i class='bx bx-check'></i>
                         <span>Confirmar</span>
                     </button>
                 </div>

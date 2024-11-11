@@ -129,15 +129,15 @@
                 <div class="flex justify-between">
                     <!-- Título "Gestionar" -->
     <!--                   <h3 class="text-[42px] mt-[70px] ml-[210px]">Gestionar</h3>
-                    @if ($errors->any())
+                    {{-- @if ($errors->any() --}})
 <div class="bg-red-500 text-white p-4 mb-4 rounded">
                             <ul>
-                                @foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
+                                {{-- @foreach ($errors->all() as $error --}})
+<li{{-- >{{ $error }} --}}</li>
+{{-- @endforeach --}}
                             </ul>
                         </div>
-@endif
+{{-- @endif --}}
 
                     <!-- Contenedor de botones -->
     <!--                      <div class="flex flex-col space-y-4 mr-[40px] mt-[20px]">
@@ -146,34 +146,34 @@
                             <div
                                 class="bg-[#CCE4FF] w-[600px] h-[70px] rounded-[12px] flex items-center justify-center transition-transform duration-300 hover:scale-105">
                                 <p class="text-center text-[20px]">Solicitudes de donación</p>
-                                <x-modal-form :btnTitulo="'Nueva Convocatoria'" :tituloModal="'Agrega Nueva Convocatoria'" :router="route('convocatoria.store')" :btnDanger="'Cancelar'"
+                                <x-modal-form :btnTitulo="'Nueva Convocatoria'" :tituloModal="'Agrega Nueva Convocatoria'" {{-- :router="route('convocatoria.store')"  --}}:btnDanger="'Cancelar'"
                                     :btnSuccess="'Confirmar'">
                                     <!-- Nombre -->
-    <!--                                    <x-input-form-modal :name="'nombre'" :labelText="'Nombre:'" :type="'text'"
-                                        :id="'nombre'" :placeholder="'Nombre: '" :maxLength="'255'" required>
+    <!--                                    <x-input-form-modal {{-- :name="'nombre'" --}} :labelText="'Nombre:'" {{-- :type="'text'" --}}
+                                        {{-- :id="'nombre'" --}} {{-- :placeholder="'Nombre: '"  --}}:maxLength="'255'" required>
                                     </x-input-form-modal>
 
                                     <!-- Descripción -->
-    <!--                                    <x-input-form-modal :name="'descripcion'" :labelText="'Descripción:'" :type="'text'"
-                                        :id="'descripcion'" :placeholder="'Descripción: '" required>
+    <!--                                    <x-input-form-modal{{--  :name="'descripcion'"  --}}:labelText="'Descripción:'" {{-- :type="'text'" --}}
+                                       {{--  :id="'descripcion'" --}} {{-- :placeholder="'Descripción: '" --}} required>
                                     </x-input-form-modal>
 
                                     <!-- Fecha de Inicio -->
-    <!--                                    <x-input-form-modal :name="'fecha_inicio'" :labelText="'Fecha de Inicio:'" :type="'date'"
-                                        :id="'fecha_inicio'" required :value="old('fecha_inicio')"  :placeholder="'Fecha'"/>
+    <!--                                    <x-input-form-modal{{--  :name="'fecha_inicio'"  --}}:labelText="'Fecha de Inicio:'" {{-- :type="'date'" --}}
+                                        {{-- :id="'fecha_inicio'" --}} required {{-- :value="old('fecha_inicio')"  :placeholder="'Fecha'" --}}/>
 
                                     <!-- Fecha de Fin -->
-    <!--                                    <x-input-form-modal :name="'fecha_fin'" :labelText="'Fecha de Fin:'" :type="'date'"
-                                        :id="'fecha_fin'" required :value="old('fecha_fin')" :placeholder="'Fecha'"/>
+    <!--                                    <x-input-form-modal {{-- :name="'fecha_fin'"  --}}:labelText="'Fecha de Fin:'" {{-- :type="'date'" --}}
+                                        {{-- :id="'fecha_fin'"  --}}required {{-- :value="old('fecha_fin')" :placeholder="'Fecha'" --}}/>
 
                                     <!-- Objetivo -->
-    <!--                                    <x-input-form-modal :name="'objetivo'" :labelText="'Objetivo:'" :type="'text'"
-                                        :id="'objetivo'" placeholder="Objetivo: " required>
+    <!--                                    <x-input-form-modal {{-- :name="'objetivo'"  --}}:labelText="'Objetivo:'" {{-- :type="'text'" --}}
+                                       {{--  :id="'objetivo'"  --}}placeholder="Objetivo: " required>
                                     </x-input-form-modal>
 
                                     <!-- Comentarios -->
-    <!--                                    <x-input-form-modal :name="'comentarios'" :labelText="'Comentarios:'" :type="'text'"
-                                        :id="'comentarios'" placeholder="Comentarios: " required>
+    <!--                                    <x-input-form-modal{{--  :name="'comentarios'"  --}}:labelText="'Comentarios:'"{{--  :type="'text'" --}}
+                                        {{-- :id="'comentarios'" --}} placeholder="Comentarios: " required>
                                     </x-input-form-modal>
 
 

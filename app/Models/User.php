@@ -61,6 +61,22 @@ class User extends Authenticatable
     {
         return "{$this->name} {$this->apellido_paterno} {$this->apellido_materno}";
     }
+    
+    public function getGenero(): string
+    {
+        $genero = $this->genero;
+
+        switch ($genero) {
+            case 'M':
+                return 'Masculino';
+            case 'F':
+                return 'Femenino';
+            case 'O':
+                return 'Otro';
+            default:
+                return 'Sin género';
+        }
+    }
 
     /**
      * Get the trabajador associated with the user.

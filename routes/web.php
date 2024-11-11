@@ -15,6 +15,7 @@ use App\Http\Controllers\TerminosCondiciones\TerminosCondicionesController;
 use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\TrabajadorController;
+use App\Http\Controllers\Usuarios\BeneficiarioController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
 use App\Http\Middleware\AuthSessionActive;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,9 @@ Route::middleware('auth')->group(function () {
         /* Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store'); */
 
         Route::get('/programas', [DashboardCoordinadorController::class, 'programas'])->name('coordinador.programas');
+        Route::put('/beneficiarios/beneficiarioDesactivar', [BeneficiarioController::class, 'desactivarBeneficiario'])->name('coordinador.desactivar');
+        Route::put('/beneficiarios/beneficiarioCancelar', [BeneficiarioController::class, 'cancelarBeneficiario'])->name('coordinador.cancelar');
+        Route::put('/benficiarios/beneificiarioAceptar', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario'])->name('coordinador.aceptarSolicitudBeneficiario');
     });
 
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {

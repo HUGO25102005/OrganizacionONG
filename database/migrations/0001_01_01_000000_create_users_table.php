@@ -60,7 +60,8 @@ return new class extends Migration
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade')
                                 ->comment('Clave foranea de usuarios');
-            $table->enum('nivel_educativo', [1, 2, 3, 4])->comment('1 = Primaria, 2 = Secundaria, 3 = Preparatoria, 4 = Superior');
+            $table->enum('estado', [1, 2, 3, 4])->comment('1 = Activo, 2 = Inactivado, 3 = Solicitado, 4 = Cancelado');
+            $table->enum('nivel_educativo', [1, 2, 3, 4])->comment('1 = Primaria, 2 = Secundaria, 3 = Bachillerato, 4 = Universidad');
             $table->string('ocupacion', 100);
             $table->tinyInteger('num_dependientes')->comment('Numero de personas que dependen del usuario');
             $table->float('ingresos_mensuales')->comment('Ingresos del usuario, si no es el caso, dejar en blanco')->nullable();
