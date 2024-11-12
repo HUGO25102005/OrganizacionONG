@@ -65,7 +65,7 @@ class DashboardAdminController extends Controller
             $seccion = $request->seccion;
         }
 
-        if($seccion == 1){
+        if ($seccion == 1) {
             $monto_disponible = CajaFondo::getMontoDisponible();
             $monto_usado = Presupuesto::getMontoTotal();
             $monto_total_donaciones = Donacion::getMontoTotal();
@@ -73,8 +73,7 @@ class DashboardAdminController extends Controller
             $total_donaciones_semana = Donacion::getTotalMontoSemana();
             $total_donaciones_mes = Donacion::getTotalMontoMes();
             $topDonadantes = Donacion::getTopDonadores();
-            // dd($topDonadantes);
-            // dd($total_donaciones_semana);
+            
             return view(
                 'Dashboard.Admin.donaciones',
                 compact(
@@ -92,15 +91,18 @@ class DashboardAdminController extends Controller
             );
         } else {
 
-            if(empty($request->estado)){
+            if (empty($request->estado)) {
                 $estado = 0;
             } else {
                 $estado = $request->estado;
             }
+            
+            $searchTerm = $request->search;
+
             $convocatoriasActivas = Convocatoria::getTotalConvocatoriasPorEstado(1);
             $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasPorEstado(2);
             $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasPorEstado(3);
-            $convocatorias = Convocatoria::getConvocatoriaList($estado)->paginate(10);
+            $convocatorias = Convocatoria::getConvocatoriaListWithSearch($estado, $searchTerm); // Llama a la función con búsqueda
             $totProductSolici = Convocatoria::getTotalProductosSolicitdos();
             $totProductRecaudados = Recaudacion::getTotalProductosRecaudados();
             $totRegisRecau = Recaudacion::getTotalRegistros();
@@ -150,7 +152,7 @@ class DashboardAdminController extends Controller
                 )
             );
         } else {
-            
+
             $search = $request->input('search');
 
             $programas = ProgramaEducativo::when($search, function ($query, $search) {
@@ -178,66 +180,203 @@ class DashboardAdminController extends Controller
     }
     public function usuarios(Request $request)
     {
+        // dd($request);
+        // Determinar la sección solicitada
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
         } else {
             $seccion = $request->seccion;
         }
 
+        // dd($seccion);
+        // Determinar el rol solicitado o por defecto 'Administrador'
+        $rol = $request->get('rol', 'Administrador');
+
+        // Determinar el estado por defecto para la primera sección
+        $estado = $seccion == 1 ? $request->get('estado', '1') : '3';
+
+        // Variables de fecha para la segunda sección (con valores por defecto si no se proporcionan)
+        $fecha_inicio = $request->get('fecha_inicio', date('Y-m-d', strtotime('-1 month')));
+        $fecha_fin = $request->get('fecha_fin', date('Y-m-d', strtotime('+1 week')));
+
+        // Determinar el término de búsqueda si existe
+        $search = $request->input('search');
+
+        // dd($seccion);
+        // Ejecutar la lógica para cada sección
         if ($seccion == 1) {
-
-            if (empty($request->rol)) {
-                $rol = $request->get('rol', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
-            } else {
-                $rol = $request->rol;
-            }
-
-            $estado = $request->get('estado', '1');
+            // Sección 1: Búsqueda condicional basada en el rol y el estado
             switch ($rol) {
                 case 'Administrador':
-                    $datos = Administrador::getAdministradoresActivos($estado)->paginate(10);
+                    $datos = Administrador::when($search, function ($query, $search) {
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);
+
                     break;
                 case 'Coordinador':
-                    $datos = Coordinador::getCoordinadoresActivos($estado)->paginate(10);
+                    $datos = Coordinador::when($search, function ($query, $search) {
+                        // Si hay un término de búsqueda, filtramos por el nombre del coordinador
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            // Filtramos según el estado, fecha de creación, etc.
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);  // Paginamos los resultados
                     break;
                 case 'Voluntario':
-                    $datos = Voluntario::getVoluntariosActivos($estado)->paginate(10);
+                    $datos = Voluntario::when($search, function ($query, $search) {
+                        // Filtramos por nombre del voluntario
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            // Filtramos por el estado, fecha de creación, etc. en la tabla 'trabajadores'
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);  // Paginamos los resultados
                     break;
+
                 case 'Beneficiario':
-                    $datos = Beneficiario::paginate(10);
+                    $datos = Beneficiario::when($search, function ($query, $search) {
+                        // Filtramos por nombre del beneficiario
+                        return $query->where('nombre', 'LIKE', '%' . $search . '%');
+                    })
+                        ->paginate(10);  // Paginamos los resultados
                     break;
+
                 default:
+                    $datos = collect(); // Devuelve una colección vacía en caso de rol no definido
             }
 
-            return view('Dashboard.Admin.usuarios', compact(['rol', 'estado', 'seccion'], 'datos'));
+            return view('Dashboard.Admin.usuarios', compact(['rol', 'estado', 'seccion', 'datos']));
         } else {
-
-            $rol = $request->get('rol', 'Administrador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
-
-            $estado = '3';
-
-            if (!$request->fecha_inicio) {
-                $fecha_inicio = date('Y-m-d', strtotime('-1 month'));
-            } else {
-                $fecha_inicio = $request->fecha_inicio;
-            }
-
-            if (!$request->fecha_fin) {
-                $fecha_fin = date('Y-m-d', strtotime('+1 week'));
-            } else {
-                $fecha_fin = $request->fecha_fin;
-            }
-
+            // Sección 2: Búsqueda por fechas y rol
             switch ($rol) {
                 case 'Administrador':
-                    $datos = Administrador::getAdministradoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
+                    $datos = Administrador::when($search, function ($query, $search) {
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);
+
                     break;
                 case 'Coordinador':
-                    $datos = Coordinador::getCoordinadoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
+                    $datos = Coordinador::when($search, function ($query, $search) {
+                        // Si hay un término de búsqueda, filtramos por el nombre del coordinador
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            // Filtramos según el estado, fecha de creación, etc.
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);  // Paginamos los resultados
                     break;
+                default:
+                    $datos = collect();
             }
 
-            return view('Dashboard.Admin.usuarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado'], 'datos'));
+            return view('Dashboard.Admin.usuarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado', 'datos']));
         }
     }
 }

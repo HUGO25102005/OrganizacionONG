@@ -3,7 +3,26 @@
         <td class="py-3 px-4 text-center">{{ $user->trabajador->id }}</td>
         <td class="py-3 px-4 text-center">{{ $user->trabajador->user->name }}</td>
         <td class="py-3 px-4 text-center">{{ $user->trabajador->user->email }}</td>
-        <td class="py-3 px-4 text-center">{{ $user->trabajador->getEstadoDescripcion() }}</td>
+        <td class="py-3 px-4 text-center">
+            @switch($user->trabajador->estado)
+                @case(1)
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Activo</span>
+                @break
+
+                @case(2)
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">Desactivado</span>
+                @break
+
+                @case(3)
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">Solicitado</span>
+                @break
+
+                @case(4)
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Suspendido</span>
+                @break
+            @endswitch
+
+        </td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
@@ -28,71 +47,71 @@
                                 {{ $user->trabajador->user->getFullName() }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Correo Electrónico:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->email }}
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Dirección:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->direccion }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Teléfono:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->telefono }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Fecha:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->fecha_nacimiento }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">País:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->pais }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Estado:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->estado }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Municipio:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->municipio }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Código Postal (CP):</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->cp }}
                             </div>
                         </div>
-                        
+
                         <div class="w-[250px]">
                             <label class="block text-gray-600 mb-1">Género:</label>
                             <div class="border border-gray-400 rounded-lg py-2 px-3 bg-blue-50 text-black truncate">
                                 {{ $user->trabajador->user->genero }}
                             </div>
                         </div>
-                        
+
                     </section>
                     {{-- separacion --}}
                     <hr class="my-4 border-gray-300"> <!-- Línea separadora -->
@@ -130,7 +149,9 @@
                 </x-modal-view-info>
                 @if ($user->trabajador->estado != 2)
                     @if ($user->trabajador->id != auth()->user()->trabajador->id)
-                        <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' . $user->trabajador->user->name . '?'" :router="route('admin.desactivar')" :itemId="$user->trabajador->id" :tituloModal="'Confirmar Eliminación'" />
+                        <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' .
+                            $user->trabajador->user->name .
+                            '?'" :router="route('admin.desactivar')" :itemId="$user->trabajador->id" :tituloModal="'Confirmar Eliminación'" />
                     @endif
                 @endif
 

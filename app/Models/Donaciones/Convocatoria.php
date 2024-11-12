@@ -40,30 +40,34 @@ class Convocatoria extends Model
         return $campañas;
     }
 
-    public static function getConvocatoriaList($estado)
+    // Convocatoria.php
+    public static function getConvocatoriaListWithSearch($estado, $searchTerm = null)
     {
-        if ($estado == 0) {
-            // Trae todas las convocatorias y las ordena por estado de forma ascendente
-            $campañas = Convocatoria::addSelect([
-                'artfaltantes' => Recaudacion::selectRaw('COALESCE(SUM(cantidad), 0)')
-                    ->whereColumn('id_convocatoria', 'convocatorias.id')
-                    ->limit(1),
-                'isInPage' => CargarCampaniasPage::selectRaw('1')
-                    ->whereColumn('id_convocatoria', 'convocatorias.id')
-                    ->limit(1)
-            ])->orderBy('estado', 'asc');
-        } else {
-            // Filtra por estado específico
-            $campañas = Convocatoria::where('estado', $estado)
-                ->addSelect([
-                    'artfaltantes' => Recaudacion::selectRaw('COALESCE(SUM(cantidad), 0)')
-                        ->whereColumn('id_convocatoria', 'convocatorias.id')
-                        ->limit(1)
-                ]);
+        $campañas = self::addSelect([
+            'artfaltantes' => Recaudacion::selectRaw('COALESCE(SUM(cantidad), 0)')
+                ->whereColumn('id_convocatoria', 'convocatorias.id')
+                ->limit(1),
+            'isInPage' => CargarCampaniasPage::selectRaw('1')
+                ->whereColumn('id_convocatoria', 'convocatorias.id')
+                ->limit(1),
+        ]);
+
+        if ($estado != 0) {
+            $campañas = $campañas->where('estado', $estado);
         }
 
-        return $campañas;
+        if ($searchTerm) {
+            $campañas = $campañas->where(function ($query) use ($searchTerm) {
+                $query->where('titulo', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhereHas('productoSolicitado', function ($query) use ($searchTerm) {
+                        $query->where('nombre', 'LIKE', '%' . $searchTerm . '%');
+                    });
+            });
+        }
+
+        return $campañas->orderBy('estado', 'asc')->paginate(10);
     }
+
 
 
     public static function setEstatusFinalizar($id_convocatoria)

@@ -1,8 +1,17 @@
 
-<div class="container w-full mb-5">
+<div class="flex items-center justify-between mb-6">
     <h2 class="text-center font-semibold text-2xl md:text-3xl">
         Solicitudes de Trabajadores
     </h2>
+    <form action="{{ route('admin.usuarios', ['seccion' => 2]) }}" method="POST" id="search-form" class="flex items-center">
+        @csrf
+        @method('GET')
+        <div class="relative"> <!-- Eliminar el margen -->
+            <input type="text" name='search' placeholder="Buscar"
+                class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>                   
+        </div>
+    </form>
 </div>
 
 <div class="content w-full px-2 sm:px-4 lg:px-6">

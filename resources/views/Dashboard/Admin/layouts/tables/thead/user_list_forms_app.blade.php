@@ -1,7 +1,8 @@
 <div class="bg-white p-4 rounded-lg shadow-md mb-6">
     <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-6">
-            <!-- Filtro de rol -->
+
+            {{-- search --}}
             <form action="{{ route('admin.usuarios') }}" method="POST" class="flex items-center justify-between mb-4">
                 @csrf
                 @method('GET')
@@ -28,7 +29,7 @@
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
                             <option value="1" {{ $estado == '1' ? 'selected' : '' }}>Activo</option>
                             <option value="2" {{ $estado == '2' ? 'selected' : '' }}>Desactivado</option>
-                            <option value="3" {{ $estado == '3' ? 'selected' : '' }}>Suspendido</option>
+                            <option value="4" {{ $estado == '4' ? 'selected' : '' }}>Suspendido</option>
                         </select>
                     </div>
 

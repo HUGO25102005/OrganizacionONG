@@ -1,6 +1,7 @@
 <div class="relative bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
     <div class="flex justify-between items-center mb-[20px]">
         <h2 class="text-2xl font-semibold">Campañas de Recaudación</h2>
+
         <div x-data="{ open: false, tab: 'informacion' }">
             <!-- Botón para abrir el modal -->
             <button @click="open = true" class="bg-blue-500 text-white px-4 py-2 rounded">
@@ -209,41 +210,54 @@
 
     <!-- Sección de detalles -->
     <div class="mt-[30px] overflow-x-auto">
-        <div class="flex items-center space-x-5 pb-4 bg-white p-4 rounded-lg shadow-md mb-6">
-            <!-- Contenedor del Título -->
-            <div class="flex-shrink-0">
-                <h3 class="text-xl font-semibold">Detalles de Campañas</h3>
+        <div class="flex items-center justify-between pb-4 bg-white p-4 rounded-lg shadow-md mb-6">
+
+            <!-- Contenedor para Search (lado izquierdo) -->
+            <div class="flex-1 flex justify-start">
+                <div class="flex-shrink-0">
+                    <h3 class="text-xl font-semibold">Detalles de Campañas</h3>
+                </div>
             </div>
 
-            <!-- Contenedor del Formulario de Filtros -->
-            <form action="{{ route('admin.donaciones', ['seccion' => 2]) }}" method="POST"
-                class="flex items-center space-x-6">
-                @csrf
-                @method('GET')
+            <!-- Contenedor del Formulario de Filtros (centro) -->
+            <div class="flex-1 flex justify-center">
+                <form action="{{ route('admin.donaciones', ['seccion' => 2]) }}" method="POST"
+                    class="flex items-center space-x-6">
+                    @csrf
+                    @method('GET')
+                    <div class="w-48">
+                        <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                        <select id="estado" name="estado"
+                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
+                            <option value="0" {{ $estado == 0 ? 'selected' : '' }}>Todos</option>
+                            <option value="1" {{ $estado == 1 ? 'selected' : '' }}>Activo</option>
+                            <option value="2" {{ $estado == 2 ? 'selected' : '' }}>Finalizado</option>
+                            <option value="3" {{ $estado == 3 ? 'selected' : '' }}>Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-center">
+                        <button id="filterButton" type="submit"
+                            class="w-48 px-4 py-2 bg-blue-400 text-white font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-200 hover:scale-110">
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-                <!-- Filtro de Estado -->
-                <div class="w-48">
-                    <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-                    <select id="estado" name="estado"
-                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
-                        <option value="0" {{ $estado == 0 ? 'selected' : '' }}>Todos</option>
-                        <option value="1" {{ $estado == 1 ? 'selected' : '' }}>Activo</option>
-                        <option value="2" {{ $estado == 2 ? 'selected' : '' }}>Finalizado</option>
-                        <option value="3" {{ $estado == 3 ? 'selected' : '' }}>Cancelado</option>
-                    </select>
-                </div>
+            <!-- Contenedor del Título (lado derecho) -->
+            <div class="flex-1 flex justify-end">
 
-                <!-- Botón de Aplicar Filtro -->
-                <div class="flex justify-center">
-                    <button id="filterButton" type="submit"
-                        class="w-48 px-4 py-2 bg-blue-400 text-white font-medium rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-200 hover:scale-110">
-                        Aplicar Filtros
-                    </button>
-                </div>
-            </form>
-
-            <!-- Contenedor para search -->
-            <div class="flex-grow"></div>
+                <form action="{{ route('admin.donaciones', ['seccion' => 2]) }}" method="POST" id="search-form"
+                    class="flex items-center space-x-6">
+                    @csrf
+                    @method('GET')
+                    <div class="relative">
+                        <input type="text" name='search' placeholder="Buscar"
+                            class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <table class="w-full bg-white rounded-[20px] shadow-md ">
