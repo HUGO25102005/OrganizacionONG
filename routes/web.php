@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/beneficiarios/beneficiarioDesactivar', [BeneficiarioController::class, 'desactivarBeneficiario'])->name('coordinador.desactivar');
         Route::put('/beneficiarios/beneficiarioCancelar', [BeneficiarioController::class, 'cancelarBeneficiario'])->name('coordinador.cancelar');
         Route::put('/benficiarios/beneificiarioAceptar', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario'])->name('coordinador.aceptarSolicitudBeneficiario');
+        Route::put('/benficiarios/beneificiarioAceptar2', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario2'])->name('coordinador.aceptarSolicitudBeneficiario2');
     });
 
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {

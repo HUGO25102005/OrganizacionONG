@@ -21,7 +21,6 @@
     </div>
     
     <!-- Sección: Visualización de gráficos de flujo de caja -->
-    <h2 class="text-2xl text-center font-bold mb-4">Programas Educativos</h2>
     <br>
     <!-- Gráficos en un contenedor flex -->
     <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
@@ -60,8 +59,8 @@
         @include('Dashboard.Coordinador.layouts.tables.thead.programas_list_forms_app')
         
         <div class="overflow-x-auto">   
-            <table class="w-full mt-4 bg-white rounded-lg shadow-md min-w-[600px]">
-                <thead>
+            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
+                <thead class="bg-[#BBDEFB] text-black">
                     @switch($estado)
                         @case(0)
                             @include('Dashboard.Coordinador.layouts.tables.thead.th_todosP')

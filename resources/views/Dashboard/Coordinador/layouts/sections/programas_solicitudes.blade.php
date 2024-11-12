@@ -16,15 +16,15 @@
         @include('Dashboard.Coordinador.layouts.tables.thead.programas_soli_forms_app')
         
         <div class="overflow-x-auto">
-            <table class="w-full table-auto">
+            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
                 <thead class="bg-[#BBDEFB]"> <!-- Mantener el fondo en el thead -->
-                    <tr class="text-black bg-[#BBDEFB]">
-                        <th class="rounded-tl-[15px] px-3 py-1 text-center">Nombre</th>
-                        <th class="px-4 py-2 text-center ml-2">Solicitante</th>
-                        <th class="px-4 py-2 text-center ml-2">Fecha Incio</th>
-                        <th class="px-4 py-2 text-center ml-2">Fecha Termino</th>
-                        <th class="px-4 py-2 text-center ml-2">Modalidad</th>
-                        <th class="rounded-tr-[15px] px-4 py-2 text-center ml-2">Acciones
+                    <tr class="bg-[#BBDEFB] text-black">
+                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Nombre</th>
+                        <th class="py-3 px-2 md:px-4">Solicitante</th>
+                        <th class="py-3 px-2 md:px-4">Fecha Incio</th>
+                        <th class="py-3 px-2 md:px-4">Fecha Termino</th>
+                        <th class="py-3 px-2 md:px-4">Modalidad</th>
+                        <th class="py-3 px-2 md:px-4 rounded-r-lg">Acciones
                         </th>
                     </tr>
                 </thead>

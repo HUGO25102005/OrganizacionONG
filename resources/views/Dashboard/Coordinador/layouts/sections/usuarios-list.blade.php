@@ -35,7 +35,7 @@
                     data: [ {{ $total_BA }}, {{ $total_BI }}, {{ $total_BSO }}, {{ $total_BC }}],
                     backgroundColor: ['#4CAF50'],
                     borderColor: ['#596475'],
-                    borderWidth: 3
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -60,7 +60,7 @@
                     data: [ {{$total_BP}}, {{$total_BS}}, {{$total_BB}}, {{$total_BU}} ],
                     backgroundColor: ['#1E96FC'],
                     borderColor: ['#596475'],
-                    borderWidth: 3
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -93,10 +93,10 @@
         {{-- FIN CONDICION DE MODALS Y FORMS --}}
 
         <div class="overflow-x-auto">
-            <table class="admin-table w-full mt-6 bg-white rounded-lg">
-                <thead class="bg-[#bbdefb] text-black">
+            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
+                <thead class="bg-[#BBDEFB] text-black">
                     <tr>
-                        <th class="py-3 px-2 md:px-4">Número</th>
+                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Número</th>
                         <th class="py-3 px-2 md:px-4">Nombre completo</th>
                         <th class="py-3 px-2 md:px-4">Correo electrónico</th>
                         <th class="py-3 px-2 md:px-4">Nivel Educativo</th>

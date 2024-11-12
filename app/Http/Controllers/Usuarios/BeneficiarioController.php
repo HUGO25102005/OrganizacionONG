@@ -26,6 +26,24 @@ class BeneficiarioController extends Controller
         return redirect()->route('coordinador.beneficiarios')->with('error', 'Ocurrió un error al activar el beneficiario.');
     }
 
+    public function aceptarSolicitudBeneficiario2(Request $request){
+
+        $idBeneficiario = $request->id;
+
+        $beneficiario = Beneficiario::find($idBeneficiario);
+
+        if ($beneficiario) {
+            // Actualizar el estado del trabajador, asumiendo que el campo se llama 'activo'
+            $beneficiario->update(['estado' => 1]);
+
+            // Redirigir de vuelta con un mensaje de éxito
+            return redirect()->route('coordinador.beneficiarios', ['seccion' => 2])->with('success', 'Solicitud aceptada con éxito.');
+        }
+
+        // Si no se encuentra el trabajador, redirigir con un mensaje de error
+        return redirect()->route('coordinador.beneficiarios', ['seccion' => 2])->with('error', 'Ocurrió un error al aceptar el beneficiario.');
+    }
+
     public function desactivarBeneficiario(Request $request){
         // Obtener el ID del trabajador del request
         $id = $request->id;
@@ -56,10 +74,10 @@ class BeneficiarioController extends Controller
             $beneficiario->update(['estado' => 4]);
 
             // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('coordinador.beneficiarios')->with('warning', 'Solicitud cancelada con éxito.');
+            return redirect()->route('coordinador.beneficiarios', ['seccion' => 2])->with('warning', 'Solicitud cancelada con éxito.');
         }
 
         // Si no se encuentra el trabajador, redirigir con un mensaje de error
-        return redirect()->route('coordinador.beneficiarios')->with('error', 'Ocurrió un error al cancelar la solicitud.');
+        return redirect()->route('coordinador.beneficiarios', ['seccion' => 2])->with('error', 'Ocurrió un error al cancelar la solicitud.');
     }
 }

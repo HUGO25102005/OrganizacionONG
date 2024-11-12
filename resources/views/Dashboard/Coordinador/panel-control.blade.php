@@ -105,8 +105,8 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Estatus</th>
+                            <th class="text-center rounded-l-lg">Nombre</th>
+                            <th class="text-center rounded-r-lg">Estatus</th>
                        </tr>
                     </thead>
                     <tbody>
@@ -152,7 +152,7 @@
                     data: [ {{ $total_PS }}, {{ $total_PR }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PT }}, {{ $total_PC }}],
                     backgroundColor: ['#4CAF50'],
                     borderColor: ['#596475'],
-                    borderWidth: 3
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -177,7 +177,7 @@
                     data: [ {{ $total_BA }}, {{ $total_BI }}, {{ $total_BSO }}, {{ $total_BSU }} ],
                     backgroundColor: ['#1E96FC'],
                     borderColor: ['#596475'],
-                    borderWidth: 3
+                    borderWidth: 1
                 }]
             },
             options: {

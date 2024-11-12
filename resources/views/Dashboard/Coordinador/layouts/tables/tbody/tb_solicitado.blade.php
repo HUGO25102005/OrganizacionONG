@@ -101,9 +101,9 @@
                                 </button>
                             </div>
                         </x-modal-view-info>
-                        <x-button-accept :messageAlert="'¿Estás seguro que deseas aceptar la solicitud?'" :router="route('coordinador.aceptarSolicitudBeneficiario')"
+                        <x-button-accept :messageAlert="'¿Estás seguro que deseas aceptar la solicitud?'" :router="route('coordinador.aceptarSolicitudBeneficiario2')"
                         :itemId="$beneficiario->id" :tituloModal="'Confirmar Solicitud'" title="Activar Usuario" />
-                        <x-button-trash :messageAlert="'¿Estás seguro de que deseas declinar la solicitud?'" :router="route('coordinador.cancelar')" :itemId="$beneficiario->id" :tituloModal="'Confirmar Eliminación'" />                    
+                        <x-button-cancel :messageAlert="'¿Estás seguro de que deseas declinar la solicitud?'" :router="route('coordinador.cancelar')" :itemId="$beneficiario->id" :tituloModal="'Confirmar Eliminación'" />                    
                     @endif
                 </div>
             </td>

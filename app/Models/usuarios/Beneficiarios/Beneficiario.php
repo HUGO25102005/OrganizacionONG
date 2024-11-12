@@ -89,7 +89,10 @@ class Beneficiario extends Model
         return self::whereIn('estado', [1, 2])
         ->when($search, function ($query, $search) {
             $query->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->where('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                    ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%'); // Búsqueda por correo
             });
         });
 
@@ -100,10 +103,12 @@ class Beneficiario extends Model
         return self::whereIn('estado', [3, 4])
         ->when($search, function ($query, $search) {
             $query->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->where('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                    ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%'); // Búsqueda por correo
             });
         });
-
     }
 
     
