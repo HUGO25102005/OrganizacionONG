@@ -1,8 +1,9 @@
-    <div x-data="{ open: false }">
-        <!-- Botón de eliminación que abre el modal -->
-        <button @click="open = true" class="text-black text-2xl bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-500">
-            <i class='bx bx-check-circle'></i>
-        </button>   
+<div x-data="{ open: false }">
+    <!-- Botón de eliminación que abre el modal -->
+    <button @click="open = true" class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
+        <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer'
+                                    title="Estado: activo"></i>
+    </button>
 
         <!-- Modal de confirmación -->
         <div x-show="open" x-transition class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center"

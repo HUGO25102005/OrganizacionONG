@@ -12,8 +12,12 @@
                         @break
                     @case('Voluntario')
                         @include('layouts.sections.nav_voluntario')
-                        @break
-                    @endswitch
+                    @break
+
+                    @default
+                        @include('layouts.sections.nav_beneficiario')
+                @endswitch
+
             </div>
 
             <!-- Settings Dropdown -->

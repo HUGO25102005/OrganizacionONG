@@ -25,24 +25,64 @@ class Convocatoria extends Model
         'comentarios'
     ];
 
-    public static function getTotalConvocatoriasActivas( $estado ){
+    public static function getTotalConvocatoriasPorEstado($estado)
+    {
 
         $total = Convocatoria::where('estado', $estado)->count();
 
         return $total;
     }
-    public static function getConvocatoriaPorEstado($estado){
+    public static function getConvocatoriaPorEstado($estado)
+    {
 
         $campañas = Convocatoria::where('estado', $estado)->get();
 
         return $campañas;
     }
-    
+
+    // Convocatoria.php
+    public static function getConvocatoriaListWithSearch($estado, $searchTerm = null)
+    {
+        $campañas = self::addSelect([
+            'artfaltantes' => Recaudacion::selectRaw('COALESCE(SUM(cantidad), 0)')
+                ->whereColumn('id_convocatoria', 'convocatorias.id')
+                ->limit(1),
+            'isInPage' => CargarCampaniasPage::selectRaw('1')
+                ->whereColumn('id_convocatoria', 'convocatorias.id')
+                ->limit(1),
+        ]);
+
+        if ($estado != 0) {
+            $campañas = $campañas->where('estado', $estado);
+        }
+
+        if ($searchTerm) {
+            $campañas = $campañas->where(function ($query) use ($searchTerm) {
+                $query->where('titulo', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhereHas('productoSolicitado', function ($query) use ($searchTerm) {
+                        $query->where('nombre', 'LIKE', '%' . $searchTerm . '%');
+                    });
+            });
+        }
+
+        return $campañas->orderBy('estado', 'asc')->paginate(10);
+    }
+
+
+
+    public static function setEstatusFinalizar($id_convocatoria)
+    {
+        self::where('id', $id_convocatoria)->update(['estado' => 2]);
+    }
     public function productoSolicitado()
     {
         return $this->belongsTo(ProductoSolicitado::class, 'id_producto');
     }
 
+    public static function getTotalProductosSolicitdos(): int
+    {
+        return self::where('estado', '!=', 3)->sum('cantarticulos');
+    }
     /**
      * Relación con Administrador (uno a muchos, con opción nullable).
      */
@@ -57,5 +97,10 @@ class Convocatoria extends Model
     public function recaudaciones()
     {
         return $this->hasMany(Recaudacion::class, 'id_convocatoria');
+    }
+
+    public function producto()
+    {
+        return $this->belongsTo(ProductoSolicitado::class, 'id_producto');
     }
 }

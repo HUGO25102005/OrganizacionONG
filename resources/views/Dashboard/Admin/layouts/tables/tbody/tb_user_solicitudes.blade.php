@@ -6,7 +6,7 @@
         <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getTipoRolUsuario() }}</td>
         <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getEstadoDescripcion() }}</td>
         <td class="py-3 px-4 text-center">
-            <div class="inline-flex items-center">
+            <div class="p-[15px] flex justify-center space-x-4">
                 <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl hover'">
                     <!-- Encabezado con foto -->
                     <header class="mb-6 border-b border-gray-200 pb-4 flex items-center">
