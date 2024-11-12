@@ -17,13 +17,13 @@
                     {{ __('Campañas de recaudación') }}
                 </h2>
             </a>
-            @if ($seccion == 2)
+           {{--  @if ($seccion == 2) --}}
                 {{-- <div class="">
                     <a href="{{ route('pdf.generar') }}">
                         <i class='bx bxs-file-pdf' style="transform: scale(2.5)"></i>
                     </a>
                 </div> --}}
-            @endif
+            {{-- @endif --}}
         </div>
     </x-slot>
 
@@ -146,13 +146,11 @@
     @switch($seccion)
         @case(1)
             @include('Dashboard.Admin.layouts.sections.donaciones-info');
-        @break
+            @break
 
         @case(2)
             @include('Dashboard.Admin.layouts.sections.donaciones-campañas');
-        @break
-
-        @default
+            @break
     @endswitch
 
 

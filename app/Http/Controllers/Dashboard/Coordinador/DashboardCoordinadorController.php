@@ -73,6 +73,15 @@ class DashboardCoordinadorController extends Controller
 
     public function beneficiarios(Request $request)
     {
+        $total_BA = Beneficiario::getTotalBeneficiariosActivos(1);
+        $total_BI = Beneficiario::getTotalBeneficiariosActivos(2);
+        $total_BSO = Beneficiario::getTotalBeneficiariosActivos(3);
+        $total_BC = Beneficiario::getTotalBeneficiariosActivos(4);
+        $total_BP = Beneficiario::getTotalNivelE(1);
+        $total_BS = Beneficiario::getTotalNivelE(2);
+        $total_BB = Beneficiario::getTotalNivelE(3);
+        $total_BU = Beneficiario::getTotalNivelE(4);
+
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
         } else {
@@ -81,58 +90,55 @@ class DashboardCoordinadorController extends Controller
 
         if ($seccion == 1) {
 
-            if (empty($request->rol)) {
-                $rol = $request->get('rol', 'Coordinador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
+            if (empty($request->estado)) {
+                $estado = $request->get('estado', '0');
             } else {
-                $rol = $request->rol;
+                $estado = $request->estado;
+            }
+            
+            $beneficiariosearch = null;
+
+            switch($estado){
+                case '0':
+                    $datos = Beneficiario::getBeneficiarios()->paginate(10);
+                    $search = $request->input('search');
+                    $beneficiariosearch = Beneficiario::getBeneficiarios($search)->paginate(10);
+                    break;
+                case '1':
+                    $datos = Beneficiario::getBeneficiariosE(1)->paginate(10);
+                    break;
+                case '2':
+                    $datos = Beneficiario::getBeneficiariosE(2)->paginate(10);                    
+                    break;
             }
 
-            $estado = $request->get('estado', '1');
-            switch ($rol) {
-                case 'Administrador':
-                    $datos = Administrador::getAdministradoresActivos($estado)->paginate(10);
-                    break;
-                case 'Coordinador':
-                    $datos = Coordinador::getCoordinadoresActivos($estado)->paginate(10);
-                    break;
-                case 'Voluntario':
-                    $datos = Voluntario::getVoluntariosActivos($estado)->paginate(10);
-                    break;
-                case 'Beneficiario':
-                    $datos = Beneficiario::paginate(10);
-                    break;
-                default:
-            }
-
-            return view('Dashboard.Coordinador.beneficiarios', compact(['rol', 'estado', 'seccion'], 'datos'));
+                
+            return view('Dashboard.Coordinador.beneficiarios', compact(['estado', 'seccion'], 'datos', 'total_BI', 'total_BSO', 'total_BA', 'total_BC', 'total_BP', 'total_BS', 'total_BB', 'total_BU', 'beneficiariosearch'));
         } else {
-
-            $rol = $request->get('rol', 'Coordinador'); // Cambia 'Administrador' por 'admin' para que coincida con los rols
-
-            $estado = '3';
-
-            if (!$request->fecha_inicio) {
-                $fecha_inicio = date('Y-m-d', strtotime('-1 month'));
+            
+            if (empty($request->estado)) {
+                $estado = $request->get('estado', '0');
             } else {
-                $fecha_inicio = $request->fecha_inicio;
+                $estado = $request->estado;
             }
 
-            if (!$request->fecha_fin) {
-                $fecha_fin = date('Y-m-d', strtotime('+1 week'));
-            } else {
-                $fecha_fin = $request->fecha_fin;
-            }
-
-            switch ($rol) {
-                case 'Administrador':
-                    $datos = Administrador::getAdministradoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
+            $seccion = $request->get('seccion', 2);
+            $beneficiariosearch2 = null;
+            switch($estado){
+                case '0':
+                    $datos = Beneficiario::getBeneficiarios2()->paginate(10);
+                    $search = $request->input('search');
+                    $beneficiariosearch2 = Beneficiario::getBeneficiarios2($search)->paginate(10);
                     break;
-                case 'Coordinador':
-                    $datos = Coordinador::getCoordinadoresActivos($estado, $fecha_inicio, $fecha_fin)->paginate(10);
+                case '3':
+                    $datos = Beneficiario::getBeneficiariosE(3)->paginate(10);
+                    break;
+                case '4':
+                    $datos = Beneficiario::getBeneficiariosE(4)->paginate(10);                    
                     break;
             }
-
-            return view('Dashboard.Coordinador.beneficiarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado'], 'datos'));
+                    
+            return view('Dashboard.Coordinador.beneficiarios', compact(['seccion', 'estado'], 'datos', 'beneficiariosearch2', 'seccion'));
         }
     }
 
@@ -143,6 +149,13 @@ class DashboardCoordinadorController extends Controller
         } else {
             $seccion = $request->seccion;
         }
+
+        if (empty($request->estado)) {
+            $estado = $request->get('estado', '0');
+        } else {
+            $estado = $request->estado;
+        }
+
         if ($seccion == 1) {
             $monto_total_donaciones = Donacion::getMontoTotal();
             $total_donaciones = Donacion::all();
@@ -157,12 +170,23 @@ class DashboardCoordinadorController extends Controller
                         'total_donaciones',
                         'total_donaciones_semana',
                         'seccion',
-                        'programas'
+                        'programas',
+                        'estado'
                     ]
                 )
             );
         } else {
             $search = $request->input('search');
+            
+            
+
+            if (empty($request->estado)) {
+                $estado = $request->get('estado', '0');
+            } else {
+                $estado = $request->estado;
+            }
+
+            $seccion = $request->get('seccion', 2);
 
             $programas = ProgramaEducativo::when($search, function ($query, $search) {
                 return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
@@ -175,15 +199,8 @@ class DashboardCoordinadorController extends Controller
                     ->orWhere('estado', 'LIKE', '%' . $search . '%');
                 })
                     ->paginate(5);
-
-
-                if (empty($request->seccion)) {
-                    $seccion = $request->get('seccion', 1);
-                } else {
-                    $seccion = $request->seccion;
-                }
                 
-                return view('Dashboard.Coordinador.programas', compact(['seccion', 'programas']));
+                return view('Dashboard.Coordinador.programas', compact('seccion', 'programas', 'estado'));
         }
     }
     

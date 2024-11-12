@@ -22,17 +22,15 @@
     
 
 
+    <div class="bg-[#F6F8FF] w-full max-w-[95%] md:max-w-[1450px] h-auto my-6 p-4 md:p-8 shadow-lg rounded-2xl mx-auto">
+        @switch($seccion)
+            @case(1)
+                @include('Dashboard.Coordinador.layouts.sections.programas_list')
+            @break
 
-    @switch($seccion)
-        @case(1)
-            @include('Dashboard.Coordinador.layouts.sections.recursos-disponibles');
-        @break
-
-        @case(2)
-            @include('Dashboard.Coordinador.layouts.sections.recursos-programas');
-        @break
-
-        @default
-    @endswitch
-
+            @case(2)
+                @include('Dashboard.Coordinador.layouts.sections.programas_solicitudes')
+            @break
+        @endswitch
+    </div>
 </x-app-layout>

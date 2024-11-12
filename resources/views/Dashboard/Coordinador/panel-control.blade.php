@@ -3,6 +3,12 @@
         <x-alerts-component />
     </div>
 
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gray-100 rounded inline-block px-4 py-2">
+            {{ __('Panel de Control') }}
+        </h2>
+
+    </x-slot>
 
     <div class="bg-[#F6F8FF] w-full max-w-6xl m-12 mx-auto h-auto  px-12 shadow-lg rounded-[30px]">
     
@@ -17,7 +23,7 @@
 
 
             <div class="bg-white w-full lg:w-1/2 shadow-md p-6 rounded-lg h-[320px]">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Programas Educativos</h3>
+                <h3 class="text-center font-bold mb-4">Gráfico del estatus de Programas Educativos</h3>
                 <div class="max-w-[700px] max-h-[400px]">
                     <canvas id="programasChart"></canvas>
                 </div>
@@ -53,7 +59,7 @@
 {{--                     <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BA }}</p>
                     <h3 class="text-lg font-bold mb-2">BENEFICIARIOS ACTIVOS</h3>  --}}
                     <p class="text-3xl font-bold mt-4 text-green-500">{{ $total_BA }}</p>
-                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS</h3> 
+                    <h3 class="text-lg font-bold mb-2">BENEFICIARIOS</h3>
                 </div>
             </div>
     
@@ -99,15 +105,15 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Status</th>
-                        </tr>
+                            <th class="text-center rounded-l-lg">Nombre</th>
+                            <th class="text-center rounded-r-lg">Estatus</th>
+                       </tr>
                     </thead>
                     <tbody>
                         @foreach ($beneficiarios as $beneficiario)
                             <tr>
-                                <td class="text-center">{{ $beneficiario->user->name . ' ' . $beneficiario->user->apellido_paterno . ' ' . $beneficiario->user->apellido_materno }}</td>
-                                <td class="text-center"><i class='bx bx-check'></td>
+                                <td class="text-center">{{ $beneficiario->user->getFullName() }}</td>
+                                <td class="text-center">{{ $beneficiario->getEstadoDescripcion() }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -121,7 +127,7 @@
                     <canvas id="beneficiariosChart"></canvas> --}}
 
             <div class="bg-white shadow-md p-6 rounded-lg h-[250px]">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Beneficiarios</h3>
+                <h3 class="text-center font-bold mb-4">Gráfico del estatus de Beneficiarios</h3>
                 <div class="max-w-[700px] max-h-[400px]">
                     <canvas id="beneficiariosChart"></canvas>
                 </div>
@@ -142,9 +148,10 @@
             data: {
                 labels: ['Solicitud', 'En Revision', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'],
                 datasets: [{
-                    label: 'Estatus de Programas Educativos',
+                    label: ' Cantidad de Programas',
                     data: [ {{ $total_PS }}, {{ $total_PR }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PT }}, {{ $total_PC }}],
-                    backgroundColor: ['#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50', '#4CAF50'],
+                    backgroundColor: ['#4CAF50'],
+                    borderColor: ['#596475'],
                     borderWidth: 1
                 }]
             },
@@ -164,12 +171,12 @@
         const beneficiariosChart = new Chart(ctxIncome, {
             type: 'bar',
             data: {
-                labels: ['Activo', 'Inactivo', 'Solicitado', 'Suspendido'],
+                labels: ['Activo', 'Inactivo', 'Solicitado', 'Cancelado'],
                 datasets: [{
-                    label: 'Estatus de Beneficiarios',
+                    label: ' Cantidad de Beneficiarios',
                     data: [ {{ $total_BA }}, {{ $total_BI }}, {{ $total_BSO }}, {{ $total_BSU }} ],
-                    backgroundColor: 'rgba(54, 162, 235, 1)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: ['#1E96FC'],
+                    borderColor: ['#596475'],
                     borderWidth: 1
                 }]
             },

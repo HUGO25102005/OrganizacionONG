@@ -1,32 +1,86 @@
 <!-- Sección: Visualización de gráficos de flujo de caja -->
 <div class="mb-6">
-    <h2 class="text-2xl text-center font-bold mb-4">Nivel de exito de Beneficiarios</h2>
+    <h2 class="text-2xl text-center font-bold mb-4">Beneficiarios</h2>
     <br>
     <!-- Gráficos en un contenedor flex -->
     <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-        <!-- Gráfico 1: Ingresos mensuales -->
-        <div class="w-full lg:w-1/2 h-64 bg-gray-100 flex items-center justify-center">
-            <canvas id="programasChart"></canvas>
+        <!-- Gráfico 1: Estatus Programas Educativos -->
+        <div class="w-full lg:w-1/2 flex flex-col items-center">
+            <h3 class="text-center font-bold mb-4">Gráfico del estatus</h3>
+            <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
+                <canvas id="beneficiariosstChart"></canvas>
+            </div>
         </div>
         
-        <!-- Gráfico 2: Gastos mensuales -->
-        <div class="w-full lg:w-1/2 h-64 bg-gray-100 flex items-center justify-center">
-            <canvas id="programasChart"></canvas>
+        <!-- Gráfico 2: Estatus de Beneficiarios -->
+        <div class="w-full lg:w-1/2 flex flex-col items-center">
+            <h3 class="text-center font-bold mb-4">Gráfico del nivel educativo</h3>
+            <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
+                <canvas id="beneficiariostChart"></canvas>
+            </div>
         </div>
     </div>
-</div>
-
-
-<script>
     
-</script>
-<div class="container w-full mb-5 flex items-center justify-between">
-    <h2 class="text-left ml-20 font-semibold text-2xl md:text-3xl flex-grow">
-        Beneficiarios
-    </h2>
-    <form action="{{ route('coordinador.programas') }}" method="GET" id="search-form" class="relative">
-        <input type="text" name="search" placeholder="Buscar"
-            class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Gráfico de programas
+        const ctx = document.getElementById('beneficiariosstChart').getContext('2d');
+        const beneficiariosstChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Activo', 'Inactivo', 'Solicitado', 'Cancelado'],
+                datasets: [{
+                    label: ' Cantidad de Beneficiarios',
+                    data: [ {{ $total_BA }}, {{ $total_BI }}, {{ $total_BSO }}, {{ $total_BC }}],
+                    backgroundColor: ['#4CAF50'],
+                    borderColor: ['#596475'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        // Gráfico de beneficiarios
+        const ctxIncome = document.getElementById('beneficiariostChart').getContext('2d');
+        const beneficiariostChart = new Chart(ctxIncome, {
+            type: 'bar',
+            data: {
+                labels: ['Primaria', 'Secundaria', 'Bachillerato', 'Universidad'],
+                datasets: [{
+                    label: ' Cantidad de Beneficiarios',
+                    data: [ {{$total_BP}}, {{$total_BS}}, {{$total_BB}}, {{$total_BU}} ],
+                    backgroundColor: ['#1E96FC'],
+                    borderColor: ['#596475'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+<br><br><br><br>
+
+<div class="container w-full mb-5 flex relative">
+    <form action="{{ route('coordinador.beneficiarios') }}" method="GET" id="search-form" class="absolute right-6 bottom-2">
+        <input type="text" id="search" name="search" placeholder="Buscar"
+            class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('search', request()->input('search')) }}" />
         <i class="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
     </form>
 </div>
@@ -39,9 +93,10 @@
         {{-- FIN CONDICION DE MODALS Y FORMS --}}
 
         <div class="overflow-x-auto">
-            <table class="admin-table w-full mt-6 bg-white rounded-lg">
-                <thead class="bg-[#bbdefb] text-black">
+            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
+                <thead class="bg-[#BBDEFB] text-black">
                     <tr>
+                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Número</th>
                         <th class="py-3 px-2 md:px-4">Nombre completo</th>
                         <th class="py-3 px-2 md:px-4">Correo electrónico</th>
                         <th class="py-3 px-2 md:px-4">Nivel Educativo</th>
@@ -51,107 +106,39 @@
                 </thead>
                 
                 <tbody>
-                    @if ($rol != 'Beneficiario')
-                        @include('Dashboard.Coordinador.layouts.tables.tbody.tb_trabajadores')
-                    @else
-                        @include('Dashboard.Coordinador.layouts.tables.tbody.tb_beneficiario')
-                    @endif
+                    @switch($estado)
+                        @case(0)
+                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_todos')
+                            @break
+                        @case(1)
+                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_activo')                            
+                            @break
+                        @case(2)
+                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_inactivo')                            
+                            @break    
+                    @endswitch
                 </tbody>
             </table>
         </div>
 
-        <!-- Coordinadores Tab -->
-        {{-- <div id="coordinadores" class="tab-content">
-            <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
-                <h2 class="admin-title">Lista de coordinadores</h2>
-                <button
-                    class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full shadow-md hover:bg-gray-100">
-                    <i class='bx bx-user-plus mr-2'></i> Agregar coordinador
-                </button>
-            </div>
-
-            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
-                <thead class="bg-[#2A334B] text-white">
-                    <tr>
-                        <th class="py-3 px-4">Número</th>
-                        <th class="py-3 px-4">Nombre completo</th>
-                        <th class="py-3 px-4">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-300">
-                        <td class="py-3 px-4 text-center">1</td>
-                        <td class="py-3 px-4 text-center">Juan Pérez</td>
-                        <td class="py-3 px-4 text-center">
-                            <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                            <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Voluntarios Tab -->
-        <div id="voluntarios" class="tab-content">
-            <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
-                <h2 class="admin-title text-lg">Lista de voluntarios</h2>
-                <button
-                    class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-fullover:bg-gray-100">
-                    <i class='bx bx-user-plus mr-2'></i> Agregar voluntario
-                </button>
-            </div>
-
-            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg border-collapse">
-                <thead class="bg-[#2A334B] text-white">
-                    <tr>
-                        <th class="py-3 px-4">Número</th>
-                        <th class="py-3 px-4">Nombre completo</th>
-                        <th class="py-3 px-4">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-300">
-                        <td class="py-3 px-4 text-center">1</td>
-                        <td class="py-3 px-4 text-center">Ana Gómez</td>
-                        <td class="py-3 px-4 text-center">
-                            <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                            <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Beneficiarios Tab -->
-        <div id="beneficiarios" class="tab-content">
-            <div class="admin-header flex justify-between items-center bg-[#2A334B] text-white py-4 px-6 rounded-lg">
-                <h2 class="admin-title text-lg">Lista de beneficiarios</h2>
-                <button
-                    class="add-admin-button flex items-center bg-white text-[#2A334B] py-2 px-4 rounded-full hover:bg-gray-100">
-                    <i class='bx bx-user-plus mr-2'></i> Agregar beneficiario
-                </button>
-            </div>
-
-            <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg ">
-                <thead class="bg-[#2A334B] text-white">
-                    <tr>
-                        <th class="py-3 px-4">Número</th>
-                        <th class="py-3 px-4">Nombre completo</th>
-                        <th class="py-3 px-4">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-300">
-                        <td class="py-3 px-4 text-center">1</td>
-                        <td class="py-3 px-4 text-center">Luis Martínez</td>
-                        <td class="py-3 px-4 text-center">
-                            <button class="mr-2 text-blue-500 text-xl"><i class='bx bx-show'></i></button>
-                            <button class="delete-button text-red-500 text-xl"><i class='bx bx-trash'></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> --}}
         {{ $datos->links() }}
+        @if ($beneficiariosearch)
+            {{ $beneficiariosearch->links() }}
+        @endif
+    </div>
 </div>
 
+<script>
+    document.getElementById('search').addEventListener('click', function () {
+        // Guarda la posición de scroll actual
+        localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Restaura la posición de scroll después de recargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('scrollPosition') !== null) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            localStorage.removeItem('scrollPosition'); // Elimina el valor después de restaurarlo
+        }
+    });
+</script>

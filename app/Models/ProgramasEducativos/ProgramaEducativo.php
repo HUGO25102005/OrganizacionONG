@@ -36,7 +36,7 @@ class ProgramaEducativo extends Model
     public static function getProgramasActivos(){
         return self::where('estado', 4)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->take(5);
     }
 
     public static function getTotalProgramas($estado){

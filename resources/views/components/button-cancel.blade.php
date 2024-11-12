@@ -1,7 +1,7 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
     <button @click="open = true" class="ml-2 text-black text-2xl bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-500">
-        <i class='bx bx-trash'></i>
+        <i class='bx bx-x-circle'></i>
     </button>    
 
     <!-- Modal de confirmación -->
