@@ -13,7 +13,7 @@
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
         
         <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
-            <h1 class="text-[45px] font-sans font-medium">InspierUp te da la bienvenida.</h1>
+            <h1 class="text-[45px] font-sans font-medium">InspireUp te da la bienvenida.</h1>
         </div>
         <div class="flex justify-center items-center gap-[30px] pb-[10px]"> 
             <h2 class="text-[24px] font-sans font-extralight">Buen día, {{ session('name') }}!</h2>

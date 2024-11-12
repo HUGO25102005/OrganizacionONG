@@ -19,7 +19,7 @@ class DashboardVolunController extends Controller
 
         
 
-        $seccion = 1;
+        $seccion = 2;
 
         return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
     }
@@ -27,7 +27,7 @@ class DashboardVolunController extends Controller
     {
 
         
-        $seccion = 1;
+        $seccion = 2;
         return view('Dashboard.Voluntario.nueva_clase', compact(['seccion']));
     }
 }
