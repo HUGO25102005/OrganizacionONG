@@ -40,5 +40,5 @@
         </div>
 
         {{ $datos->links() }}
-    </div>
+</div>
 

@@ -236,7 +236,7 @@
                 contribuyendo a la construcción de un futuro más equitativo y próspero.</p>
 
             <!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
-            <div id="donate-button-container"></div>
+            <!--<div id="donate-button-container"></div>
             <div id="donate-button"></div>
             <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
             <script>
@@ -252,7 +252,23 @@
                         title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
                     }
                 }).render('#donate-button');
-            </script>
+            </script>-->
+            <!-- Botón de donar con sandbox -->
+            <div id="donate-button-container">
+              <div id="donate-button"></div>
+              <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+              <script>
+                PayPal.Donation.Button({
+                  env:'sandbox',
+                  hosted_button_id:'ZL8G9R6KRJUSN',
+                  image: {
+                    src: "{{asset('images/donar.png')}}",
+                    alt:'Donar con el botón PayPal',
+                    title:'PayPal - La forma mas fácil y segura de pagar en línea!',
+                  }
+                }).render('#donate-button');
+              </script>
+            </div>              
         </div>
         </div>
     </section>

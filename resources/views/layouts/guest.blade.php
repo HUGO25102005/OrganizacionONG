@@ -27,11 +27,7 @@
 
                 <h2 class="text-2xl mb-2 text-gray-800 text-center">Bienvenido</h2>
                 <h4 class="text-lg mb-8 text-gray-500 text-center">Inicie sesión</h4>
-
-                
                     {{ $slot }}
-                
-                
             </div>
         </div>
     </div>

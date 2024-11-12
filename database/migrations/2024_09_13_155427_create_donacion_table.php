@@ -86,5 +86,6 @@ return new class extends Migration
         Schema::dropIfExists('convocatorias');
         Schema::dropIfExists('producto_solicitado');
         Schema::dropIfExists('donacion');
+        Schema::dropIfExists('convocatorias_donacion');
     }
 };

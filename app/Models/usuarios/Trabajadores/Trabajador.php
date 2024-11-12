@@ -3,6 +3,7 @@
 namespace App\Models\Usuarios\Trabajadores;
 
 use App\Models\User;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,6 +66,11 @@ class Trabajador extends Model
     public function coordinador()
     {
         return $this->hasOne(Coordinador::class, 'id_trabajador');
+    }
+
+    public function beneficiario()
+    {
+        return $this->hasOne(Beneficiario::class, 'id_user');
     }
 
     public function voluntario()

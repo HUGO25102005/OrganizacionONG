@@ -37,7 +37,7 @@ class DashboardAdminController extends Controller
 
         $total_ingresos = Donacion::getMontoTotal();
         $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getTotalProgramasActivos();
+        $programas_activos = ProgramaEducativo::getTotalProgramas(4);
         $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
         $actividades_registradas = RegistroActividades::getTotalActividades();
         $total_beneficiarios = Beneficiario::getTotalBeneficiarios();

@@ -24,6 +24,7 @@ return new class extends Migration
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade')
                                 ->comment('Clave foranea de voluntario');
+            $table->string('nombre', 70);
             $table->date('fecha_actividad');
             $table->text('descripcion_actividad');
             $table->text('resultados_actividad');

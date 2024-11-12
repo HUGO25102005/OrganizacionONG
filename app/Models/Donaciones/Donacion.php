@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\DB;
 class Donacion extends Model
 {
     use HasFactory;
-    // Especifica la tabla si el nombre no sigue la convención plural
+    
+    protected $table = 'donacion';
+    protected $fillable = ['id_transaccion', 'payer_id', 'currency', 'monto'];
+
+    /*// Especifica la tabla si el nombre no sigue la convención plural
     protected $table = 'donacion';
 
     // Define los atributos que se pueden asignar masivamente
@@ -20,7 +24,7 @@ class Donacion extends Model
         'id_donante',
         'currency',
         'monto',
-    ];
+    ];*/
 
     public static function getMontoTotal()
     {

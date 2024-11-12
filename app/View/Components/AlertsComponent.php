@@ -20,4 +20,3 @@ class AlertsComponent extends Component
         return view('components.alerts-component');
     }
 }
-

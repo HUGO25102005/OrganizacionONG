@@ -16,6 +16,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        if (Auth::check()) {
+            // Redirigir a la ruta del dashboard si ya está autenticado
+            return redirect()->route('admin.home'); // Cambia esto según tu lógica de redirección
+        }
         return view('auth.login');
     }
 
@@ -39,7 +43,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->trabajador && $user->trabajador->administrador) {
             return redirect()->intended(route('admin.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->coordinador) {
-            return redirect()->intended(route('cordi.home'))->with('success', 'Sesión iniciada correctamente');
+            return redirect()->intended(route('coordinador.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->voluntario) {
             return redirect()->intended(route('vol.home'))->with('success', 'Sesión iniciada correctamente');
         } else {
