@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Administrador\DashboardAdminController;
+use App\Http\Controllers\Dashboard\Beneficiario\DashboardBeneficiarioController;
 use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\TrabajadorController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
 use App\Http\Middleware\AuthSessionActive;
+use App\Http\Middleware\CheckBeneficiario;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +76,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
     });
+
+    //* Rutas del Dashboard Beneficiario
+    Route::middleware([CheckBeneficiario::class])->prefix('dashboard/beneficiario')->group(function () {
+        Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
+        Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
+        Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
+    });
+
+
 });
 
 //TODO: RUTAS DE LINING PAGE

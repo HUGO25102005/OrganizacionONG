@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
 use App\Models\Usuarios\Trabajadores\Trabajador;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,4 +70,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Trabajador::class, 'id_user');
     }
+
+    public function beneficiario()
+    {
+        return $this->hasOne(Beneficiario::class, 'id_user');
+    }
+
+
 }
