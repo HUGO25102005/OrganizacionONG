@@ -73,7 +73,7 @@ class DashboardAdminController extends Controller
             $total_donaciones_semana = Donacion::getTotalMontoSemana();
             $total_donaciones_mes = Donacion::getTotalMontoMes();
             $topDonadantes = Donacion::getTopDonadores();
-            
+
             return view(
                 'Dashboard.Admin.donaciones',
                 compact(
@@ -96,7 +96,7 @@ class DashboardAdminController extends Controller
             } else {
                 $estado = $request->estado;
             }
-            
+
             $searchTerm = $request->search;
 
             $convocatoriasActivas = Convocatoria::getTotalConvocatoriasPorEstado(1);
@@ -106,7 +106,7 @@ class DashboardAdminController extends Controller
             $totProductSolici = Convocatoria::getTotalProductosSolicitdos();
             $totProductRecaudados = Recaudacion::getTotalProductosRecaudados();
             $totRegisRecau = Recaudacion::getTotalRegistros();
-            $porcentajeRecaudacion = ($totProductRecaudados * 100) / $totProductSolici;
+            $porcentajeRecaudacion = $totProductRecaudados == 0 ? 0 : ($totProductRecaudados * 100) / $totProductSolici;
             // dd($totProductSolici);
             return view(
                 'Dashboard.Admin.donaciones',
@@ -371,6 +371,36 @@ class DashboardAdminController extends Controller
                             }
                         })
                         ->paginate(10);  // Paginamos los resultados
+                    break;
+                case 'Voluntario':
+                    $datos = Voluntario::when($search, function ($query, $search) {
+                        // Si hay un término de búsqueda, filtramos por el nombre del Voluntario
+                        return $query->whereHas('trabajador.user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
+                    })
+                        ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
+                            // Filtramos según el estado, fecha de creación, etc.
+                            $query->where('estado', '=', intval($estado));
+
+                            if ($fecha_inicio) {
+                                $query->where('created_at', '>=', $fecha_inicio);
+                            }
+
+                            if ($fecha_fin) {
+                                $query->where('created_at', '<=', $fecha_fin);
+                            }
+                        })
+                        ->paginate(10);
                     break;
                 default:
                     $datos = collect();

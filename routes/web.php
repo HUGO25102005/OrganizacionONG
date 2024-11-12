@@ -36,6 +36,8 @@ Route::get('/', function () {
 })->middleware(AuthSessionActive::class);
 
 //*Rutas de perfil existentes de Breeze
+
+
 //TODO: RUTAS DE DASHBOARDS
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -75,6 +77,7 @@ Route::middleware('auth')->group(function () {
     
     });
 
+    //* Rutas del Dashboard Coordinador
     Route::middleware([CheckCoordinador::class])->prefix('dashboard/coordinador')->group(function () {
         Route::get('/home', [DashboardCoordinadorController::class, 'home'])->name('coordinador.home');
         Route::get('/panelControl', [DashboardCoordinadorController::class, 'panelControl'])->name('coordinador.panelControl');
