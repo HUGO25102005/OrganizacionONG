@@ -5,6 +5,22 @@
 
 <!-- Contenedor de las alertas -->
 <div id="alert-container" class="fixed top-4 right-4 flex flex-col space-y-4 z-50">
+    <!-- Mostrar errores de validación -->
+    @if ($errors->any())
+        <div
+            class="alert w-80 p-4 rounded-lg shadow-lg relative bg-red-100 border border-red-400 text-red-700 animate-fade-in">
+            <button class="close-alert absolute top-2 right-2 text-lg font-bold text-gray-500 hover:text-gray-700">
+                &times;
+            </button>
+            <div class="font-bold text-lg mb-1">Errores de validación:</div>
+            <ul class="list-disc pl-4">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- Recorrer las claves de mensajes flash -->
     @foreach ($flashTypes as $type)
         @if (session()->has($type))
@@ -21,42 +37,14 @@
                 </button>
 
                 <!-- Contenido de la alerta -->
-                {{-- <div class="font-bold text-lg mb-1">
-                    {{ ucfirst($type) }}:
-                </div> --}}
                 <p>{{ session($type) }}</p>
             </div>
         @endif
     @endforeach
 </div>
 
+
 <style>
-    /* Añadir animación suave de aparición */
-    /* @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    } */
-
-    /* Animación de desvanecimiento */
-    /* @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        to {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-    } */
-
     .animate-fade-in {
         animation: fadeIn 0.5s ease forwards;
     }

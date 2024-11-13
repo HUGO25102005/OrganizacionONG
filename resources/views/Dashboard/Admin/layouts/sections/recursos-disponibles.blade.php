@@ -5,7 +5,7 @@
         <h2 class="text-2xl font-bold mb-4">Recursos disponibles</h2>
     
         <!-- Tarjetas de recursos disponibles -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Tarjeta 1 -->
             <div class="bg-white p-6 pl-10 rounded-lg shadow-md border-l-4 border-yellow-500">
                 <h3 class="text-lg font-bold mb-2">Programa A</h3>
@@ -33,7 +33,7 @@
                 <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">250</span></p>
                 <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">$100,000</span></p>
             </div>
-        </div>
+        </div> --}}
     </div>
     
 

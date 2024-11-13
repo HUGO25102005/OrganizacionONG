@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Voluntario;
+namespace App\Http\Controllers\Dashboard\Beneficiario;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardVolunController extends Controller
+class DashboardBeneficiarioController extends Controller
 {
     public function home()
     {
 
         session(['name' => auth()->user()->name, 'rol' => 'Voluntario', 'id' => auth()->user()->id]);
 
-        return view('Dashboard.Voluntario.index');
+        return view('Dashboard.Beneficiario.index');
     }
     public function misClases()
     {
@@ -21,13 +21,13 @@ class DashboardVolunController extends Controller
 
         $seccion = 2;
 
-        return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
+        return view('Dashboard.Beneficiario.mis_clases', compact(['seccion']));
     }
     public function nuevaClase()
     {
 
         
         $seccion = 2;
-        return view('Dashboard.Voluntario.nueva_clase', compact(['seccion']));
+        return view('Dashboard.Beneficiario.nueva_clase', compact(['seccion']));
     }
 }

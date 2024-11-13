@@ -10,6 +10,7 @@
                 class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-transform duration-200 hover:scale-110">
                 <option value="Administrador" {{ $rol == 'Administrador' ? 'selected' : ''}}>Administrador</option>
                 <option value="Coordinador" {{ $rol == 'Coordinador' ? 'selected' : ''}}>Coordinador</option>
+                <option value="Voluntario" {{ $rol == 'Voluntario' ? 'selected' : ''}}>Voluntario</option>
             </select>
         </div>
 
