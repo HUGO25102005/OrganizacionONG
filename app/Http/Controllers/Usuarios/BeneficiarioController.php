@@ -3,11 +3,45 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Usuarios\StoreBeneficiarioRequest;
+use App\Models\User;
 use App\Models\Usuarios\Beneficiarios\Beneficiario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class BeneficiarioController extends Controller
 {
+    
+    public function store(StoreBeneficiarioRequest $request)
+    {
+        // Creación del usuario
+        $user = User::create([
+            'name' => $request->name,
+            'apellido_paterno' => $request->apellido_paterno,
+            'apellido_materno' => $request->apellido_materno,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'pais' => $request->pais,
+            'estado' => $request->estado,
+            'municipio' => $request->municipio,
+            'cp' => $request->cp,
+            'direccion' => $request->direccion,
+            'genero' => $request->genero,
+            'telefono' => $request->telefono,
+        ]);
+
+        // Creación del administrador vinculado al trabajador
+        $beneficiario = Beneficiario::create([
+            'id_user' => $user->id,  // Relación con el trabajador recién creado
+            'estado' => 3,  // Estado solicitado por defecto
+            'nivel_educativo' => $request->nivel_educativo,
+            'ocupacion' => $request->ocupacion,
+            'num_dependientes' => 0,
+            'ingresos_mensuales' => $request->ingresos_mensuales
+        ]);
+    }
+
     public function aceptarSolicitudBeneficiario(Request $request){
 
         $idBeneficiario = $request->id;

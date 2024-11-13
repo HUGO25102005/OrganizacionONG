@@ -120,8 +120,9 @@
                 </tbody>
             </table>
         </div>
-
-        {{ $datos->links() }}
+        @if($datos)
+            {{ $datos->links() }}
+        @endif
         @if ($beneficiariosearch)
             {{ $beneficiariosearch->links() }}
         @endif

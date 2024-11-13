@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Usuarios\StoreCoordinadorRequest;
 use App\Http\Requests\Usuarios\CoordinadorRequest;
 use App\Models\User;
 use App\Models\Usuarios\Trabajadores\Coordinador;
@@ -67,6 +68,39 @@ class CoordinadorController extends Controller
         ]);
 
         return redirect()->route('admin.usuarios')->with('success', 'Coordinador creado exitosamente. Puedes revisarlo en la sección Usuarios > Solicitudes > Rol > Coordinador.');
+    }
+
+    public function store1(StoreCoordinadorRequest $request)
+    {
+        // Creación del usuario
+        $user = User::create([
+            'name' => $request->name,
+            'apellido_paterno' => $request->apellido_paterno,
+            'apellido_materno' => $request->apellido_materno,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'pais' => $request->pais,
+            'estado' => $request->estado,
+            'municipio' => $request->municipio,
+            'cp' => $request->cp,
+            'direccion' => $request->direccion,
+            'genero' => $request->genero,
+            'telefono' => $request->telefono,
+        ]);
+
+        // Creación del trabajador vinculado a este usuario
+        $trabajador = Trabajador::create([
+            'id_user' => $user->id,  // Relación con el usuario recién creado
+            'estado' => 3,  // Estado solicitado por defecto
+            'hora_inicio' => $request->hora_inicio,
+            'hora_fin' => $request->hora_fin,
+        ]);
+
+        // Creación del administrador vinculado al trabajador
+        $coordinador = Coordinador::create([
+            'id_trabajador' => $trabajador->id,  // Relación con el trabajador recién creado
+        ]);
     }
 
     /**

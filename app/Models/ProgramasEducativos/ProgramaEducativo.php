@@ -35,12 +35,18 @@ class ProgramaEducativo extends Model
 
     public static function getProgramasActivos(){
         return self::where('estado', 4)
-            ->orderBy('created_at', 'desc')
-            ->take(5);
+            ->orderBy('created_at', 'desc');
     }
+
+
 
     public static function getTotalProgramas($estado){
         return self::where('estado', $estado)->count();
+    }
+    
+    public function getTotalBeneficiarios(){
+        $id= $this->id;
+        return SalonesClase::where('id_programa_educativo', $id)->count();
     }
     
     public static function getTotalSolicitudesProgramas(){

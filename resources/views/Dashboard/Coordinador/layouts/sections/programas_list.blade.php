@@ -1,15 +1,22 @@
+@php
+    // Arreglo de colores
+    $colores = ['border-red-400', 'border-blue-400', 'border-green-400', 'border-yellow-400'];
+@endphp
+
 <div class="mb-6">
-    <h2 class="text-2xl text-center mt-4 font-bold mb-4">Programas disponibles</h2> 
+    <h2 class="text-2xl text-center mt-4 font-bold mb-4">Programas disponibles</h2>
+    <br> 
     <!-- Contenedor principal del carrusel -->
     <!-- Contenedor principal del carrusel -->
     <div class="overflow-hidden relative">
         <!-- Carrusel con desplazamiento horizontal -->
         <div id="carousel" class="flex space-x-6 overflow-x-auto mb-12 snap-x snap-mandatory scroll-smooth transition-transform duration-500 ease-in-out">
             @foreach ($programas as $programa)
-                <div class="bg-white min-w-[250px] sm:min-w-[300px] p-6 rounded-lg shadow-md border-l-4 border-{{ $programa->color }} snap-center">
-                    <h3 class="text-lg font-bold mb-2">{{ $programa->nombre }}</h3>
-                    <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">{{ $programa->beneficiarios }}</span></p>
-                    <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">${{ number_format($programa->recursos) }}</span></p>
+                <div class="bg-white min-w-[250px] sm:min-w-[300px] p-6 rounded-lg shadow-lg border-l-8 {{ $colores[$loop->index % count($colores)] }} snap-center">
+                    <h3 class="text-lg font-bold mb-2">{{ $programa->nombre_programa }}</h3>
+                    <p class="text-gray-500 mb-2">Impartido por: <span class="font-semibold">{{ $programa->voluntario->trabajador->user->name }}</span></p>
+                    <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
+                    <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">${{ number_format($programa->presupuesto->monto) }}</span></p>
                 </div>
             @endforeach
         </div>
@@ -107,7 +114,7 @@
     </div>
 </div>
 
-{{-- <style>
+<style>
     /* Oculta la barra de desplazamiento */
 #carousel {
     scrollbar-width: none; /* Firefox */
@@ -117,7 +124,7 @@
     display: none; /* Chrome, Safari y Edge */
 }
 
-</style> --}}
+</style>
 <script>
     const carousel = document.getElementById('carousel');
     const indicatorsContainer = document.getElementById('indicators');
