@@ -1,5 +1,3 @@
-<!--solicitudes-->
-
 <x-app-layout>
     <div class="alert alert-success">
         <x-alerts-component />
