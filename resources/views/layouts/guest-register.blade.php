@@ -18,7 +18,7 @@
 </head>
 
 <body class="flex justify-center items-center min-h-screen m-0 bg-cover bg-center"
-    style="background-image: url('{{ asset('storage/image/fofondo3.jpg') }}');">
+    style="background-image: url('{{ asset('storage/images/fofondo3.jpg') }}');">
 
     <div class="relative w-[90vw] h-[90vh] md:w-[700px] md:h-[800px] flex justify-center items-center">
         <div class="absolute w-[100vw] h-[100vh] md:w-[850px] md:h-[950px] bg-white shadow-lg flex justify-center items-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">

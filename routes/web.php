@@ -126,6 +126,8 @@ Route::group(['prefix' => 'page'], function () {
     Route::prefix('colabora')->group(function () {
         Route::get('/', [ColaboraController::class, 'index'])->name('colabora.index');
         Route::post('/solicitudes/voluntario', [ColaboraController::class, 'storeVoluntario'])->name('vol.store');
+        Route::post('/solicitudes/beneficiario', [ColaboraController::class, 'storeBeneficiario'])->name('beneficiario.store');
+        Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coordinador.store');
     });
 
 
