@@ -132,7 +132,9 @@
                     <canvas id="beneficiariosChart"></canvas>
                 </div>
             </div>
-    
+            @if ($programas_activos)
+                {{ $programas_activos->links() }}
+            @endif
         </div>
 
 <!-- Botón flotante de soporte -->
