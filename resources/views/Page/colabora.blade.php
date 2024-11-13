@@ -21,10 +21,8 @@
         <div class="content">
             <h1>Se parte de esta experiencia</h1>
             <p>Toma cursos de tu interés de forma gratuita</p>
-            <!-- Botón para abrir el modal -->
-            <button class="experience-donate" onclick="openModal()">
-                <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img">
-            </button>
+            {{-- Beneficiarios --}}
+            @include('Page.layouts.modals.modal_nuevo_beneficiario')
         </div>
         <div class="image">
             <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop">
@@ -50,9 +48,8 @@
             <h1>Se parte de nuestro soporte de coordinación</h1>
             <p>Toma cursos de tu interés de forma gratuita</p>
             <!-- Botón para abrir el modal -->
-            <button class="experience-donate" onclick="openCoordinatorModal()">
-                <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img">
-            </button>
+            {{-- Coordinador --}}
+            @include('Page.layouts.modals.modal_nuevo_coordinador')
 
         </div>
         <div class="image">

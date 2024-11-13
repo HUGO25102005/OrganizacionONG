@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Usuarios\BeneficiarioController;
+use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
+use App\Http\Requests\Usuarios\CoordinadorRequest;
+use App\Http\Requests\Usuarios\StoreBeneficiarioRequest;
 use App\Http\Requests\Usuarios\StoreVoluntarioRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ColaboraController extends Controller
 {
@@ -17,22 +22,6 @@ class ColaboraController extends Controller
         $linkActive = 4;
         return view('Page.colabora', compact('linkActive'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
     public function storeVoluntario(StoreVoluntarioRequest $request)
     {
 
@@ -41,36 +30,25 @@ class ColaboraController extends Controller
 
         return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function storeBeneficiario(StoreBeneficiarioRequest $request)
     {
-        //
+
+        $benController = new BeneficiarioController();
+        $benController->store($request);
+
+        // dd($benController);
+        return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
+    }
+    public function storeCoordinador(CoordinadorRequest $request)
+    {
+        
+        
+        // dd($request);
+        $coordinadorController = new CoordinadorController();
+        $coordinadorController->store($request);
+
+        // dd($benController);
+        return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

@@ -15,11 +15,9 @@ class AuthSessionActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         if(auth()->check()){
             $user = auth()->user();
             if ($user->trabajador) {
-                
                 if ($user->trabajador->administrador) {
                     return redirect()->route('admin.home');
                 } elseif ($user->trabajador->coordinador) {
@@ -27,6 +25,8 @@ class AuthSessionActive
                 } elseif ($user->trabajador->voluntario) {
                     return redirect()->route('vol.home');
                 }
+            } else if ($user->beneficiario) {
+                return redirect()->route('ben.home');
             }
         }
         return $next($request);

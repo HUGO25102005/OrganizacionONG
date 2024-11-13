@@ -23,17 +23,6 @@ class CoordinadorController extends Controller
         return view('Dashboard.Coordinador.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
- 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CoordinadorRequest $request)
     {
         // Creación del usuario
@@ -67,37 +56,5 @@ class CoordinadorController extends Controller
         ]);
 
         return redirect()->route('admin.usuarios')->with('success', 'Coordinador creado exitosamente. Puedes revisarlo en la sección Usuarios > Solicitudes > Rol > Coordinador.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

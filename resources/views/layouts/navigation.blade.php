@@ -6,10 +6,12 @@
                 @switch(session('rol'))
                     @case('Administrador')
                         @include('layouts.sections.nav_admin')
-                        @break
+                    @break
+
                     @case('Coordinador')
                         @include('layouts.sections.nav_coordinador')
-                        @break
+                    @break
+
                     @case('Voluntario')
                         @include('layouts.sections.nav_voluntario')
                     @break
@@ -83,18 +85,15 @@
                 @break
 
                 @case('Coordinador')
-                    <x-responsive-nav-link :href="route('coordinador.home')" :active="request()->routeIs('coordinador.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_coordinador')
                 @break
 
                 @case('Voluntario')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_voluntario')
                 @break
 
                 @default
+                    @include('layouts.sections.nav_responsive_beneficiario')
             @endswitch
 
         </div>

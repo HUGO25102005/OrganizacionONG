@@ -10,7 +10,7 @@ class DashboardBeneficiarioController extends Controller
     public function home()
     {
 
-        session(['name' => auth()->user()->name, 'rol' => 'Voluntario', 'id' => auth()->user()->id]);
+        session(['name' => auth()->user()->name, 'rol' => 'Beneficiario', 'id' => auth()->user()->id]);
 
         return view('Dashboard.Beneficiario.index');
     }
