@@ -14,20 +14,29 @@ class DashboardVolunController extends Controller
 
         return view('Dashboard.Voluntario.index');
     }
-    public function misClases()
+    public function misClases(Request $request)
     {
 
-        
+        // dd($request);
 
-        $seccion = 2;
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+        } else {
+            $seccion = $request->seccion;
+        }
+
+        // dd($seccion);
 
         return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
     }
-    public function nuevaClase()
+    public function nuevaClase(Request $request)
     {
-
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+        } else {
+            $seccion = $request->seccion;
+        }
         
-        $seccion = 2;
         return view('Dashboard.Voluntario.nueva_clase', compact(['seccion']));
     }
 }
