@@ -137,8 +137,8 @@
 
 <!-- Botón flotante de soporte -->
 <div class="fixed bottom-5 right-5 z-50">
-    <button onclick="toggleSupport()" class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center">
-        <i class='bx bx-help-circle text-2xl'></i>
+    <button onclick="toggleSupport()" class="bg-slate-700 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-slate-600 flex items-center justify-center">
+        <i class='bx bx-message-square-dots text-2xl'></i>
     </button>
 </div>
 
@@ -159,7 +159,7 @@
 
     <div class="flex-1 overflow-y-auto space-y-4 max-h-[450px] p-2">
         <!-- Mensaje de bienvenida del soporte -->
-        <div class="bg-gray-100 p-3 rounded-lg shadow max-w-xs">
+        <div class="bg-gray-100 p-2 items-center justify-items rounded-full shadow max-w-xs">
             <p class="text-sm text-gray-700">¡Hola! ¿En qué podemos ayudarte?</p>
         </div>
         <!-- Espacio para los mensajes -->
@@ -168,8 +168,8 @@
 
     <!-- Formulario para enviar el mensaje -->
     <form id="supportForm" onsubmit="sendMessage(event)" class="flex items-center space-x-2 pt-2 border-t">
-        <textarea name="message" id="userMessage" placeholder="Escribe tu mensaje..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-blue-500 resize-none" rows="1"></textarea>
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 flex items-center justify-center">
+        <textarea name="message" id="userMessage" placeholder="Escribe tu mensaje..." class="w-full p-3 border rounded-full focus:outline-none focus:border-blue-500 resize-none" rows="1"></textarea>
+        <button type="submit" class="bg-blue-500 text-white h-10 w-10 rounded-full hover:bg-blue-600 flex items-center justify-center">
             <i class="fa-solid fa-check text-xl"></i> <!-- Icono de check para enviar -->
         </button>
     </form>
@@ -199,7 +199,7 @@
         // Crear la burbuja del mensaje del usuario
         if (userMessage.trim() !== "") {
             const messageBubble = document.createElement('div');
-            messageBubble.classList.add('bg-blue-500', 'text-white', 'p-3', 'rounded-lg', 'shadow', 'self-end', 'max-w-xs');
+            messageBubble.classList.add('bg-blue-500', 'text-white', 'p-2', 'rounded-full', 'shadow', 'self-end', 'max-w-xs');
             messageBubble.innerHTML = `<p class="text-sm">${userMessage}</p>`;
 
             // Agregar el mensaje al contenedor del chat
