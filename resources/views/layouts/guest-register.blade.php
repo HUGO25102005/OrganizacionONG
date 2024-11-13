@@ -18,12 +18,12 @@
 </head>
 
 <body class="flex justify-center items-center min-h-screen m-0 bg-cover bg-center"
-    style="background-image: url('{{ asset('storage/image/fofondo3.jpg') }}');">
+    style="background-image: url('{{ asset('storage/images/fofondo3.jpg') }}');">
 
     <div class="relative w-[90vw] h-[90vh] md:w-[700px] md:h-[800px] flex justify-center items-center">
-        <div class="absolute w-[100vw] h-[100vh] md:w-[850px] md:h-[950px] bg-white shadow-lg flex justify-center items-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+        <div class="absolute w-[100vw] h-[100vh] md:w-[850px] md:h-[950px] bg-sky-900 shadow-lg flex justify-center items-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
 
-            <div class="w-[80vw] h-auto md:w-[400px] md:h-auto bg-[#DDE3E7] rounded-[3%] shadow-[0px_0px_15px_1px_rgba(105,105,105,1)] flex flex-col justify-center items-center p-5">
+            <div class="w-[80vw] h-auto md:w-[400px] md:h-auto  rounded-[3%] shadow-[0px_0px_15px_1px_rgba(105,105,105,1)] flex flex-col justify-center items-center p-5" style="background-color: #f2f2ff;">
 
                 <h2 class="text-2xl mb-2 text-gray-800 text-center">Bienvenido</h2>
                 <h4 class="text-lg mb-4 text-gray-500 text-center">Inicie sesión</h4>
