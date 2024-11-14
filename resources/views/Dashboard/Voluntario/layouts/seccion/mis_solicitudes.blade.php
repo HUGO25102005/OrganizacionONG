@@ -5,22 +5,36 @@
                 <th class="px-3 py-4">Id</th>
                 <th class="px-6 py-4">Nombre</th>
                 <th class="px-6 py-4">Fecha envío</th>
+                <th class="px-6 py-4">Información</th>
+                <th class="px-6 py-4">Presupuesto</th>
                 <th class="px-6 py-4">Estado</th>
             </tr>
         </thead>
         <tbody class="text-gray-700">
             <tr class="border-b hover:bg-blue-50">
-                <td class="px-3 py-4 text">1</td>
+                <td class="px-3 py-4">1</td>
                 <td class="px-6 py-4">Aprendiendo divertido</td>
                 <td class="px-6 py-4">2024-10-15</td>
+                <td class="px-6 py-4">
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Detalles</span>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">$500</span>
+                </td>
                 <td class="px-6 py-4">
                     <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aceptado</span>
                 </td>
             </tr>
             <tr class="border-b hover:bg-blue-50">
                 <td class="px-3 py-4">2</td>
-                <td class="px-6 py-4">Follando</td>
+                <td class="px-6 py-4">Cantando</td>
                 <td class="px-6 py-4">2024-10-20</td>
+                <td class="px-6 py-4">
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Detalles</span>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">$300</span>
+                </td>
                 <td class="px-6 py-4">
                     <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">En espera</span>
                 </td>
@@ -29,6 +43,12 @@
                 <td class="px-3 py-4">3</td>
                 <td class="px-6 py-4">Código al aire libre</td>
                 <td class="px-6 py-4">2024-10-25</td>
+                <td class="px-6 py-4">
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Detalles</span>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">$200</span>
+                </td>
                 <td class="px-6 py-4">
                     <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Rechazado</span>
                 </td>
