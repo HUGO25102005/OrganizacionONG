@@ -3,9 +3,11 @@
 namespace App\Models\ProgramasEducativos;
 
 use App\Models\Caja\Presupuesto;
+use App\Models\Caja\AprobacionPresupuesto;
 use App\Models\User;
 use App\Models\Usuarios\Trabajadores\Voluntario;
 use App\Models\ProgramasEducativos\InformesSeguimientos;
+use App\Models\Registros\RegistroActividades;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -126,7 +128,12 @@ class ProgramaEducativo extends Model
 
     public function aprobacionContenidos()
     {
-        return $this->hasMany(AprobacionContenido::class, 'id_programa_educativo');
+        return $this->hasOne(AprobacionContenido::class, 'id_programa_educativo');
+    }
+
+    public function aprobacionPresupuestos()
+    {
+        return $this->hasOne(AprobacionPresupuesto::class, 'id_presupuesto');
     }
     
     public function informeSeguimiento()
@@ -138,4 +145,9 @@ class ProgramaEducativo extends Model
     {
         return $this->hasMany(SalonesClase::class, 'id_programa_educativo');
     }
+    public function registroActividades()
+    {
+        return $this->hasMany(RegistroActividades::class, 'id_programa');
+    }
+
 }

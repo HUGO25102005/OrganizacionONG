@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/programas/programaCancelar', [ProgramaController::class, 'cancelarPrograma'])->name('coordinador.cancelarPrograma');
         Route::put('/programas/programaActivar', [ProgramaController::class, 'activarPrograma'])->name('coordinador.activarPrograma');
         Route::put('/programas/programaAceptar', [ProgramaController::class, 'aceptarPrograma'])->name('coordinador.aceptarPrograma');
+        Route::get('/programas/planeacion/{id}', [ProgramaController::class, 'show'])->name('coordinador.planeacion');
     });
 
     //* Rutas del Dashboard Voluntario

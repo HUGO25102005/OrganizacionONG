@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-/* use App\Models\User; */
+use App\Models\User;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
+use App\Models\ProgramasEducativos\AprobacionContenido;
+use App\Models\Caja\AprobacionPresupuesto;
 use Illuminate\Http\Request;
 /* use Illuminate\Support\Facades\Hash; */
 
@@ -31,23 +33,34 @@ class ProgramaController extends Controller
         return redirect()->route('coordinador.programas')->with('error', 'Ocurrió un error al desactivar el programa.');
     }
 
-    public function cancelarPrograma(Request $request){
-
+    public function cancelarPrograma(Request $request)
+    {
         $idPrograma = $request->id;
-
+        $idCoordinador = auth()->user()->trabajador->coordinador->id;
+        // Obtener el programa
         $programa = ProgramaEducativo::find($idPrograma);
-
+    
         if ($programa) {
-            // Actualizar el estado del trabajador, asumiendo que el campo se llama 'activo'
+            // Crear o actualizar el registro en `aprobacion_contenidos` con `si_no = 0`
+            AprobacionContenido::updateOrCreate(
+                ['id_programa_educativo' => $idPrograma],
+                [
+                    'id_coordinador' => $idCoordinador,
+                    'si_no' => 0, // Rechazar
+                ]
+            );
+    
+            // Actualizar el estado del programa directamente a 6
             $programa->update(['estado' => 6]);
-
-            // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('coordinador.programas', ['seccion' => 2])->with('warning', 'Solicitud cancelada con éxito.');
+    
+            return redirect()->route('coordinador.programas', ['seccion' => 2])
+                ->with('warning', 'El programa fue rechazado.');
         }
+    
+        return redirect()->route('coordinador.programas', ['seccion' => 2])
+            ->with('error', 'No se encontró el programa.');
+    }    
 
-        // Si no se encuentra el trabajador, redirigir con un mensaje de error
-        return redirect()->route('coordinador.programas', ['seccion' => 2])->with('error', 'Ocurrió un error al cancelar la solicitud.');
-    }
 
     public function activarPrograma(Request $request){
         // Obtener el ID del trabajador del request
@@ -67,22 +80,53 @@ class ProgramaController extends Controller
         // Si no se encuentra el trabajador, redirigir con un mensaje de error
         return redirect()->route('coordinador.programas')->with('error', 'Ocurrió un error al activar el programa.');
     }
-    public function aceptarPrograma(Request $request){
-        // Obtener el ID del trabajador del request
+
+    public function aceptarPrograma(Request $request)
+    {
         $idPrograma = $request->id;
-
-        // Encontrar el trabajador por su ID
-        $programa = ProgramaEducativo::find($idPrograma);
-
+        $idCoordinador = auth()->user()->trabajador->coordinador->id;
+        // Obtener el programa junto con las relaciones necesarias
+        $programa = ProgramaEducativo::with(['aprobacionPresupuesto'])->find($idPrograma);
+    
         if ($programa) {
-            // Actualizar el estado del trabajador, asumiendo que el campo se llama 'activo'
-            $programa->update(['estado' => 3]);
-
-            // Redirigir de vuelta con un mensaje de éxito
-            return redirect()->route('coordinador.programas', ['seccion' => 2])->with('success', 'Solicitud aceptada con éxito.');
+            // Verificar si el presupuesto está desaprobado (si_no = 0)
+            $aprobacionPresupuesto = $programa->aprobacionPresupuesto;
+    
+            if ($aprobacionPresupuesto && $aprobacionPresupuesto->si_no == 0) {
+                $programa->update(['estado' => 6]); // Cambiar estado a rechazado
+                return redirect()->route('coordinador.programas', ['seccion' => 2])
+                    ->with('warning', 'El programa fue rechazado debido a la desaprobación del presupuesto.');
+            }
+    
+            // Crear o actualizar el registro en `aprobacion_contenidos` con `si_no = 1`
+            AprobacionContenido::updateOrCreate(
+                ['id_programa_educativo' => $idPrograma],
+                [
+                    'id_coordinador' => $idCoordinador,
+                    'si_no' => 1, // Aceptar
+                ]
+            );
+    
+            // Verificar si el presupuesto está aprobado (si_no = 1)
+            $nuevoEstado = ($aprobacionPresupuesto && $aprobacionPresupuesto->si_no == 1) ? 4 : 3;
+    
+            // Actualizar el estado del programa
+            $programa->update(['estado' => $nuevoEstado]);
+    
+            return redirect()->route('coordinador.programas', ['seccion' => 2])
+                ->with('success', 'El programa fue aceptado con éxito.');
         }
+    
+        return redirect()->route('coordinador.programas', ['seccion' => 2])
+            ->with('error', 'No se encontró el programa.');
+    }
 
-        // Si no se encuentra el trabajador, redirigir con un mensaje de error
-        return redirect()->route('coordinador.programas', ['seccion' => 2])->with('error', 'Ocurrió un error al aceptar el programa.');
+    public function show($id){
+        $programa = ProgramaEducativo::find($id);
+        if (!$programa) {
+            return redirect()->route('coordinador.programas')->with('error', 'Programa no encontrado.');
+        }
+        $programaData = $programa->registroActividades;
+        return view('Dashboard.Coordinador.layouts.planeacion', compact('programa', 'programaData'));
     }
 }

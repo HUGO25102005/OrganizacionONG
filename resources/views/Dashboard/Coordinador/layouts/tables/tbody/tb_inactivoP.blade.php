@@ -1,5 +1,6 @@
 @foreach($datos as $programa)
     <tr class="border-b border-gray-300">
+        <td class="py-3 px-4 text-center"> {{ $loop->iteration }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
         <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>

@@ -1,7 +1,7 @@
 @foreach ($datos as $programa)
     <tr class="border-b border-gray-300">
-        <td class="py-3 px-4 text-center">{{ $programa->nombre_programa }}
-        </td>
+        <td class="py-3 px-4 text-center">{{ $loop->iteration }}</td>
+        <td class="py-3 px-4 text-center">{{ $programa->nombre_programa }}</td>
         <td class="py-3 px-4 text-center">{{ $programa->voluntario->trabajador->user->getFullName() }}</td>
         <td class="py-3 px-4 text-center">{{ \Carbon\Carbon::parse($programa->fecha_inicio)->format('d-m-Y') }}</td>
         <td class="py-3 px-4 text-center">{{ \Carbon\Carbon::parse($programa->fecha_termino)->format('d-m-Y') }}</td>
@@ -98,6 +98,9 @@
                             </button>
                         </div>
                     </x-modal-view-info>
+                    <x-button-accept :messageAlert="'¿Estás seguro que deseas aceptar la solicitud?'" :router="route('coordinador.aceptarPrograma')"
+                        :itemId="$programa->id" :tituloModal="'Confirmar Solicitud'"/>
+                    <x-button-cancel :messageAlert="'¿Estás seguro de que deseas declinar la solicitud?'" :router="route('coordinador.cancelarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" /> 
                 @endif
             </div>     
         </td>

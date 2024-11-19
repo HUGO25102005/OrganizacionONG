@@ -1,5 +1,6 @@
 @foreach($datos as $programa)    
     <tr class="border-b border-gray-300">
+        <td class="py-3 px-4 text-center"> {{ $loop->iteration }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->getTotalBeneficiarios() }} </td>
@@ -98,7 +99,15 @@
                         </div>
                     </x-modal-view-info>
                     <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar el programa?'" :router="route('coordinador.desactivarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" />
-                   {{--  <x-button-planning :messageAlert="'¿Estás seguro de que deseas eliminar el programa?'" :router="route('coordinador.desactivarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" /> --}}
+                        @if($programa->registroActividades && $programa->registroActividades->isNotEmpty())
+                        <div>
+                            <!-- Botón de planificación -->
+                            <a href="{{ route('coordinador.planeacion', ['id' => $programa->id]) }}" 
+                                class="ml-2 text-black text-2xl bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-500">
+                                <i class='bx bx-table'></i>
+                            </a>
+                        </div>
+                    @endif
                 @endif
             </div>     
         </td>                        

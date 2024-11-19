@@ -19,7 +19,8 @@
             <table class="admin-table w-full mt-6 bg-[#F6F8FF] rounded-lg">
                 <thead class="bg-[#BBDEFB]"> <!-- Mantener el fondo en el thead -->
                     <tr class="bg-[#BBDEFB] text-black">
-                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Nombre del programa</th>
+                        <th class="py-3 px-2 md:px-4 rounded-l-lg">Número</th>
+                        <th class="py-3 px-2 md:px-4">Nombre del programa</th>
                         <th class="py-3 px-2 md:px-4">Solicitante</th>
                         <th class="py-3 px-2 md:px-4">Fecha Inicio</th>
                         <th class="py-3 px-2 md:px-4">Fecha Termino</th>

@@ -1,6 +1,6 @@
 @foreach ($beneficiariosearch as $beneficiario)
         <tr class="border-b border-gray-300">
-            <td class="py-3 px-4 text-center">{{ $beneficiario->id }}</td>
+            <td class="py-3 px-4 text-center">{{ $loop->iteration }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->getFullName() }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->email }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->getNivelEducativo() }}</td>
