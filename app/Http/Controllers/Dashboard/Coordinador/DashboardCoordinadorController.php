@@ -27,14 +27,13 @@ class DashboardCoordinadorController extends Controller
     {
         $total_ingresos = Donacion::getMontoTotal();
         $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getProgramasActivos()->paginate(5);
+        $programas_activos = ProgramaEducativo::getProgramasActivos()->take(5)->get();
         $total_PS = ProgramaEducativo::getTotalProgramas(1);
-        $total_PR = ProgramaEducativo::getTotalProgramas(2);
+        $total_PI = ProgramaEducativo::getTotalProgramas(2);
         $total_PAP = ProgramaEducativo::getTotalProgramas(3);
         $total_PA = ProgramaEducativo::getTotalProgramas(4);
         $total_PT = ProgramaEducativo::getTotalProgramas(5);
         $total_PC = ProgramaEducativo::getTotalProgramas(6);
-        $solicitudes_P = ProgramaEducativo::getTotalSolicitudesProgramas();
         $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
         $actividades_registradas = RegistroActividades::getTotalActividades();
         $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
@@ -58,9 +57,8 @@ class DashboardCoordinadorController extends Controller
                 'beneficiarios',
                 'total_BA',
                 'total_PA',
-                'solicitudes_P',
                 'total_PS',
-                'total_PR',
+                'total_PI',
                 'total_PAP',
                 'total_PT',
                 'total_PC',
@@ -113,7 +111,7 @@ class DashboardCoordinadorController extends Controller
             }
 
                 
-            return view('Dashboard.Coordinador.beneficiarios', compact(['estado', 'seccion'], 'datos', 'total_BI', 'total_BSO', 'total_BA', 'total_BC', 'total_BP', 'total_BS', 'total_BB', 'total_BU', 'beneficiariosearch'));
+            return view('Dashboard.Coordinador.beneficiarios', compact(['estado', 'seccion', 'datos', 'total_BI', 'total_BSO', 'total_BA', 'total_BC', 'total_BP', 'total_BS', 'total_BB', 'total_BU', 'beneficiariosearch']));
         } else {
             
             if (empty($request->estado)) {
@@ -138,29 +136,54 @@ class DashboardCoordinadorController extends Controller
                     break;
             }
                     
-            return view('Dashboard.Coordinador.beneficiarios', compact(['seccion', 'estado'], 'datos', 'beneficiariosearch2', 'seccion'));
+            return view('Dashboard.Coordinador.beneficiarios', compact(['seccion', 'estado', 'datos', 'beneficiariosearch2']));
         }
     }
 
     public function programas(Request $request)
     {
+        $monto_total_donaciones = Donacion::getMontoTotal();
+        $total_donaciones = Donacion::all();
+        $total_donaciones_semana = Donacion::getTotalMontoSemana();
+        $programas = ProgramaEducativo::getProgramasActivos()->get();
+        $programas_solicitados = ProgramaEducativo::getTotalProgramas(1);
+        $programas_inactivos = ProgramaEducativo::getTotalProgramas(2);
+        $programas_aprobados = ProgramaEducativo::getTotalProgramas(3);
+        $programas_activos = ProgramaEducativo::getTotalProgramas(4);
+        $programas_terminados = ProgramaEducativo::getTotalProgramas(5);
+        $programas_cancelados = ProgramaEducativo::getTotalProgramas(6);
+
+
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
         } else {
             $seccion = $request->seccion;
         }
 
-        if (empty($request->estado)) {
-            $estado = $request->get('estado', '0');
-        } else {
-            $estado = $request->estado;
-        }
-
         if ($seccion == 1) {
-            $monto_total_donaciones = Donacion::getMontoTotal();
-            $total_donaciones = Donacion::all();
-            $total_donaciones_semana = Donacion::getTotalMontoSemana();
-            $programas = ProgramaEducativo::getProgramasActivos()->get();
+
+            if (empty($request->estado)) {
+                $estado = $request->get('estado', '0');
+            } else {
+                $estado = $request->estado;
+            }
+            $programassearch = null;
+            switch($estado){
+                case '0':
+                    $datos = ProgramaEducativo::getProgramasAll()->paginate(10);
+                    $search = $request->input('search');
+                    $programassearch = ProgramaEducativo::getProgramasEducativos($search)->paginate(10);
+                    break;
+                case '2':
+                    $datos = ProgramaEducativo::getProgramas(2)->paginate(10);
+                    break;
+                case '4':
+                    $datos = ProgramaEducativo::getProgramas(4)->paginate(10);                    
+                    break;
+                case '5':
+                    $datos = ProgramaEducativo::getProgramas(5)->paginate(10);                    
+                    break;
+            }
 
             return view(
                 'Dashboard.Coordinador.programas',
@@ -171,15 +194,20 @@ class DashboardCoordinadorController extends Controller
                         'total_donaciones_semana',
                         'seccion',
                         'programas',
-                        'estado'
+                        'estado',
+                        'programas_solicitados',
+                        'programas_inactivos',
+                        'programas_aprobados',
+                        'programas_activos',
+                        'programas_terminados',
+                        'programas_cancelados',
+                        'datos',
+                        'programassearch'
                     ]
                 )
             );
-        } else {
-            $search = $request->input('search');
+        }  else {
             
-            
-
             if (empty($request->estado)) {
                 $estado = $request->get('estado', '0');
             } else {
@@ -187,20 +215,25 @@ class DashboardCoordinadorController extends Controller
             }
 
             $seccion = $request->get('seccion', 2);
-
-            $programas = ProgramaEducativo::when($search, function ($query, $search) {
-                return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
-                    //Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
-                    ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
-                        $query->where('name', 'LIKE', '%' . $search . '%');
-                    })
-                    ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
-                    ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
-                    ->orWhere('estado', 'LIKE', '%' . $search . '%');
-                })
-                    ->paginate(5);
-                
-                return view('Dashboard.Coordinador.programas', compact('seccion', 'programas', 'estado'));
+            $programassearch1 = null;
+            switch($estado){
+                case '0':
+                    $datos = ProgramaEducativo::getProgramasAll1()->paginate(10);
+                    $search = $request->input('search');
+                    $programassearch1 = ProgramaEducativo::getProgramasEducativos1($search)->paginate(10);
+                    break;
+                case '1':
+                    $datos = ProgramaEducativo::getProgramas(1)->paginate(10);
+                    break;
+                case '3':
+                    $datos = ProgramaEducativo::getProgramas(3)->paginate(10);                    
+                    break;
+                case '6':
+                    $datos = ProgramaEducativo::getProgramas(6)->paginate(10);                    
+                    break;
+            }
+                    
+            return view('Dashboard.Coordinador.programas', compact(['seccion', 'estado', 'datos', 'programassearch1']));
         }
     }
     

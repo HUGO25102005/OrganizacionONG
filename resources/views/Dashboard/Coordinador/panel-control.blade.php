@@ -75,7 +75,7 @@
                             </button>
                         </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $solicitudes_P }}</p>
+                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $total_PS }}</p>
                     <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
                 </div>
     
@@ -132,9 +132,6 @@
                     <canvas id="beneficiariosChart"></canvas>
                 </div>
             </div>
-            @if ($programas_activos)
-                {{ $programas_activos->links() }}
-            @endif
         </div>
 
 <!-- Botón flotante de soporte -->
@@ -228,10 +225,10 @@
         const programasChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Solicitud', 'En Revision', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'],
+                labels: ['Solicitud', 'Aprobado', 'Activo', 'Inactivo', 'Terminado', 'Cancelado'],
                 datasets: [{
                     label: ' Cantidad de Programas',
-                    data: [ {{ $total_PS }}, {{ $total_PR }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PT }}, {{ $total_PC }}],
+                    data: [ {{ $total_PS }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PI }}, {{ $total_PT }}, {{ $total_PC }}],
                     backgroundColor: ['#4CAF50'],
                     borderColor: ['#596475'],
                     borderWidth: 1

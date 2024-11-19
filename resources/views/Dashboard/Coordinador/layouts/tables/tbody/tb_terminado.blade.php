@@ -1,19 +1,138 @@
-<tr class="border-b border-gray-300">
-    <td class="py-3 px-4 text-center">Ayuda para Escuelas</td>
-    <td class="py-3 px-4 text-center">Ernesto Jimenez</td>
-    <td class="py-3 px-4 text-center">100</td>
-    <td class="py-3 px-4 text-center">Virtual</td>
-    <td class="py-3 px-4 text-center">$10,000</td>
-    <td class="py-3 px-4 text-center">Activo</td>
-    <td class="py-3 px-4 text-center">
-        <span class="bg-blue-100 w-10 h-10 p-1 rounded-full transition duration-300 ease-in-out hover:bg-blue-300">
-            <i class='bx bx-show text-2xl text-gray-700 cursor-pointer' title="Visualizar"></i>
-        </span>
-        <span class="bg-blue-200 w-10 h-10 p-1 rounded-full transition duration-300 ease-in-out hover:bg-blue-600">
-            <i class='bx bx-detail text-2xl text-blue-500 cursor-pointer' title="Aprobar"></i>
-        </span>
-        <span class="bg-red-100 w-10 h-10 p-1 rounded-full transition duration-300 ease-in-out hover:bg-red-300">
-            <i class='bx bx-x-circle text-2xl text-red-500 cursor-pointer' title="Rechazar"></i>
-        </span>
-    </td>                        
-</tr>
+@foreach($datos as $programa)
+    <tr class="border-b border-gray-300">
+        <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
+        <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
+        <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>
+        <td class="py-3 px-4 text-center"> {{ $programa->getEstado() }} </td>
+        <td class="py-3 px-4 text-center">
+            <div class="inline-flex items-center">
+                @if ($programa->estado == 5)
+                    <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
+                        @if($programa->informeSeguimiento)
+                            <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Informe</h4> <!-- Encabezado -->
+                            <section class="mb-6 grid grid-cols-2 gap-4">
+                                <div class="col-span-2 text-center">
+                                    <label class="block text-gray-600 mb-1">Resumen:</label>
+                                    <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                        {{ $programa->informeSeguimiento->resumen_informe }}
+                                    </div>
+                                </div>
+                                <div class="col-span-2 text-center">
+                                    <label class="block text-gray-600 mb-1">Indicadores de cumplimiento:</label>
+                                    <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                        {{ $programa->informeSeguimiento->cumplimiento_indicadores }}
+                                    </div>
+                                </div>
+                                <div class="col-span-2 text-center">
+                                    <label class="block text-gray-600 mb-1">Desafios encontrados:</label>
+                                    <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                        {{ $programa->informeSeguimiento->desafios_encontrados }}
+                                    </div>
+                                </div>
+                                <div class="col-span-2 text-center">
+                                    <label class="block text-gray-600 mb-1">Recomendaciones:</label>
+                                    <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                        {{ $programa->informeSeguimiento->recomendaciones }}
+                                    </div>
+                                </div>
+                                <div class="col-span-2 text-center">
+                                    <label class="block text-gray-600 mb-1">Comentarios adicionales:</label>
+                                    <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                        {{ $programa->informeSeguimiento->comentarios_Adicionales }}
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Datos del Programa</h4> <!-- Encabezado -->
+                        <section class="mb-6 grid grid-cols-2 gap-4">
+                            <!-- Primeros dos datos -->
+                            <div>
+                                <label class="block text-gray-600 mb-1">Encargado del Programa: </label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->voluntario->trabajador->user->getFullName() }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Nombre del programa:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->nombre_programa }}
+                                </div>
+                            </div>
+            
+                            <!-- Tercer dato (centrado) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Descripción:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->descripcion }}
+                                </div>
+                            </div>
+            
+                            <!-- Cuarto dato (centrado) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Objetivo(s):</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->objetivos }}
+                                </div>
+                            </div>
+            
+                            <!-- Datos 5 al 8 (uno al lado del otro) -->
+                            <div>
+                                <label class="block text-gray-600 mb-1">Dirigido a:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->publico_objetivo }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Duración estimada:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->duracion }} días
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Fecha estimada de inicio:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ \Carbon\Carbon::parse($programa->fecha_inicio)->format('d-m-Y') }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Fecha estimada de finalización:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ \Carbon\Carbon::parse($programa->fecha_termino)->format('d-m-Y') }}
+                                </div>
+                            </div>
+            
+                            <!-- Últimos 3 datos (centrados y solos) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Beneficiarios estimados:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->beneficiarios_estimados }}
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Resultados esperados:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->resultados_esperados }}
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Comentarios adicionales:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->comentarios_adicionales }}
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Botón de cerrar modal alineado a la izquierda -->
+                        <div class="flex justify-end mt-6">
+                            <button @click="open = false" type="button"
+                                class="flex items-center space-x-2 bg-[#2A334B] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
+                                <i class='bx bx-x text-xl'></i>
+                                <span>Cerrar</span>
+                            </button>
+                        </div>
+                    </x-modal-view-info>
+                @endif
+            </div>     
+        </td>                        
+    </tr>
+@endforeach

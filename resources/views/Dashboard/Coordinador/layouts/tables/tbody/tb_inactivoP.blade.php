@@ -1,13 +1,12 @@
-@foreach($datos as $programa)    
+@foreach($datos as $programa)
     <tr class="border-b border-gray-300">
         <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
-        <td class="py-3 px-4 text-center"> {{ $programa->getTotalBeneficiarios() }} </td>
         <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->getEstado() }} </td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
-                @if ($programa->estado == 4)
+                @if ($programa->estado == 2)
                     <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
                         <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Datos del Programa</h4> <!-- Encabezado -->
                         <section class="mb-6 grid grid-cols-2 gap-4">
@@ -97,8 +96,8 @@
                             </button>
                         </div>
                     </x-modal-view-info>
-                    <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar el programa?'" :router="route('coordinador.desactivarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" />
-                   {{--  <x-button-planning :messageAlert="'¿Estás seguro de que deseas eliminar el programa?'" :router="route('coordinador.desactivarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" /> --}}
+                    <x-button-accept :messageAlert="'¿Estás seguro que deseas activar el programa?'" :router="route('coordinador.activarPrograma')"
+                        :itemId="$programa->id" :tituloModal="'Confirmar Solicitud'"/>
                 @endif
             </div>     
         </td>                        

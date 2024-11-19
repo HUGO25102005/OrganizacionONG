@@ -93,7 +93,7 @@
                             </section>
                         
                             <!-- Botón de cerrar modal alineado a la izquierda -->
-                            <div class="flex justify-start mt-6">
+                            <div class="flex justify-end mt-6">
                                 <button @click="open = false" type="button"
                                     class="flex items-center space-x-2 bg-[#2A334B] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
                                     <i class='bx bx-x text-xl'></i>

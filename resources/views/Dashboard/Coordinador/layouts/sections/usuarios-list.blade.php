@@ -120,17 +120,34 @@
                 </tbody>
             </table>
         </div>
-        @if($datos)
-            {{ $datos->links() }}
-        @endif
-        @if ($beneficiariosearch)
-            {{ $beneficiariosearch->links() }}
-        @endif
+        <div class="mt-2" id="lista">
+            @if($datos and $estado != 0)
+                {{ $datos->links() }}
+            @endif
+            @if ($beneficiariosearch and $estado == 0)
+                {{ $beneficiariosearch->links() }}
+            @endif 
+        </div> 
     </div>
 </div>
 
 <script>
     document.getElementById('search').addEventListener('click', function () {
+        // Guarda la posición de scroll actual
+        localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Restaura la posición de scroll después de recargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('scrollPosition') !== null) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            localStorage.removeItem('scrollPosition'); // Elimina el valor después de restaurarlo
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('lista').addEventListener('click', function () {
         // Guarda la posición de scroll actual
         localStorage.setItem('scrollPosition', window.scrollY);
     });

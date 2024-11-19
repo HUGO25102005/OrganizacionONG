@@ -19,6 +19,7 @@ use App\Http\Controllers\Usuarios\AdminController;
 use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\TrabajadorController;
 use App\Http\Controllers\Usuarios\BeneficiarioController;
+use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
 use App\Http\Middleware\AuthSessionActive;
 use App\Http\Middleware\CheckBeneficiario;
@@ -83,13 +84,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/panelControl', [DashboardCoordinadorController::class, 'panelControl'])->name('coordinador.panelControl');
         
         Route::get('/beneficiarios', [DashboardCoordinadorController::class, 'beneficiarios'])->name('coordinador.beneficiarios');
+        Route::put('/beneficiarios/beneficiarioDesactivar', [BeneficiarioController::class, 'desactivarBeneficiario'])->name('coordinador.desactivar');
+        Route::put('/beneficiarios/beneficiarioCancelar', [BeneficiarioController::class, 'cancelarBeneficiario'])->name('coordinador.cancelar');
+        Route::put('/benficiarios/beneficiarioAceptar', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario'])->name('coordinador.aceptarSolicitudBeneficiario');
+        Route::put('/benficiarios/beneficiarioActivar', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario2'])->name('coordinador.aceptarSolicitudBeneficiario2');
         /* Route::post('/donaciones/convocatorias', [ConvocatoriaController::class, 'store'])->name('convocatoria.store'); */
 
         Route::get('/programas', [DashboardCoordinadorController::class, 'programas'])->name('coordinador.programas');
-        Route::put('/beneficiarios/beneficiarioDesactivar', [BeneficiarioController::class, 'desactivarBeneficiario'])->name('coordinador.desactivar');
-        Route::put('/beneficiarios/beneficiarioCancelar', [BeneficiarioController::class, 'cancelarBeneficiario'])->name('coordinador.cancelar');
-        Route::put('/benficiarios/beneificiarioAceptar', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario'])->name('coordinador.aceptarSolicitudBeneficiario');
-        Route::put('/benficiarios/beneificiarioAceptar2', [BeneficiarioController::class, 'aceptarSolicitudBeneficiario2'])->name('coordinador.aceptarSolicitudBeneficiario2');
+        Route::put('/programas/programaDesactivar', [ProgramaController::class, 'desactivarPrograma'])->name('coordinador.desactivarPrograma');
+        Route::put('/programas/programaCancelar', [ProgramaController::class, 'cancelarPrograma'])->name('coordinador.cancelarPrograma');
+        Route::put('/programas/programaActivar', [ProgramaController::class, 'activarPrograma'])->name('coordinador.activarPrograma');
+        Route::put('/programas/programaAceptar', [ProgramaController::class, 'aceptarPrograma'])->name('coordinador.aceptarPrograma');
     });
 
     //* Rutas del Dashboard Voluntario
