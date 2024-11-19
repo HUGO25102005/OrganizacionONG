@@ -4,7 +4,7 @@
         <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
         <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>
-        <td class="py-3 px-4 text-center"> {{ $programa->getEstado() }} </td>
+        <td class="py-3 px-4"><div class="items-center h-8 justify-center flex bg-yellow-100 rounded-full"><b>{{ $programa->getEstado() }}</b></div></td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 @if ($programa->estado == 5)

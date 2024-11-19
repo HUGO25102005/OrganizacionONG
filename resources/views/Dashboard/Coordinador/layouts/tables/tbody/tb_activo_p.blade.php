@@ -5,7 +5,7 @@
         <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
         <td class="py-3 px-4 text-center"> {{ $programa->getTotalBeneficiarios() }} </td>
         <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>
-        <td class="py-3 px-4 text-center"> {{ $programa->getEstado() }} </td>
+        <td class="py-3 px-4"><div class="items-center h-8 justify-center flex bg-green-100 rounded-full"><b>{{ $programa->getEstado() }}</b></div></td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 @if ($programa->estado == 4)
@@ -103,7 +103,7 @@
                         <div>
                             <!-- Botón de planificación -->
                             <a href="{{ route('coordinador.planeacion', ['id' => $programa->id]) }}" 
-                                class="ml-2 text-black text-2xl bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-500">
+                                class="ml-2 text-black text-2xl bg-orange-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-orange-500">
                                 <i class='bx bx-table'></i>
                             </a>
                         </div>

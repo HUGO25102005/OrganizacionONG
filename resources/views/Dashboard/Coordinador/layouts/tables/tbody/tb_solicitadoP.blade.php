@@ -5,7 +5,7 @@
         <td class="py-3 px-4 text-center">{{ $programa->voluntario->trabajador->user->getFullName() }}</td>
         <td class="py-3 px-4 text-center">{{ \Carbon\Carbon::parse($programa->fecha_inicio)->format('d-m-Y') }}</td>
         <td class="py-3 px-4 text-center">{{ \Carbon\Carbon::parse($programa->fecha_termino)->format('d-m-Y') }}</td>
-        <td class="py-3 px-4 text-center">{{ $programa->getEstado() }}</td>
+        <td class="py-3 px-4"><div class="items-center h-8 justify-center flex bg-blue-100 rounded-full"><b>{{ $programa->getEstado() }}</b></div></td>
         <td class="py-3 px-4 text-center">
             <div class="inline-flex items-center">
                 @if ($programa->estado == 1)

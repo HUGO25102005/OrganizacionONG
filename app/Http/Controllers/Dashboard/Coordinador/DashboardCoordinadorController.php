@@ -170,9 +170,9 @@ class DashboardCoordinadorController extends Controller
             $programassearch = null;
             switch($estado){
                 case '0':
-                    $datos = ProgramaEducativo::getProgramasAll()->paginate(15);
+                    $datos = ProgramaEducativo::getProgramasAll()->paginate(10);
                     $search = $request->input('search');
-                    $programassearch = ProgramaEducativo::getProgramasEducativos($search)->paginate(15);
+                    $programassearch = ProgramaEducativo::getProgramasEducativos($search)->paginate(10);
                     break;
                 case '2':
                     $datos = ProgramaEducativo::getProgramas(2)->paginate(10);
