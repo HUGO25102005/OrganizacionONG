@@ -18,6 +18,7 @@ class RegistroActividades extends Model
     protected $fillable = [
         'id_programa',
         'id_voluntario',
+        'nombre',
         'fecha_actividad',
         'descripcion_actividad',
         'resultados_actividad',
