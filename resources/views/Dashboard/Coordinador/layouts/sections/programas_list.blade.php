@@ -7,7 +7,6 @@
     <h2 class="text-2xl text-center mt-4 font-bold mb-4">Programas disponibles</h2>
     <br> 
     <!-- Contenedor principal del carrusel -->
-    <!-- Contenedor principal del carrusel -->
     <div class="overflow-hidden relative">
         <!-- Carrusel con desplazamiento horizontal -->
         <div id="carousel" class="flex space-x-6 overflow-x-auto mb-12 snap-x snap-mandatory scroll-smooth transition-transform duration-500 ease-in-out">
@@ -129,8 +128,8 @@
     const carousel = document.getElementById('carousel');
     const indicatorsContainer = document.getElementById('indicators');
     const programas = @json($programas); // Convertir los datos de programas en JSON
-    const slideWidth = 400; // Ajusta según el ancho de cada tarjeta
-    const itemsPerIndicator = 3; // Cada indicador representará tres programas
+    const slideWidth = 100; // Ajusta según el ancho de cada tarjeta
+    const itemsPerIndicator = 1; // Cada indicador representará tres programas
     const totalSlides = Math.ceil(programas.length / itemsPerIndicator);
 
     let currentIndex = 0;
@@ -139,7 +138,7 @@
     function createIndicators() {
         for (let i = 0; i < totalSlides; i++) {
             const indicator = document.createElement('button');
-            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-300', 'transition-all', 'duration-300');
+            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-200', 'transition-all', 'duration-300');
             indicator.addEventListener('click', () => {
                 currentIndex = i;
                 updateCarousel();

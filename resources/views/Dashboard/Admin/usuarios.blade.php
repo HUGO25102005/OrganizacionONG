@@ -30,4 +30,7 @@
             @include('Dashboard.Admin.layouts.sections.usuarios-solicitudes')
         @endif
     </div>
+
+    <x-support-widget :roles="['Coordinador']" />
+    
 </x-app-layout>

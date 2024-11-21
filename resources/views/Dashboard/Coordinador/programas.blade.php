@@ -33,4 +33,7 @@
             @break
         @endswitch
     </div>
+
+    <x-support-widget :roles="['Administrador', 'Voluntario']" />
+    
 </x-app-layout>

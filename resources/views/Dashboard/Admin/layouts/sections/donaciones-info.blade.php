@@ -120,6 +120,7 @@
             </div>
         </div>
     </div>
+    <x-support-widget :roles="['Coordinador', 'Beneficiario']" />
     {{ $total_donaciones->links() }}
 
     <!--
@@ -198,3 +199,4 @@
     </div>
     </div>
 -->
+

@@ -27,7 +27,7 @@ class DashboardCoordinadorController extends Controller
     {
         $total_ingresos = Donacion::getMontoTotal();
         $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getProgramasActivos()->paginate(5);
+        $programas_activos = ProgramaEducativo::getProgramasActivos()->take(5)->get();
         $total_PS = ProgramaEducativo::getTotalProgramas(1);
         $total_PR = ProgramaEducativo::getTotalProgramas(2);
         $total_PAP = ProgramaEducativo::getTotalProgramas(3);

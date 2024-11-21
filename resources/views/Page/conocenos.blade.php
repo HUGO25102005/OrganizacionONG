@@ -82,50 +82,51 @@
 
     </section>
 
-    <section class="valores">
-        <div class="val_font">
-            <h2>Nuestros valores</h2>
-            <p class="paragraph">Nuestra plataforma está dedicada a brindar acceso gratuito a la educación
-                para todas las personas, sin importar su situación. A través de cursos y centros comunitarios,
-                buscamos promover la educación digital y el desarrollo intelectual de cada ser humano. Estos son
-                los valores que guían nuestro trabajo:</p>
-
-            <div class="valores-grid">
-                <div class="valor-item">
-                    <h3>Empatía</h3>
-                    <p>Nos esforzamos por entender las necesidades de quienes más lo necesitan. Trabajamos para
-                        ofrecer educación que sea accesible, inclusiva y adaptada a las circunstancias de cada persona,
-                        con el fin de contribuir a su desarrollo personal y profesional.
+    
+    <section class="valores bg-[#efeff9] text-[#262D34] text-center px-8 py-8">
+        <div class="val_font w-full max-w-7xl mx-auto rounded-[32px] bg-[#ffffff] shadow-[10px_10px_20px_#d1d9e6,-10px_-10px_20px_#ffffff] p-8 flex flex-col justify-between items-center overflow-hidden">
+            <h2 class="text-4xl font-bold mt-8 mb-12">Nuestros valores</h2>
+            <p class="paragraph mb-20 px-8 md:px-20 lg:px-40 text-justify">
+                Nuestra plataforma está dedicada a brindar acceso gratuito a la educación para todas las personas, sin importar su situación. Estos son los valores que guían nuestro trabajo:
+            </p>
+            <div class="valores-grid flex flex-wrap justify-around gap-8">
+                <div class="valor-item max-w-[230px] p-5 rounded-[16px]  shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10" style="background-color: rgb(246, 247, 255)">
+                    <i class="bx bx-heart text-4xl text-[#262D34] mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Empatía</h3>
+                    <p class="text-md font-medium text-[#262D34] text-justify">
+                        Nos esforzamos por entender las necesidades de quienes más lo necesitan.
                     </p>
                 </div>
-                <div class="valor-item">
-                    <h3>Integridad</h3>
-                    <p>Actuamos con honestidad y ética en todo lo que hacemos. Nuestros programas educativos se
-                        gestionan de manera responsable, siempre garantizando que nuestros beneficiarios reciban
-                        un servicio de calidad y sin fines de lucro.</p>
-                </div>
-                <div class="valor-item">
-                    <h3>Solidaridad</h3>
-                    <p>Creemos en la importancia de unir esfuerzos para generar un impacto real en la sociedad.
-                        Nos comprometemos a trabajar en colaboración con comunidades, voluntarios y socios para hacer
-                        que la educación sea una herramienta accesible para todos.
+               
+                <div class="valor-item max-w-[230px] p-5 rounded-[16px] bg-[#efeff2] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10" style="background-color: rgb(246, 247, 255)">
+                    <i class="bx bx-group text-4xl text-[#262D34] mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Solidaridad</h3>
+                    <p class="text-md font-medium text-[#262D34] text-justify">
+                        Creemos en la importancia de unir esfuerzos para generar un impacto real en la sociedad.
                     </p>
                 </div>
-                <div class="valor-item">
-                    <h3>Transparencia</h3>
-                    <p>Nos comprometemos a ser claros en nuestras acciones, decisiones y el uso de recursos.
-                        Mantenemos un diálogo abierto con nuestros beneficiarios y colaboradores para garantizar
-                        que todos los aspectos de nuestra labor sean visibles y accesibles.</p>
+                <div class="valor-item max-w-[230px] p-5 rounded-[16px] bg-[#efeff2] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10" style="background-color: rgb(246, 247, 255)">
+                    <i class="bx bx-show text-4xl text-[#262D34] mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Transparencia</h3>
+                    <p class="text-md font-medium text-[#262D34] text-justify">
+                        Nos comprometemos a ser claros en nuestras acciones, decisiones y el uso de recursos.
+                    </p>
                 </div>
-                <div class="valor-item">
-                    <h3>Compromiso social</h3>
-                    <p>Estamos dedicados a mejorar la vida de las personas a través de la educación gratuita.
-                        Reconocemos la importancia de nuestra misión y trabajamos incansablemente para contribuir
-                        al progreso social y reducir la brecha educativa.</p>
+                <div class="valor-item max-w-[230px] p-5 rounded-[16px] bg-[#efeff2] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10" style="background-color: rgb(246, 247, 255)">
+                    <i class="bx bx-world text-4xl text-[#262D34] mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-4">Compromiso social</h3>
+                    <p class="text-md font-medium text-[#262D34] text-justify">
+                        Estamos dedicados a mejorar la vida de las personas a través de la educación gratuita.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+    
+    
+    
+    
+    
 
 
     <section class="sect4">
