@@ -22,7 +22,8 @@
                         </button>
                         <button @click="tab = 'actividades'" id="btn-actividades"
                             :class="{ 'border-b-2 border-blue-500 text-blue-500': tab === 'actividades' }"
-                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none" disabled='true'>
+                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
+                            disabled='true'>
                             Actividades
                         </button>
                     </nav>
@@ -182,8 +183,8 @@
 
                         {{-- * Etiquetas hidden de control  --}}
                         <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
-                        <input type="hidden" name="id_programa" id="id_programa"
-                            value="0">
+                        <input type="hidden" name="id_programa" id="id_programa" value="0">
+                        <div id="routerTablaActividades" data-url="{{ route('vol.cargarActividadesEnTabla') }}"></div>
                         {{-- * fIN Etiquetas hidden de control  --}}
 
                         <div>
@@ -227,7 +228,7 @@
                             <button onclick="addActividadesByClass()" data-url="{{ route('vol.storeActividades') }}"
                                 id="btnAddActividades"
                                 class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold p-[15px] rounded-lg hover:from-blue-600 hover:to-indigo-600 transition ease-in-out duration-200 mt-8">
-                                Enviar solicitud
+                                Agregar Actividad
                             </button>
                         </div>
                     </div>
@@ -237,8 +238,8 @@
                         <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                             <thead>
                                 <tr class="bg-gray-100 text-left">
-                                    <th class="px-6 py-3 font-medium text-gray-700 border-b">ID Programa</th>
-                                    <th class="px-6 py-3 font-medium text-gray-700 border-b">ID Voluntario</th>
+                                    <th class="px-6 py-3 font-medium text-gray-700 border-b">#</th>
+                                    <th class="px-6 py-3 font-medium text-gray-700 border-b">Tema</th>
                                     <th class="px-6 py-3 font-medium text-gray-700 border-b">Fecha de Actividad</th>
                                     <th class="px-6 py-3 font-medium text-gray-700 border-b">Descripción de la
                                         Actividad
@@ -249,18 +250,9 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id='tablaActividades'>
                                 <!-- Ejemplo de fila de actividad -->
-                                <tr>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">1</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">123</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">2024-11-15</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">Descripción de la actividad...
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">Resultados obtenidos...</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 border-b">Comentarios adicionales...
-                                    </td>
-                                </tr>
+                                @include('Dashboard.Voluntario.layouts.tr_tablas.filas_actividades', ['actividades' => $actividades])
                                 <!-- Más filas de actividades pueden ser agregadas dinámicamente -->
                             </tbody>
                         </table>
@@ -268,12 +260,12 @@
                 </div>
 
             </div>
-            <div class="left text-right">
+            <div class="left text-right" id="btnConfirm">
                 <!-- Botón de Enviar -->
-                <spam onclick="sendFormNewClass('formNewClass')"
+                <span onclick="sendFormNewClass('formNewClass')"
                     class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold p-[15px] rounded-lg hover:from-blue-600 hover:to-indigo-600 transition ease-in-out duration-200 mt-8">
                     Enviar solicitud
-                </spam>
+                </span>
             </div>
         </div>
     </div>

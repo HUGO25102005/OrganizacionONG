@@ -110,6 +110,14 @@ import {
                 if (success && id_programa) {
 
                     enableActividades();
+                    addTuplaTableActividades();
+                    document.querySelector('#btnConfirm').innerHTML = `
+                                <span onclick="refreshWindow()"
+                                    class="inline-block bg-red-500 text-white font-semibold p-[15px] rounded-lg hover:bg-red-600 transition ease-in-out duration-200 mt-8">
+                                    Terminar Solicitud
+                                </span>
+                            `;
+
 
                     // Se da valor al campo de id_programa
                     document.querySelector('#id_programa').value = id_programa;
@@ -128,14 +136,14 @@ import {
             });
     }
 
-    function cleanFormActividades(){
+    function cleanFormActividades() {
         document.querySelector('#nombreActividad').value = '';
         document.querySelector('#fecha_actividad').value = '';
         document.querySelector('#descripcion_actividad').value = '';
         document.querySelector('#resultados_actividad').value = '';
         document.querySelector('#comentarios_adicionales').value = '';
     }
-    
+
     function addActividadesByClass() {
 
         const id_programa = getValueRequired('id_programa');
@@ -175,6 +183,7 @@ import {
             .then((responseData) => {
                 const { success } = responseData
                 if (success) {
+                    addTuplaTableActividades();
                     messageSendSuccess('Actividad registrada exitosamente.');
                     cleanFormActividades();
                     console.log('Actividad registrada:', responseData);
@@ -183,14 +192,61 @@ import {
                 }
             })
             .catch((error) => {
-                console.error('Error en la solicitud:', error);
-                messageErrorRequest('Ocurrió un error al enviar la actividad.');
+                if(error.errors.fecha_actividad[0]){
+                    messageSendError('Error al registrar la actividad.', error.errors.fecha_actividad[0])
+                } else {
+                    console.error('Error en la solicitud:', error);
+                    messageErrorRequest('Ocurrió un error al enviar la actividad.');
+                }
             });
     }
 
-    function addTuplaTableActividades() {
+    async function addTuplaTableActividades() {
 
-        const url = document.getElementById('btnAddActividades').getAttribute('data-url');
+        const url = document.getElementById('routerTablaActividades').getAttribute('data-url');
+
+        if (!url) {
+            console.error('No se encontró la URL en el botón.');
+            return;
+        }
+
+        // Obtener el ID del programa desde otro elemento (opcional)
+        const idPrograma = document.getElementById('id_programa')?.value || null;
+
+        try {
+            // Hacer la solicitud fetch
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                },
+                body: JSON.stringify({ id_programa: idPrograma }),
+            });
+
+            // Verificar si la respuesta es exitosa
+            if (!response.ok) {
+                throw new Error('Error al obtener las actividades.');
+            }
+
+            // Parsear la respuesta como JSON
+            const data = await response.json();
+
+            // Insertar el HTML recibido en el cuerpo de la tabla
+            const tablaCuerpo = document.getElementById('tablaActividades');
+            if (tablaCuerpo && data.html) {
+                tablaCuerpo.innerHTML = data.html; // Agregar las filas al final del tbody
+            } else {
+                console.error('No se encontró el tbody o el HTML recibido está vacío.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Ocurrió un error al intentar agregar actividades a la tabla.');
+        }
+    }
+
+    function refreshWindow() {
+        window.location.reload();
     }
 
     //* declaro funciones para usar en cualquier archivo
@@ -204,4 +260,6 @@ import {
     window.enableActividades = enableActividades;
     window.disableActividades = disableActividades;
     window.cleanFormActividades = cleanFormActividades;
+    window.addTuplaTableActividades = addTuplaTableActividades;
+    window.refreshWindow = refreshWindow;
 })();

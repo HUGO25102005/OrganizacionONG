@@ -25,6 +25,11 @@ class RegistroActividades extends Model
         'comentarios_adicionales',
     ];
 
+    public static function getActividadesByProgama($idProgama){
+        return self::where('id_programa',$idProgama)->get();
+    }
+
+
     // Define las relaciones con otros modelos
     public function programa()
     {

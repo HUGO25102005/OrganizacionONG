@@ -41,10 +41,11 @@ class DashboardVolunController extends Controller
             $seccion = $request->seccion;
         }
 
-        return view('Dashboard.Voluntario.nueva_clase', compact(['seccion']));
+        $actividades = [];
+        return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades']));
     }
 
-    public function storeProgramaEducativo(ProgramaRequest $request)
+    public function storeProgramaEducativo(Request $request)
     {
         try {
             $id_voluntario = Auth()->user()->trabajador->voluntario->id;
@@ -79,7 +80,7 @@ class DashboardVolunController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Programa educativo creado con éxito.',
-                    'id_programa' => $programa->id,
+                    'id_programa' => 48,
                     'seccion' => 1, // Puedes incluir otras variables necesarias aquí
                 ]);
             }
@@ -107,6 +108,33 @@ class DashboardVolunController extends Controller
         // Log para depurar el método recibido
         logger('Método recibido: ' . $request->method());
 
+        $programa = ProgramaEducativo::find($request->id_programa); // Recuperar directamente el registro
+
+        if (!$programa) {
+            // Respuesta en caso de que no exista el programa
+            return response()->json([
+                'success' => false,
+                'message' => 'El programa educativo no existe.',
+            ], 404);
+        }
+
+        $fechaInicio = $programa->fecha_inicio;
+        $fechaFin = $programa->fecha_fin;
+
+        $fechaActividad = $request->fecha_actividad;
+
+        // Validar si la fecha de actividad está fuera del rango
+        if ($fechaActividad < $fechaInicio || $fechaActividad > $fechaFin) {
+            // Registrar el error (opcional)
+            logger('Error al crear el registro de actividad: La fecha de la actividad está fuera del rango permitido.');
+
+            // Respuesta en caso de error
+            return response()->json([
+                'success' => false,
+                'message' => 'La fecha de la actividad debe estar dentro del rango establecido entre la fecha de inicio y la fecha de fin del programa.',
+            ], 400);
+        }
+
         try {
             //Crear el registro de actividad usando los datos validados en ActividadesRequest
             $registro = RegistroActividades::create([
@@ -119,6 +147,9 @@ class DashboardVolunController extends Controller
                 'comentarios_adicionales' => $request->comentarios_adicionales,
             ]);
 
+            $tupla = '
+
+            ';
             // Respuesta exitosa
             return response()->json([
                 'success' => true,
@@ -138,6 +169,21 @@ class DashboardVolunController extends Controller
         }
     }
 
+    public function cargarActividadesEnTabla(request $request)
+    {
+        // dd($request);
+        $html = '';
+        $seccion = 1;
+        // Obtener actividades relacionadas al programa
+        $actividades = RegistroActividades::getActividadesByProgama($request->id_programa);
+
+        // Generar la vista de los <tr> con las actividades
+        $html = view('Dashboard.Voluntario.layouts.tr_tablas.filas_actividades', compact('actividades', 'seccion'))->render();
+
+        // dd($html);
+        // Retornar la vista generada como respuesta
+        return response()->json(['html' => $html]);
+    }
     public function cargarActividades(Request $request)
     {
         $programas = ProgramaEducativo::getProgramasWithPresupuesto();

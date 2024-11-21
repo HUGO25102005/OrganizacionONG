@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
         Route::post('/nueva-clase/solicitud/informacion', [DashboardVolunController::class, 'storeProgramaEducativo'])->name('vol.storeProgramaEducativo');
         Route::post('/nueva-clase/solicitud/actividades', [DashboardVolunController::class, 'storeActividades'])->name('vol.storeActividades');
+        Route::post('/nueva-clase/solicitud/actividades/cargar', [DashboardVolunController::class, 'cargarActividadesEnTabla'])->name('vol.cargarActividadesEnTabla');
     });
 
     //* Rutas del Dashboard Beneficiario

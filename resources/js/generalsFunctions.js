@@ -46,7 +46,6 @@ export function showElement(idElement) {
     element.classList.remove(...styleHide.split(' '));
 }
 
-
 //TODO: Message by action or response
 export function messageMandatory() {
     Swal.fire({
