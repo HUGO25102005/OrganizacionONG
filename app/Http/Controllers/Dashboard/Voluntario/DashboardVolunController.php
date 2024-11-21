@@ -35,14 +35,23 @@ class DashboardVolunController extends Controller
     }
     public function nuevaClase(Request $request)
     {
-        if (empty($request->seccion)) {
-            $seccion = $request->get('seccion', 1);
-        } else {
-            $seccion = $request->seccion;
-        }
+        $id_voluntario = Auth()->user()->trabajador->voluntario->id;
 
         $actividades = [];
-        return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades']));
+
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+
+            
+
+            return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades']));
+        } else {
+            $seccion = $request->seccion;
+
+            $misSolicitudes = ProgramaEducativo::getProgramasForVoluntarioTable($id_voluntario)->paginate();
+
+            return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades', 'misSolicitudes']));
+        }
     }
 
     public function storeProgramaEducativo(Request $request)

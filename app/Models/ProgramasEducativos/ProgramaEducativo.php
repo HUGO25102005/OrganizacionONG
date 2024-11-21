@@ -8,6 +8,7 @@ use App\Models\Usuarios\Trabajadores\Voluntario;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ProgramaEducativo extends Model
 {
@@ -33,6 +34,36 @@ class ProgramaEducativo extends Model
         'comentarios_adicionales',
     ];
 
+    public static function getProgramasForVoluntarioTable($idVoluntario)
+    {
+        return self::select(
+            'programas_educativos.*',
+            DB::raw('EXISTS (
+                SELECT 1 
+                FROM aprobacion_contenidos 
+                WHERE aprobacion_contenidos.id_programa_educativo = programas_educativos.id 
+                AND aprobacion_contenidos.si_no = 1
+            ) AS tiene_aprobacion_contenido'),
+            DB::raw('EXISTS (
+                SELECT 1 
+                FROM aprobacion_presupuestos 
+                INNER JOIN presupuestos 
+                ON presupuestos.id = aprobacion_presupuestos.id_presupuesto
+                WHERE presupuestos.id = programas_educativos.id_presupuesto 
+                AND aprobacion_presupuestos.si_no = 1
+            ) AS tiene_aprobacion_presupuesto')
+        )
+            ->where('id_voluntario', $idVoluntario);
+    }
+    public function getTieneAprobacionContenidoAttribute()
+    {
+        return $this->aprobacionContenidos()->exists();
+    }
+
+    public function getTieneAprobacionPresupuestoAttribute()
+    {
+        return $this->presupuesto && $this->presupuesto->estado_aprobado; // Suponiendo que el presupuesto tiene un atributo estado_aprobado
+    }
     public static function getDuracion($fecha_inicio, $fecha_termino)
     {
         $fechaInicio = new DateTime($fecha_inicio);
@@ -69,7 +100,8 @@ class ProgramaEducativo extends Model
         return self::whereIn('estado', [1, 2])->count();
     }
 
-    public static function getProgramasWithPresupuesto(){
+    public static function getProgramasWithPresupuesto()
+    {
 
         $programas = self::with('presupuestos')->get();
         return $programas;
