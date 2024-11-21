@@ -46,48 +46,55 @@ class DashboardVolunController extends Controller
 
     public function storeProgramaEducativo(ProgramaRequest $request)
     {
+        try {
+            $id_voluntario = Auth()->user()->trabajador->voluntario->id;
 
-        $id_voluntario = Auth()->user()->trabajador->voluntario->id;
+            $duracion = ProgramaEducativo::getDuracion($request->fecha_inicio, $request->fecha_termino);
 
-        $duracion = ProgramaEducativo::getDuracion($request->fecha_inicio, $request->fecha_termino);
+            $presupuesto = Presupuesto::create([
+                'monto' => $request->monto_presupuesto, // Asignación del monto de presupuesto
+                'porque' => $request->motivo_presupuesto, // Asignación del motivo de presupuesto
+            ]);
 
-        // dd($duracion);
-        $presupuesto = Presupuesto::create([
-            'monto' => $request->monto_presupuesto, // Asignación del monto de presupuesto
-            'porque' => $request->motivo_presupuesto, // Asignación del motivo de presupuesto
-        ]);
+            $programa = ProgramaEducativo::create([
+                'id_voluntario' => $id_voluntario,
+                'nombre_programa' => $request->nombre_programa,
+                'descripcion' => $request->descripcion,
+                'objetivos' => $request->objetivos,
+                'publico_objetivo' => $request->publico_objetivo,
+                'duracion' => $duracion,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_termino' => $request->fecha_termino,
+                'recursos_necesarios' => $request->recursos_necesarios,
+                'estado' => 1,
+                'resultados_esperados' => $request->resultados_esperados,
+                'id_presupuesto' => $presupuesto->id,
+                'beneficiarios_estimados' => $request->beneficiarios_estimados,
+                'indicadores_cumplimiento' => $request->indicadores_cumplimiento,
+                'comentarios_adicionales' => $request->comentarios_adicionales,
+            ]);
 
-        $programa = ProgramaEducativo::create([
-            'id_voluntario' => $request->id_voluntario,
-            'nombre_programa' => $request->nombre_programa,
-            'descripcion' => $request->descripcion,
-            'objetivos' => $request->objetivos,
-            'publico_objetivo' => $request->publico_objetivo,
-            'duracion' => $duracion,
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_termino' => $request->fecha_termino,
-            'recursos_necesarios' => $request->recursos_necesarios,
-            'estado' => 1,
-            'resultados_esperados' => $request->resultados_esperados,
-            'id_presupuesto' => $presupuesto->id,
-            'beneficiarios_estimados' => $request->beneficiarios_estimados,
-            'indicadores_cumplimiento' => $request->indicadores_cumplimiento,
-            'comentarios_adicionales' => $request->comentarios_adicionales,
-        ]);
-        $seccion = 1;
+            // Verificar si el programa fue creado correctamente
+            if ($programa) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Programa educativo creado con éxito.',
+                    'id_programa' => $programa->id,
+                    'seccion' => 1, // Puedes incluir otras variables necesarias aquí
+                ]);
+            }
 
-        if ($programa) {
-            $id_programa = $programa->id;
-            return view(
-                'Dashboard.Voluntario.nueva_clase',
-                compact(
-                    [
-                        'id_programa',
-                        'seccion',
-                    ]
-                )
-
-            );
+            // En caso de fallo
+            return response()->json([
+                'success' => false,
+                'message' => 'No se pudo crear el programa educativo.',
+            ], 500);
+        } catch (\Exception $e) {
+            // Manejo de excepciones
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocurrió un error inesperado: ' . $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -131,7 +138,8 @@ class DashboardVolunController extends Controller
         }
     }
 
-    public function cargarActividades(Request $request){
+    public function cargarActividades(Request $request)
+    {
         $programas = ProgramaEducativo::getProgramasWithPresupuesto();
         return response()->json(
             ['data' => json_encode($programas),]

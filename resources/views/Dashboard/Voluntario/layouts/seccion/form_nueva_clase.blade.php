@@ -6,26 +6,23 @@
         <div class="space-y-[20px]">
 
             <!-- Nombre del Programa -->
-            <div x-data="{ tab: '{{ !empty($id_programa) ? 'actividades' : 'informacion' }}' }">
+            <div x-data="{ tab: 'informacion' }" id="divTab">
                 <!-- Navegación de tabs -->
                 <div class="mb-6" id="NavForm">
                     <nav class="flex space-x-4" aria-label="Tabs">
-                        <button @click="tab = 'informacion'"
+                        <button @click="tab = 'informacion'" id="btn-informacion"
                             :class="{ 'border-b-2 border-blue-500 text-blue-500': tab === 'informacion' }"
-                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
-                            @if (!empty($id_programa)) :disabled="disabledTabs.includes('informacion')" @endif>
+                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none">
                             Información
                         </button>
-                        <button @click="tab = 'presupuesto'"
+                        <button @click="tab = 'presupuesto'" id="btn-presupuesto"
                             :class="{ 'border-b-2 border-blue-500 text-blue-500': tab === 'presupuesto' }"
-                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none"
-                            @if (!empty($id_programa)) :disabled="disabledTabs.includes('presupuesto')" @endif>
+                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none">
                             Presupuesto
                         </button>
-                        <button @click="tab = 'actividades'" id="btn-presupuesto"
+                        <button @click="tab = 'actividades'" id="btn-actividades"
                             :class="{ 'border-b-2 border-blue-500 text-blue-500': tab === 'actividades' }"
-                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none {{ !empty($id_programa) ? '' : 'hidden' }}"
-                            @if (empty($id_programa)) :disabled="disabledTabs.includes('presupuesto')" @endif>
+                            class="px-3 py-2 font-medium text-gray-500 hover:text-blue-500 focus:outline-none" disabled='true'>
                             Actividades
                         </button>
                     </nav>
@@ -186,13 +183,13 @@
                         {{-- * Etiquetas hidden de control  --}}
                         <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
                         <input type="hidden" name="id_programa" id="id_programa"
-                            value="{{ !empty($id_programa) ? $id_programa : 0 }}">
+                            value="0">
                         {{-- * fIN Etiquetas hidden de control  --}}
 
                         <div>
-                            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre de la
+                            <label for="nombreActividad" class="block text-sm font-medium text-gray-700">Nombre de la
                                 Actividad</label>
-                            <input type="text" id="nombre" name="nombre" onfocus="resetInput('nombre')"
+                            <input type="text" id="nombreActividad" name="nombre" onfocus="resetInput('nombre')"
                                 maxlength="70" placeholder="Ingrese el nombre de la actividad"
                                 class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                         </div>

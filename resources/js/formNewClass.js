@@ -1,4 +1,3 @@
-
 import {
     addHTML,
     getValue,
@@ -7,10 +6,33 @@ import {
     resetInput,
     showElement,
     submitForm,
-    showJsonErrors
+    showJsonErrors,
+    messageMandatory,
+    messageSendSuccess,
+    messageSendError,
+    messageErrorRequest
 } from './generalsFunctions.js';
 
 (function () {
+
+    function enableActividades() {
+        //* esta funcion deshabilita los campos de informacion y presupuesto para solo
+        //* habilitar el de actividades, esto para agregar actividades a la clase
+
+        document.querySelector('#btn-informacion').setAttribute('disabled', true);
+        document.querySelector('#btn-presupuesto').setAttribute('disabled', true);
+        document.querySelector('#btn-actividades').removeAttribute('disabled');
+        document.querySelector('#btn-actividades').click();
+    }
+
+    function disableActividades() {
+        //* esta funcion deshabilita el campo de actividades y vuelve a informacion
+
+        document.querySelector('#btn-informacion').removeAttribute('disabled');
+        document.querySelector('#btn-presupuesto').removeAttribute('disabled');
+        document.querySelector('#btn-actividades').setAttribute('disabled', true);
+        document.querySelector('#btn-informacion').click();
+    }
 
     function sendFormNewClass(idForm) {
         // Recopilar datos del formulario
@@ -44,7 +66,7 @@ import {
             montoPresupuesto === false ||
             motivoPresupuesto === false
         ) {
-            alert('Por favor, complete todos los campos obligatorios.');
+            messageMandatory();
             return;
         }
 
@@ -73,36 +95,61 @@ import {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             },
-            body: data,
+            body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
             .then((responseData) => {
-                if (responseData.success) {
-                
 
-                    
+                const { success, id_programa } = responseData;
+
+                if (success && id_programa) {
+
+                    enableActividades();
+
+                    // Se da valor al campo de id_programa
+                    document.querySelector('#id_programa').value = id_programa;
+
+                    messageSendSuccess('Clase creada con éxito');
+
                 } else {
-                    alert('Error al crear la clase.');
+                    messageSendError('Error al crear la clase', responseData.message);
                     console.error('Error:', responseData.message);
                 }
             })
             .catch((error) => {
+
+                messageErrorRequest(error.message);
                 console.error('Error en la solicitud:', error);
-                alert('Ocurrió un error al enviar la información.');
             });
     }
 
+    function cleanFormActividades(){
+        document.querySelector('#nombreActividad').value = '';
+        document.querySelector('#fecha_actividad').value = '';
+        document.querySelector('#descripcion_actividad').value = '';
+        document.querySelector('#resultados_actividad').value = '';
+        document.querySelector('#comentarios_adicionales').value = '';
+    }
+    
     function addActividadesByClass() {
+
         const id_programa = getValueRequired('id_programa');
         const nombre = getValueRequired('nombreActividad');
-        const fecha_actividad = getValueRequired('fechaActividad');
-        const descripcion_actividad = getValueRequired('descripcionActividad');
-        const resultados_actividad = getValueRequired('resultadosActividad');
-        const comentarios_adicionales = getValueRequired('comentariosAdicionalesActividad');
+        const fecha_actividad = getValueRequired('fecha_actividad');
+        const descripcion_actividad = getValueRequired('descripcion_actividad');
+        const resultados_actividad = getValueRequired('resultados_actividad');
+        const comentarios_adicionales = getValue('comentarios_adicionales');
 
         // Validar datos requeridos
-        if (nombre === false || fecha_actividad === false || descripcion_actividad === false) {
-            alert('Por favor, complete los campos obligatorios.');
+        if (nombre === false || fecha_actividad === false || descripcion_actividad === false ||
+            resultados_actividad === false) {
+
+            messageMandatory();
             return;
         }
 
@@ -126,17 +173,18 @@ import {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.success) {
-                    alert('Actividad registrada exitosamente.');
+                const { success } = responseData
+                if (success) {
+                    messageSendSuccess('Actividad registrada exitosamente.');
+                    cleanFormActividades();
                     console.log('Actividad registrada:', responseData);
                 } else {
-                    alert('Error al registrar la actividad.');
-                    console.error('Error:', responseData.message);
+                    messageSendError('Error al registrar la actividad.', responseData.message)
                 }
             })
             .catch((error) => {
                 console.error('Error en la solicitud:', error);
-                alert('Ocurrió un error al enviar la actividad.');
+                messageErrorRequest('Ocurrió un error al enviar la actividad.');
             });
     }
 
@@ -153,4 +201,7 @@ import {
     window.showElement = showElement;
     window.addActividadesByClass = addActividadesByClass;
     window.showJsonErrors = showJsonErrors;
+    window.enableActividades = enableActividades;
+    window.disableActividades = disableActividades;
+    window.cleanFormActividades = cleanFormActividades;
 })();

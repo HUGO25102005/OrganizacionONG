@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 const styleWarning = 'border-red-500 bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all duration-300 ease-in-out';
 
 export function getValue(idElement) {
@@ -45,7 +47,56 @@ export function showElement(idElement) {
 }
 
 
-// Función para mostrar errores desde una respuesta JSON
+//TODO: Message by action or response
+export function messageMandatory() {
+    Swal.fire({
+        title: 'Faltan campos obligatorios',
+        text: 'Por favor, complete todos los campos obligatorios.',
+        iconHtml: '<i class="bx bx-error-circle" style="color: #e74c3c; font-size: 2.5rem;"></i>',
+        customClass: {
+            icon: 'swal-icon',
+        },
+        confirmButtonText: 'Aceptar',
+    });
+}
+
+export function messageSendSuccess(message) {
+    Swal.fire({
+        title: message,
+        text: 'Los datos se enviaron correctamente.',
+        iconHtml: '<i class="bx bx-check-circle" style="color: #2ecc71; font-size: 2.5rem;"></i>',
+        customClass: {
+            icon: 'swal-icon',
+        },
+        confirmButtonText: 'Aceptar',
+    });
+}
+
+export function messageSendError(message, response){
+    Swal.fire({
+        title: message,
+        text: response || 'Hubo un problema con los datos enviados.',
+        iconHtml: '<i class="bx bx-error" style="color: #e74c3c; font-size: 2.5rem;"></i>',
+        customClass: {
+            icon: 'swal-icon',
+        },
+        confirmButtonText: 'Aceptar',
+    });
+}
+
+export function messageErrorRequest(errorMessage){
+    Swal.fire({
+        title: 'Error en la solicitud',
+        text: errorMessage || 'No se pudo conectar con el servidor.',
+        iconHtml: '<i class="bx bx-error" style="color: #e74c3c; font-size: 2.5rem;"></i>',
+        customClass: {
+            icon: 'swal-icon',
+        },
+        confirmButtonText: 'Aceptar',
+    });
+}
+
+//TODO: Función para mostrar errores desde una respuesta JSON
 export function showJsonErrors(errors) {
     const container = document.getElementById('json-errors-container');
     container.innerHTML = ''; // Limpiar errores anteriores
