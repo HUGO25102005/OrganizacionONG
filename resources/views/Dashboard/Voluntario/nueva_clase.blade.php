@@ -22,7 +22,7 @@
             </div>
         </div>
     </x-slot>
-
+    
     @if ($seccion == 1)
         @include('Dashboard.Voluntario.layouts.seccion.form_nueva_clase')
     @else

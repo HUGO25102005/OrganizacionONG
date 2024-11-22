@@ -28,8 +28,9 @@ class DashboardVolunController extends Controller
         } else {
             $seccion = $request->seccion;
         }
-
-        session(['name' => auth()->user()->name, 'rol' => 'Valuntario', 'id' => auth()->user()->id]);
+        
+        // dd($seccion);
+        session(['name' => auth()->user()->name, 'rol' => 'Voluntario', 'id' => auth()->user()->id]);
 
         return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
     }
@@ -48,7 +49,7 @@ class DashboardVolunController extends Controller
         } else {
             $seccion = $request->seccion;
 
-            $misSolicitudes = ProgramaEducativo::getProgramasForVoluntarioTable($id_voluntario)->paginate();
+            $misSolicitudes = ProgramaEducativo::getProgramasForVoluntarioTable($id_voluntario)->paginate(10);
 
             return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades', 'misSolicitudes']));
         }

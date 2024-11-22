@@ -99,14 +99,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
         Route::post('/nueva-clase/solicitud/informacion', [DashboardVolunController::class, 'storeProgramaEducativo'])->name('vol.storeProgramaEducativo');
         Route::post('/nueva-clase/solicitud/actividades', [DashboardVolunController::class, 'storeActividades'])->name('vol.storeActividades');
-        Route::post('/nueva-clase/solicitud/actividades/cargar', [DashboardVolunController::class, 'cargarActividadesEnTabla'])->name('vol.cargarActividadesEnTabla');
+        Route::post('/nueva-clase/solicitud/actividades/cargar  ', [DashboardVolunController::class, 'cargarActividadesEnTabla'])->name('vol.cargarActividadesEnTabla');
     });
 
     //* Rutas del Dashboard Beneficiario
     Route::middleware([CheckBeneficiario::class])->prefix('dashboard/beneficiario')->group(function () {
         Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
         Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
-        Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
     });
 
 
