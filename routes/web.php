@@ -58,7 +58,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/donaciones/convocatorias/desactivar', [ConvocatoriaController::class, 'desactivar'])->name('convocatoria.desactivar');
         Route::post('/donaciones/convocatorias/recaudacion', [RecaudacionController::class, 'store'])->name('recaudacion.store');
 
-        Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
         // Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
 
 
@@ -71,9 +70,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/usuarios/trabajadorDesactivar', [TrabajadorController::class, 'desactivarTrabajador'])->name('admin.desactivar');
         Route::put('/usuarios/trabajadorAceptar', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
 
-
-        // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
-    
+        // RECURSOS --------------------------------------------------------------------------------------------------------------------------------------
+        Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
+        Route::get('/recursos/tabla/actualizar/soli', [DashboardAdminController::class, 'actualizarSolicitudes'])->name('tabla.actuSoli');
     
     });
 

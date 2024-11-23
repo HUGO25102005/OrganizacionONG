@@ -135,22 +135,22 @@ class DashboardAdminController extends Controller
         } else {
             $seccion = $request->seccion;
         }
+
         if ($seccion == 1) {
-            $monto_total_donaciones = Donacion::getMontoTotal();
-            $total_donaciones = Donacion::all();
-            $total_donaciones_semana = Donacion::getTotalMontoSemana();
+            // $monto_total_donaciones = Donacion::getMontoTotal();
+            // $total_donaciones = Donacion::all();
+            // $total_donaciones_semana = Donacion::getTotalMontoSemana();
+            $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
 
             return view(
                 'Dashboard.Admin.recursos',
                 compact(
                     [
-                        'monto_total_donaciones',
-                        'total_donaciones',
-                        'total_donaciones_semana',
+                        'soliRecursos',
                         'seccion'
                     ]
                 )
-            );
+            )->render();
         } else {
 
             $search = $request->input('search');
@@ -177,6 +177,14 @@ class DashboardAdminController extends Controller
 
             return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
         }
+    }
+    public function actualizarSolicitudes(){
+
+        $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
+
+        $html = view('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes', compact(['soliRecursos']))->render();
+
+        return response()->json(['html' => $html]);
     }
     public function usuarios(Request $request)
     {

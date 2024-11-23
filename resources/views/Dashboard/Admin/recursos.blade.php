@@ -11,11 +11,11 @@
                         {{ __('Recursos') }}
                     </h2>
                 </a>
-                <a href="{{ route('admin.recursos', ['seccion' => 2]) }}">
+                {{-- <a href="{{ route('admin.recursos', ['seccion' => 2]) }}">
                     <h2 class="font-semibold text-xl text-gray-800 hover:bg-gray-100 hover:text-black p-2 transition-transform duration-200 hover:scale-110 rounded leading-tight min-w-[200px] {{ $seccion == 2 ? 'bg-gray-100' : 'bg-white' }}">
                         {{ __('Solicitud de presupuesto') }}
                     </h2>
-                </a>
+                </a> --}}
             </div>
         </div>
     </x-slot>

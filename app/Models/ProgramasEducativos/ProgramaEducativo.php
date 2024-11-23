@@ -55,6 +55,9 @@ class ProgramaEducativo extends Model
         )
             ->where('id_voluntario', $idVoluntario);
     }
+    public static function getSoliRecursos(){
+        return self::with('presupuesto');
+    }
     public function getTieneAprobacionContenidoAttribute()
     {
         return $this->aprobacionContenidos()->exists();
