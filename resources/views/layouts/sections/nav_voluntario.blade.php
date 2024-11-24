@@ -14,10 +14,9 @@
     <x-nav-link :href="route('vol.misClases')" :active="request()->routeIs('vol.misClases')">
         {{ __('Mis Clases') }}
     </x-nav-link>
-</div>
+</div> 
 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
     <x-nav-link :href="route('vol.nuevaClase')" :active="request()->routeIs('vol.nuevaClase')">
-        {{ __('Nueva Clase') }}
+        {{ __('Nueva clase') }}
     </x-nav-link>
 </div>
-

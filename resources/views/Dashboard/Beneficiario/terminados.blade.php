@@ -26,100 +26,110 @@
     </x-slot>    
 
 <!-- Contenedor principal -->
-<div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-xl rounded-[30px] flex flex-col lg:flex-row gap-8">
-    
-    <!-- Dropdown de Clases Terminadas -->
-    <div class="w-full lg:w-1/6">
-        <div class="flex items-center justify-between lg:justify-start cursor-pointer text-[#5A78A5] whitespace-nowrap mb-4 font-semibold hover:text-[#1E3A5F]" onclick="toggleDropdown()">
-            <div class="flex items-center">
-                <i class='bx bx-chevron-down mr-2 text-2xl'></i>
-                <span class="text-xl">Clases Terminadas</span>
-            </div>
-            <!-- Icono solo visible en dispositivos móviles -->
-            <i class="bx bx-menu text-2xl lg:hidden"></i>
-        </div>
-        <div id="dropdown" class="space-y-2 hidden lg:block">
-            <ul class="space-y-2 text-[#4A5568]">
-                <li onclick="mostrarInfoClase('Curso de HTML Básico')" class="flex items-center space-x-2 bg-[#E0EFFF] hover:bg-[#C7DCFF] p-2 rounded-lg cursor-pointer transition duration-200 shadow-sm border border-[#B3D1FF]">
-                    <i class='bx bx-book-content text-[#1E3A5F]'></i>
-                    <span>Curso de HTML Básico</span>
-                </li>
-                <li onclick="mostrarInfoClase('Introducción a CSS')" class="flex items-center space-x-2 bg-[#E0EFFF] hover:bg-[#C7DCFF] p-2 rounded-lg cursor-pointer transition duration-200 shadow-sm border border-[#B3D1FF]">
-                    <i class='bx bx-palette text-[#1E3A5F]'></i>
-                    <span>Introducción a CSS</span>
-                </li>
-                <li onclick="mostrarInfoClase('JavaScript Avanzado')" class="flex items-center space-x-2 bg-[#E0EFFF] hover:bg-[#C7DCFF] p-2 rounded-lg cursor-pointer transition duration-200 shadow-sm border border-[#B3D1FF]">
-                    <i class='bx bx-code-alt text-[#1E3A5F]'></i>
-                    <span>JavaScript Avanzado</span>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!--clases terminadas ben-->
 
-    <!-- Contenedor de Información y Reportes -->
-    <div id="informacionClase" class="w-full lg:w-5/6 bg-[#FFFFFF] p-8 rounded-2xl shadow-md border border-[#D0E4FF]">
-        <h2 id="tituloClase" class="text-3xl font-semibold mb-4 text-[#1E3A5F]">Clases terminadas</h2>
-        <p id="descripcionClase" class="text-[#000000] mb-6 text-lg">Aquí se mostrará la descripción y los reportes de la clase seleccionada.</p>
-        <div id="reportesClase" class="space-y-4">
-            <!-- Reportes de la clase seleccionada -->
-        </div>
+<!-- Contenedor principal -->
+<div id="clasesTerminadasContainer"
+class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-xl rounded-[30px] transition-all duration-500 ease-in-out">
+<h2 class="text-3xl font-semibold mb-6 text-[#1E3A5F]">Clases Terminadas</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Clase 1 -->
+    <div onclick="mostrarReportes('Codeando fácil')"
+        class="cursor-pointer bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400 hover:shadow-lg hover:scale-105 transition-transform duration-300">
+        <img src="ruta_de_la_imagen_html.jpg" alt="HTML Básico"
+            class="w-full h-32 object-cover rounded-md mb-4">
+        <h3 class="text-lg font-semibold bg-[#E0EFFF] p-2 rounded-md text-blue-700">Codeando fácil</h3>
+        <p class="text-gray-700 mt-2">Aprende los fundamentos básicos de programación para dar tus primeros pasos
+            en el mundo de la tecnología.</p>
     </div>
+    <!-- Clase 2 -->
+    <div onclick="mostrarReportes('Aprendiendo código')"
+        class="cursor-pointer bg-white p-6 rounded-lg shadow-md border-t-4 border-green-400 hover:shadow-lg hover:scale-105 transition-transform duration-300">
+        <img src="ruta_de_la_imagen_css.jpg" alt="CSS"
+            class="w-full h-32 object-cover rounded-md mb-4">
+        <h3 class="text-lg font-semibold bg-[#C8E6C9] p-2 rounded-md text-green-700">Aprendiendo código</h3>
+        <p class="text-gray-700 mt-2">Profundiza en conocimientos avanzados para aplicar programación a
+            proyectos reales y mejorar tus habilidades</p>
+    </div>
+</div>
+</div>
+
+<!-- Contenedor de reportes de clase -->
+<div id="reportesClaseContainer"
+class="hidden opacity-0 transform scale-90 bg-[#F6F8FF] p-8 rounded-lg shadow-xl w-full max-w-[1450px] h-auto my-8 transition-all duration-500 ease-in-out">
+<h2 id="tituloClase" class="text-3xl font-semibold mb-6 text-[#1E3A5F]">Reportes de la Clase</h2>
+<p id="descripcionClase" class="text-[#4A5568] mb-4">Descripción de la clase seleccionada.</p>
+<div id="reportes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Contenido dinámico de reportes -->
+</div>
+<button onclick="volverAClases()"
+    class="mt-6 px-6 py-3 bg-[#4A90E2] text-white rounded-full font-semibold text-lg hover:bg-[#357ABD] hover:scale-105 transition-transform duration-300 shadow-lg">
+    Volver a Clases
+</button>
 </div>
 
 <script>
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown");
-    dropdown.classList.toggle("hidden");
-}
-function mostrarInfoClase(clase) {
-    const tituloClase = document.getElementById("tituloClase");
-    const descripcionClase = document.getElementById("descripcionClase");
-    const reportesClase = document.getElementById("reportesClase");
+function mostrarReportes(clase) {
+const clasesTerminadasContainer = document.getElementById("clasesTerminadasContainer");
+const reportesClaseContainer = document.getElementById("reportesClaseContainer");
+const tituloClase = document.getElementById("tituloClase");
+const descripcionClase = document.getElementById("descripcionClase");
+const reportes = document.getElementById("reportes");
 
-    // Información según la clase seleccionada
-    if (clase === "Curso de HTML Básico") {
-        tituloClase.textContent = "Curso de HTML Básico";
+// Ocultar clasesTerminadasContainer con animación
+clasesTerminadasContainer.classList.remove("opacity-100", "scale-100");
+clasesTerminadasContainer.classList.add("opacity-0", "scale-90");
+
+// Mostrar reportes después de la animación
+setTimeout(() => {
+    clasesTerminadasContainer.classList.add("hidden");
+    reportesClaseContainer.classList.remove("hidden", "opacity-0", "scale-90");
+    reportesClaseContainer.classList.add("opacity-100", "scale-100");
+
+    // Configurar contenido dinámico
+    if (clase === "Codeando fácil") {
+        tituloClase.textContent = "Codeando fácil";
         descripcionClase.textContent = "Este curso cubre los fundamentos de HTML para principiantes.";
-
-        reportesClase.innerHTML = `
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#FFFFF]">Reporte 1</h3>
+        reportes.innerHTML = `
+            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF]">
+                <h3 class="text-xl font-semibold mb-2">Reporte 1</h3>
                 <p class="text-[#4A5568]">Los estudiantes comprendieron bien los conceptos básicos de etiquetas HTML.</p>
             </div>
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#00000]">Reporte 2</h3>
+            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF]">
+                <h3 class="text-xl font-semibold mb-2">Reporte 2</h3>
                 <p class="text-[#4A5568]">La mayoría completó satisfactoriamente el proyecto final.</p>
-            </div>
-        `;
-    } else if (clase === "Introducción a CSS") {
-        tituloClase.textContent = "Introducción a CSS";
+            </div>`;
+    } else if (clase === "Aprendiendo código") {
+        tituloClase.textContent = "Aprendiendo código";
         descripcionClase.textContent = "Este curso enseña los fundamentos de CSS para diseñar páginas web atractivas.";
-
-        reportesClase.innerHTML = `
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#00000]">Reporte 1</h3>
+        reportes.innerHTML = `
+            <div class="bg-[#E8F5E9] p-6 rounded-lg shadow-md border border-[#A5D6A7]">
+                <h3 class="text-xl font-semibold mb-2">Reporte 1</h3>
                 <p class="text-[#4A5568]">Los estudiantes aprendieron a aplicar estilos básicos con CSS.</p>
             </div>
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#00000]">Reporte 2</h3>
+            <div class="bg-[#E8F5E9] p-6 rounded-lg shadow-md border border-[#A5D6A7]">
+                <h3 class="text-xl font-semibold mb-2">Reporte 2</h3>
                 <p class="text-[#4A5568]">Realizaron ejercicios de flexbox y responsive design.</p>
-            </div>
-        `;
-    } else if (clase === "JavaScript Avanzado") {
-        tituloClase.textContent = "JavaScript Avanzado";
-        descripcionClase.textContent = "En este curso, los estudiantes profundizan en conceptos avanzados de JavaScript.";
-
-        reportesClase.innerHTML = `
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#00000]">Reporte 1</h3>
-                <p class="text-[#4A5568]">Comprendieron conceptos de programación asíncrona y manejo de promesas.</p>
-            </div>
-            <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                <h3 class="text-xl font-semibold text-[#00000]">Reporte 2</h3>
-                <p class="text-[#4A5568]">Los proyectos finales incluyeron funcionalidades dinámicas avanzadas.</p>
-            </div>
-        `;
+            </div>`;
     }
+}, 300); // Tiempo de duración de la animación
+}
+
+function volverAClases() {
+const reportesClaseContainer = document.getElementById("reportesClaseContainer");
+const clasesTerminadasContainer = document.getElementById("clasesTerminadasContainer");
+
+// Ocultar reportesClaseContainer con animación
+reportesClaseContainer.classList.remove("opacity-100", "scale-100");
+reportesClaseContainer.classList.add("opacity-0", "scale-90");
+
+// Mostrar clasesTerminadasContainer después de la animación
+setTimeout(() => {
+    reportesClaseContainer.classList.add("hidden");
+    clasesTerminadasContainer.classList.remove("hidden");
+    clasesTerminadasContainer.classList.remove("opacity-0", "scale-90");
+    clasesTerminadasContainer.classList.add("opacity-100", "scale-100");
+}, 300); // Tiempo de duración de la animación
 }
 </script>
 
