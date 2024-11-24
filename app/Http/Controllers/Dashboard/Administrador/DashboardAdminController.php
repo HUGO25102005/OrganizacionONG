@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Models\Caja\AprobacionPresupuesto;
 use App\Models\Caja\CajaFondo;
 use App\Models\Caja\Presupuesto;
 use App\Models\Donaciones\Convocatoria;
@@ -142,6 +143,7 @@ class DashboardAdminController extends Controller
             // $total_donaciones_semana = Donacion::getTotalMontoSemana();
             $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
 
+            // dd($soliRecursos);
             return view(
                 'Dashboard.Admin.recursos',
                 compact(
@@ -178,9 +180,29 @@ class DashboardAdminController extends Controller
             return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
         }
     }
-    public function actualizarSolicitudes(){
+    public function actualizarSolicitudes(Request $request)
+    {
 
-        $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
+        // Inicia la consulta base
+        $query = ProgramaEducativo::getSoliRecursos();
+
+        // Si hay un término de búsqueda, aplica los filtros
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query = $query->where(function ($q) use ($search) {
+                $q->where('nombre_programa', 'like', "%{$search}%")
+                    ->orWhereHas('voluntario.trabajador.user', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhere('beneficiarios_estimados', 'like', "%{$search}%")
+                    ->orWhereHas('presupuesto', function ($subQuery) use ($search) {
+                        $subQuery->where('monto', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        // Paginar los resultados
+        $soliRecursos = $query->paginate(10);
 
         $html = view('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes', compact(['soliRecursos']))->render();
 
@@ -416,5 +438,44 @@ class DashboardAdminController extends Controller
 
             return view('Dashboard.Admin.usuarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado', 'datos']));
         }
+    }
+
+    public function aceptarRecurso(Request $request)
+    {
+        $idAdmin = auth()->user()->trabajador->administrador->id;
+        $idPresupuesto = $request->id;
+        // Validar que el método sea PUT
+        if ($request->isMethod('put')) {
+            // Procesar la acción
+            AprobacionPresupuesto::updateOrCreate(
+                ['id_presupuesto' => $idPresupuesto],
+                ['id_administrador' => $idAdmin, 'si_no' => 1]
+            );
+
+            // Redirigir para evitar duplicación al recargar
+            return redirect()->route('admin.recursos')->with('success', 'Recurso aceptado con éxito.');
+        }
+
+        // Si no es PUT, redirige con un mensaje de error
+        return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
+    }
+    public function rechazarRecurso(Request $request)
+    {
+        $idAdmin = auth()->user()->trabajador->administrador->id;
+        $idPresupuesto = $request->id;
+        // Validar que el método sea PUT
+        if ($request->isMethod('put')) {
+            // Procesar la acción
+            AprobacionPresupuesto::updateOrCreate(
+                ['id_presupuesto' => $idPresupuesto],
+                ['id_administrador' => $idAdmin, 'si_no' => 0]
+            );
+
+            // Redirigir para evitar duplicación al recargar
+            return redirect()->route('admin.recursos')->with('warning', 'Recurso rechazado con éxito.');
+        }
+
+        // Si no es PUT, redirige con un mensaje de error
+        return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
     }
 }

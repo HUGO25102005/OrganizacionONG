@@ -1,11 +1,11 @@
 <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-    
+
     <!-- Sección: Recursos disponibles -->
     {{-- <div class="mb-6"> --}}
-        {{-- <h2 class="text-2xl font-bold mb-4">Recursos disponibles</h2> --}}
-    
-        <!-- Tarjetas de recursos disponibles -->
-        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {{-- <h2 class="text-2xl font-bold mb-4">Recursos disponibles</h2> --}}
+
+    <!-- Tarjetas de recursos disponibles -->
+    {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Tarjeta 1 -->
             <div class="bg-white p-6 pl-10 rounded-lg shadow-md border-l-4 border-yellow-500">
                 <h3 class="text-lg font-bold mb-2">Programa A</h3>
@@ -35,7 +35,7 @@
             </div>
         </div> --}}
     {{-- </div> --}}
-    
+
 
     <!-- Sección: Visualización de gráficos de flujo de caja -->
     {{-- <div class="mb-6">
@@ -55,23 +55,26 @@
             </div>
         </div>
     </div> --}}
-    
+
 
     <!-- Sección: Asignación de recursos -->
     <div class="bg-white p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-center font-semibold text-2xl md:text-3xl">Asignación de recursos</h3>
-            <form action="{{ route('admin.usuarios', ['seccion' => 2]) }}" method="POST" id="search-form" class="flex items-center">
+            <h3 class="text-center font-semibold text-2xl md:text-3xl">Solicitudes de Recursos</h3>
+            <form action="{{ route('tabla.actuSoli') }}" method="GET" id="search-form" class="flex items-center">
                 @csrf
-                @method('GET')
-                <div class="relative"> <!-- Eliminar el margen -->
-                    <input type="text" name='search' placeholder="Buscar"
+                <div class="relative">
+                    <input type="text" name="search"
+                        placeholder="Buscar por nombre del programa, impartido por, beneficiarios o recursos"
                         class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>                   
+                    <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
                 </div>
             </form>
         </div>
-        @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')         
+
+
+        @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')
+
     </div>
 </div>
 
@@ -81,6 +84,15 @@
     document.addEventListener('DOMContentLoaded', () => {
         updateTableSolicitudes();
     });
+    document.getElementById('search-form').addEventListener('input', () => {
+        event.preventDefault(); // Evitar el envío del formulario de manera tradicional
+        updateTableSolicitudes();
+    });
+    document.getElementById('search-form').addEventListener('submit', (event) => {
+        event.preventDefault(); // Previene el envío tradicional del formulario
+        updateTableSolicitudes(); // Llama a la función para actualizar la tabla
+    });
+
     // Gráfico de Ingresos Mensuales
     const ctxIncome = document.getElementById('incomeChart').getContext('2d');
     const incomeChart = new Chart(ctxIncome, {

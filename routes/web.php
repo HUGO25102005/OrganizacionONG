@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function () {
         // RECURSOS --------------------------------------------------------------------------------------------------------------------------------------
         Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
         Route::get('/recursos/tabla/actualizar/soli', [DashboardAdminController::class, 'actualizarSolicitudes'])->name('tabla.actuSoli');
+        Route::put('/recursos/tabla/actualizar/soli/aceptar', [DashboardAdminController::class, 'aceptarRecurso'])->name('tabla.aceptarRecurso');
+        Route::put('/recursos/tabla/actualizar/soli/rechazar', [DashboardAdminController::class, 'rechazarRecurso'])->name('tabla.rechazarRecurso');
     
     });
 
