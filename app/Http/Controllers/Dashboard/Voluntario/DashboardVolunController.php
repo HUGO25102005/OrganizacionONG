@@ -25,14 +25,24 @@ class DashboardVolunController extends Controller
     {
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
+
         } else {
             $seccion = $request->seccion;
         }
-        
-        // dd($seccion);
-        session(['name' => auth()->user()->name, 'rol' => 'Voluntario', 'id' => auth()->user()->id]);
 
-        return view('Dashboard.Voluntario.mis_clases', compact(['seccion']));
+        if($seccion == 1){
+
+            $idVoluntario = Auth()->user()->trabajador->voluntario->id;
+            $misProgramas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario);
+
+            return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'misProgramas']));
+        } else {
+
+            $idVoluntario = Auth()->user()->trabajador->voluntario->id;
+            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario,5);
+
+            return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'claFinalizadas']));
+        }
     }
     public function nuevaClase(Request $request)
     {
@@ -200,5 +210,16 @@ class DashboardVolunController extends Controller
         return response()->json(
             ['data' => json_encode($programas),]
         );
+    }
+
+    function getInformacionClase(Request $request){
+
+        // dd($request);
+        $id_voluntario = Auth()->user()->trabajador->voluntario->id;
+        $idClase = $request->id_clase;
+
+        $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase);
+        // dd($info);
+        return response()->json(['data' => json_encode($info)]);
     }
 }

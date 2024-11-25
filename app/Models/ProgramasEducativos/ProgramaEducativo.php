@@ -34,28 +34,44 @@ class ProgramaEducativo extends Model
         'comentarios_adicionales',
     ];
 
-    public static function getProgramasForVoluntarioTable($idVoluntario)
+    public static function obtenerDetallesClase($idVoluntario, $idClase, $estado = 1)
     {
-        return self::select(
-            'programas_educativos.*',
-            DB::raw('EXISTS (
-                SELECT 1 
-                FROM aprobacion_contenidos 
-                WHERE aprobacion_contenidos.id_programa_educativo = programas_educativos.id 
-                AND aprobacion_contenidos.si_no = 1
-            ) AS tiene_aprobacion_contenido'),
-            DB::raw('EXISTS (
-                SELECT 1 
-                FROM aprobacion_presupuestos 
-                INNER JOIN presupuestos 
-                ON presupuestos.id = aprobacion_presupuestos.id_presupuesto
-                WHERE presupuestos.id = programas_educativos.id_presupuesto 
-                AND aprobacion_presupuestos.si_no = 1
-            ) AS tiene_aprobacion_presupuesto')
-        )
-            ->where('id_voluntario', $idVoluntario);
+        // Validar parámetros (opcional, dependiendo del contexto)
+        if (!is_numeric($idVoluntario) || !is_numeric($idClase) || !is_numeric($estado)) {
+            return ['error' => 'Parámetros inválidos'];
+        }
+
+        // Obtener información de la clase
+        $detallesClase = self::where([
+            ['id_voluntario', '=', $idVoluntario],
+            ['id', '=', $idClase],
+            ['estado', '=', $estado],
+        ])->with(['presupuesto'])->first();
+
+        // Verificar si se encontró la clase
+        if (!$detallesClase) {
+            return ['error' => 'Clase no encontrada'];
+        }
+
+        // Obtener lista de alumnos relacionada
+        $listaAlumnos = SalonesClase::where('id_programa_educativo', $idClase)
+            ->with(['beneficiario', 'user'])
+            ->get();
+
+        // Devolver los datos organizados
+        return [
+            'detallesClase' => $detallesClase,
+            'listaAlumnos' => $listaAlumnos
+        ];
     }
-    public static function getSoliRecursos(){
+
+    public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)
+    {
+        return self::where('id_voluntario', $idVoluntario)
+            ->where('estado', $estado)->get();
+    }
+    public static function getSoliRecursos()
+    {
         return self::with(['presupuesto']);
     }
     public function getTieneAprobacionContenidoAttribute()

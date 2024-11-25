@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
+        Route::post('/mis-clases/detalles-clase', [DashboardVolunController::class, 'getInformacionClase'])->name('vol.detallesClase');
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
         Route::post('/nueva-clase/solicitud/informacion', [DashboardVolunController::class, 'storeProgramaEducativo'])->name('vol.storeProgramaEducativo');
         Route::post('/nueva-clase/solicitud/actividades', [DashboardVolunController::class, 'storeActividades'])->name('vol.storeActividades');
@@ -107,6 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckBeneficiario::class])->prefix('dashboard/beneficiario')->group(function () {
         Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
         Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
+        Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
     });
 
 
