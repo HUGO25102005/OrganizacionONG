@@ -27,4 +27,14 @@ export default {
     },
 
     plugins: [forms],
+    safelist: [
+        'bg-red-400',
+        'bg-blue-400',
+        'bg-green-400',
+        'bg-orange-400',
+        'hover:bg-red-500',
+        'hover:bg-blue-500',
+        'hover:bg-green-500',
+        'hover:bg-orange-500',
+    ],
 };

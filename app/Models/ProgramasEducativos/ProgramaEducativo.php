@@ -34,6 +34,34 @@ class ProgramaEducativo extends Model
         'comentarios_adicionales',
     ];
 
+    // public static function obtenerDetallesClaseBene($idBene, $idClase, $estado = 1)
+    // {
+    //     // Validar parámetros (opcional, dependiendo del contexto)
+    //     if (!is_numeric($idBene) || !is_numeric($idClase) || !is_numeric($estado)) {
+    //         return ['error' => 'Parámetros inválidos'];
+    //     }
+
+    //     // Obtener lista de alumnos relacionada
+    //     $clase = SalonesClase::where('id_beneficiarios', '=', $idBene)
+    //         ->with(['beneficiario', 'user', 'programasEtucativos'])
+    //         ->get();
+
+    //     if ($estado == 1) {
+    //         return [
+    //             'detallesClase' => $detallesClase,
+    //             'clase' => $clase
+    //         ];
+    //     } else {
+    //         $reporte = InformesSeguimientos::where('id_programa_educativo', '=', intval($idClase))->first();
+    //         // dd($reporte);
+    //         return [
+    //             'detallesClase' => $detallesClase,
+    //             'clase' => $clase,
+    //             'reporte' => $reporte
+    //         ];
+    //     }
+    //     // Devolver los datos organizados
+    // }
     public static function obtenerDetallesClase($idVoluntario, $idClase, $estado = 1)
     {
         // Validar parámetros (opcional, dependiendo del contexto)
@@ -58,7 +86,7 @@ class ProgramaEducativo extends Model
             ->with(['beneficiario', 'user'])
             ->get();
 
-        if($estado == 1){
+        if ($estado == 1) {
             return [
                 'detallesClase' => $detallesClase,
                 'listaAlumnos' => $listaAlumnos
@@ -73,6 +101,26 @@ class ProgramaEducativo extends Model
             ];
         }
         // Devolver los datos organizados
+    }
+    public static function obtenerDetalles($idClase)
+    {
+        // Validar parámetro (opcional)
+        if (!is_numeric($idClase)) {
+            return ['error' => 'Parámetro inválido'];
+        }
+
+        // Obtener información de la clase sin incluir presupuesto
+        $detallesClase = self::where('id', '=', intval($idClase))
+            ->with(['salonesClases', 'salonesClases.beneficiario', 'voluntario.trabajador.user']) // Añade las relaciones relevantes, si las necesitas
+            ->first();
+
+        // Verificar si se encontró la clase
+        if (!$detallesClase) {
+            return ['error' => 'Clase no encontrada'];
+        }
+
+        // Devolver los detalles de la clase
+        return $detallesClase;
     }
 
     public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)

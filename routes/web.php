@@ -110,7 +110,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckBeneficiario::class])->prefix('dashboard/beneficiario')->group(function () {
         Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
         Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
-        Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
+        Route::post('/mis-clases/oferta/detalles', [DashboardBeneficiarioController::class, 'getDetallesClase'])->name('ben.detallesClase');
+        Route::post('/mis-clases/inscrito/detalles', [DashboardBeneficiarioController::class, 'getDetallesClase'])->name('ben.detallesClaseInscrito');
+        Route::post('/mis-clases/oferta/inscripcion', [DashboardBeneficiarioController::class, 'inscribirmeClase'])->name('ben.inscribirmeClase');
     });
 
 
