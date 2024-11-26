@@ -7,6 +7,7 @@ use App\Http\Controllers\Programa\ProgramaController;
 use App\Http\Requests\Programa\ActividadesRequest;
 use App\Http\Requests\Programa\ProgramaRequest;
 use App\Models\Caja\Presupuesto;
+use App\Models\ProgramasEducativos\InformesSeguimientos;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
 use App\Models\Registros\RegistroActividades;
 use Illuminate\Container\Attributes\Auth;
@@ -25,12 +26,11 @@ class DashboardVolunController extends Controller
     {
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
-
         } else {
             $seccion = $request->seccion;
         }
 
-        if($seccion == 1){
+        if ($seccion == 1) {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
             $misProgramas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario);
@@ -39,7 +39,7 @@ class DashboardVolunController extends Controller
         } else {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario,5);
+            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario, 5);
 
             return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'claFinalizadas']));
         }
@@ -53,7 +53,7 @@ class DashboardVolunController extends Controller
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
 
-            
+
 
             return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades']));
         } else {
@@ -212,13 +212,58 @@ class DashboardVolunController extends Controller
         );
     }
 
-    function getInformacionClase(Request $request){
-
-        // dd($request);
+    public function getInformacionClase(Request $request)
+    {
         $id_voluntario = Auth()->user()->trabajador->voluntario->id;
         $idClase = $request->id_clase;
 
         $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase);
+        // dd($info);
+        return response()->json(['data' => json_encode($info)]);
+    }
+
+    public function terminarClase(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'id_programa_educativo' => 'required|integer',
+            'id_trabajador' => 'required|integer',
+            'fecha_informe' => 'required|date',
+            'resumen_informe' => 'required|string',
+            'cumplimiento_indicadores' => 'required|string',
+            'desafios_encontrados' => 'required|string',
+            'recomendaciones' => 'required|string',
+            'comentarios_adicionales' => 'nullable|string', // Opcional
+            'descripcion_reporte' => 'required|string',
+        ]);
+
+        // Crear el registro en la base de datos
+        $reporte = InformesSeguimientos::create($validatedData);
+
+        // Cambiar el estatus del programa si el informe se creó correctamente
+        if ($reporte) {
+            // Buscar el programa educativo asociado
+            $programa = ProgramaEducativo::find($validatedData['id_programa_educativo']);
+            if ($programa) {
+                // Actualizar el estatus del programa
+                $programa->estado = 5; // Cambia el valor según tu lógica
+                $programa->save(); // Guardar los cambios
+                $data = 'ok';
+            } else {
+                $data = 'error_programa_no_encontrado';
+            }
+        } else {
+            $data = 'error';
+        }
+        return response()->json(['data' => json_encode($data)]);
+    }
+
+    public function getInformacionClaseTerminada(Request $request)
+    {
+        $id_voluntario = Auth()->user()->trabajador->voluntario->id;
+        $idClase = $request->id_clase;
+
+        $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase, 5);
         // dd($info);
         return response()->json(['data' => json_encode($info)]);
     }

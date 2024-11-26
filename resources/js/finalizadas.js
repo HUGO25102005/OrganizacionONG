@@ -31,33 +31,12 @@ import {
         }
     }
 
-    function mostrarSoloDetalles(idClase) {
-        const clasesContainer = document.getElementById("clasesContainer");
-        const detalles = document.getElementById("detalles");
+    function mostrarInfoClase(idClase) {
+        const tituloClase = document.getElementById("tituloClase");
+        const descripcionClase = document.getElementById("descripcionClase");
+        const reportesClase = document.getElementById("reportesClase");
 
-        clasesContainer.classList.add("hidden");
-        detalles.classList.remove("hidden");
-
-        const idProgramaDetalles = document.getElementById("idProgramaDetalles");
-        const detallesTitulo = document.getElementById("detallesTitulo");
-        const listaEstudiantes = document.getElementById("listaEstudiantes");
-        const descripcionActividad = document.getElementById("descripcionActividad");
-        const duracionActividad = document.getElementById("duracionActividad");
-        const presupuestoActividad = document.getElementById("presupuestoActividad");
-        const instructorActividad = document.getElementById("instructorActividad");
-        const objetivoActividad = document.getElementById("objetivoActividad");
-        const publicObjetivo = document.getElementById("publicObjetivo");
-        const fechaInicio = document.getElementById("fechaInicio");
-        const fechaTermino = document.getElementById("fechaTermino");
-        const recursosNecesarios = document.getElementById("recursosNecesarios");
-        const estadoActividad = document.getElementById("estadoActividad");
-        const resultadosEsperados = document.getElementById("resultadosEsperados");
-        const beneficiariosEstimados = document.getElementById("beneficiariosEstimados");
-        const indicadoresCumplimiento = document.getElementById("indicadoresCumplimiento");
-        const comentariosAdicionales = document.getElementById("comentariosAdicionales");
-        const fechaRegistro = document.getElementById("fechaRegistro");
-
-        const url = document.getElementById("routerDetallesClase").getAttribute('data-url');
+        const url = document.getElementById("urlTerminadas").getAttribute('data-url');
         const dataFetch = {
             id_clase: idClase
         }
@@ -72,8 +51,8 @@ import {
             .then(res => res.json())
             .then(response => {
                 const data = JSON.parse(response.data);
-                // console.log(data);
-                const { detallesClase, listaAlumnos } = data;
+                console.log(data);
+                const { detallesClase, listaAlumnos, reporte } = data;
                 const {
                     id,
                     nombre_programa,
@@ -105,24 +84,22 @@ import {
                     lista += `<li>No hay alumnos registrados en la clase</li>`;
                 }
 
-                idProgramaDetalles.value = id;
-                detallesTitulo.textContent = nombre_programa;
-                listaEstudiantes.innerHTML = lista;
-                descripcionActividad.textContent = descripcion;
-                duracionActividad.textContent = `Duración: ${duracion} semanas`;
-                presupuestoActividad.textContent = `Presupuesto: $${presupuesto.monto}`;
-                objetivoActividad.textContent = objetivos;
-                publicObjetivo.textContent = publico_objetivo;
-                fechaInicio.textContent = fecha_inicio;
-                fechaTermino.textContent = fecha_termino;
-                recursosNecesarios.textContent = recursos_necesarios;
-                estadoActividad.textContent = estado;
-                resultadosEsperados.textContent = resultados_esperados;
-                beneficiariosEstimados.textContent = beneficiarios_estimados;
-                indicadoresCumplimiento.textContent = indicadores_cumplimiento;
-                comentariosAdicionales.textContent = comentarios_adicionales;
-                fechaRegistro.textContent = fecha_registro;
-                // instructorActividad.textContent = "Instructor: Laura Gómez";
+                const {
+                    comentarios_Adicionales,
+                    desafios_encontrados,
+                    recomendaciones,
+                    resumen_informe,
+                } = reporte;
+
+                tituloClase.textContent = nombre_programa;
+                descripcionClase.textContent = descripcion;
+
+                reportesClase.innerHTML = `
+                    <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
+                        <h3 class="text-xl font-semibold">Reporte Finalizacion</h3>
+                        <p class="text-[#4A5568]">${resumen_informe}</p>
+                    </div>
+                `;
             })
 
 
@@ -213,7 +190,7 @@ import {
             .then(response => {
                 const data = JSON.parse(response.data);
                 // console.log(data);
-                if(data == 'ok'){
+                if (data == 'ok') {
                     messageSendSuccess('Clase finalizada exitosamente.');
                 } else {
                     messageErrorRequest('Ocurrió un error al finalizar la clase.');
@@ -225,7 +202,7 @@ import {
     }
 
     window.toggleDropdown = toggleDropdown;
-    window.mostrarSoloDetalles = mostrarSoloDetalles;
+    window.mostrarInfoClase = mostrarInfoClase;
     window.cerrarDetalles = cerrarDetalles;
     window.enviarInforme = enviarInforme;
     window.resetInput = resetInput;

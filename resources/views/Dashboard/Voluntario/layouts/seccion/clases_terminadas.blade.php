@@ -14,7 +14,7 @@
         <div id="dropdown">
             <ul class="space-y-2 text-[#4A5568]">
                 @foreach ($claFinalizadas as $clase)
-                    <li onclick="mostrarInfoClase('{{ $clase->nombre_programa }}')"
+                    <li onclick="mostrarInfoClase('{{ $clase->id }}')"
                         class="flex items-center space-x-2 bg-[#E0EFFF] hover:bg-[#C7DCFF] p-2 rounded-lg cursor-pointer transition duration-200 shadow-sm border border-[#B3D1FF]">
                         <i class='bx bx-book-content text-[#1E3A5F]'></i>
                         <span>{{ $clase->nombre_programa }}</span>
@@ -25,6 +25,7 @@
         </div>
     </div>
 
+    <div id="urlTerminadas" data-url="{{route('vol.terminadaClase')}}"></div>
     <!-- Contenedor de Información y Reportes -->
     <div id="informacionClase" class="w-full lg:w-5/6 bg-[#FFFFFF] p-8 rounded-2xl shadow-md border border-[#D0E4FF]">
         <h2 id="tituloClase" class="text-3xl font-semibold mb-4 text-[#1E3A5F]">Clases terminadas</h2>
@@ -95,3 +96,6 @@
         }
     }
 </script>
+
+
+@vite(['resources/js/finalizadas.js'])

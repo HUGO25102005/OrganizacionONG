@@ -54,15 +54,25 @@ class ProgramaEducativo extends Model
         }
 
         // Obtener lista de alumnos relacionada
-        $listaAlumnos = SalonesClase::where('id_programa_educativo', $idClase)
+        $listaAlumnos = SalonesClase::where('id_programa_educativo', '=', $idClase)
             ->with(['beneficiario', 'user'])
             ->get();
 
+        if($estado == 1){
+            return [
+                'detallesClase' => $detallesClase,
+                'listaAlumnos' => $listaAlumnos
+            ];
+        } else {
+            $reporte = InformesSeguimientos::where('id_programa_educativo', '=', intval($idClase))->first();
+            // dd($reporte);
+            return [
+                'detallesClase' => $detallesClase,
+                'listaAlumnos' => $listaAlumnos,
+                'reporte' => $reporte
+            ];
+        }
         // Devolver los datos organizados
-        return [
-            'detallesClase' => $detallesClase,
-            'listaAlumnos' => $listaAlumnos
-        ];
     }
 
     public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)
