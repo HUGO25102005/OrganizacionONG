@@ -50,18 +50,6 @@
                     </button>
                 </div>
             @endforeach
-
-            <!-- Cuadro de información 2 -->
-            <div
-                class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400 hover:shadow-lg transition duration-300">
-                <img src="ruta_de_la_imagen_2.jpg" alt="Imagen 2" class="w-full h-32 object-cover rounded-md mb-4">
-                <h3 class="text-lg font-semibold bg-[#bbdefb] p-2 rounded-md text-blue-700">Aprendiendo código</h3>
-                <p class="text-gray-700 mt-2">Curso avanzado para profundizar en temas complejos de programación.</p>
-                <button onclick="mostrarSoloDetalles('Aprendiendo código')"
-                    class="mt-6 px-4 py-2 bg-blue-500 text-white font-semibold rounded-full text-sm hover:bg-[#2196f3] transition duration-200">
-                    Ver detalles
-                </button>
-            </div>
         </div>
     </div>
 </div>
@@ -74,13 +62,102 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Cuadro de información adicional -->
         <div class="bg-white p-8 rounded-lg shadow-lg border border-[#a5d6a7]">
-            <h3 class="text-2xl font-semibold mb-4 text-[#2e7d32]"></h3>
-            <p id="descripcionActividad" class="text-gray-700 mb-6 text-lg break-words" ></p>
-            <p id="duracionActividad" class="text-gray-700 mb-2 font-medium text-lg"></p>
-            <p id="presupuestoActividad" class="text-gray-700 mb-2 font-medium text-lg"></p>
-            <p id="instructorActividad" class="text-gray-700 font-medium text-lg">Instructor:
-                {{ auth()->user()->trabajador->user->name }}</p>
+            <!-- Título -->
+            <h3 class="text-2xl font-semibold mb-4 text-[#2e7d32]">Detalles de la Actividad</h3>
+
+            <!-- Descripción -->
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-[#2e7d32]">Descripción</h4>
+                <p id="descripcionActividad" class="text-gray-700 text-lg break-words"></p>
+            </div>
+
+            <!-- Duración y Presupuesto (dos columnas) -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Duración</h4>
+                    <p id="duracionActividad" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Presupuesto</h4>
+                    <p id="presupuestoActividad" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+            </div>
+
+            <!-- Objetivo y publico objetivo -->
+               <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Objetivo</h4>
+                    <p id="objetivoActividad" class="text-gray-700 font-medium text-lg break-words"></p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Público dirigido</h4>
+                    <p id="publicObjetivo" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+            </div>
+        
+            <!-- Fechas -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Fecha de inicio</h4>
+                    <p id="fechaInicio" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Fecha de término</h4>
+                    <p id="fechaTermino" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+            </div>
+        
+            <!-- Recursos Necesarios -->
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-[#2e7d32]">Recursos Necesarios</h4>
+                <p id="recursosNecesarios" class="text-gray-700 text-lg break-words"></p>
+            </div>
+        
+            <!-- Estado y beneficiarios-->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Estado de actividad</h4>
+                    <p id="estadoActividad" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Beneficiarios estimados</h4>
+                    <p id="beneficiariosEstimados" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+            </div>
+        
+            <!-- Resultados Esperados -->
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-[#2e7d32]">Resultados Esperados</h4>
+                <p id="resultadosEsperados" class="text-gray-700 text-lg break-words"></p>
+            </div>
+        
+            <!-- Indicadores de Cumplimiento -->
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-[#2e7d32]">Indicadores de Cumplimiento</h4>
+                <p id="indicadoresCumplimiento" class="text-gray-700 text-lg break-words"></p>
+            </div>
+        
+            <!-- Comentarios Adicionales -->
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-[#2e7d32]">Comentarios Adicionales</h4>
+                <p id="comentariosAdicionales" class="text-gray-700 text-lg break-words"></p>
+            </div>
+        
+            <!-- Fecha de Registro  e instructor-->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Fecha de registro</h4>
+                    <p id="fechaRegistro" class="text-gray-700 font-medium text-lg"></p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-[#2e7d32]">Instructor</h4>
+                    <p id="instructorActividad" class="text-gray-700 font-medium text-lg">
+                        {{ auth()->user()->trabajador->user->name }}
+                    </p>
+                </div>
+            </div>
         </div>
+        
 
         <!-- Cuadro de lista de estudiantes -->
         <div class="bg-white p-8 rounded-lg shadow-lg border border-[#a5d6a7]">
@@ -92,10 +169,17 @@
         </div>
     </div>
 
-    <button onclick="cerrarDetalles()"
-        class="mt-8 px-8 py-3 bg-green-500 text-white rounded-full font-semibold text-lg hover:bg-[#388e3c] transition duration-200 ease-in-out shadow-lg">
-        Cerrar
-    </button>
+    <div class="flex justify-start space-x-4 mt-8">
+        <button onclick="cerrarDetalles()"
+            class="px-8 py-3 bg-green-500 text-white rounded-full font-semibold text-lg hover:bg-[#388e3c] transition duration-200 ease-in-out shadow-lg">
+            Cerrar
+        </button>
+        <button onclick="terminarDetalles()"
+            class="px-8 py-3 bg-red-500 text-white rounded-full font-semibold text-lg hover:bg-[#d32f2f] transition duration-200 ease-in-out shadow-lg">
+            Terminar
+        </button>
+    </div>
+    
 </div>
 
 <script></script>

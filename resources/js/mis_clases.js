@@ -1,4 +1,3 @@
-import { duration } from "@mui/material";
 
 
 (function () {
@@ -32,6 +31,20 @@ import { duration } from "@mui/material";
         const duracionActividad = document.getElementById("duracionActividad");
         const presupuestoActividad = document.getElementById("presupuestoActividad");
         const instructorActividad = document.getElementById("instructorActividad");
+        const objetivoActividad = document.getElementById("objetivoActividad");
+        const publicObjetivo = document.getElementById("publicObjetivo");
+        const fechaInicio = document.getElementById("fechaInicio");
+        const fechaTermino = document.getElementById("fechaTermino");
+        const recursosNecesarios = document.getElementById("recursosNecesarios");
+        const estadoActividad = document.getElementById("estadoActividad");
+        const resultadosEsperados = document.getElementById("resultadosEsperados");
+        const beneficiariosEstimados = document.getElementById("beneficiariosEstimados");
+        const indicadoresCumplimiento = document.getElementById("indicadoresCumplimiento");
+        const comentariosAdicionales = document.getElementById("comentariosAdicionales");
+        const fechaRegistro = document.getElementById("fechaRegistro");
+
+    
+
 
         const url = document.getElementById("routerDetallesClase").getAttribute('data-url');
         const dataFetch = {
@@ -86,6 +99,17 @@ import { duration } from "@mui/material";
                 descripcionActividad.textContent = descripcion;
                 duracionActividad.textContent = `Duración: ${duracion} semanas`;
                 presupuestoActividad.textContent = `Presupuesto: $${presupuesto.monto}`;
+                objetivoActividad.textContent = objetivos;
+                publicObjetivo.textContent = publico_objetivo;
+                fechaInicio.textContent = fecha_inicio;
+                fechaTermino.textContent = fecha_termino;
+                recursosNecesarios.textContent = recursos_necesarios;
+                estadoActividad.textContent = estado;
+                resultadosEsperados.textContent = resultados_esperados;
+                beneficiariosEstimados.textContent = beneficiarios_estimados;
+                indicadoresCumplimiento.textContent = indicadores_cumplimiento;
+                comentariosAdicionales.textContent = comentarios_adicionales;
+                fechaRegistro.textContent = fecha_registro;
                 // instructorActividad.textContent = "Instructor: Laura Gómez";
             })
 
