@@ -174,14 +174,63 @@
             class="px-8 py-3 bg-green-500 text-white rounded-full font-semibold text-lg hover:bg-[#388e3c] transition duration-200 ease-in-out shadow-lg">
             Cerrar
         </button>
-        <button onclick="terminarDetalles()"
-            class="px-8 py-3 bg-red-500 text-white rounded-full font-semibold text-lg hover:bg-[#d32f2f] transition duration-200 ease-in-out shadow-lg">
-            Terminar
-        </button>
+    <button onclick="abrirModal()"
+        class="px-8 py-3 bg-red-500 text-white rounded-full font-semibold text-lg hover:bg-[#d32f2f] transition duration-200 ease-in-out shadow-lg">
+        Terminar
+    </button>
     </div>
-    
-</div>
 
-<script></script>
+    <!-- Modal para Reporte -->
+    <div id="modalReporte" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <!-- Título del modal -->
+            <h3 class="text-2xl font-semibold mb-4 text-[#2e7d32]">Reporte de la Actividad</h3>
 
-@vite(['resources/js/mis_clases.js'])
+            <!-- Formulario -->
+            <form id="formReporte" onsubmit="enviarReporte(event)">
+                <!-- Descripción del reporte -->
+                <div class="mb-4">
+                    <label for="descripcionReporte" class="block text-lg font-medium text-gray-700">Reporte</label>
+                    <textarea class="w-full border rounded-lg p-2 text-gray-700" rows="4" required></textarea>
+                </div>
+
+                <!-- Campo adicional (opcional) -->
+                <div class="mb-4">
+                    <label for="comentariosAdicionales" class="block text-lg font-medium text-gray-700">Comentarios adicionales</label>
+                    <textarea class="w-full border rounded-lg p-2 text-gray-700" rows="3"></textarea>
+                </div>
+
+                <!-- Botones del modal -->
+                <div class="flex justify-end gap-4">
+                    <!-- Botón para cerrar -->
+                    <button type="button" onclick="cerrarModal()"
+                        class="px-6 py-2 bg-gray-300 text-gray-700 rounded-full font-medium hover:bg-gray-400">
+                        Cancelar
+                    </button>
+                    <!-- Botón para enviar el reporte -->
+                    <button type="submit"
+                        class="px-6 py-2 bg-green-500 text-white rounded-full font-semibold hover:bg-[#388e3c]">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+        </div>
+
+        </div>
+            
+        </div>
+
+        <script>
+            // Abrir el modal
+        function abrirModal() {
+            document.getElementById('modalReporte').classList.remove('hidden');
+        }
+
+        // Cerrar el modal
+        function cerrarModal() {
+            document.getElementById('modalReporte').classList.add('hidden');
+        }
+    </script>
+
+    @vite(['resources/js/mis_clases.js'])
