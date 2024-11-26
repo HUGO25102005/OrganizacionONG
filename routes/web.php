@@ -25,7 +25,7 @@ use App\Http\Middleware\AuthSessionActive;
 use App\Http\Middleware\CheckBeneficiario;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaypalWebhookController;
-
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Middleware\CheckAdmin;
@@ -74,6 +74,27 @@ Route::middleware('auth')->group(function () {
 
 
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
+
+        // Rutas del chat
+        Route::get('/chat', [MessagesController::class, 'index'])->name('admin.chat');
+        Route::post('/chat/idInfo', [MessagesController::class, 'idFetchData'])->name('admin.chat.idFetchData');
+        Route::post('/chat/sendMessage', [MessagesController::class, 'send'])->name('admin.chat.sendMessage');
+        Route::post('/chat/fetchMessages', [MessagesController::class, 'fetch'])->name('admin.chat.fetchMessages');
+        Route::get('/chat/download/{fileName}', [MessagesController::class, 'download'])->name('admin.chat.download');
+        Route::post('/chat/auth', [MessagesController::class, 'pusherAuth'])->name('admin.chat.pusherAuth');
+        Route::post('/chat/makeSeen', [MessagesController::class, 'seen'])->name('admin.chat.makeSeen');
+        Route::get('/chat/getContacts', [MessagesController::class, 'getContacts'])->name('admin.chat.getContacts');
+        Route::post('/chat/updateContacts', [MessagesController::class, 'updateContactItem'])->name('admin.chat.updateContacts');
+        Route::post('/chat/star', [MessagesController::class, 'favorite'])->name('admin.chat.star');
+        Route::post('/chat/favorites', [MessagesController::class, 'getFavorites'])->name('admin.chat.favorites');
+        Route::get('/chat/search', [MessagesController::class, 'search'])->name('admin.chat.search');
+        Route::post('/chat/shared', [MessagesController::class, 'sharedPhotos'])->name('admin.chat.shared');
+        Route::post('/chat/deleteConversation', [MessagesController::class, 'deleteConversation'])->name('admin.chat.deleteConversation');
+        Route::post('/chat/deleteMessage', [MessagesController::class, 'deleteMessage'])->name('admin.chat.deleteMessage');
+        Route::post('/chat/updateSettings', [MessagesController::class, 'updateSettings'])->name('admin.chat.updateSettings');
+        Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('admin.chat.setActiveStatus');
+        Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('admin.chat.group');
+        Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('admin.chat.user');
     
     
     });
@@ -96,6 +117,27 @@ Route::middleware('auth')->group(function () {
         Route::put('/programas/programaActivar', [ProgramaController::class, 'activarPrograma'])->name('coordinador.activarPrograma');
         Route::put('/programas/programaAceptar', [ProgramaController::class, 'aceptarPrograma'])->name('coordinador.aceptarPrograma');
         Route::get('/programas/planeacion/{id}', [ProgramaController::class, 'show'])->name('coordinador.planeacion');
+
+        // Rutas del chat
+        Route::get('/chat', [MessagesController::class, 'index'])->name('coordinador.chat');
+        Route::post('/chat/idInfo', [MessagesController::class, 'idFetchData'])->name('coordinador.chat.idFetchData');
+        Route::post('/chat/sendMessage', [MessagesController::class, 'send'])->name('coordinador.chat.sendMessage');
+        Route::post('/chat/fetchMessages', [MessagesController::class, 'fetch'])->name('coordinador.chat.fetchMessages');
+        Route::get('/chat/download/{fileName}', [MessagesController::class, 'download'])->name('coordinador.chat.download');
+        Route::post('/chat/auth', [MessagesController::class, 'pusherAuth'])->name('coordinador.chat.pusherAuth');
+        Route::post('/chat/makeSeen', [MessagesController::class, 'seen'])->name('coordinador.chat.makeSeen');
+        Route::get('/chat/getContacts', [MessagesController::class, 'getContacts'])->name('coordinador.chat.getContacts');
+        Route::post('/chat/updateContacts', [MessagesController::class, 'updateContactItem'])->name('coordinador.chat.updateContacts');
+        Route::post('/chat/star', [MessagesController::class, 'favorite'])->name('coordinador.chat.star');
+        Route::post('/chat/favorites', [MessagesController::class, 'getFavorites'])->name('coordinador.chat.favorites');
+        Route::get('/chat/search', [MessagesController::class, 'search'])->name('coordinador.chat.search');
+        Route::post('/chat/shared', [MessagesController::class, 'sharedPhotos'])->name('coordinador.chat.shared');
+        Route::post('/chat/deleteConversation', [MessagesController::class, 'deleteConversation'])->name('coordinador.chat.deleteConversation');
+        Route::post('/chat/deleteMessage', [MessagesController::class, 'deleteMessage'])->name('coordinador.chat.deleteMessage');
+        Route::post('/chat/updateSettings', [MessagesController::class, 'updateSettings'])->name('coordinador.chat.updateSettings');
+        Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('coordinador.chat.setActiveStatus');
+        Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('coordinador.chat.group');
+        Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('coordinador.chat.user');
     });
 
     //* Rutas del Dashboard Voluntario
@@ -103,6 +145,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
+        // Rutas del chat
+        Route::get('/chat', [MessagesController::class, 'index'])->name('vol.chat');
+        Route::post('/chat/idInfo', [MessagesController::class, 'idFetchData'])->name('vol.chat.idFetchData');
+        Route::post('/chat/sendMessage', [MessagesController::class, 'send'])->name('vol.chat.sendMessage');
+        Route::post('/chat/fetchMessages', [MessagesController::class, 'fetch'])->name('vol.chat.fetchMessages');
+        Route::get('/chat/download/{fileName}', [MessagesController::class, 'download'])->name('vol.chat.download');
+        Route::post('/chat/auth', [MessagesController::class, 'pusherAuth'])->name('vol.chat.pusherAuth');
+        Route::post('/chat/makeSeen', [MessagesController::class, 'seen'])->name('vol.chat.makeSeen');
+        Route::get('/chat/getContacts', [MessagesController::class, 'getContacts'])->name('vol.chat.getContacts');
+        Route::post('/chat/updateContacts', [MessagesController::class, 'updateContactItem'])->name('vol.chat.updateContacts');
+        Route::post('/chat/star', [MessagesController::class, 'favorite'])->name('vol.chat.star');
+        Route::post('/chat/favorites', [MessagesController::class, 'getFavorites'])->name('vol.chat.favorites');
+        Route::get('/chat/search', [MessagesController::class, 'search'])->name('vol.chat.search');
+        Route::post('/chat/shared', [MessagesController::class, 'sharedPhotos'])->name('vol.chat.shared');
+        Route::post('/chat/deleteConversation', [MessagesController::class, 'deleteConversation'])->name('vol.chat.deleteConversation');
+        Route::post('/chat/deleteMessage', [MessagesController::class, 'deleteMessage'])->name('vol.chat.deleteMessage');
+        Route::post('/chat/updateSettings', [MessagesController::class, 'updateSettings'])->name('vol.chat.updateSettings');
+        Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('vol.chat.setActiveStatus');
+        Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('vol.chat.group');
+        Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('vol.chat.user');
+        
     });
 
     //* Rutas del Dashboard Beneficiario
@@ -110,6 +173,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
         Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
         Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
+
+        // Rutas del chat
+        Route::get('/chat', [MessagesController::class, 'index'])->name('ben.chat');
+        Route::post('/chat/idInfo', [MessagesController::class, 'idFetchData'])->name('ben.chat.idFetchData');
+        Route::post('/chat/sendMessage', [MessagesController::class, 'send'])->name('ben.chat.sendMessage');
+        Route::post('/chat/fetchMessages', [MessagesController::class, 'fetch'])->name('ben.chat.fetchMessages');
+        Route::get('/chat/download/{fileName}', [MessagesController::class, 'download'])->name('ben.chat.download');
+        Route::post('/chat/auth', [MessagesController::class, 'pusherAuth'])->name('ben.chat.pusherAuth');
+        Route::post('/chat/makeSeen', [MessagesController::class, 'seen'])->name('ben.chat.makeSeen');
+        Route::get('/chat/getContacts', [MessagesController::class, 'getContacts'])->name('ben.chat.getContacts');
+        Route::post('/chat/updateContacts', [MessagesController::class, 'updateContactItem'])->name('ben.chat.updateContacts');
+        Route::post('/chat/star', [MessagesController::class, 'favorite'])->name('ben.chat.star');
+        Route::post('/chat/favorites', [MessagesController::class, 'getFavorites'])->name('ben.chat.favorites');
+        Route::get('/chat/search', [MessagesController::class, 'search'])->name('ben.chat.search');
+        Route::post('/chat/shared', [MessagesController::class, 'sharedPhotos'])->name('ben.chat.shared');
+        Route::post('/chat/deleteConversation', [MessagesController::class, 'deleteConversation'])->name('ben.chat.deleteConversation');
+        Route::post('/chat/deleteMessage', [MessagesController::class, 'deleteMessage'])->name('ben.chat.deleteMessage');
+        Route::post('/chat/updateSettings', [MessagesController::class, 'updateSettings'])->name('ben.chat.updateSettings');
+        Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('ben.chat.setActiveStatus');
+        Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('ben.chat.group');
+        Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('ben.chat.user');
     });
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Usuarios\Trabajadores;
+namespace App\Models\usuarios\Trabajadores;
 
 use App\Models\User;
 use App\Models\usuarios\Beneficiarios\Beneficiario;
