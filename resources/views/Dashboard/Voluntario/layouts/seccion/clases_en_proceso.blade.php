@@ -14,7 +14,7 @@
             <div id="dropdown" class="mt-4">
                 <ul class="space-y-2 text-gray-600">
                     @foreach ($misProgramas as $programa)
-                        <li onclick="mostrarSoloDetalles('{{ $programa->nombre_programa }}')"
+                        <li onclick="mostrarSoloDetalles('{{ $programa->id }}')"
                             class="flex items-center space-x-3 bg-[#ffecb3] hover:bg-[#ffe082] p-4 rounded-lg cursor-pointer transition duration-200 shadow-md border border-[#ffb300] w-full md:w-56">
                             <i class='bx bxs-book'></i>
                             <span class="truncate">{{ $programa->nombre_programa }}</span>

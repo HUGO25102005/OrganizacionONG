@@ -14,12 +14,16 @@ class DashboardBeneficiarioController extends Controller
 
         return view('Dashboard.Beneficiario.index');
     }
-    public function misClases()
+    public function misClases(Request $request)
     {
+        if (empty($request->seccion)) {
+            $seccion = $request->get('seccion', 1);
+
+        } else {
+            $seccion = $request->seccion;
+        }
 
         
-
-        $seccion = 2;
 
         return view('Dashboard.Beneficiario.mis_clases', compact(['seccion']));
     }

@@ -1,6 +1,3 @@
-import { duration } from "@mui/material";
-
-
 (function () {
     function toggleDropdown() {
         const dropdown = document.getElementById("dropdown");
@@ -111,6 +108,19 @@ import { duration } from "@mui/material";
                 clasesContainer.classList.add("opacity-100", "scale-100");
             }, 10); // Pequeño retraso para que se aplique la animación
         }, 300); // Duración de la animación de salida
+
+        const detallesTitulo = document.getElementById("detallesTitulo");
+        const listaEstudiantes = document.getElementById("listaEstudiantes");
+        const descripcionActividad = document.getElementById("descripcionActividad");
+        const duracionActividad = document.getElementById("duracionActividad");
+        const presupuestoActividad = document.getElementById("presupuestoActividad");
+        const instructorActividad = document.getElementById("instructorActividad");
+
+        detallesTitulo.textContent = '';
+        listaEstudiantes.innerHTML = '';
+        descripcionActividad.textContent = '';
+        duracionActividad.textContent = ``;
+        presupuestoActividad.textContent = ``;
     }
 
     window.toggleDropdown = toggleDropdown;
