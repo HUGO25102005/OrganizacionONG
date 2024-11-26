@@ -35,8 +35,18 @@ import {
         const clasesContainer = document.getElementById("clasesContainer");
         const detalles = document.getElementById("detalles");
 
-        clasesContainer.classList.add("hidden");
-        detalles.classList.remove("hidden");
+        // Ocultar el contenedor de clases con animación
+        clasesContainer.classList.add("opacity-0", "scale-90");
+        setTimeout(() => {
+            clasesContainer.classList.add("hidden");
+            clasesContainer.classList.remove("opacity-0", "scale-90");
+
+            // Mostrar la sección de detalles con animación
+            detalles.classList.remove("hidden");
+            setTimeout(() => {
+                detalles.classList.add("opacity-100", "scale-100");
+            }, 10); // Pequeño retraso para que Tailwind aplique las clases
+        }, 300); // Duración de la animación de salida
 
         const idProgramaDetalles = document.getElementById("idProgramaDetalles");
         const detallesTitulo = document.getElementById("detallesTitulo");
@@ -99,7 +109,7 @@ import {
                     // console.log('hola');
                     listaAlumnos.forEach(alumno => {
                         // Supongamos que cada alumno tiene un nombre y un ID
-                        lista += `<li><i class="bx bxs-user mr-2 text-yellow-600"></i> ${alumno.user.name}</li>`;
+                        lista += `<li><i class="bx bxs-user mr-2 text-yellow-600"></i> ${alumno.beneficiario.user.name}</li>`;
                     });
                 } else {
                     lista += `<li>No hay alumnos registrados en la clase</li>`;
@@ -213,7 +223,7 @@ import {
             .then(response => {
                 const data = JSON.parse(response.data);
                 // console.log(data);
-                if(data == 'ok'){
+                if (data == 'ok') {
                     messageSendSuccess('Clase finalizada exitosamente.');
                 } else {
                     messageErrorRequest('Ocurrió un error al finalizar la clase.');

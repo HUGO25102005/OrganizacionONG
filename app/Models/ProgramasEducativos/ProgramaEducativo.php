@@ -62,6 +62,7 @@ class ProgramaEducativo extends Model
     //     }
     //     // Devolver los datos organizados
     // }
+
     public static function obtenerDetallesClase($idVoluntario, $idClase, $estado = 1)
     {
         // Validar parámetros (opcional, dependiendo del contexto)
@@ -83,7 +84,7 @@ class ProgramaEducativo extends Model
 
         // Obtener lista de alumnos relacionada
         $listaAlumnos = SalonesClase::where('id_programa_educativo', '=', $idClase)
-            ->with(['beneficiario', 'user'])
+            ->with(['beneficiario.user'])
             ->get();
 
         if ($estado == 1) {
@@ -111,7 +112,7 @@ class ProgramaEducativo extends Model
 
         // Obtener información de la clase sin incluir presupuesto
         $detallesClase = self::where('id', '=', intval($idClase))
-            ->with(['salonesClases', 'salonesClases.beneficiario', 'voluntario.trabajador.user']) // Añade las relaciones relevantes, si las necesitas
+            ->with(['salonesClases', 'salonesClases.beneficiario']) // Añade las relaciones relevantes, si las necesitas
             ->first();
 
         // Verificar si se encontró la clase

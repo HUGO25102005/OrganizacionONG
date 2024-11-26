@@ -25,31 +25,39 @@
 
         </div>
 
-        <div id='routerDetallesClase' data-url="{{ route('vol.detallesClase') }}"></div>
+        <div id='routerDetallesClase' data-url="{{ route('vol.detallesClaseV') }}"></div>
         <!-- Cuadros de información de clases -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
             <!-- Cuadro de información 1 -->
-            @foreach ($misProgramas as $programa)
-                <div
-                    class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-400 hover:shadow-lg transition duration-300">
-                    <img src="ruta_de_la_imagen_1.jpg" alt="Imagen 1" class="w-full h-32 object-cover rounded-md mb-4">
-                    <h3 class="text-lg font-semibold bg-[#ffcc80] p-2 rounded-md text-orange-700">
-                        {{ $programa->nombre_programa }}</h3>
-                    <p class="text-gray-700 mt-2 break-words">
+            @php
+                $coloresKeys = array_keys($colores); // Obtén las claves de los colores
+            @endphp
 
+            @foreach ($misProgramas as $programa)
+                @php
+                    $color = $colores[$coloresKeys[array_rand($coloresKeys)]]; // Selecciona un color aleatorio
+                @endphp
+
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md border-t-4 {{ $color['border'] }} hover:shadow-lg transition duration-300">
+                    <img src="ruta_de_la_imagen_1.jpg" alt="Imagen 1" class="w-full h-32 object-cover rounded-md mb-4">
+                    <h3 class="text-lg font-semibold {{ $color['bg'] }} p-2 rounded-md {{ $color['text'] }}">
+                        {{ $programa->nombre_programa }}
+                    </h3>
+                    <p class="text-gray-700 mt-2 break-words">
                         @if (strlen($programa->descripcion) > 60)
                             {{ \Illuminate\Support\Str::limit($programa->descripcion, 60) }}
                         @else
                             {{ $programa->descripcion }}
                         @endif
-
                     </p>
                     <button onclick="mostrarSoloDetalles('{{ $programa->id }}')"
-                        class="mt-6 px-4 py-2 bg-orange-500 text-white font-semibold rounded-full text-sm hover:bg-[#ff5722] transition duration-200">
+                        class="mt-6 px-4 py-2 {{ $color['bg'] }} text-white font-semibold rounded-full text-sm {{ $color['hover'] }} transition duration-200">
                         Ver detalles
                     </button>
                 </div>
             @endforeach
+
         </div>
     </div>
 </div>
@@ -207,7 +215,7 @@
             <!-- Formulario -->
             <div id="formReporte">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div id="routerInformes" data-url="{{route('vol.terminarClase')}}"></div>
+                    <div id="routerInformes" data-url="{{ route('vol.terminarClase') }}"></div>
                     <!-- Resumen del Informe -->
                     <div class="col-span-1 lg:col-span-2">
                         <label for="resumenInforme" class="block text-lg font-medium text-gray-700 mb-2">Resumen del
@@ -221,7 +229,8 @@
                     <div>
                         <label for="cumplimientoIndicadores"
                             class="block text-lg font-medium text-gray-700 mb-2">Cumplimiento de Indicadores</label>
-                        <textarea id="cumplimientoIndicadores" name="cumplimiento_indicadores" onfocus="resetInput('cumplimientoIndicadores')"
+                        <textarea id="cumplimientoIndicadores" name="cumplimiento_indicadores"
+                            onfocus="resetInput('cumplimientoIndicadores')"
                             class="w-full border rounded-lg p-3 text-gray-700 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 ease-in-out"
                             rows="3"></textarea>
                     </div>

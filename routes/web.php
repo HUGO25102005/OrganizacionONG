@@ -97,9 +97,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
-        Route::post('/mis-clases/detalles-clase', [DashboardVolunController::class, 'getInformacionClase'])->name('vol.detallesClase');
+        Route::post('/mis-clases/detalles-clase', [DashboardVolunController::class, 'getInformacionClase'])->name('vol.detallesClaseV');
         Route::post('/mis-clases/detalles-clase/terminar', [DashboardVolunController::class, 'terminarClase'])->name('vol.terminarClase');
-        Route::post('/mis-clases/detalles-clase', [DashboardVolunController::class, 'getInformacionClaseTerminada'])->name('vol.terminadaClase');
+        Route::post('/mis-clases/detalles-clase/terminada', [DashboardVolunController::class, 'getInformacionClaseTerminada'])->name('vol.terminadaClase');
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
         Route::post('/nueva-clase/solicitud/informacion', [DashboardVolunController::class, 'storeProgramaEducativo'])->name('vol.storeProgramaEducativo');
         Route::post('/nueva-clase/solicitud/actividades', [DashboardVolunController::class, 'storeActividades'])->name('vol.storeActividades');

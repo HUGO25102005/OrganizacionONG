@@ -15,6 +15,32 @@ use Illuminate\Http\Request;
 
 class DashboardVolunController extends Controller
 {
+    private $colores = [
+        'orange' => [
+            'border' => 'border-orange-400',
+            'bg' => 'bg-orange-400',
+            'hover' => 'hover:bg-orange-500',
+            'text' => 'text-orange-700',
+        ],
+        'blue' => [
+            'border' => 'border-blue-400',
+            'bg' => 'bg-blue-400',
+            'hover' => 'hover:bg-blue-500',
+            'text' => 'text-blue-700',
+        ],
+        'green' => [
+            'border' => 'border-green-400',
+            'bg' => 'bg-green-400',
+            'hover' => 'hover:bg-green-500',
+            'text' => 'text-green-700',
+        ],
+        'red' => [
+            'border' => 'border-red-400',
+            'bg' => 'bg-red-400',
+            'hover' => 'hover:bg-red-500',
+            'text' => 'text-red-700',
+        ],
+    ];
     public function home()
     {
 
@@ -31,11 +57,12 @@ class DashboardVolunController extends Controller
         }
 
         if ($seccion == 1) {
-
+            $colores = $this->colores;
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
             $misProgramas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario);
 
-            return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'misProgramas']));
+            return view('Dashboard.Voluntario.mis_clases', compact('seccion', 'misProgramas', 'colores'));
+
         } else {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
@@ -216,7 +243,6 @@ class DashboardVolunController extends Controller
     {
         $id_voluntario = Auth()->user()->trabajador->voluntario->id;
         $idClase = $request->id_clase;
-
         $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase);
         // dd($info);
         return response()->json(['data' => json_encode($info)]);

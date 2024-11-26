@@ -31,59 +31,39 @@ import {
         }
     }
 
-    function mostrarInfoClase(idClase) {
+    function mostrarInfoReporte(idClase) {
+        // Elementos del DOM donde se colocará la información
         const tituloClase = document.getElementById("tituloClase");
         const descripcionClase = document.getElementById("descripcionClase");
         const reportesClase = document.getElementById("reportesClase");
 
-        const url = document.getElementById("urlTerminadas").getAttribute('data-url');
+        // URL y datos para la petición
+        const url = document.getElementById("urlTerminadas").getAttribute("data-url");
         const dataFetch = {
-            id_clase: idClase
-        }
+            id_clase: idClase,
+        };
+
         fetch(url, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
             },
             body: JSON.stringify(dataFetch),
         })
-            .then(res => res.json())
-            .then(response => {
+            .then((res) => res.json())
+            .then((response) => {
                 const data = JSON.parse(response.data);
-                console.log(data);
-                const { detallesClase, listaAlumnos, reporte } = data;
+
+                const { detallesClase, reporte } = data;
+
+                // Datos de la clase
                 const {
-                    id,
                     nombre_programa,
                     descripcion,
-                    objetivos,
-                    publico_objetivo,
-                    duracion,
-                    fecha_inicio,
-                    fecha_termino,
-                    recursos_necesarios,
-                    estado,
-                    resultados_esperados,
-                    beneficiarios_estimados,
-                    indicadores_cumplimiento,
-                    comentarios_adicionales,
-                    fecha_registro,
-                    presupuesto
                 } = detallesClase;
 
-                let lista = '';
-
-                if (Array.isArray(listaAlumnos) && listaAlumnos.length > 0) {
-                    // console.log('hola');
-                    listaAlumnos.forEach(alumno => {
-                        // Supongamos que cada alumno tiene un nombre y un ID
-                        lista += `<li><i class="bx bxs-user mr-2 text-yellow-600"></i> ${alumno.user.name}</li>`;
-                    });
-                } else {
-                    lista += `<li>No hay alumnos registrados en la clase</li>`;
-                }
-
+                // Datos del reporte
                 const {
                     comentarios_Adicionales,
                     desafios_encontrados,
@@ -91,20 +71,46 @@ import {
                     resumen_informe,
                 } = reporte;
 
+                // Llenar título y descripción de la clase
                 tituloClase.textContent = nombre_programa;
                 descripcionClase.textContent = descripcion;
 
+                // Crear contenido dinámico para el reporte
                 reportesClase.innerHTML = `
-                    <div class="bg-[#EDF7FF] p-6 rounded-lg shadow-md border border-[#C7DCFF] transition duration-200 hover:shadow-lg">
-                        <h3 class="text-xl font-semibold">Reporte Finalizacion</h3>
-                        <p class="text-[#4A5568]">${resumen_informe}</p>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md border border-gray-300 space-y-6">
+                        <!-- Resumen del Informe -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E3A5F] mb-2">Resumen del Informe</h3>
+                            <p class="text-gray-800 text-lg leading-relaxed break-words">${resumen_informe}</p>
+                        </div>
+    
+                        <!-- Desafíos Encontrados -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E3A5F] mb-2">Desafíos Encontrados</h3>
+                            <p class="text-gray-800 text-lg leading-relaxed break-words">${desafios_encontrados}</p>
+                        </div>
+    
+                        <!-- Recomendaciones -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E3A5F] mb-2">Recomendaciones</h3>
+                            <p class="text-gray-800 text-lg leading-relaxed break-words">${recomendaciones}</p>
+                        </div>
+    
+                        <!-- Comentarios Adicionales -->
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E3A5F] mb-2">Comentarios Adicionales</h3>
+                            <p class="text-gray-800 text-lg leading-relaxed break-words">${comentarios_Adicionales}</p>
+                        </div>
                     </div>
                 `;
             })
-
-
-
+            .catch((error) => {
+                console.error("Error al obtener los datos del reporte:", error);
+                // Muestra un mensaje de error si es necesario
+            });
     }
+
+
 
     function cerrarDetalles() {
         const clasesContainer = document.getElementById("clasesContainer");
@@ -202,7 +208,7 @@ import {
     }
 
     window.toggleDropdown = toggleDropdown;
-    window.mostrarInfoClase = mostrarInfoClase;
+    window.mostrarInfoReporte = mostrarInfoReporte;
     window.cerrarDetalles = cerrarDetalles;
     window.enviarInforme = enviarInforme;
     window.resetInput = resetInput;
