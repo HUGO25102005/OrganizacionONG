@@ -37,23 +37,47 @@ class DashboardAdminController extends Controller
     {
 
         $total_ingresos = Donacion::getMontoTotal();
-        $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getTotalProgramas(4);
-        $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
-        $actividades_registradas = RegistroActividades::getTotalActividades();
-        $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
+        $monto_disponible = CajaFondo::getMontoDisponible();
+
+        $monto_usado = Presupuesto::getMontoTotal();
+
+        $ultimas_donaciones = Donacion::latest()->take(5)->get();
+
+        $convocatorias = Convocatoria::where('estado', '=', 1)->latest()->take(5)->get();
+        $convocatoriasActivas = Convocatoria::getTotalConvocatoriasPorEstado(1);
+        $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasPorEstado(2);
+        $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasPorEstado(3);
+
+        $donacionesPorMes = Donacion::getDonacionesPorMes();
+
+        // Crear etiquetas y datos para el gráfico
+        $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        $labels = [];
+        $data = [];
+
+        foreach ($donacionesPorMes as $donacion) {
+            $labels[] = $meses[$donacion['mes'] - 1] . ' ' . $donacion['anio'];
+            $data[] = $donacion['total'];
+        }
+
 
         session(['name' => auth()->user()->name,]);
 
         return view(
             'Dashboard.Admin.panel-control',
             compact(
+                'monto_disponible',
                 'total_ingresos',
+                'monto_usado',
                 'ultimas_donaciones',
-                'programas_activos',
-                'informes_seguimiento',
-                'actividades_registradas',
-                'total_beneficiarios',
+                'convocatorias',
+                'convocatoriasActivas',
+                'convocatoriasFinalizadas',
+                'convocatoriasCanceladas',
+                'donacionesPorMes',
+                'labels',
+                'data'
             )
         );
     }
