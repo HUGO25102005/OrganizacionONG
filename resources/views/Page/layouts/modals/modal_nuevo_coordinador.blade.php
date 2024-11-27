@@ -1,7 +1,7 @@
 <div x-data="{ open: false, tab: 'personal' }">
     <!-- Botón para abrir el modal -->
     <button @click="open = true" class="experience-donate">
-        <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img">
+        <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img w-28 h-22">
     </button>
 
     <!-- Modal -->

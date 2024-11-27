@@ -233,7 +233,7 @@
                         </p>
                         <img src="{{ asset('images/estudiante.png') }}" alt="Estudiante" class="neumorphic-img h-48 mb-6">
                     </div>
-                    @include('Page.layouts.modals.modal_nuevo_beneficiario')
+                    <div class="">@include('Page.layouts.modals.modal_nuevo_beneficiario')</div>
                 </div>
                 <div>
                     <div

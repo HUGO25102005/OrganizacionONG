@@ -1,8 +1,9 @@
 <div x-data="{ open: false, tab: 'personal' }">
     <!-- Botón para abrir el modal -->
-    <button @click="open = true" class="experience-donate">
-        <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img">
+    <button @click="open = true" class="experience-donate p-1">
+        <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img w-28 h-22">
     </button>
+    
 
     <!-- Modal -->
     <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
