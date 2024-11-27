@@ -31,16 +31,37 @@
             <!-- Cuadro de información 1 -->
             @php
                 $coloresKeys = array_keys($colores); // Obtén las claves de los colores
+                $fondosSvg = [
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <rect width="100%" height="100%" fill="#f8b400"/>
+                        <circle cx="50" cy="50" r="40" fill="#ff5722"/>
+                    </svg>',
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <rect width="100%" height="100%" fill="#8e44ad"/>
+                        <polygon points="50,0 100,100 0,100" fill="#3498db"/>
+                    </svg>',
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <rect width="100%" height="100%" fill="#2ecc71"/>
+                        <line x1="0" y1="0" x2="100" y2="100" stroke="#27ae60" stroke-width="5"/>
+                    </svg>',
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <rect width="100%" height="100%" fill="#e74c3c"/>
+                        <ellipse cx="50" cy="50" rx="40" ry="20" fill="#c0392b"/>
+                    </svg>',
+                ];
             @endphp
 
             @foreach ($misProgramas as $programa)
                 @php
                     $color = $colores[$coloresKeys[array_rand($coloresKeys)]]; // Selecciona un color aleatorio
+                    $fondoSvg = $fondosSvg[array_rand($fondosSvg)];
                 @endphp
 
                 <div
                     class="bg-white p-6 rounded-lg shadow-md border-t-4 {{ $color['border'] }} hover:shadow-lg transition duration-300">
-                    <img src="ruta_de_la_imagen_1.jpg" alt="Imagen 1" class="w-full h-32 object-cover rounded-md mb-4">
+                    <div class="relative w-full h-32 rounded-md overflow-hidden mb-4">
+                        {!! $fondoSvg !!}
+                    </div>
                     <h3 class="text-lg font-semibold {{ $color['bg'] }} p-2 rounded-md {{ $color['text'] }}">
                         {{ $programa->nombre_programa }}
                     </h3>
