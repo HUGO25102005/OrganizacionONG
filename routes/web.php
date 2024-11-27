@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
 use App\Http\Controllers\Donaciones\RecaudacionController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
@@ -37,6 +38,8 @@ Route::get('/', function () {
 
 //*Rutas de perfil existentes de Breeze
 
+
+Route::get('/enviar-correo', [MailController::class, 'enviarCorreo']);
 
 //TODO: RUTAS DE DASHBOARDS
 Route::middleware('auth')->group(function () {
