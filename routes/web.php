@@ -34,9 +34,9 @@ use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckCoordinador;
 use App\Http\Middleware\CheckVoluntario;
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
-})->middleware(AuthSessionActive::class);
+})->middleware(AuthSessionActive::class)->name('login');
 
 //*Rutas de perfil existentes de Breeze
 
@@ -218,7 +218,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //TODO: RUTAS DE LINING PAGE
-Route::group(['prefix' => 'page'], function () {
+Route::group(['prefix' => '/'], function () {
 
     Route::resources([
 
