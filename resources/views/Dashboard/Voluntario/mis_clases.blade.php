@@ -158,4 +158,7 @@
         detalles.classList.add("hidden");
     }
 </script>
+
+<x-support-widget :roles="['Coordinador', 'Beneficiario']" />
+
 </x-app-layout>

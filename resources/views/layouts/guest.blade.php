@@ -21,16 +21,28 @@
     style="background-image: url('{{ asset('/images/fofondo3.jpeg') }}');">
 
     <div class="relative w-[90vw] h-[90vh] md:w-[630px] md:h-[720px] flex justify-center items-center">
-        <div class="absolute w-[80vw] h-[80vh] md:w-[630px] md:h-[740px] shadow-lg flex justify-center items-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);background-color: #f6f6fe;">
+        <!-- Hexágono de fondo con el logo arriba -->
+        <div class="absolute w-[80vw] h-[80vh] md:w-[630px] md:h-[740px] shadow-lg flex flex-col justify-center items-center" 
+             style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                    background-color: #f6f6fe;">
+            
+            <!-- Logo centrado arriba en el hexágono -->
+<div class="absolute top-[-40px] md:top-[70px] w-[70px] h-[70px] md:w-[80px] md:h-[80px] flex items-center justify-center rounded-full">
+    <img src="{{ asset('/images/logo_n.png') }}" alt="Logo" class="w-full h-full object-cover">
+</div>
 
-            <div class="w-[80vw] h-[50vh] md:w-[350px] md:h-[400px] bg-[#DDE3E7] rounded-[3%] shadow-[0px_0px_15px_1px_rgba(105,105,105,1)] flex flex-col justify-center items-center"  style="background-color: #efeff9; box-shadow: 0px 3px 6px rgba(117, 148, 202, 0.391);">
-
+    
+            <!-- Caja de inicio de sesión -->
+            <div class="w-[80vw] h-[50vh] md:w-[350px] md:h-[400px] bg-[#DDE3E7] rounded-[3%] shadow-[0px_0px_15px_1px_rgba(105,105,105,1)] flex flex-col justify-center items-center"  
+                 style="background-color: #efeff9; box-shadow: 0px 3px 6px rgba(117, 148, 202, 0.391); margin-top: 40px;">
+                
                 <h2 class="text-2xl mb-2 text-gray-800 text-center">Bienvenido</h2>
                 <h4 class="text-lg mb-8 text-gray-500 text-center">Inicie sesión</h4>
-                    {{ $slot }}
+                {{ $slot }}
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>

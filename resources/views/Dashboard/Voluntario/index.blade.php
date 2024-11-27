@@ -28,4 +28,7 @@
         
 
     </div>
+
+    <x-support-widget :roles="['Coordinador', 'Beneficiario']" />
+
 </x-app-layout>
