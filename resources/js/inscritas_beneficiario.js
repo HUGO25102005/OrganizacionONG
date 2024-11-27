@@ -120,15 +120,15 @@ import {
                     comentarios_adicionales,
                     fecha_registro,
                     presupuesto,
-                    salonesClase,
+                    salones_clases,
                     voluntario
                 } = data;
 
                 let lista = "";
-
-                if (Array.isArray(salonesClase) && salonesClase.length > 0) {
-                    salonesClase.forEach((alumno) => {
-                        lista += `<li><i class="bx bxs-user mr-2 text-yellow-600"></i> ${alumno.user.name}</li>`;
+                console.log(salones_clases);
+                if (Array.isArray(salones_clases) && salones_clases.length > 0) {
+                    salones_clases.forEach((alumno) => {
+                        lista += `<li><i class="bx bxs-user mr-2 text-yellow-600"></i> ${alumno.beneficiario.user.name}</li>`;
                     });
                 } else {
                     lista += `<li>No hay alumnos registrados en la clase</li>`;

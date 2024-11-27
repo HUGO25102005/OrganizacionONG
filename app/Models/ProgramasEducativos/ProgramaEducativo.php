@@ -112,7 +112,7 @@ class ProgramaEducativo extends Model
 
         // Obtener información de la clase sin incluir presupuesto
         $detallesClase = self::where('id', '=', intval($idClase))
-            ->with(['salonesClases', 'salonesClases.beneficiario']) // Añade las relaciones relevantes, si las necesitas
+            ->with(['salonesClases', 'salonesClases.beneficiario.user', 'voluntario.trabajador.user']) // Añade las relaciones relevantes, si las necesitas
             ->first();
 
         // Verificar si se encontró la clase
@@ -124,10 +124,16 @@ class ProgramaEducativo extends Model
         return $detallesClase;
     }
 
-    public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)
+    public static function getProgramasForVoluntario($idVoluntario, $estado = 1)
     {
         return self::where('id_voluntario', $idVoluntario)
             ->where('estado', $estado)->get();
+    }
+    public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)
+    {
+        return self::where('id_voluntario', $idVoluntario)
+            ->where('estado', $estado)
+            ->with(['presupuesto.aprobacionPresupuestos', 'aprobacionContenidos']);
     }
     public static function getSoliRecursos()
     {

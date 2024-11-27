@@ -16,29 +16,65 @@ use Illuminate\Http\Request;
 class DashboardVolunController extends Controller
 {
     private $colores = [
-        'orange' => [
-            'border' => 'border-orange-400',
-            'bg' => 'bg-orange-400',
-            'hover' => 'hover:bg-orange-500',
-            'text' => 'text-orange-700',
+        'peach' => [
+            'border' => 'border-rose-200',
+            'bg' => 'bg-rose-200',
+            'hover' => 'hover:bg-rose-300',
+            'text' => 'text-rose-700',
         ],
-        'blue' => [
-            'border' => 'border-blue-400',
-            'bg' => 'bg-blue-400',
-            'hover' => 'hover:bg-blue-500',
-            'text' => 'text-blue-700',
+        'sky' => [
+            'border' => 'border-sky-200',
+            'bg' => 'bg-sky-200',
+            'hover' => 'hover:bg-sky-300',
+            'text' => 'text-sky-700',
         ],
-        'green' => [
-            'border' => 'border-green-400',
-            'bg' => 'bg-green-400',
-            'hover' => 'hover:bg-green-500',
+        'mint' => [
+            'border' => 'border-green-200',
+            'bg' => 'bg-green-200',
+            'hover' => 'hover:bg-green-300',
             'text' => 'text-green-700',
         ],
-        'red' => [
-            'border' => 'border-red-400',
-            'bg' => 'bg-red-400',
-            'hover' => 'hover:bg-red-500',
-            'text' => 'text-red-700',
+        'lavender' => [
+            'border' => 'border-purple-200',
+            'bg' => 'bg-purple-200',
+            'hover' => 'hover:bg-purple-300',
+            'text' => 'text-purple-700',
+        ],
+        'butter' => [
+            'border' => 'border-yellow-200',
+            'bg' => 'bg-yellow-200',
+            'hover' => 'hover:bg-yellow-300',
+            'text' => 'text-yellow-700',
+        ],
+        'aqua' => [
+            'border' => 'border-teal-200',
+            'bg' => 'bg-teal-200',
+            'hover' => 'hover:bg-teal-300',
+            'text' => 'text-teal-700',
+        ],
+        'coral' => [
+            'border' => 'border-orange-200',
+            'bg' => 'bg-orange-200',
+            'hover' => 'hover:bg-orange-300',
+            'text' => 'text-orange-700',
+        ],
+        'blush' => [
+            'border' => 'border-pink-200',
+            'bg' => 'bg-pink-200',
+            'hover' => 'hover:bg-pink-300',
+            'text' => 'text-pink-700',
+        ],
+        'ice' => [
+            'border' => 'border-cyan-200',
+            'bg' => 'bg-cyan-200',
+            'hover' => 'hover:bg-cyan-300',
+            'text' => 'text-cyan-700',
+        ],
+        'cream' => [
+            'border' => 'border-amber-200',
+            'bg' => 'bg-amber-200',
+            'hover' => 'hover:bg-amber-300',
+            'text' => 'text-amber-700',
         ],
     ];
     public function home()
@@ -59,14 +95,13 @@ class DashboardVolunController extends Controller
         if ($seccion == 1) {
             $colores = $this->colores;
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $misProgramas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario);
+            $misProgramas = ProgramaEducativo::getProgramasForVoluntario($idVoluntario);
 
             return view('Dashboard.Voluntario.mis_clases', compact('seccion', 'misProgramas', 'colores'));
-
         } else {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario, 5);
+            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntario($idVoluntario, 5);
 
             return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'claFinalizadas']));
         }
@@ -87,7 +122,7 @@ class DashboardVolunController extends Controller
             $seccion = $request->seccion;
 
             $misSolicitudes = ProgramaEducativo::getProgramasForVoluntarioTable($id_voluntario)->paginate(10);
-
+            // dd($misSolicitudes);
             return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades', 'misSolicitudes']));
         }
     }
