@@ -236,7 +236,7 @@
                 contribuyendo a la construcción de un futuro más equitativo y próspero.</p>
 
             <!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
-            <!--<div id="donate-button-container"></div>
+            {{-- <div id="donate-button-container"></div>
             <div id="donate-button"></div>
             <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
             <script>
@@ -250,26 +250,108 @@
                         src: "{{ asset('images/donar.png') }}",
                         alt: 'Donar con el botón PayPal',
                         title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
+                    },
+                    onComplete: function (data) {
+                        // Extraer los datos relevantes
+                        console.log('Donación completada:', data);
+        
+                        // Realizar una solicitud AJAX o Fetch
+                        /* fetch('/procesar-donacion', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Error al procesar la donación.');
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            console.log('Resultado del servidor:', result);
+                            alert('¡Gracias por tu donación!');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Hubo un problema al procesar tu donación.');
+                        }); */
+                        fetch('{{ url('/page/donar/procesar-donacion') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(data)
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(result => {
+                                console.log('Resultado del servidor:', result);
+                                alert('¡Gracias por tu donación!');
+                            })
+                            .catch(error => {
+                                console.error('Error al procesar la solicitud:', error);
+                                alert('Hubo un problema. Por favor, intenta nuevamente.');
+                            });
                     }
+                        
                 }).render('#donate-button');
-            </script>-->
+            </script> --}}
+
             <!-- Botón de donar con sandbox -->
             <div id="donate-button-container">
-              <div id="donate-button"></div>
-              <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-              <script>
-                PayPal.Donation.Button({
-                  env:'sandbox',
-                  hosted_button_id:'ZL8G9R6KRJUSN',
-                  image: {
-                    src: "{{asset('images/donar.png')}}",
-                    alt:'Donar con el botón PayPal',
-                    title:'PayPal - La forma mas fácil y segura de pagar en línea!',
-                  }
-                }).render('#donate-button');
-              </script>
-            </div>              
-        </div>
+                <div id="donate-button"></div>
+                <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                <script>
+                    PayPal.Donation.Button({
+                        env: 'sandbox',
+                        hosted_button_id: 'BNH9DUN6KARHS',
+                        image: {
+                            src: "{{ asset('images/donar.png') }}",
+                            alt: 'Donar con el botón PayPal',
+                            title: 'PayPal - La forma más fácil y segura de pagar en línea!',
+                        },
+                        onComplete: function (params) {
+                            console.log('Datos de la transacción:', params);
+
+                            // Configurar los datos enviados al servidor
+                            const payload = {
+                                transaction_id: params.tx, // ID de la transacción
+                                status: params.st, // Estado de la transacción
+                                amount: params.amt, // Monto
+                                currency: params.cc, // Moneda
+                            };
+
+                            console.log('Datos enviados al servidor:', payload);
+
+                            fetch('{{ route('procesarDonacion') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                },
+                                body: JSON.stringify(payload),
+                            })
+                                .then((response) => response.json())
+                                .then((result) => {
+                                    console.log('Respuesta del servidor:', result);
+                                })
+                                .catch((error) => {
+                                    console.error('Error al procesar la solicitud:', error);
+                                    alert('Hubo un problema al procesar tu donación. Por favor, intenta nuevamente.');
+                                });
+                        },
+
+                    }).render('#donate-button');
+                </script>
+            </div>
         </div>
     </section>
 @endsection

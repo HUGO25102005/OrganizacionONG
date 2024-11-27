@@ -4,6 +4,8 @@ namespace App\Http\Controllers\vendor\Chatify;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
+use App\Models\usuarios\Trabajadores\Trabajador;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
@@ -252,6 +254,49 @@ class MessagesController extends Controller
             'last_page' => $users->lastPage() ?? 1,
         ], 200);
     }
+    /* public function getContacts(Request $request)
+    {
+        // Obtener los contactos con los que el usuario autenticado ha intercambiado mensajes
+        $users = Message::join('user', function ($join) {
+            $join->on('ch_messages.from_id', '=', 'user.id')
+                 ->orOn('ch_messages.to_id', '=', 'user.id');
+        })
+        ->where(function ($query) {
+            $query->where('ch_messages.from_id', Auth::user()->id)
+                  ->orWhere('ch_messages.to_id', Auth::user()->id);
+        })
+        ->where('user.id', '!=', Auth::user()->id) // Excluir al usuario autenticado
+        ->select('user.*', DB::raw('MAX(ch_messages.created_at) as max_created_at'))
+        ->groupBy('user.id')
+        ->orderBy('max_created_at', 'desc')
+        ->paginate($request->per_page ?? $this->perPage);
+    
+        $usersList = $users->items();
+    
+        // Crear la lista de contactos
+        if (count($usersList) > 0) {
+            $contacts = '';
+            foreach ($usersList as $user) {
+                // Verificar roles o realizar cualquier filtro necesario
+                $isBeneficiario = Beneficiario::where('id_user', $user->id)->exists();
+                $isTrabajador = Trabajador::where('id_user', $user->id)->exists();
+    
+                // Solo incluir usuarios específicos si aplica algún filtro
+                if ($isBeneficiario || $isTrabajador) {
+                    $contacts .= Chatify::getContactItem($user);
+                }
+            }
+        } else {
+            $contacts = '<p class="message-hint center-el"><span>Your contact list is empty</span></p>';
+        }
+    
+        return Response::json([
+            'contacts' => $contacts,
+            'total' => $users->total() ?? 0,
+            'last_page' => $users->lastPage() ?? 1,
+        ], 200);
+    } */
+    
 
     /**
      * Update user's list item data

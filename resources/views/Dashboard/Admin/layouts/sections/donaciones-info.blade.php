@@ -122,6 +122,16 @@
     </div>
     {{ $total_donaciones->links() }}
 
+    <div class="fixed bottom-5 right-5 z-100">
+        <a href="{{ route('admin.chat') }}">
+            <button
+                class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                <i class='bx bx-message-square-dots text-2xl'></i>
+            </button>
+        </a>
+    </div>
+</div>
+
     <!--
         <div
             class="bg-gradient-to-r from-[#2A334B] via-[#46567E] to-[#2A334B] w-full max-w-[1480px] h-[225px] mt-[20px] rounded-[15px] flex justify-center items-center">

@@ -134,86 +134,15 @@
             </div>
         </div>
 
-<!-- Botón flotante de soporte -->
-<div class="fixed bottom-5 right-5 z-50">
-    <button onclick="toggleSupport()" class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center">
-        <i class='bx bx-help-circle text-2xl'></i>
-    </button>
-</div>
-
-<!-- Contenedor del widget de soporte -->
-<div id="supportWidget" class="fixed bottom-16 right-5 w-96 h-[600px] bg-white p-5 rounded-lg shadow-lg hidden flex flex-col space-y-3 z-50">
-    <!-- Encabezado del widget con botón de cierre y reset -->
-    <div class="flex justify-between items-center border-b pb-2">
-        <h2 class="text-lg font-semibold text-blue-500">InspireUp - Soporte</h2>
-        <div class="flex items-center space-x-2">
-            <!-- Botón de reinicio del chat -->
-            <button onclick="resetChat()" class="text-gray-500 hover:text-gray-700">
-                <i class="fa-solid fa-rotate-right text-xl"></i>
-            </button>
-            <!-- Botón de cierre -->
-            <button onclick="toggleSupport()" class="text-gray-500 hover:text-gray-700">&times;</button>
+        <div class="fixed bottom-5 right-5 z-100">
+            <a href="{{ route('coordinador.chat') }}">
+                <button 
+                    class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                    <i class='bx bx-message-square-dots text-2xl'></i>
+                </button>
+            </a>
         </div>
-    </div>
-
-    <div class="flex-1 overflow-y-auto space-y-4 max-h-[450px] p-2">
-        <!-- Mensaje de bienvenida del soporte -->
-        <div class="bg-gray-100 p-3 rounded-lg shadow max-w-xs">
-            <p class="text-sm text-gray-700">¡Hola! ¿En qué podemos ayudarte?</p>
-        </div>
-        <!-- Espacio para los mensajes -->
-        <div id="chatContainer" class="space-y-4"></div>
-    </div>
-
-    <!-- Formulario para enviar el mensaje -->
-    <form id="supportForm" onsubmit="sendMessage(event)" class="flex items-center space-x-2 pt-2 border-t">
-        <textarea name="message" id="userMessage" placeholder="Escribe tu mensaje..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-blue-500 resize-none" rows="1"></textarea>
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 flex items-center justify-center">
-            <i class="fa-solid fa-check text-xl"></i> <!-- Icono de check para enviar -->
-        </button>
-    </form>
-</div>
-
-<script>
-    function toggleSupport() {
-        var widget = document.getElementById('supportWidget');
-        widget.classList.toggle('hidden');
-    }
-
-    function resetChat() {
-        const chatContainer = document.getElementById('chatContainer');
-        chatContainer.innerHTML = '';
-        // Mensaje inicial de bienvenida tras el reset
-        const welcomeMessage = document.createElement('div');
-        welcomeMessage.classList.add('bg-gray-100', 'p-3', 'rounded-lg', 'shadow', 'max-w-xs');
-        welcomeMessage.innerHTML = '<p class="text-sm text-gray-700">¡Hola! ¿En qué podemos ayudarte?</p>';
-        chatContainer.appendChild(welcomeMessage);
-    }
-
-    function sendMessage(event) {
-        event.preventDefault();
-        const chatContainer = document.getElementById('chatContainer');
-        const userMessage = document.getElementById('userMessage').value;
-
-        // Crear la burbuja del mensaje del usuario
-        if (userMessage.trim() !== "") {
-            const messageBubble = document.createElement('div');
-            messageBubble.classList.add('bg-blue-500', 'text-white', 'p-3', 'rounded-lg', 'shadow', 'self-end', 'max-w-xs');
-            messageBubble.innerHTML = `<p class="text-sm">${userMessage}</p>`;
-
-            // Agregar el mensaje al contenedor del chat
-            chatContainer.appendChild(messageBubble);
-
-            // Limpiar el campo de texto y desplazar al último mensaje
-            document.getElementById('userMessage').value = '';
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-    }
-</script>
-
-
-
-    
+        
     </div>
     
     

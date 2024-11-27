@@ -27,8 +27,8 @@
         
         
 
-    </div>
-
+    </div> 
+    
     <div class="fixed bottom-5 right-5 z-100">
         <a href="{{ route('coordinador.chat') }}">
             <button 

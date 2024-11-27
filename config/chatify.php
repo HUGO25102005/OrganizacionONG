@@ -22,10 +22,10 @@ return [
     |-------------------------------------
     */
     'routes' => [
-        'custom' => env('CHATIFY_CUSTOM_ROUTES', false),
-        /* 'prefix' => env('CHATIFY_ROUTES_PREFIX', 'chatify'),
-        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web','auth']),
-        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'Chatify\Http\Controllers'), */
+        /* 'custom' => true,
+        'prefix' => 'chatify',
+        'middleware' => ['web', 'auth'],
+        'namespace' => 'App\Http\Controllers\vendor\Chatify', */
         'prefix' => env('CHATIFY_ROUTES_PREFIX', 'dashboard/Coordinador/chat'), // Permitir rutas específicas para roles
         
         /* env('CHATIFY_ROUTES_PREFIX', function () {
@@ -47,9 +47,8 @@ return [
             }
 
         }), */
-        /* env('CHATIFY_ROUTES_PREFIX', 'dashboard/${rol}/chat'), */ // Permitir rutas específicas para roles
-        'middleware' => env('CHATIFY_ROUTES_MIDDLEWARE', ['web', 'auth']),
-        'namespace' => env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'),
+        'middleware' => ['web', 'auth'],    /* env('CHATIFY_ROUTES_MIDDLEWARE', ['web', 'auth']), */ 
+        'namespace' => 'App\Http\Controllers\vendor\Chatify', /* env('CHATIFY_ROUTES_NAMESPACE', 'App\Http\Controllers\vendor\Chatify'), */
     ],
     'api_routes' => [
         /* 'prefix' => env('CHATIFY_API_ROUTES_PREFIX', 'chatify/api'),
