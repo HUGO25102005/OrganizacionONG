@@ -52,25 +52,5 @@ class ColaboraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-
-        $benController = new BeneficiarioController();
-        $benController->store($request);
-
-        // dd($benController);
-        return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
-    }
-    public function storeCoordinador(CoordinadorRequest $request)
-    {
-        
-        
-        // dd($request);
-        $coordinadorController = new CoordinadorController();
-        $coordinadorController->store($request);
-
-        // dd($benController);
-        return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
-    }
 
 }

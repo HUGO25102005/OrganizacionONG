@@ -30,7 +30,7 @@
 
                     </td>
                     <td class="px-6 py-4">
-                        
+
                         @if ($soli->presupuesto->aprobacionPresupuestos == null)
                             <span
                                 class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
@@ -64,6 +64,14 @@
             @endforeach
         </tbody>
     </table>
+    <div class="fixed bottom-5 right-5 z-100">
+        <a href="{{ route('vol.chat') }}">
+            <button
+                class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                <i class='bx bx-message-square-dots text-2xl'></i>
+            </button>
+        </a>
+    </div>
 </div>
 
 {{ $misSolicitudes->links() }}
