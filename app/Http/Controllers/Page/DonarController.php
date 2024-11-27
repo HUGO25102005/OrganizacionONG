@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProgramasEducativos\ProgramaEducativo;
 use Illuminate\Http\Request;
 
 class DonarController extends Controller
@@ -12,8 +13,9 @@ class DonarController extends Controller
      */
     public function index()
     {
+        $programas = ProgramaEducativo::getProgramasActivos()->get();
         $linkActive = 5;
-        return view('Page.donar', compact('linkActive'));
+        return view('Page.donar', compact('linkActive', 'programas'));
     }
 
     /**

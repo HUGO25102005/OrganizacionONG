@@ -212,7 +212,7 @@
                         Toma cursos de tu interés de forma gratuita.
                     </p>
                     <img src="{{ asset('images/estudiante.png') }}" alt="Estudiante" class="neumorphic-img h-48 mb-6">
-                    <button class="btn-neumorphic" onclick="openModal('myModal')">Solicita un curso</button>
+                    <button class="btn-neumorphic" onclick="openModal('myModal')">Únete como beneficiario</button>
                 </div>
                 <div class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
                     <h3 class="text-2xl font-semibold mb-10">Se parte de nuestro soporte de docentes</h3>

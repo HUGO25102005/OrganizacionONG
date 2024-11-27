@@ -22,6 +22,7 @@
 
         <!-- Botón "Iniciar Sesión" con efecto neumorphism -->
         <button
+            onclick="window.location.href='{{ route('login') }}'"
             class="mt-4 w-[150px] h-[40px] bg-[#232323] text-white rounded-lg shadow-[4px_4px_8px_#1a1a1a,-4px_-4px_8px_#2e2e2e] hover:shadow-[inset_4px_4px_8px_#1a1a1a,inset_-4px_-4px_8px_#2e2e2e] transition-shadow duration-300">
             Iniciar Sesión
         </button>

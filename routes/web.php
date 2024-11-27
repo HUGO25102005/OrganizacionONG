@@ -35,7 +35,7 @@ use App\Http\Middleware\CheckVoluntario;
 
 Route::get('/', function () {
     return view('auth.login');
-})->middleware(AuthSessionActive::class);
+})->middleware(AuthSessionActive::class)->name('login');
 
 //*Rutas de perfil existentes de Breeze
 

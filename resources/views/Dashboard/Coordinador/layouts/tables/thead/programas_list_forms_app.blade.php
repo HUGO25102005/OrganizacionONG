@@ -28,7 +28,7 @@
                 </div>
             </form>
 
-            <!-- Botón para abrir el modal, alineado a la derecha -->
+            {{-- <!-- Botón para abrir el modal, alineado a la derecha -->
             <button id="openModalBtn" class="ml-auto flex items-center bg-blue-100 text-gray-800 font-semibold rounded-full px-4 py-2 shadow-md">
                 <i class='bx bx-user-plus mr-2'></i>
                 Nuevo Programa Educativo
@@ -168,7 +168,7 @@
 
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
