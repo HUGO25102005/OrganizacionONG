@@ -179,19 +179,19 @@
                     title: 'PayPal - La forma más fácil y segura de pagar en línea!',
                 },
                 onComplete: function (params) {
-                    console.log('Datos de la transacción:', params);
+                    console.log('Transacción completada:', params);
 
-                    // Configurar los datos enviados al servidor
+                    // Configurar datos enviados al servidor
                     const payload = {
-                        transaction_id: params.tx, // ID de la transacción
-                        status: params.st, // Estado de la transacción
-                        amount: params.amt, // Monto
-                        currency: params.cc, // Moneda
+                        transaction_id: params.tx,
+                        status: params.st,
+                        amount: params.amt,
+                        currency: params.cc,
                     };
 
-                    console.log('Datos enviados al servidor:', payload);
+                    console.log('Enviando datos al servidor:', payload);
 
-                    fetch('{{ route('procesarDonacion') }}', {
+                    fetch('{{ route('paypal.procesarDonacion') }}', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -199,16 +199,16 @@
                         },
                         body: JSON.stringify(payload),
                     })
-                        .then((response) => response.json())
-                        .then((result) => {
-                            console.log('Respuesta del servidor:', result);
-                        })
-                        .catch((error) => {
-                            console.error('Error al procesar la solicitud:', error);
-                            alert('Hubo un problema al procesar tu donación. Por favor, intenta nuevamente.');
-                        });
+                    .then((response) => response.json())
+                    .then((result) => {
+                        console.log('Respuesta del servidor:', result);
+                        alert('¡Donación procesada correctamente!');
+                    })
+                    .catch((error) => {
+                        console.error('Error al enviar la solicitud:', error);
+                        alert('Hubo un error al procesar la donación. Por favor, intenta nuevamente.');
+                    });
                 },
-
             }).render('#donate-button');
         </script>
     </div>

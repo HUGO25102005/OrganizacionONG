@@ -210,8 +210,6 @@ Route::group(['prefix' => 'page'], function () {
         'donar' => DonarController::class,
     ]);
 
-    Route::post('/donar/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('procesarDonacion');
-
     Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
     });
@@ -222,7 +220,6 @@ Route::group(['prefix' => 'page'], function () {
         Route::post('/solicitudes/beneficiario', [ColaboraController::class, 'storeBeneficiario'])->name('beneficiario.store');
         Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coordinador.store');
     });
-
 
     Route::get('/', function () {
         return redirect()->route('conocenos.index');
@@ -237,6 +234,9 @@ Route::group(['prefix' => 'pdf'], function () {
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });
 
+Route::group(['prefix' => 'paypal'], function () {
+    Route::post('/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('paypal.procesarDonacion');
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';
