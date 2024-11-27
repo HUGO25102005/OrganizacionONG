@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProgramasEducativos\ProgramaEducativo;
 use Illuminate\Http\Request;
 
 class NuestroTrabajoController extends Controller
@@ -12,8 +13,9 @@ class NuestroTrabajoController extends Controller
      */
     public function index()
     {
+        $programas = ProgramaEducativo::getProgramasActivos()->get();
         $linkActive = 3;
-        return view('Page.nuestro-trabajo', compact('linkActive'));
+        return view('Page.nuestro-trabajo', compact('linkActive', 'programas'));
     }
 
     /**

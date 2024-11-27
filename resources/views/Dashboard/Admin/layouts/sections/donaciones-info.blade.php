@@ -114,9 +114,6 @@
 
     {{ $total_donaciones->links() }}
 
-    <x-support-widget :roles="['Coordinador', 'Beneficiario']" />
-    {{ $total_donaciones->links() }}
-
     <div class="fixed bottom-5 right-5 z-100">
         <a href="{{ route('admin.chat') }}">
             <button

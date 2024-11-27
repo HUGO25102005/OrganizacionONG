@@ -170,5 +170,4 @@
             }
         });
     </script>
-        
 </x-app-layout>
