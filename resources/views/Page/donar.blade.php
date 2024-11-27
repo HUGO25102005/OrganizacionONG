@@ -3,273 +3,300 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/donar.css'])
 @endsection
 @section('content')
-    <section class="cont_video" id="home">
-        <h1>InspireUp</h1>
-        <video autoplay loop muted plays-inline class="back-video">
-            <source src="{{ asset('images/donar.mp4') }}" type="video/mp4">
-        </video>
-    </section>
+<section id="home" class="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden">
+    <h1 class="text-4xl sm:text-6xl md:text-7xl leading-tight text-white uppercase mb-6 z-10 animate-colorChange">
+        InspireUp
+    </h1>
+    <video autoplay loop muted plays-inline class="absolute top-0 left-0 w-full h-full object-cover">
+        <source src="{{ asset('images/donar.mp4') }}" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+</section>
+
+<style>
+    @keyframes colorChange {
+        0% {
+            color: #c4e0ff;
+        }
+        50% {
+            color: #022794;
+        }
+        100% {
+            color: #cbdafa;
+        }
+    }
+
+    .animate-colorChange {
+        animation: colorChange 5s infinite alternate;
+    }
+</style>
+
 
     <!-- Imágenes interactivas -->
-    <!-- Slider con imágenes interactivas -->
-    <section class="w-full h-[55vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center">
-        <div id="slider" class="flex items-center gap-[21px] overflow-hidden relative">
+    <section class="w-full h-auto bg-cover bg-center flex overflow-hidden flex-col items-center justify-center">
+        <div id="slider" class="flex mt-20 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 py-4">
             <!-- Imagen 1 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[180px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/centro1.jpg') }}" alt="1" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 1</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 1</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 1.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn1">Ver
-                        más</button>
+            <div class="slider-item snap-center flex-shrink-0 w-[90%] md:w-[45%] lg:w-[30%] rounded-md bg-gray-100 shadow-lg">
+                <img class="w-full h-48 object-cover rounded-t-md" src="{{ asset('images/centro1.jpg') }}" alt="Programa 1">
+                <div class="p-4">
+                    <h2 class="font-bold text-lg text-gray-800">Programa 1</h2>
+                    <p class="text-gray-600 text-sm">Descripción breve del programa 1.</p>
+                    <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn1">
+                        Ver más
+                    </button>
                 </div>
             </div>
-
             <!-- Modal -->
-            <x-programas-modal :title="'Programa 1'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'¡El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'" :dateEnd="'16/12/2024'"
-                :modalId="'modal1'" />
-
-
-
-            <!-- Imagen 2 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[260px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/centro2.jpg') }}" alt="2" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 2</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 2</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 2.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn2">Ver
-                        más</button>
+            <x-programas-modal :title="'Programa 1'" 
+                :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" 
+                :objetive="'¡El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" 
+                :dateinit="'16/10/2024'" 
+                :dateEnd="'16/12/2024'" 
+                :modalId="'modal1'" 
+            />
+            <!-- Imagen 1 -->
+            <div class="slider-item snap-center flex-shrink-0 w-[90%] md:w-[45%] lg:w-[30%] rounded-md bg-gray-100 shadow-lg">
+                <img class="w-full h-48 object-cover rounded-t-md" src="{{ asset('images/centro1.jpg') }}" alt="Programa 1">
+                <div class="p-4">
+                    <h2 class="font-bold text-lg text-gray-800">Programa 1</h2>
+                    <p class="text-gray-600 text-sm">Descripción breve del programa 1.</p>
+                    <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn1">
+                        Ver más
+                    </button>
                 </div>
             </div>
-
             <!-- Modal -->
-            <x-programas-modal :title="'Programa 2'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'" :dateEnd="'16/12/2024'"
-                :modalId="'modal2'" />
-
-            <!-- Imagen 3 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[315px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/graduada1.jpg') }}"
-                    alt="3" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 3</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 3</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 3.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn3">Ver
-                        más</button>
+            <x-programas-modal :title="'Programa 1'" 
+                :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" 
+                :objetive="'¡El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" 
+                :dateinit="'16/10/2024'" 
+                :dateEnd="'16/12/2024'" 
+                :modalId="'modal1'" 
+            />
+            
+            <!-- Repite para las demás imágenes -->
+            <div class="slider-item snap-center flex-shrink-0 w-[90%] md:w-[45%] lg:w-[30%] rounded-md bg-gray-100 shadow-lg">
+                <img class="w-full h-48 object-cover rounded-t-md" src="{{ asset('images/centro2.jpg') }}" alt="Programa 2">
+                <div class="p-4">
+                    <h2 class="font-bold text-lg text-gray-800">Programa 2</h2>
+                    <p class="text-gray-600 text-sm">Descripción breve del programa 2.</p>
+                    <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn2">
+                        Ver más
+                    </button>
                 </div>
             </div>
-
             <!-- Modal -->
-            <x-programas-modal :title="'Programa 3'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'"
-                :dateEnd="'16/12/2024'" :modalId="'modal3'" />
-
-            <!-- Imagen 4 (activa por defecto) -->
-            <div
-                class="slider-img active relative w-[366px] min-h-[315px] h-[350px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/graduada3.jpg') }}"
-                    alt="4" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md hidden transition-transform duration-1000 ease-in-out">
-                    Programa 4</h1>
-                <div class="absolute bottom-[20px] left-[20px] details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 4</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 4.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn4">Ver
-                        más</button>
+            <x-programas-modal :title="'Programa 2'" 
+                :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" 
+                :objetive="'¡El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" 
+                :dateinit="'16/10/2024'" 
+                :dateEnd="'16/12/2024'" 
+                :modalId="'modal2'" 
+            />
+            <!-- Repite para las demás imágenes -->
+            <div class="slider-item snap-center flex-shrink-0 w-[90%] md:w-[45%] lg:w-[30%] rounded-md bg-gray-100 shadow-lg">
+                <img class="w-full h-48 object-cover rounded-t-md" src="{{ asset('images/centro2.jpg') }}" alt="Programa 2">
+                <div class="p-4">
+                    <h2 class="font-bold text-lg text-gray-800">Programa 2</h2>
+                    <p class="text-gray-600 text-sm">Descripción breve del programa 2.</p>
+                    <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn2">
+                        Ver más
+                    </button>
                 </div>
             </div>
-
             <!-- Modal -->
-            <x-programas-modal :title="'Programa 4'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'"
-                :dateEnd="'16/12/2024'" :modalId="'modal4'" />
-
-            <!-- Imagen 5 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[315px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/graduado2.jpg') }}"
-                    alt="5" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 5</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 5</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 5.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn5">Ver
-                        más</button>
-                </div>
-            </div>
-
-
-            <!-- Modal -->
-            <x-programas-modal :title="'Programa 5'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'"
-                :dateEnd="'16/12/2024'" :modalId="'modal5'" />
-
-            <!-- Imagen 6 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[260px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/centro2.jpg') }}" alt="6" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 6</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 6</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 6.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn6">Ver
-                        más</button>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <x-programas-modal :title="'Programa 6'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'2024/10/16'"
-                :dateEnd="'2024/12/16'" :modalId="'modal6'" />
-
-            <!-- Imagen 7 -->
-            <div
-                class="slider-img relative w-[110px] min-h-[315px] h-[260px] rounded-md cursor-pointer transition-all duration-700 ease-in-out">
-                <img class="w-full h-full object-cover rounded-md" src="{{ asset('images/centro1.jpg') }}" alt="7" />
-                <h1
-                    class="absolute top-[40%] left-[-15%] transform rotate-[270deg] font-bold text-2xl text-white uppercase shadow-md transition-transform duration-1000 ease-in-out">
-                    Programa 7</h1>
-                <div class="absolute bottom-[20px] left-[20px] hidden details">
-                    <h2 class="font-bold text-3xl text-white uppercase shadow-md transition-all duration-1000 ease-in-out">
-                        Programa 7</h2>
-                    <p class="text-white mt-2">Descripción breve del programa 7.</p>
-                    <button class="openModalBtn mt-2 px-4 py-2 bg-white text-black rounded-full" id="openModalBtn7">Ver
-                        más</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <x-programas-modal :title="'Programa 7'" :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" :objetive="'El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" :dateinit="'16/10/2024'" :dateEnd="'16/12/2024'"
-            :modalId="'modal7'" />
-
-        <!-- Botones circulares indicadores -->
-        <div id="slider-indicators" class="flex mt-4 space-x-2">
-            <!-- Los botones se generarán dinámicamente con JS -->
+            <x-programas-modal :title="'Programa 2'" 
+                :content="'¡Nuestro programa educativo en modalidad virtual está diseñado para adaptarse a tu estilo de vida. Te permite elegir tu horario de estudio, brindándote la flexibilidad necesaria para compaginar tus responsabilidades diarias. Además, contarás con asistencia virtual disponible las 24 horas, lista para apoyarte en cualquier momento.!'" 
+                :objetive="'¡El objetivo de este programa es transformar tu aprendizaje en una experiencia cómoda y accesible, permitiéndote desarrollar tus habilidades y conocimientos de manera efectiva, sin las limitaciones de un horario fijo.'" 
+                :dateinit="'16/10/2024'" 
+                :dateEnd="'16/12/2024'" 
+                :modalId="'modal2'" 
+            />
         </div>
     </section>
+<style>#slider {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sliderImages = document.querySelectorAll('.slider-img');
-            let currentIndex = 3; // Imagen 4 es la activa por defecto (índice 3)
-            const totalSlides = sliderImages.length;
-            const intervalTime = 3000; // 3 segundos entre cambios automáticos
-            let autoSlide;
+.slider-item {
+    flex: 0 0 auto;
+}
 
-            // Crear indicadores circulares
-            const sliderIndicators = document.getElementById('slider-indicators');
-            sliderImages.forEach((img, index) => {
-                const indicator = document.createElement('div');
-                indicator.classList.add('w-3', 'h-3', 'bg-gray-400', 'rounded-full', 'cursor-pointer',
-                    'transition-all', 'duration-500');
-                if (index === currentIndex) {
-                    indicator.classList.add('bg-slate-900');
-                }
-                indicator.addEventListener('click', () => {
-                    clearInterval(autoSlide);
-                    changeSlide(index);
-                });
-                sliderIndicators.appendChild(indicator);
-            });
+.openModalBtn {
+    transition: background-color 0.3s ease;
+}
 
-            const changeSlide = (index) => {
-                sliderImages.forEach((slide, i) => {
-                    slide.classList.remove('active');
-                    slide.style.width = '110px';
-                    slide.style.height = slide.getAttribute('class').includes('h-[315px]') ? '315px' :
-                        slide.getAttribute('class').includes('h-[260px]') ? '260px' : '180px';
-                    slide.querySelector('h1').style.display = 'block';
-                    slide.querySelector('.details').style.display = 'none';
-                    sliderIndicators.children[i].classList.remove('bg-slate-900');
-                    sliderIndicators.children[i].classList.add('bg-gray-400');
-                });
-
-                sliderImages[index].classList.add('active');
-                sliderImages[index].style.width = '366px';
-                sliderImages[index].style.height = '350px';
-                sliderImages[index].querySelector('h1').style.display = 'none';
-                sliderImages[index].querySelector('.details').style.display = 'block';
-                sliderIndicators.children[index].classList.add('bg-slate-900');
-                sliderIndicators.children[index].classList.remove('bg-gray-400');
-
-                currentIndex = index;
-            };
-
-            autoSlide = setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                changeSlide(currentIndex);
-            }, intervalTime);
-        });
-    </script>
+.openModalBtn:hover {
+    background-color: #405584;
+}
+</style>    
 
 
-    <section class="third-section">
-        <!-- Imagen de unirse -->
-        <div class="third-section-image">
-            <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop">
-        </div>
-        <!-- Contenido y botón para unirse -->
-        <div class="third-section-content">
-            <h1>Ayuda a promover la educación y la superación.</h1>
-            <p class="text-justify text-slate-900">Las donaciones permitirían asegurar el suministro de materiales
-                esenciales y facilitar la implementación de talleres y capacitaciones educativas. De este modo, nuestra ONG
-                podría empoderar a las comunidades que atendemos, promoviendo su desarrollo personal y profesional y
-                contribuyendo a la construcción de un futuro más equitativo y próspero.</p>
-
-            <!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
-            <!--<div id="donate-button-container"></div>
+<section class="flex flex-col-reverse lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto lg:h-[65vh] px-6 lg:px-[10%] py-8 relative">
+    <!-- Imagen -->
+    <div class="relative max-w-full lg:max-w-[40%] lg:absolute lg:bottom-0 lg:left-0">
+        <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop"
+            class="w-full h-auto mt-20 rounded-lg lg:pl-[120px] mb-6 lg:mb-0">
+    </div>
+    <!-- Contenido -->
+    <div class="w-full lg:w-[50%] flex flex-col justify-center text-left">
+        <h1 class="text-3xl lg:text-4xl font-bold text-slate-700 mb-4">
+            Ayuda a promover la educación y la superación.
+        </h1>
+        <p class="text-base lg:text-lg text-slate-700 text-justify leading-relaxed mb-6">
+            Las donaciones permitirían asegurar el suministro de materiales esenciales y facilitar la implementación de
+            talleres y capacitaciones educativas.
+        </p>
+        <!-- Botón de donar con PayPal -->
+        <div id="donate-button-container" class="flex justify-center lg:justify-start relative">
             <div id="donate-button"></div>
-            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-            <script>
-                PayPal.Donation.Button({
-                    env: 'production',
-                    hosted_button_id: 'M66DWADBGCNAG',
-                    style: {
-                        shape: 'pill',
+        </div>
+    </div>
+</section>
+
+<!-- Script de PayPal -->
+<!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
+    {{-- <div id="donate-button-container"></div>
+    <div id="donate-button"></div>
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+    <script>
+        PayPal.Donation.Button({
+            env: 'production',
+            hosted_button_id: 'M66DWADBGCNAG',
+            style: {
+                shape: 'pill',
+            },
+            image: {
+                src: "{{ asset('images/donar.png') }}",
+                alt: 'Donar con el botón PayPal',
+                title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
+            },
+            onComplete: function (data) {
+                // Extraer los datos relevantes
+                console.log('Donación completada:', data);
+
+                // Realizar una solicitud AJAX o Fetch
+                /* fetch('/procesar-donacion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    image: {
-                        src: "{{ asset('images/donar.png') }}",
-                        alt: 'Donar con el botón PayPal',
-                        title: 'PayPal - La más segura y sencilla manera de pagar en linea!',
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al procesar la donación.');
                     }
-                }).render('#donate-button');
-            </script>-->
-            <!-- Botón de donar con sandbox -->
-            <div id="donate-button-container">
-              <div id="donate-button"></div>
-              <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-              <script>
-                PayPal.Donation.Button({
-                  env:'sandbox',
-                  hosted_button_id:'ZL8G9R6KRJUSN',
-                  image: {
-                    src: "{{asset('images/donar.png')}}",
-                    alt:'Donar con el botón PayPal',
-                    title:'PayPal - La forma mas fácil y segura de pagar en línea!',
-                  }
-                }).render('#donate-button');
-              </script>
-            </div>              
-        </div>
-        </div>
-    </section>
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('Resultado del servidor:', result);
+                    alert('¡Gracias por tu donación!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un problema al procesar tu donación.');
+                }); */
+                fetch('{{ url('/page/donar/procesar-donacion') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        console.log('Resultado del servidor:', result);
+                        alert('¡Gracias por tu donación!');
+                    })
+                    .catch(error => {
+                        console.error('Error al procesar la solicitud:', error);
+                        alert('Hubo un problema. Por favor, intenta nuevamente.');
+                    });
+            }
+                
+        }).render('#donate-button');
+    </script> --}}
+
+    <!-- Botón de donar con sandbox -->
+    <div id="donate-button-container">
+        <div id="donate-button"></div>
+        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+        <script>
+            PayPal.Donation.Button({
+                env: 'sandbox',
+                hosted_button_id: 'BNH9DUN6KARHS',
+                image: {
+                    src: "{{ asset('images/donar.png') }}",
+                    alt: 'Donar con el botón PayPal',
+                    title: 'PayPal - La forma más fácil y segura de pagar en línea!',
+                },
+                onComplete: function (params) {
+                    console.log('Datos de la transacción:', params);
+
+                    // Configurar los datos enviados al servidor
+                    const payload = {
+                        transaction_id: params.tx, // ID de la transacción
+                        status: params.st, // Estado de la transacción
+                        amount: params.amt, // Monto
+                        currency: params.cc, // Moneda
+                    };
+
+                    console.log('Datos enviados al servidor:', payload);
+
+                    fetch('{{ route('procesarDonacion') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        },
+                        body: JSON.stringify(payload),
+                    })
+                        .then((response) => response.json())
+                        .then((result) => {
+                            console.log('Respuesta del servidor:', result);
+                        })
+                        .catch((error) => {
+                            console.error('Error al procesar la solicitud:', error);
+                            alert('Hubo un problema al procesar tu donación. Por favor, intenta nuevamente.');
+                        });
+                },
+
+            }).render('#donate-button');
+        </script>
+    </div>
+<style>
+    .donate-img {
+        width: 150px;
+        height: auto;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    
+    .donate-img:hover {
+        transform: scale(1.1);
+    }
+    
+    /* Botón donación */
+    
+    #donate-button {
+        position: absolute;
+        height: 65px;
+        width: 160px;
+        transition: transform 0.2s ease-in-out; /* Efecto de zoom al pasar el mouse */
+    }
+    
+    #donate-button:hover {
+      transform: scale(1.03); /* Aumenta el tamaño al pasar el mouse */
+    }</style>
+
 @endsection

@@ -100,6 +100,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="fixed bottom-5 right-5 z-100">
+            <a href="{{ route('admin.chat') }}">
+                <button
+                    class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                    <i class='bx bx-message-square-dots text-2xl'></i>
+                </button>
+            </a>
+        </div>
     </div>
 
     <!-- Script para las gráficas -->
@@ -161,6 +170,5 @@
             }
         });
     </script>
-
-
+        
 </x-app-layout>

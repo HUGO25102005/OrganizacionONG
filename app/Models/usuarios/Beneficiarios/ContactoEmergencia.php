@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Usuarios\Beneficiarios;
+namespace App\Models\usuarios\Beneficiarios;
 
-use App\Models\usuarios\Beneficiario;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

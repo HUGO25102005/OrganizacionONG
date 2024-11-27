@@ -12,11 +12,10 @@
                     <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
                     <select id="estado" name="estado"
                         class="mt-1 md:mt-0 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transform transition-transform duration-200 hover:scale-105">
-                        <option value="0">Todos</option>
-                        <option value="4">Activo</option>
-                        <option value="5">Terminado</option>
-                        <option value="3">Aprovado</option>
-                        <option value="2">En revisión</option>
+                        <option value="0" {{ $estado == '0' ? 'selected' : '' }}>Todos</option>
+                        <option value="4" {{ $estado == '4' ? 'selected' : '' }}>Activo</option>
+                        <option value="2" {{ $estado == '2' ? 'selected' : '' }}>Inactivo</option>
+                        <option value="5" {{ $estado == '5' ? 'selected' : '' }}>Terminado</option>
                     </select>
                 </div>
 
@@ -32,7 +31,7 @@
             <!-- Botón para abrir el modal, alineado a la derecha -->
             <button id="openModalBtn" class="ml-auto flex items-center bg-blue-100 text-gray-800 font-semibold rounded-full px-4 py-2 shadow-md">
                 <i class='bx bx-user-plus mr-2'></i>
-                Nuevo Beneficiario
+                Nuevo Programa Educativo
             </button>
 
             <!-- Modal -->

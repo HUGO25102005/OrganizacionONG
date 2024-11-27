@@ -36,7 +36,7 @@ return new class extends Migration
             $table->date('fecha_termino');
             $table->text('recursos_necesarios');
 /*             $table->enum('tipo', [1,2])->comment('1 = Presencial, 2 = Virtual'); */
-            $table->enum('estado', [1,2,3,4,5,6])->comment('1 = Solicitado(coordinador y admin), 2 = En Revision(Actividades (cordinador)), 3 = Aprovado, 4 = activo, 5 = terminado, 6 = Cancelado');
+            $table->enum('estado', [1,2,3,4,5,6])->comment('1 = Solicitado(coordinador), 2 = Inactivo 3 = Aprobado, 4 = activo, 5 = terminado, 6 = Cancelado');
             $table->text('resultados_esperados');
             $table->foreignId('id_presupuesto')
                                 ->constrained('presupuestos')

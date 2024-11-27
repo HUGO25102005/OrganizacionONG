@@ -1,5 +1,6 @@
-@foreach ($datos as $beneficiario)
+{{-- @foreach ($datos as $beneficiario)
         <tr class="border-b border-gray-300">
+            <td class="py-3 px-4 text-center">{{ $loop->iteration }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->name }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->email }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->nivel_educativo }}</td>
@@ -12,4 +13,4 @@
                 </button>
             </td>
         </tr>
-@endforeach
+@endforeach --}}

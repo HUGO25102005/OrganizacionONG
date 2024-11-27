@@ -1,172 +1,115 @@
-<tr class="border-b border-gray-300">
-    <td class="py-3 px-4 text-center">Ayuda para Escuelas</td>
-    <td class="py-3 px-4 text-center">Ernesto Jimenez</td>
-    <td class="py-3 px-4 text-center">100</td>
-    <td class="py-3 px-4 text-center">Virtual</td>
-    <td class="py-3 px-4 text-center">$10,000</td>
-    <td class="py-3 px-4 text-center">Activo</td>
-    <td class="py-3 px-4 text-center">
-        <button class="bg-blue-100 w-10 h-10 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-300 flex items-center justify-center" onclick="openModal()">
-            <i class='bx bx-show text-2xl text-gray-700 cursor-pointer' title="Visualizar"></i>
-        </button>
-
-        <!-- Modal -->
-        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden" id="modalOverlay">
-            <div class="bg-white rounded-lg p-6 w-full max-h-[80vh] max-w-lg overflow-y-auto shadow-lg">
-                <!-- Modal Header -->
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Detalle del Programa</h2>
-
-                <!-- Formulario dentro del modal -->
-                <form>
-                    <!-- Nombre -->
-                    <div class="mb-4">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre del Programa</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="name" name="name" maxlength="255" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
+@foreach($datos as $programa)    
+    <tr class="border-b border-gray-300">
+        <td class="py-3 px-4 text-center"> {{ $loop->iteration }} </td>
+        <td class="py-3 px-4 text-center"> {{ $programa->nombre_programa }} </td>
+        <td class="py-3 px-4 text-center"> {{ $programa->voluntario->trabajador->user->getFullName() }} </td>
+        <td class="py-3 px-4 text-center"> {{ $programa->getTotalBeneficiarios() }} </td>
+        <td class="py-3 px-4 text-center"> ${{ number_format($programa->presupuesto->monto) }} </td>
+        <td class="py-3 px-4"><div class="items-center h-8 justify-center flex bg-green-100 rounded-full"><b>{{ $programa->getEstado() }}</b></div></td>
+        <td class="py-3 px-4 text-center">
+            <div class="inline-flex items-center">
+                @if ($programa->estado == 4)
+                    <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl'">
+                        <h4 class="text-2xl font-semibold text-[#2A334B] mb-4">Datos del Programa</h4> <!-- Encabezado -->
+                        <section class="mb-6 grid grid-cols-2 gap-4">
+                            <!-- Primeros dos datos -->
+                            <div>
+                                <label class="block text-gray-600 mb-1">Encargado del Programa: </label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->voluntario->trabajador->user->getFullName() }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Nombre del programa:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->nombre_programa }}
+                                </div>
+                            </div>
+            
+                            <!-- Tercer dato (centrado) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Descripción:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->descripcion }}
+                                </div>
+                            </div>
+            
+                            <!-- Cuarto dato (centrado) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Objetivo(s):</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->objetivos }}
+                                </div>
+                            </div>
+            
+                            <!-- Datos 5 al 8 (uno al lado del otro) -->
+                            <div>
+                                <label class="block text-gray-600 mb-1">Dirigido a:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->publico_objetivo }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Duración estimada:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->duracion }} días
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Fecha estimada de inicio:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ \Carbon\Carbon::parse($programa->fecha_inicio)->format('d-m-Y') }}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-1">Fecha estimada de finalización:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ \Carbon\Carbon::parse($programa->fecha_termino)->format('d-m-Y') }}
+                                </div>
+                            </div>
+            
+                            <!-- Últimos 3 datos (centrados y solos) -->
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Beneficiarios estimados:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->beneficiarios_estimados }}
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Resultados esperados:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->resultados_esperados }}
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-center">
+                                <label class="block text-gray-600 mb-1">Comentarios adicionales:</label>
+                                <div class="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 text-[#2A334B]">
+                                    {{ $programa->comentarios_adicionales }}
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Botón de cerrar modal alineado a la izquierda -->
+                        <div class="flex justify-end mt-6">
+                            <button @click="open = false" type="button"
+                                class="flex items-center space-x-2 bg-[#2A334B] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
+                                <i class='bx bx-x text-xl'></i>
+                                <span>Cerrar</span>
+                            </button>
                         </div>
-                    </div>
-
-                    <!-- Coordinador encargado -->
-                    <div class="mb-4">
-                        <label for="coordinador_encargado" class="block text-sm font-medium text-gray-700">Coordinador encargado</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="coordinador_encargado" name="apellido_paterno" maxlength="255" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
+                    </x-modal-view-info>
+                    <x-button-trash :messageAlert="'¿Estás seguro de que deseas eliminar el programa?'" :router="route('coordinador.desactivarPrograma')" :itemId="$programa->id" :tituloModal="'Confirmar Eliminación'" />
+                        @if($programa->registroActividades && $programa->registroActividades->isNotEmpty())
+                        <div>
+                            <!-- Botón de planificación -->
+                            <a href="{{ route('coordinador.planeacion', ['id' => $programa->id]) }}" 
+                                class="ml-2 text-black text-2xl bg-orange-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-orange-500">
+                                <i class='bx bx-table'></i>
+                            </a>
                         </div>
-                    </div>
-
-                    <!-- Descripción -->
-                    <div class="mb-4">
-                        <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="descripcion" name="descripcion" maxlength="255" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Objetivo -->
-                    <div class="mb-4">
-                        <label for="objetivo" class="block text-sm font-medium text-gray-700">Objetivo</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="objetivo" name="objetivo" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Tipo de público -->
-                    <div class="mb-4">
-                        <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de público</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="tipo" name="tipo_publico" maxlength="255" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Duración -->
-                    <div class="mb-4">
-                        <label for="duracion" class="block text-sm font-medium text-gray-700">Duración</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="duracion" name="duracion" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Fecha de inicio -->
-                    <div class="mb-4">
-                        <label for="fecha_init" class="block text-sm font-medium text-gray-700">Fecha de inicio</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="date" id="fecha_init" name="fecha_init" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Fecha de término -->
-                    <div class="mb-4">
-                        <label for="fecha_term" class="block text-sm font-medium text-gray-700">Fecha de término</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="date" id="fecha_term" name="fecha_term" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Recursos necesarios -->
-                    <div class="mb-4">
-                        <label for="recursos" class="block text-sm font-medium text-gray-700">Recursos necesarios</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="recursos" name="estado" maxlength="100" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Resultados esperados -->
-                    <div class="mb-4">
-                        <label for="resultados" class="block text-sm font-medium text-gray-700">Resultados esperados</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="resultados" name="municipio" maxlength="100" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Presupuesto -->
-                    <div class="mb-4">
-                        <label for="presupuesto" class="block text-sm font-medium text-gray-700">Presupuesto</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="presupuesto" name="cp" maxlength="100" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Beneficiarios estimados -->
-                    <div class="mb-4">
-                        <label for="beneficiarios" class="block text-sm font-medium text-gray-700">Beneficiarios estimados</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="beneficiarios" name="direccion" maxlength="255" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Indicadores de cumplimiento -->
-                    <div class="mb-4">
-                        <label for="indicadores" class="block text-sm font-medium text-gray-700">Indicadores de cumplimiento</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="indicadores" name="telefono" maxlength="20" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Comentarios adicionales -->
-                    <div class="mb-4">
-                        <label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios adicionales</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="comentarios" name="telefono" maxlength="20" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-                    <!-- Fecha de registro de actividad -->
-                    <div class="mb-4">
-                        <label for="fecha_registro" class="block text-sm font-medium text-gray-700">Fecha de registro de actividad</label>
-                        <div class="flex items-center bg-gray-100 rounded-full p-2">
-                            <input type="text" id="fecha_registro" name="telefono" maxlength="20" required class="bg-transparent flex-1 border-none outline-none text-black px-2" />
-                        </div>
-                    </div>
-
-
-
-
-
-                <!-- Modal Footer -->
-                <div class="mt-6 text-right">
-                    <button onclick="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Cerrar</button>
-                </div>
-            </form>
-        </div>
-
-
-
-        <script>
-            // Función para abrir el modal
-            function openModal() {
-                document.getElementById('modalOverlay').classList.remove('hidden');
-            }
-
-            // Función para cerrar el modal
-            function closeModal() {
-                document.getElementById('modalOverlay').classList.add('hidden');
-            }
-        </script>
-
-
-
-        <span class="bg-blue-200 w-10 h-10 p-1 rounded-full transition duration-300 ease-in-out hover:bg-blue-600">
-            <i class='bx bx-detail text-2xl text-blue-500 cursor-pointer' title="Aprobar"></i>
-        </span>
-    </td>                        
-</tr>
+                    @endif
+                @endif
+            </div>     
+        </td>                        
+    </tr>
+@endforeach
