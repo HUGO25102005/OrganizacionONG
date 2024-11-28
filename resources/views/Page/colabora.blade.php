@@ -227,7 +227,7 @@
                 <div>
                     <div
                         class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
-                        <h3 class="text-2xl font-semibold mb-4">Se parte de esta experiencia</h3>
+                        <h3 class="text-2xl font-semibold mb-4">Se parte de nuestros beneficiarios</h3>
                         <p class="text-md font-semibold text-[#262D34] text-justify">
                             Toma cursos de tu interés de forma gratuita.
                         </p>
@@ -235,6 +235,7 @@
                     </div>
                     <div class="">@include('Page.layouts.modals.modal_nuevo_beneficiario')</div>
                 </div>
+
                 <div>
                     <div
                         class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
