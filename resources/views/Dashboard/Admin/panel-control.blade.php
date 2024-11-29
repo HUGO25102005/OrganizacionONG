@@ -5,67 +5,64 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gray-100 rounded inline-block px-4 py-2 cursor-pointer transition-transform duration-200 hover:scale-110">
-            {{ __('Panel de Control') }}
+            {{ __('dashboard.panel') }}
         </h2>
-
+        
     </x-slot>
+
     <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-        <!-- Título -->
-        <h2 class="text-2xl font-bold mb-6">Donaciones</h2>
-    
-        <!-- Fila superior: Total disponible y Dinero usado -->
+        <h2 class="text-2xl font-bold mb-6">{{ __('dashboard.donations') }}</h2>
+        <!-- Botón para cambiar el idioma -->
+        <div>
+            <a href="{{ route('change.language', 'en') }}">English</a>
+            <a href="{{ route('change.language', 'es') }}">Español</a>
+        </div>
+        
+
+
+        <!-- Fila superior -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Total disponible -->
             <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-2">Total disponible:</h3>
+                <h3 class="text-lg font-bold mb-2">{{ __('dashboard.total_available') }}</h3>
                 <p class="text-3xl font-bold text-green-600">$1234</p>
-                <p class="text-sm text-gray-500">Monto total: $11,200</p>
+                <p class="text-sm text-gray-500">{{ __('dashboard.total_amount') }}: $11,200</p>
             </div>
-    
-            <!-- Dinero usado -->
+
             <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-2">Dinero usado:</h3>
+                <h3 class="text-lg font-bold mb-2">{{ __('dashboard.money_used') }}</h3>
                 <p class="text-3xl font-bold text-red-600">$500</p>
             </div>
         </div>
-    
-        <!-- Fila intermedia: Últimas Donaciones y Campañas Activas -->
+
+        <!-- Últimas Donaciones -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Últimas Donaciones (expandido para 10 registros) -->
             <div class="bg-white shadow-md p-6 rounded-lg h-[250px] overflow-y-auto">
-                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Últimas Donaciones</h3>
+                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">{{ __('dashboard.latest_donations') }}</h3>
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-left">Nombre</th>
-                            <th class="text-right">Monto</th>
+                            <th class="text-left">{{ __('dashboard.name') }}</th>
+                            <th class="text-right">{{ __('dashboard.amount') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr><td>Ernesto</td><td class="text-right">$1500</td></tr>
                         <tr><td>Isa</td><td class="text-right">$1200</td></tr>
-                        <tr><td>Juan</td><td class="text-right">$900</td></tr>
-                        <tr><td>Ana</td><td class="text-right">$800</td></tr>
-                        <tr><td>Carlos</td><td class="text-right">$700</td></tr>
                     </tbody>
                 </table>
             </div>
-    
-            <!-- Campañas Activas con metas -->
+
             <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">Campañas Activas</h3>
+                <h3 class="text-lg font-bold mb-4 flex justify-center bg-[#BBDEFB] rounded-lg">{{ __('dashboard.active_campaigns') }}</h3>
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-left">Campaña</th>
-                            <th class="text-right">Meta</th>
+                            <th class="text-left">{{ __('dashboard.campaign') }}</th>
+                            <th class="text-right">{{ __('dashboard.goal') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr><td>Campaña A</td><td class="text-right">$5000</td></tr>
-                        <tr><td>Campaña B</td><td class="text-right">$10000</td></tr>
-                        <tr><td>Campaña C</td><td class="text-right">$7500</td></tr>
-                        <tr><td>Campaña D</td><td class="text-right">$12000</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -75,7 +72,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <!-- Gráfico de Campañas Activas -->
             <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Campañas Activas</h3>
+                <h3 class="text-lg font-bold mb-4">{{ __('dashboard.campaigndata') }}</h3>
                 <div style="max-width: 700px; max-height: 400px;">
                     <canvas id="campaignChart"></canvas>
                 </div>
@@ -83,7 +80,7 @@
     
             <!-- Gráfico de Ingresos Mensuales -->
             <div class="bg-white shadow-md p-6 rounded-lg">
-                <h3 class="text-lg font-bold mb-4">Gráfico de Ingresos Mensuales</h3>
+                <h3 class="text-lg font-bold mb-4">{{ __('dashboard.graficodeingresos') }}</h3>
                 <div style="max-width: 700px; max-height: 400px;">
                     <canvas id="incomeChart"></canvas>
                 </div>
