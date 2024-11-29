@@ -207,11 +207,15 @@ Route::group(['prefix' => 'page'], function () {
 
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
-        'donar' => DonarController::class,
     ]);
 
     Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
+    });
+    Route::prefix('donar')->group(function () {
+        Route::get('/', [DonarController::class, 'index'])->name('donar.index');
+        Route::post('/paypal/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('donar.procesarDonacion');
+
     });
 
     Route::prefix('colabora')->group(function () {
@@ -234,9 +238,9 @@ Route::group(['prefix' => 'pdf'], function () {
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });
 
-Route::group(['prefix' => 'paypal'], function () {
-    Route::post('/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('paypal.procesarDonacion');
-});
+// Route::group(['prefix' => 'paypal'], function () {
+//     Route::post('/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('paypal.procesarDonacion');
+// });
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';

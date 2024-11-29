@@ -191,7 +191,9 @@
 
                     console.log('Enviando datos al servidor:', payload);
 
-                    fetch('{{ route('paypal.procesarDonacion') }}', {
+                    console.log('{{ route('donar.procesarDonacion')}}');
+
+                    fetch('{{ route('donar.procesarDonacion') }}', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
