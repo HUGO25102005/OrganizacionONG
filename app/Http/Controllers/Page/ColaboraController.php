@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Usuarios\BeneficiarioController;
-use App\Http\Controllers\Usuarios\CoordinadorController;
 use App\Http\Controllers\Usuarios\VoluntarioController;
 use App\Http\Requests\Usuarios\CoordinadorRequest;
-use App\Http\Requests\Usuarios\StoreBeneficiarioRequest;
+use App\Http\Controllers\Usuarios\CoordinadorController;
+use App\Http\Controllers\Usuarios\BeneficiarioController;
 use App\Http\Requests\Usuarios\StoreVoluntarioRequest;
+use App\Http\Requests\Usuarios\StoreBeneficiarioRequest;
+use App\Http\Requests\Usuarios\StoreCoordinadorRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,25 +31,26 @@ class ColaboraController extends Controller
 
         return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
+    
     public function storeBeneficiario(StoreBeneficiarioRequest $request)
-    {
+    { 
+        $beneficiarioController = new BeneficiarioController();
+        $beneficiarioController->store($request);
 
-        $benController = new BeneficiarioController();
-        $benController->store($request);
-
-        // dd($benController);
         return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
-    public function storeCoordinador(CoordinadorRequest $request)
+
+    public function storeCoordinador(StoreCoordinadorRequest $request)
     {
-        
-        
-        // dd($request);
+
         $coordinadorController = new CoordinadorController();
-        $coordinadorController->store($request);
+        $coordinadorController->store1($request);
 
-        // dd($benController);
         return redirect()->route('colabora.index')->with('success', 'El registro se ha creado correctamente.');
     }
+
+    /**
+     * Display the specified resource.
+     */
 
 }

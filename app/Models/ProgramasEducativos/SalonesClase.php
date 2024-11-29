@@ -2,7 +2,7 @@
 
 namespace App\Models\ProgramasEducativos;
 
-use App\Models\usuarios\Beneficiario;
+use App\Models\usuarios\Beneficiarios\Beneficiario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

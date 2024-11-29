@@ -1,15 +1,21 @@
+@php
+    // Arreglo de colores
+    $colores = ['border-red-400', 'border-blue-400', 'border-green-400', 'border-yellow-400'];
+@endphp
+
 <div class="mb-6">
-    <h2 class="text-2xl text-center mt-4 font-bold mb-4">Programas disponibles</h2> 
-    <!-- Contenedor principal del carrusel -->
+    <h2 class="text-2xl text-center mt-4 font-bold mb-4">Programas disponibles</h2>
+    <br> 
     <!-- Contenedor principal del carrusel -->
     <div class="overflow-hidden relative">
         <!-- Carrusel con desplazamiento horizontal -->
         <div id="carousel" class="flex space-x-6 overflow-x-auto mb-12 snap-x snap-mandatory scroll-smooth transition-transform duration-500 ease-in-out">
             @foreach ($programas as $programa)
-                <div class="bg-white min-w-[250px] sm:min-w-[300px] p-6 rounded-lg shadow-md border-l-4 border-{{ $programa->color }} snap-center">
-                    <h3 class="text-lg font-bold mb-2">{{ $programa->nombre }}</h3>
-                    <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">{{ $programa->beneficiarios }}</span></p>
-                    <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">${{ number_format($programa->recursos) }}</span></p>
+                <div class="bg-white min-w-[250px] sm:min-w-[300px] p-6 rounded-lg shadow-lg border-l-8 {{ $colores[$loop->index % count($colores)] }} snap-center">
+                    <h3 class="text-lg font-bold mb-2">{{ $programa->nombre_programa }}</h3>
+                    <p class="text-gray-500 mb-2">Impartido por: <span class="font-semibold">{{ $programa->voluntario->trabajador->user->name. ' ' .$programa->voluntario->trabajador->user->apellido_paterno }}</span></p>
+                    <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
+                    <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">${{ number_format($programa->presupuesto->monto) }}</span></p>
                 </div>
             @endforeach
         </div>
@@ -25,20 +31,20 @@
     <!-- Gráficos en un contenedor flex -->
     <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
         <!-- Gráfico 1: Estatus Programas Educativos -->
-        <div class="w-full lg:w-1/2 flex flex-col items-center">
+        <div class="w-full lg:w-1/2 flex flex-col items-center mx-auto"> <!-- Quitar mx-auto si uso las dos graficas -->
             <h3 class="text-center font-bold mb-4">Gráfico del estatus</h3>
             <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
                 <canvas id="incomeChart"></canvas>
             </div>
         </div>
         
-        <!-- Gráfico 2: Estatus de Beneficiarios -->
+{{--         <!-- Gráfico 2: Estatus de Beneficiarios -->
         <div class="w-full lg:w-1/2 flex flex-col items-center">
             <h3 class="text-center font-bold mb-4">Gráfico de la modalidad</h3>
             <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
                 <canvas id="expenseChart"></canvas>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
     
@@ -66,13 +72,10 @@
                             @include('Dashboard.Coordinador.layouts.tables.thead.th_todosP')
                             @break
                         @case(2)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_revision')                            
-                            @break
-                        @case(3)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_aprovado')                            
+                            @include('Dashboard.Coordinador.layouts.tables.thead.th_inactivo')                            
                             @break
                         @case(4)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_activo_p')                            
+                            @include('Dashboard.Coordinador.layouts.tables.thead.th_todosP')                            
                             @break
                         @case(5)
                             @include('Dashboard.Coordinador.layouts.tables.thead.th_terminado')                            
@@ -85,10 +88,7 @@
                             @include('Dashboard.Coordinador.layouts.tables.tbody.tb_todosP')
                             @break
                         @case(2)
-                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_revision')                            
-                            @break
-                        @case(3)
-                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_aprovado')                            
+                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_inactivoP')                            
                             @break
                         @case(4)
                             @include('Dashboard.Coordinador.layouts.tables.tbody.tb_activo_p')                            
@@ -100,14 +100,18 @@
                 </tbody>                     
             </table>
         </div>
-        {{-- {{ $datos->links() }}
-        @if ($beneficiariosearch)
-            {{ $beneficiariosearch->links() }}
-        @endif --}}
+        <div class="mt-2" id="lista">
+            @if($datos and $estado != 0)
+                {{ $datos->links() }}
+            @endif
+            @if ($programassearch and $estado == 0)
+                {{ $programassearch->links() }}
+            @endif  
+        </div>
     </div>
 </div>
 
-{{-- <style>
+<style>
     /* Oculta la barra de desplazamiento */
 #carousel {
     scrollbar-width: none; /* Firefox */
@@ -117,13 +121,13 @@
     display: none; /* Chrome, Safari y Edge */
 }
 
-</style> --}}
+</style>
 <script>
     const carousel = document.getElementById('carousel');
     const indicatorsContainer = document.getElementById('indicators');
     const programas = @json($programas); // Convertir los datos de programas en JSON
-    const slideWidth = 400; // Ajusta según el ancho de cada tarjeta
-    const itemsPerIndicator = 3; // Cada indicador representará tres programas
+    const slideWidth = 100; // Ajusta según el ancho de cada tarjeta
+    const itemsPerIndicator = 1; // Cada indicador representará tres programas
     const totalSlides = Math.ceil(programas.length / itemsPerIndicator);
 
     let currentIndex = 0;
@@ -132,7 +136,7 @@
     function createIndicators() {
         for (let i = 0; i < totalSlides; i++) {
             const indicator = document.createElement('button');
-            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-300', 'transition-all', 'duration-300');
+            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-200', 'transition-all', 'duration-300');
             indicator.addEventListener('click', () => {
                 currentIndex = i;
                 updateCarousel();
@@ -184,12 +188,12 @@
     const incomeChart = new Chart(ctxIncome, {
         type: 'bar',
         data: {
-            labels: ['Solicitud', 'En Revisión', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'], // Meses
+            labels: ['Solicitud', 'Aprobado', 'Activo', 'Inactivo', 'Terminado', 'Cancelado'], // Meses
             datasets: [{
                 label: 'Estatus de Programas Educativos',
-                data: [0, 0, 0, 0, 0, 0], // Valores de ingresos
-                backgroundColor: 'rgba(54, 162, 235, 1)', // Azul sólido
-                borderColor: 'rgba(54, 162, 235, 1)',
+                data: [ {{ $programas_solicitados }}, {{ $programas_aprobados }}, {{ $programas_activos }}, {{ $programas_inactivos }}, {{ $programas_terminados }}, {{ $programas_cancelados }}], // Valores de ingresos
+                backgroundColor: ['#4CAF50'],
+                borderColor: ['#596475'],
                 borderWidth: 1
             }]
         },
@@ -203,7 +207,7 @@
         }
     });
 
-    // Gráfico de Gastos Mensuales
+/*     // Gráfico de Gastos Mensuales
     const ctxExpense = document.getElementById('expenseChart').getContext('2d');
     const expenseChart = new Chart(ctxExpense, {
         type: 'bar',
@@ -212,8 +216,8 @@
             datasets: [{
                 label: 'Modalidad',
                 data: [0, 0], // Valores de gastos
-                backgroundColor: 'rgba(255, 99, 132, 1)', // Rojo sólido
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: ['#1E96FC'],
+                borderColor: ['#596475'],
                 borderWidth: 1
             }]
         },
@@ -225,11 +229,26 @@
                 }
             }
         }
-    });
+    }); */
 </script>
 
 <script>
     document.getElementById('search').addEventListener('click', function () {
+        // Guarda la posición de scroll actual
+        localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Restaura la posición de scroll después de recargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('scrollPosition') !== null) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            localStorage.removeItem('scrollPosition'); // Elimina el valor después de restaurarlo
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('lista').addEventListener('click', function () {
         // Guarda la posición de scroll actual
         localStorage.setItem('scrollPosition', window.scrollY);
     });

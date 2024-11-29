@@ -7,6 +7,7 @@ use App\Http\Controllers\Programa\ProgramaController;
 use App\Http\Requests\Programa\ActividadesRequest;
 use App\Http\Requests\Programa\ProgramaRequest;
 use App\Models\Caja\Presupuesto;
+use App\Models\ProgramasEducativos\InformesSeguimientos;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
 use App\Models\Registros\RegistroActividades;
 use Illuminate\Container\Attributes\Auth;
@@ -14,6 +15,68 @@ use Illuminate\Http\Request;
 
 class DashboardVolunController extends Controller
 {
+    private $colores = [
+        'peach' => [
+            'border' => 'border-rose-200',
+            'bg' => 'bg-rose-200',
+            'hover' => 'hover:bg-rose-300',
+            'text' => 'text-rose-700',
+        ],
+        'sky' => [
+            'border' => 'border-sky-200',
+            'bg' => 'bg-sky-200',
+            'hover' => 'hover:bg-sky-300',
+            'text' => 'text-sky-700',
+        ],
+        'mint' => [
+            'border' => 'border-green-200',
+            'bg' => 'bg-green-200',
+            'hover' => 'hover:bg-green-300',
+            'text' => 'text-green-700',
+        ],
+        'lavender' => [
+            'border' => 'border-purple-200',
+            'bg' => 'bg-purple-200',
+            'hover' => 'hover:bg-purple-300',
+            'text' => 'text-purple-700',
+        ],
+        'butter' => [
+            'border' => 'border-yellow-200',
+            'bg' => 'bg-yellow-200',
+            'hover' => 'hover:bg-yellow-300',
+            'text' => 'text-yellow-700',
+        ],
+        'aqua' => [
+            'border' => 'border-teal-200',
+            'bg' => 'bg-teal-200',
+            'hover' => 'hover:bg-teal-300',
+            'text' => 'text-teal-700',
+        ],
+        'coral' => [
+            'border' => 'border-orange-200',
+            'bg' => 'bg-orange-200',
+            'hover' => 'hover:bg-orange-300',
+            'text' => 'text-orange-700',
+        ],
+        'blush' => [
+            'border' => 'border-pink-200',
+            'bg' => 'bg-pink-200',
+            'hover' => 'hover:bg-pink-300',
+            'text' => 'text-pink-700',
+        ],
+        'ice' => [
+            'border' => 'border-cyan-200',
+            'bg' => 'bg-cyan-200',
+            'hover' => 'hover:bg-cyan-300',
+            'text' => 'text-cyan-700',
+        ],
+        'cream' => [
+            'border' => 'border-amber-200',
+            'bg' => 'bg-amber-200',
+            'hover' => 'hover:bg-amber-300',
+            'text' => 'text-amber-700',
+        ],
+    ];
     public function home()
     {
 
@@ -25,21 +88,20 @@ class DashboardVolunController extends Controller
     {
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
-
         } else {
             $seccion = $request->seccion;
         }
 
-        if($seccion == 1){
-
+        if ($seccion == 1) {
+            $colores = $this->colores;
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $misProgramas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario);
+            $misProgramas = ProgramaEducativo::getProgramasForVoluntario($idVoluntario);
 
-            return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'misProgramas']));
+            return view('Dashboard.Voluntario.mis_clases', compact('seccion', 'misProgramas', 'colores'));
         } else {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntarioTable($idVoluntario,5);
+            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntario($idVoluntario, 5);
 
             return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'claFinalizadas']));
         }
@@ -53,14 +115,14 @@ class DashboardVolunController extends Controller
         if (empty($request->seccion)) {
             $seccion = $request->get('seccion', 1);
 
-            
+
 
             return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades']));
         } else {
             $seccion = $request->seccion;
 
             $misSolicitudes = ProgramaEducativo::getProgramasForVoluntarioTable($id_voluntario)->paginate(10);
-
+            // dd($misSolicitudes);
             return view('Dashboard.Voluntario.nueva_clase', compact(['seccion', 'actividades', 'misSolicitudes']));
         }
     }
@@ -212,13 +274,57 @@ class DashboardVolunController extends Controller
         );
     }
 
-    function getInformacionClase(Request $request){
+    public function getInformacionClase(Request $request)
+    {
+        $id_voluntario = Auth()->user()->trabajador->voluntario->id;
+        $idClase = $request->id_clase;
+        $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase);
+        // dd($info);
+        return response()->json(['data' => json_encode($info)]);
+    }
 
-        // dd($request);
+    public function terminarClase(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'id_programa_educativo' => 'required|integer',
+            'id_trabajador' => 'required|integer',
+            'fecha_informe' => 'required|date',
+            'resumen_informe' => 'required|string',
+            'cumplimiento_indicadores' => 'required|string',
+            'desafios_encontrados' => 'required|string',
+            'recomendaciones' => 'required|string',
+            'comentarios_adicionales' => 'nullable|string', // Opcional
+            'descripcion_reporte' => 'required|string',
+        ]);
+
+        // Crear el registro en la base de datos
+        $reporte = InformesSeguimientos::create($validatedData);
+
+        // Cambiar el estatus del programa si el informe se creó correctamente
+        if ($reporte) {
+            // Buscar el programa educativo asociado
+            $programa = ProgramaEducativo::find($validatedData['id_programa_educativo']);
+            if ($programa) {
+                // Actualizar el estatus del programa
+                $programa->estado = 5; // Cambia el valor según tu lógica
+                $programa->save(); // Guardar los cambios
+                $data = 'ok';
+            } else {
+                $data = 'error_programa_no_encontrado';
+            }
+        } else {
+            $data = 'error';
+        }
+        return response()->json(['data' => json_encode($data)]);
+    }
+
+    public function getInformacionClaseTerminada(Request $request)
+    {
         $id_voluntario = Auth()->user()->trabajador->voluntario->id;
         $idClase = $request->id_clase;
 
-        $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase);
+        $info = ProgramaEducativo::obtenerDetallesClase($id_voluntario, $idClase, 5);
         // dd($info);
         return response()->json(['data' => json_encode($info)]);
     }

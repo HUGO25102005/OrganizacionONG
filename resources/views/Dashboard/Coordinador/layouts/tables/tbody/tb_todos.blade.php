@@ -1,6 +1,6 @@
 @foreach ($beneficiariosearch as $beneficiario)
         <tr class="border-b border-gray-300">
-            <td class="py-3 px-4 text-center">{{ $beneficiario->id }}</td>
+            <td class="py-3 px-4 text-center">{{ $loop->iteration }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->getFullName() }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->user->email }}</td>
             <td class="py-3 px-4 text-center">{{ $beneficiario->getNivelEducativo() }}</td>
@@ -102,7 +102,7 @@
                             </section>
                         
                             <!-- Botón de cerrar modal alineado a la izquierda -->
-                            <div class="flex justify-start mt-6">
+                            <div class="flex justify-end mt-6">
                                 <button @click="open = false" type="button"
                                     class="flex items-center space-x-2 bg-[#2A334B] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
                                     <i class='bx bx-x text-xl'></i>
@@ -198,7 +198,7 @@
                             </section>
                         
                             <!-- Botón de cerrar modal alineado a la izquierda -->
-                            <div class="flex justify-start mt-6">
+                            <div class="flex justify-end mt-6">
                                 <button @click="open = false" type="button"
                                     class="flex items-center space-x-2 bg-[#2A334B] text-white py-2 px-6 rounded-full hover:bg-red-600 transition duration-200">
                                     <i class='bx bx-x text-xl'></i>

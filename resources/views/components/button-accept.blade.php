@@ -1,8 +1,8 @@
 <div x-data="{ open: false }">
     <!-- Botón de eliminación que abre el modal -->
-    <button @click="open = true" class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
+    <button @click="open = true" class="bg-green-100 p-2 ml-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300 hover:text-white">
         <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer'
-                                    title="Estado: activo"></i>
+                                    title="Aceptar/Activar"></i>
     </button>
 
         <!-- Modal de confirmación -->
@@ -33,7 +33,7 @@
                         <!-- Botón para confirmar eliminación -->
                         <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-full flex items-center">
                             <i class='bx bx-check-circle'></i>
-                            <span>Confirmar</span>
+                            <span>&nbsp;Confirmar</span>
                         </button>
                     </div>
                 </form>

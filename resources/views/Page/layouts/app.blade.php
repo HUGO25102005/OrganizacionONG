@@ -12,6 +12,8 @@
 
     <!-- Scripts -->
     @yield('importaciones')
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/dashboard.css'])
 
     <title>Pi</title>
 </head>
@@ -36,3 +38,4 @@
     </section>
 
 </body>
+

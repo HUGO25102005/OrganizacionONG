@@ -17,34 +17,28 @@
                     <td class="px-6 py-4">{{ $soli->nombre_programa }}</td>
                     <td class="px-6 py-4">{{ $soli->created_at->format('d-m-y') }}</td>
                     <td class="px-6 py-4">
-                        @switch($soli->tiene_aprobacion_contenido)
-                            @case(0)
-                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">En revision</span>
-                            @break
 
-                            @case(1)
-                                <span
-                                    class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aprobado</span>
-                            @break
+                        @if ($soli->aprobacionContenido == null)
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">En
+                                revisión</span>
+                        @elseif ($soli->aprobacionContenido)
+                            <span
+                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aprobado</span>
+                        @endif
 
-                            @default
-                        @endswitch
+
 
                     </td>
                     <td class="px-6 py-4">
-                        @switch($soli->tiene_aprobacion_presupuesto)
-                            @case(0)
-                                <span
-                                    class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
-                            @break
 
-                            @case(1)
-                                <span
-                                    class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
-                            @break
+                        @if ($soli->presupuesto->aprobacionPresupuestos == null)
+                            <span
+                                class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
+                        @else
+                            <span
+                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
+                        @endif
 
-                            @default
-                        @endswitch
 
                     </td>
                     <td class="px-6 py-4">
@@ -70,6 +64,14 @@
             @endforeach
         </tbody>
     </table>
+    <div class="fixed bottom-5 right-5 z-100">
+        <a href="{{ route('vol.chat') }}">
+            <button
+                class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                <i class='bx bx-message-square-dots text-2xl'></i>
+            </button>
+        </a>
+    </div>
 </div>
 
 {{ $misSolicitudes->links() }}

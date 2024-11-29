@@ -40,5 +40,4 @@
         @default
     @endswitch
 
-
 </x-app-layout>

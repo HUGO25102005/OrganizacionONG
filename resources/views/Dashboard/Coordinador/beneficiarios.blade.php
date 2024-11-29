@@ -29,5 +29,15 @@
     @else
         @include('Dashboard.Coordinador.layouts.sections.usuarios-solicitudes')
     @endif
+
+    <div class="fixed bottom-5 right-5 z-100">
+        <a href="{{ route('coordinador.chat') }}">
+            <button 
+                class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                <i class='bx bx-message-square-dots text-2xl'></i>
+            </button>
+        </a>
+    </div>
 </div>
+
 </x-app-layout>
