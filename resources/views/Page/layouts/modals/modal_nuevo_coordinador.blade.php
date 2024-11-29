@@ -134,6 +134,7 @@
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         required>
                                 </div>
+                                
                                 <input type="hidden" id="password" name="password" value="12345678">
                                 <input type="hidden" id="password_confirmation" name="password_confirmation" value="12345678">
                             </div>
