@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
 use App\Http\Controllers\Donaciones\RecaudacionController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Page\ColaboraController;
 use App\Http\Controllers\Page\ConocenosController;
 use App\Http\Controllers\Page\DonarController;
@@ -33,12 +34,14 @@ use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckCoordinador;
 use App\Http\Middleware\CheckVoluntario;
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 })->middleware(AuthSessionActive::class)->name('login');
 
 //*Rutas de perfil existentes de Breeze
 
+
+Route::get('/enviar-correo', [MailController::class, 'enviarCorreo']);
 
 //TODO: RUTAS DE DASHBOARDS
 Route::middleware('auth')->group(function () {
@@ -60,7 +63,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/donaciones/convocatorias/desactivar', [ConvocatoriaController::class, 'desactivar'])->name('convocatoria.desactivar');
         Route::post('/donaciones/convocatorias/recaudacion', [RecaudacionController::class, 'store'])->name('recaudacion.store');
 
-        Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
         // Route::get('/programas', [DashboardAdminController::class, 'programas'])->name('admin.programas');
 
 
@@ -72,6 +74,12 @@ Route::middleware('auth')->group(function () {
 
         Route::put('/usuarios/trabajadorDesactivar', [TrabajadorController::class, 'desactivarTrabajador'])->name('admin.desactivar');
         Route::put('/usuarios/trabajadorAceptar', [TrabajadorController::class, 'aceptarSolicitudTrabajador'])->name('admin.aceptarSolicitudTrabajador');
+
+        // RECURSOS --------------------------------------------------------------------------------------------------------------------------------------
+        Route::get('/recursos', [DashboardAdminController::class, 'recursos'])->name('admin.recursos');
+        Route::get('/recursos/tabla/actualizar/soli', [DashboardAdminController::class, 'actualizarSolicitudes'])->name('tabla.actuSoli');
+        Route::put('/recursos/tabla/actualizar/soli/aceptar', [DashboardAdminController::class, 'aceptarRecurso'])->name('tabla.aceptarRecurso');
+        Route::put('/recursos/tabla/actualizar/soli/rechazar', [DashboardAdminController::class, 'rechazarRecurso'])->name('tabla.rechazarRecurso');
 
 
         // Route::post('/usuarios', [UserController::class, 'store'])->name('user.store');
@@ -145,7 +153,13 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckVoluntario::class])->prefix('dashboard/voluntario')->group(function () {
         Route::get('/home', [DashboardVolunController::class, 'home'])->name('vol.home');
         Route::get('/mis-clases', [DashboardVolunController::class, 'misClases'])->name('vol.misClases');
+        Route::post('/mis-clases/detalles-clase', [DashboardVolunController::class, 'getInformacionClase'])->name('vol.detallesClaseV');
+        Route::post('/mis-clases/detalles-clase/terminar', [DashboardVolunController::class, 'terminarClase'])->name('vol.terminarClase');
+        Route::post('/mis-clases/detalles-clase/terminada', [DashboardVolunController::class, 'getInformacionClaseTerminada'])->name('vol.terminadaClase');
         Route::get('/nueva-clase', [DashboardVolunController::class, 'nuevaClase'])->name('vol.nuevaClase');
+        Route::post('/nueva-clase/solicitud/informacion', [DashboardVolunController::class, 'storeProgramaEducativo'])->name('vol.storeProgramaEducativo');
+        Route::post('/nueva-clase/solicitud/actividades', [DashboardVolunController::class, 'storeActividades'])->name('vol.storeActividades');
+        Route::post('/nueva-clase/solicitud/actividades/cargar  ', [DashboardVolunController::class, 'cargarActividadesEnTabla'])->name('vol.cargarActividadesEnTabla');
         // Rutas del chat
         Route::get('/chat', [MessagesController::class, 'index'])->name('vol.chat');
         Route::post('/chat/idInfo', [MessagesController::class, 'idFetchData'])->name('vol.chat.idFetchData');
@@ -173,6 +187,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware([CheckBeneficiario::class])->prefix('dashboard/beneficiario')->group(function () {
         Route::get('/home', [DashboardBeneficiarioController::class, 'home'])->name('ben.home');
         Route::get('/mis-clases', [DashboardBeneficiarioController::class, 'misClases'])->name('ben.misClases');
+        Route::post('/mis-clases/oferta/detalles', [DashboardBeneficiarioController::class, 'getDetallesClase'])->name('ben.detallesClase');
+        Route::post('/mis-clases/inscrito/detalles', [DashboardBeneficiarioController::class, 'getDetallesClase'])->name('ben.detallesClaseInscrito');
+        Route::post('/mis-clases/oferta/inscripcion', [DashboardBeneficiarioController::class, 'inscribirmeClase'])->name('ben.inscribirmeClase');
         Route::get('/nueva-clase', [DashboardBeneficiarioController::class, 'nuevaClase'])->name('ben.nuevaClase');
 
         // Rutas del chat
@@ -201,28 +218,24 @@ Route::middleware('auth')->group(function () {
 });
 
 //TODO: RUTAS DE LINING PAGE
-Route::group(['prefix' => 'page'], function () {
+Route::group(['prefix' => '/'], function () {
 
     Route::resources([
 
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
+        'donar' => DonarController::class,
     ]);
 
     Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
     });
-    Route::prefix('donar')->group(function () {
-        Route::get('/', [DonarController::class, 'index'])->name('donar.index');
-        Route::post('/paypal/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('donar.procesarDonacion');
-
-    });
 
     Route::prefix('colabora')->group(function () {
         Route::get('/', [ColaboraController::class, 'index'])->name('colabora.index');
         Route::post('/solicitudes/voluntario', [ColaboraController::class, 'storeVoluntario'])->name('vol.store');
-        Route::post('/solicitudes/beneficiario', [ColaboraController::class, 'storeBeneficiario'])->name('beneficiario.store');
-        Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coordinador.store');
+        Route::post('/solicitudes/beneficiarios', [ColaboraController::class, 'storeBeneficiario'])->name('ben.store');
+        Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coord.store');
     });
 
     Route::get('/', function () {
@@ -238,9 +251,9 @@ Route::group(['prefix' => 'pdf'], function () {
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });
 
-// Route::group(['prefix' => 'paypal'], function () {
-//     Route::post('/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('paypal.procesarDonacion');
-// });
+Route::group(['prefix' => 'paypal'], function () {
+    Route::post('/procesar-donacion', [DonacionController::class, 'procesarDonacion'])->name('paypal.procesarDonacion');
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';

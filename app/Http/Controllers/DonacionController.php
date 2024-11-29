@@ -10,7 +10,7 @@ class DonacionController extends Controller
 {
     public function procesarDonacion(Request $request)
     {
-        dd($request->all());
+
         try {
             // Validar los datos recibidos
             $request->validate([

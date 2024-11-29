@@ -22,6 +22,7 @@ class Presupuesto extends Model
     //     return $this->hasMany(ProgramaEducativo::class, 'id_presupuesto');
     // }
 
+
     public function aprobacionPresupuestos()
     {
         return $this->hasMany(AprobacionPresupuesto::class, 'id_presupuesto');

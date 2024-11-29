@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Models\Caja\AprobacionPresupuesto;
 use App\Models\Caja\CajaFondo;
 use App\Models\Caja\Presupuesto;
 use App\Models\Donaciones\Convocatoria;
@@ -36,23 +37,47 @@ class DashboardAdminController extends Controller
     {
 
         $total_ingresos = Donacion::getMontoTotal();
-        $ultimas_donaciones = Donacion::all();
-        $programas_activos = ProgramaEducativo::getTotalProgramas(4);
-        $informes_seguimiento = InformesSeguimientos::getTotalInformesSeguimineto();
-        $actividades_registradas = RegistroActividades::getTotalActividades();
-        $total_beneficiarios = Beneficiario::getTotalBeneficiarios();
+        $monto_disponible = CajaFondo::getMontoDisponible();
+
+        $monto_usado = Presupuesto::getMontoTotal();
+
+        $ultimas_donaciones = Donacion::latest()->take(5)->get();
+
+        $convocatorias = Convocatoria::where('estado', '=', 1)->latest()->take(5)->get();
+        $convocatoriasActivas = Convocatoria::getTotalConvocatoriasPorEstado(1);
+        $convocatoriasFinalizadas = Convocatoria::getTotalConvocatoriasPorEstado(2);
+        $convocatoriasCanceladas = Convocatoria::getTotalConvocatoriasPorEstado(3);
+
+        $donacionesPorMes = Donacion::getDonacionesPorMes();
+
+        // Crear etiquetas y datos para el gráfico
+        $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        $labels = [];
+        $data = [];
+
+        foreach ($donacionesPorMes as $donacion) {
+            $labels[] = $meses[$donacion['mes'] - 1] . ' ' . $donacion['anio'];
+            $data[] = $donacion['total'];
+        }
+
 
         session(['name' => auth()->user()->name,]);
 
         return view(
             'Dashboard.Admin.panel-control',
             compact(
+                'monto_disponible',
                 'total_ingresos',
+                'monto_usado',
                 'ultimas_donaciones',
-                'programas_activos',
-                'informes_seguimiento',
-                'actividades_registradas',
-                'total_beneficiarios',
+                'convocatorias',
+                'convocatoriasActivas',
+                'convocatoriasFinalizadas',
+                'convocatoriasCanceladas',
+                'donacionesPorMes',
+                'labels',
+                'data'
             )
         );
     }
@@ -135,22 +160,23 @@ class DashboardAdminController extends Controller
         } else {
             $seccion = $request->seccion;
         }
-        if ($seccion == 1) {
-            $monto_total_donaciones = Donacion::getMontoTotal();
-            $total_donaciones = Donacion::all();
-            $total_donaciones_semana = Donacion::getTotalMontoSemana();
 
+        if ($seccion == 1) {
+            // $monto_total_donaciones = Donacion::getMontoTotal();
+            // $total_donaciones = Donacion::all();
+            // $total_donaciones_semana = Donacion::getTotalMontoSemana();
+            $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
+
+            // dd($soliRecursos);
             return view(
                 'Dashboard.Admin.recursos',
                 compact(
                     [
-                        'monto_total_donaciones',
-                        'total_donaciones',
-                        'total_donaciones_semana',
+                        'soliRecursos',
                         'seccion'
                     ]
                 )
-            );
+            )->render();
         } else {
 
             $search = $request->input('search');
@@ -177,6 +203,34 @@ class DashboardAdminController extends Controller
 
             return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
         }
+    }
+    public function actualizarSolicitudes(Request $request)
+    {
+
+        // Inicia la consulta base
+        $query = ProgramaEducativo::getSoliRecursos();
+
+        // Si hay un término de búsqueda, aplica los filtros
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query = $query->where(function ($q) use ($search) {
+                $q->where('nombre_programa', 'like', "%{$search}%")
+                    ->orWhereHas('voluntario.trabajador.user', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhere('beneficiarios_estimados', 'like', "%{$search}%")
+                    ->orWhereHas('presupuesto', function ($subQuery) use ($search) {
+                        $subQuery->where('monto', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        // Paginar los resultados
+        $soliRecursos = $query->paginate(10);
+
+        $html = view('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes', compact(['soliRecursos']))->render();
+
+        return response()->json(['html' => $html]);
     }
     public function usuarios(Request $request)
     {
@@ -408,5 +462,44 @@ class DashboardAdminController extends Controller
 
             return view('Dashboard.Admin.usuarios', compact(['rol', 'seccion', 'fecha_inicio', 'fecha_fin', 'estado', 'datos']));
         }
+    }
+
+    public function aceptarRecurso(Request $request)
+    {
+        $idAdmin = auth()->user()->trabajador->administrador->id;
+        $idPresupuesto = $request->id;
+        // Validar que el método sea PUT
+        if ($request->isMethod('put')) {
+            // Procesar la acción
+            AprobacionPresupuesto::updateOrCreate(
+                ['id_presupuesto' => $idPresupuesto],
+                ['id_administrador' => $idAdmin, 'si_no' => 1]
+            );
+
+            // Redirigir para evitar duplicación al recargar
+            return redirect()->route('admin.recursos')->with('success', 'Recurso aceptado con éxito.');
+        }
+
+        // Si no es PUT, redirige con un mensaje de error
+        return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
+    }
+    public function rechazarRecurso(Request $request)
+    {
+        $idAdmin = auth()->user()->trabajador->administrador->id;
+        $idPresupuesto = $request->id;
+        // Validar que el método sea PUT
+        if ($request->isMethod('put')) {
+            // Procesar la acción
+            AprobacionPresupuesto::updateOrCreate(
+                ['id_presupuesto' => $idPresupuesto],
+                ['id_administrador' => $idAdmin, 'si_no' => 0]
+            );
+
+            // Redirigir para evitar duplicación al recargar
+            return redirect()->route('admin.recursos')->with('warning', 'Recurso rechazado con éxito.');
+        }
+
+        // Si no es PUT, redirige con un mensaje de error
+        return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
     }
 }

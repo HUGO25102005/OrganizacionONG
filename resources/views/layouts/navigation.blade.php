@@ -3,13 +3,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+                
                 @switch(session('rol'))
                     @case('Administrador')
                         @include('layouts.sections.nav_admin')
-                        @break
+                    @break
+
                     @case('Coordinador')
                         @include('layouts.sections.nav_coordinador')
-                        @break
+                    @break
+
                     @case('Voluntario')
                         @include('layouts.sections.nav_voluntario')
                     @break
@@ -83,18 +86,15 @@
                 @break
 
                 @case('Coordinador')
-                    <x-responsive-nav-link :href="route('coordinador.home')" :active="request()->routeIs('coordinador.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_coordinador')
                 @break
 
                 @case('Voluntario')
-                    <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                        {{ __('Home') }}
-                    </x-responsive-nav-link>
+                    @include('layouts.sections.nav_responsive_voluntario')
                 @break
 
                 @default
+                    @include('layouts.sections.nav_responsive_beneficiario')
             @endswitch
 
         </div>

@@ -165,17 +165,14 @@
     </div>
 
     <!-- Contenedor principal -->
-    <div class="flex flex-wrap gap-[20px]">
-        <!-- Columna izquierda -->
+    <div class="flex flex-col lg:flex-row gap-[20px]">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-[20px] flex-1">
-            <!-- Resumen de la campaña -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Campañas Activas</h3>
                 <p class="text-4xl font-bold">{{ $convocatoriasActivas }}</p>
                 <p class="text-sm text-gray-500">Total en curso actualmente</p>
             </div>
 
-            <!-- Progreso de la recaudación -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Artículos Recaudados</h3>
                 <p class="text-4xl font-bold">{{ $totProductRecaudados }}</p>
@@ -186,14 +183,12 @@
                 </div>
             </div>
 
-            <!-- Campañas finalizadas -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Campañas Finalizadas</h3>
                 <p class="text-4xl font-bold">{{ $convocatoriasFinalizadas }}</p>
                 <p class="text-sm text-gray-500">Desde el inicio del año</p>
             </div>
 
-            <!-- Total de voluntarios -->
             <div class="bg-white p-[20px] rounded-[20px] shadow-md">
                 <h3 class="text-lg font-semibold mb-[10px]">Total de donaciones</h3>
                 <p class="text-4xl font-bold">{{ $totRegisRecau }}</p>
@@ -202,9 +197,9 @@
         </div>
 
         <!-- Gráfica -->
-        <div class="bg-white p-[20px] rounded-[20px] shadow-md flex-1 max-w-[600px]">
+        <div class="bg-white p-[20px] rounded-[20px] shadow-md flex-1 w-full lg:max-w-[600px]">
             <h3 class="text-lg font-semibold mb-[10px]">Campañas</h3>
-            <canvas id="campaignChart" class="w-full h-[400px]"></canvas>
+            <canvas id="campaignChart" class="w-full h-[300px] sm:h-[400px]"></canvas>
         </div>
     </div>
 
@@ -273,7 +268,6 @@
                     <th class="p-[15px] ">Acciones</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach ($convocatorias as $conv)
                     <tr class="border-b text-center">
@@ -366,7 +360,6 @@
 </div>
 {{ $convocatorias->links() }}
 
-<!-- Script para la gráfica -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('campaignChart').getContext('2d');
@@ -384,6 +377,7 @@
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 y: {
                     beginAtZero: true
@@ -403,4 +397,3 @@
         document.getElementById(id).submit();
     }
 </script>
-

@@ -18,11 +18,17 @@ class RegistroActividades extends Model
     protected $fillable = [
         'id_programa',
         'id_voluntario',
+        'nombre',
         'fecha_actividad',
         'descripcion_actividad',
         'resultados_actividad',
         'comentarios_adicionales',
     ];
+
+    public static function getActividadesByProgama($idProgama){
+        return self::where('id_programa',$idProgama)->get();
+    }
+
 
     // Define las relaciones con otros modelos
     public function programa()

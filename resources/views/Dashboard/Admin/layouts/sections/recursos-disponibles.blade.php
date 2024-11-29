@@ -1,11 +1,11 @@
 <div class="bg-[#F6F8FF] w-full max-w-[1450px] h-auto my-[20px] p-[20px] shadow-lg rounded-[30px]">
-    
+
     <!-- Sección: Recursos disponibles -->
-    <div class="mb-6">
-        <h2 class="text-2xl font-bold mb-4">Recursos disponibles</h2>
-    
-        <!-- Tarjetas de recursos disponibles -->
-        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {{-- <div class="mb-6"> --}}
+    {{-- <h2 class="text-2xl font-bold mb-4">Recursos disponibles</h2> --}}
+
+    <!-- Tarjetas de recursos disponibles -->
+    {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Tarjeta 1 -->
             <div class="bg-white p-6 pl-10 rounded-lg shadow-md border-l-4 border-yellow-500">
                 <h3 class="text-lg font-bold mb-2">Programa A</h3>
@@ -34,11 +34,11 @@
                 <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">$100,000</span></p>
             </div>
         </div> --}}
-    </div>
-    
+    {{-- </div> --}}
+
 
     <!-- Sección: Visualización de gráficos de flujo de caja -->
-    <div class="mb-6">
+    {{-- <div class="mb-6">
         <h2 class="text-2xl font-bold mb-4">Visualización de gráficos de flujo de caja</h2>
         <p>Gráficos comparativos entre ingresos y gastos mensuales o anuales.</p>
         
@@ -54,44 +54,27 @@
                 <canvas id="expenseChart" class="w-full h-full"></canvas>
             </div>
         </div>
-    </div>
-    
+    </div> --}}
+
 
     <!-- Sección: Asignación de recursos -->
-    <div class="mt-[30px] overflow-x-auto">
-        <h3 class="text-xl font-semibold mb-[10px]">Asignación de recursos</h3>
-        <table class="w-full bg-white rounded-[20px] shadow-md min-w-[600px]">
-            <thead>
-                <tr class="bg-[#BBDEFB] text-center">
-                    <th class="p-[15px] ">Nombre del programa</th>
-                    <th class="p-[15px] ">Impartidor</th>
-                    <th class="p-[15px] ">Total de beneficiarios inscritos</th>
-                    <th class="p-[15px] ">Recursos asignados</th>
-                    <th class="p-[15px] ">Acciones</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr class="border-b text-center">
-                    <td class="p-[15px] ">Ayuda para Escuelas</td>
-                    <td class="p-[15px] ">Ernesto Jimenez</td>
-                    <td class="p-[15px] ">100</td>
-                    <td class="p-[15px] ">$10,000</td>
-                    <td class="p-[15px] flex justify-center space-x-4">
-                        <span class="bg-green-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-green-300">
-                            <i class='bx bx-check-circle text-2xl text-green-500 cursor-pointer' title="Aprobar"></i>
-                        </span>
-                        <span class="bg-red-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-red-300">
-                            <i class='bx bx-x-circle text-2xl text-red-500 cursor-pointer' title="Rechazar"></i>
-                        </span>
-                        <span class="bg-blue-100 p-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-300">
-                            <i class='bx bx-show text-2xl text-gray-700 cursor-pointer' title="Visualizar"></i>
-                        </span>
-                    </td>                        
-                </tr>
-            </tbody>                     
-            
-        </table>            
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-center font-semibold text-2xl md:text-3xl">Solicitudes de Recursos</h3>
+            <form action="{{ route('tabla.actuSoli') }}" method="GET" id="search-form" class="flex items-center">
+                @csrf
+                <div class="relative">
+                    <input type="text" name="search"
+                        placeholder="Buscar por nombre del programa, impartido por, beneficiarios o recursos"
+                        class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
+                </div>
+            </form>
+        </div>
+
+
+        @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')
+
     </div>
 
     <div class="fixed bottom-5 right-5 z-100">
@@ -107,6 +90,18 @@
 <!-- Script para generar los gráficos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTableSolicitudes();
+    });
+    document.getElementById('search-form').addEventListener('input', () => {
+        event.preventDefault(); // Evitar el envío del formulario de manera tradicional
+        updateTableSolicitudes();
+    });
+    document.getElementById('search-form').addEventListener('submit', (event) => {
+        event.preventDefault(); // Previene el envío tradicional del formulario
+        updateTableSolicitudes(); // Llama a la función para actualizar la tabla
+    });
+
     // Gráfico de Ingresos Mensuales
     const ctxIncome = document.getElementById('incomeChart').getContext('2d');
     const incomeChart = new Chart(ctxIncome, {
@@ -155,3 +150,5 @@
         }
     });
 </script>
+
+@vite(['resources/js/recursos-disponibles.js'])
