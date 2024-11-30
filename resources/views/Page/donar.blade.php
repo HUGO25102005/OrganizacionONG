@@ -53,47 +53,52 @@
             @endforeach
         </div>
     </section>
-<style>#slider {
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
+    <style>#slider {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
 
-.slider-item {
-    flex: 0 0 auto;
-}
+    .slider-item {
+        flex: 0 0 auto;
+    }
 
-.openModalBtn {
-    transition: background-color 0.3s ease;
-}
+    .openModalBtn {
+        transition: background-color 0.3s ease;
+    }
 
-.openModalBtn:hover {
-    background-color: #405584;
-}
-</style>    
+    .openModalBtn:hover {
+        background-color: #405584;
+    }
+    </style>    
 
 
-<section class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto lg:h-[65vh] px-6 lg:px-[10%] py-8 relative">
-    <!-- Imagen -->
-    <div class="relative max-w-full lg:max-w-[40%] lg:absolute lg:bottom-0 lg:left-0">
-        <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop"
-            class="w-full h-auto mt-20 rounded-lg lg:pl-[120px] mb-6 lg:mb-0">
-    </div>
-    <!-- Contenido -->
-    <div class="w-full lg:w-[50%] flex flex-col justify-center text-left">
-        <h1 class="text-3xl lg:text-4xl font-bold text-slate-700 mb-4">
-            Ayuda a promover la educación y la superación.
-        </h1>
-        <p class="text-base lg:text-lg text-slate-700 text-justify leading-relaxed mb-6">
-            Las donaciones permitirían asegurar el suministro de materiales esenciales y facilitar la implementación de
-            talleres y capacitaciones educativas.
-        </p>
-        <!-- Botón de donar con PayPal -->
-        <div id="donate-button-container" class="flex justify-center lg:justify-start relative">
-            <div id="donate-button"></div>
+    <section class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto lg:h-[65vh] px-6 lg:px-[10%] py-8 relative">
+        <!-- Imagen -->
+        <div class="relative max-w-full lg:max-w-[40%] lg:absolute lg:bottom-0 lg:left-0">
+            <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop"
+                class="w-full h-auto mt-20 rounded-lg lg:pl-[120px] mb-6 lg:mb-0">
         </div>
-    </div>
-</section>
+        <!-- Contenido -->
+        <div class="w-full lg:w-[50%] flex flex-col justify-center text-left">
+            <h1 class="text-3xl lg:text-4xl font-bold text-slate-700 mb-4">
+                Ayuda a promover la educación y la superación.
+            </h1>
+            <p class="text-base lg:text-lg text-slate-700 text-justify leading-relaxed mb-6">
+                Las donaciones permitirían asegurar el suministro de materiales esenciales y facilitar la implementación de
+                talleres y capacitaciones educativas.
+            </p>
+            <!-- Botón de donar con PayPal -->
+            <div id="donate-button-container" class="flex justify-center lg:justify-start relative">
+                <div id="donate-button"></div>
+            </div>
+        </div>
+    </section>
 
+
+    <button id="scrollButton"
+        class="fixed bottom-4 right-4 z-10 items-center justify-center bg-white text-black rounded-full text-lg font-semibold w-14 h-14 cursor-pointer transition-all duration-300 ease-in-out border border-black shadow-none hover:-translate-y-1 hover:-translate-x-0.5 hover:shadow-[2px_5px_0_0_black] active:translate-y-0.5 active:translate-x-0.25 active:shadow-none">
+        <i id="scrollIcon" class='bx bxs-chevron-down'></i>
+    </button>
 <!-- Script de PayPal -->
 <!--<a href="donar.html"><img class="donate-img" src="./img/donar.png" alt="Donar"></a>-->
     {{-- <div id="donate-button-container"></div>

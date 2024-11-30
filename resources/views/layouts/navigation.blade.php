@@ -43,6 +43,10 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <a href="{{ route('conocenos.index') }}"
+                            class='block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
+                            Página principal
+                        </a>
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>

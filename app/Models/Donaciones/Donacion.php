@@ -35,6 +35,12 @@ class Donacion extends Model
     {
         return self::sum('monto');
     }
+
+    public static function getDonacionesTotal()
+    {
+        return self::count('monto');
+    }
+
     public static function getTotalRegistros()
     {
         return self::count();

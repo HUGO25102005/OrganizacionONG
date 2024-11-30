@@ -217,8 +217,9 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
 //TODO: RUTAS DE LINING PAGE
-Route::group(['prefix' => '/'], function () {
+Route::group(['prefix' => 'page'], function () {
 
     Route::resources([
 
@@ -227,9 +228,9 @@ Route::group(['prefix' => '/'], function () {
         'donar' => DonarController::class,
     ]);
 
-    Route::prefix('conocenos')->group(function () {
+    /* Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
-    });
+    }); */
 
     Route::prefix('colabora')->group(function () {
         Route::get('/', [ColaboraController::class, 'index'])->name('colabora.index');
@@ -238,15 +239,28 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coord.store');
     });
 
+    /* Route::get('/', function () {
+        return redirect()->route('conocenos.index');
+    }); */
+});
+
+Route::group(['prefix' => '/'], function () {
+    
+    Route::prefix('conocenos')->group(function () {
+        Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
+    });
+
     Route::get('/', function () {
         return redirect()->route('conocenos.index');
     });
+
 });
+
 
 Route::group(['prefix' => 'terminosCondiciones'], function () {
-
     Route::get('/', [TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
 });
+
 Route::group(['prefix' => 'pdf'], function () {
     Route::get('/generar', [PDFController::class, 'generarPDF'])->name('pdf.generar');
 });

@@ -13,7 +13,7 @@
     <!-- Scripts -->
     @yield('importaciones')
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/dashboard.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/dashboard.css', 'resources/js/scroll.js'])
 
     <title>Pi</title>
 </head>

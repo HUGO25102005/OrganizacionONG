@@ -200,9 +200,12 @@ background-color: #405584;
       </div>
     </div>
   </section>
+
+  <button id="scrollButton"
+      class="fixed bottom-4 right-4 z-10 items-center justify-center bg-white text-black rounded-full text-lg font-semibold w-14 h-14 cursor-pointer transition-all duration-300 ease-in-out border border-black shadow-none hover:-translate-y-1 hover:-translate-x-0.5 hover:shadow-[2px_5px_0_0_black] active:translate-y-0.5 active:translate-x-0.25 active:shadow-none">
+      <i id="scrollIcon" class='bx bxs-chevron-down'></i>
+  </button>
   
-
-
 <style>/* Estilo inicial de los elementos con animación */
     .scroll-animation {
         opacity: 0;

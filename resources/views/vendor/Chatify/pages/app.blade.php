@@ -1,4 +1,15 @@
 @include('Chatify::layouts.headLinks')
+
+@php
+    $routeName = match(session('rol')) {
+        'Administrador' => 'admin.home',
+        'Coordinador' => 'coordinador.home',
+        'Voluntario' => 'vol.home',
+        'Beneficiario' => 'ben.home',
+        default => 'login', // Ruta por defecto si no hay rol
+    };
+@endphp
+
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
@@ -61,9 +72,10 @@
                     <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                 </div>
                 {{-- header buttons --}}
+
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/"><i class="fas fa-home"></i></a>
+                    <a href="{{ route($routeName) }}"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
                 </nav>
             </nav>
