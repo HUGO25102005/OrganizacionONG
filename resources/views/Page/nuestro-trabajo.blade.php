@@ -56,7 +56,7 @@
 
   
   <!-- Imágenes interactivas -->
-  <section class="w-full h-auto bg-cover bg-center scroll-animation flex overflow-hidden flex-col items-center justify-center">
+  <section class="w-full h-[100vh] bg-cover bg-center scroll-animation flex overflow-hidden flex-col items-center justify-center">
     <div id="slider" class="flex mt-20 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 py-4">
         <!-- Imagen 1 -->
         <div class="slider-item snap-center flex-shrink-0 w-[90%] md:w-[45%] lg:w-[30%] rounded-md bg-gray-100 shadow-lg">
