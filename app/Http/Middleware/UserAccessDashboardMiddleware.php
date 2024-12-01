@@ -18,6 +18,6 @@ class UserAccessDashboardMiddleware
         if(auth()->user()->trabajador()){
             return $next($request);
         }
-        return redirect('/');
+        return redirect('/login');
     }
 }

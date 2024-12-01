@@ -149,7 +149,7 @@
             <!-- Item 1 -->
             <div class="text-white flex flex-col items-center w-1/3">
                 <i class="bx bx-donate-heart mb-2 text-5xl"></i>
-                <h2 class="text-4xl font-bold mt-2 mb-2 transition-all ease-in-out duration-500">$0</h2>
+                <h2 class="text-4xl font-bold mt-2 mb-2 transition-all ease-in-out duration-500">{{ $suma_monto }}</h2>
                 <p class="text-base font-medium md:text-lg leading-6">
                     Hemos recibido de donantes. 
                 </p>
@@ -157,7 +157,7 @@
             <!-- Item 2 -->
             <div class="text-white flex flex-col items-center w-1/3">
                 <i class="bx bx-group mb-2 text-5xl"></i>
-                <h2 class="text-4xl font-bold mt-2 mb-2 transition-all ease-in-out duration-500">0</h2>
+                <h2 class="text-4xl font-bold mt-2 mb-2 transition-all ease-in-out duration-500">{{ $cantidad_donaciones }}</h2>
                 <p class="text-base font-medium md:text-lg leading-6">
                     Donaciones hemos recibido en InspireUp. 
                 </p>
@@ -209,10 +209,7 @@
             </div>
         </div>
     </section>
-    
-    
-    
-   
+
     
     
    
@@ -266,6 +263,11 @@
         </div>
     </section>
     
+    <button id="scrollButton"
+        class="fixed bottom-4 right-4 z-10 items-center justify-center bg-white text-black rounded-full text-lg font-semibold w-14 h-14 cursor-pointer transition-all duration-300 ease-in-out border border-black shadow-none hover:-translate-y-1 hover:-translate-x-0.5 hover:shadow-[2px_5px_0_0_black] active:translate-y-0.5 active:translate-x-0.25 active:shadow-none">
+        <i id="scrollIcon" class='bx bxs-chevron-down'></i>
+    </button>
+
     <style>
         /* Estilo para eliminar el borde azul por defecto */
         button {
@@ -277,7 +279,7 @@
             outline: none; /* Elimina cualquier borde que aparezca al enfocarse */
         }
     </style>
-    
+
     <script>
         // Variables del carrusel
         const track = document.querySelector('.carousel-track');

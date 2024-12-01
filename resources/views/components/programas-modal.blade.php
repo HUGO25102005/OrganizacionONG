@@ -1,7 +1,7 @@
 <div id="{{ $modalId }}" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-white w-[90%] md:w-[50%] lg:w-[50%] p-6 rounded-lg shadow-lg relative h-auto md:h-[95%]">
         
-        <div class="modal-content bg-white p-8 rounded-lg shadow-lg relative flex flex-col gap-8">
+        <div class="modal-content bg-white p-8 rounded-lg shadow-lg relative flex flex-col gap-8 ">
             <!-- Título -->
             <h2 class="text-2xl font-semibold mb-6">{{ $title }}</h2>
         

@@ -11,25 +11,36 @@ use Illuminate\Support\Facades\DB;
 class Donacion extends Model
 {
     use HasFactory;
-    
-    protected $table = 'donacion';
-    protected $fillable = ['id_transaccion', 'payer_id', 'currency', 'monto'];
 
-    /*// Especifica la tabla si el nombre no sigue la convención plural
     protected $table = 'donacion';
+    protected $fillable = ['id_transaccion', 'status', 'currency', 'monto'];
 
-    // Define los atributos que se pueden asignar masivamente
-    protected $fillable = [
-        'id_transaccion',
-        'id_donante',
-        'currency',
-        'monto',
-    ];*/
+    public static function getDonacionesPorMes()
+    {
+        return self::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(monto) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->orderByRaw('YEAR(created_at) DESC, MONTH(created_at) DESC')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'mes' => $item->month,
+                    'anio' => $item->year,
+                    'total' => $item->total,
+                ];
+            })
+            ->toArray();
+    }
 
     public static function getMontoTotal()
     {
         return self::sum('monto');
     }
+
+    public static function getDonacionesTotal()
+    {
+        return self::count('monto');
+    }
+
     public static function getTotalRegistros()
     {
         return self::count();
@@ -57,13 +68,14 @@ class Donacion extends Model
             ->sum('monto');
     }
 
-    public static function getTopDonadores(){
+    public static function getTopDonadores()
+    {
         $topDonantes = Donacion::with('donante')
-                    ->select('id_donante', DB::raw('SUM(monto) as total_donado'))
-                    ->groupBy('id_donante')
-                    ->orderBy('total_donado', 'desc')
-                    ->take(5)
-                    ->get();
+            ->select('id_donante', DB::raw('SUM(monto) as total_donado'))
+            ->groupBy('id_donante')
+            ->orderBy('total_donado', 'desc')
+            ->take(5)
+            ->get();
         return $topDonantes;
     }
 

@@ -23,12 +23,16 @@
         </div>
         <div class="flex justify-center items-center gap-[10px] pb-[10px]"> 
             <h3 class="text-[15px] font-sans font-[100]">By InnovateSoft</h3>
-        </div>
-        
-        
-
+        </div>        
     </div>
 
-    <x-support-widget :roles="['Coordinador']" />
-    
+    <div class="fixed bottom-5 right-5 z-100">
+        <a href="{{ route('admin.chat') }}">
+            <button
+                class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                <i class='bx bx-message-square-dots text-2xl'></i>
+            </button>
+        </a>
+    </div>
+
 </x-app-layout>

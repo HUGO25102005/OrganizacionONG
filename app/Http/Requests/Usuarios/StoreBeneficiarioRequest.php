@@ -35,19 +35,16 @@ class StoreBeneficiarioRequest extends FormRequest
             'estado' => 'required|string|max:100',
             'municipio' => 'required|string|max:100',
             'cp' => 'required|string|min:5|max:10',
-            'preferencia_colaboracion' => 'nullable|string',
-            'experiencia_previa' => 'nullable|string',
-            'horario_preferible' => 'nullable|string',
-            'habilidades_conocimientos' => 'nullable|string',
-            'area_interes' => 'nullable|string',
-            'comentarios' => 'nullable|string',
-            'fecha_inicio' => 'required|date|after_or_equal:today',
-            'fecha_termino' => 'required|date|after:fecha_inicio',
-            'hrs_dedicadas_semana' => 'required|integer|min:1|max:40',
+
+            'nivel_educativo' => 'required|in:1,2,3,4', // Validación específica
+            'ocupacion' => 'required|string|max:100',
+            'num_dependientes' => 'required|integer|min:0',
+            'ingresos_mensuales' => 'nullable|numeric|min:0',
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'name.required' => 'El nombre es obligatorio.',
             'apellido_paterno.required' => 'El apellido paterno es obligatorio.',
@@ -60,12 +57,14 @@ class StoreBeneficiarioRequest extends FormRequest
             'telefono.required' => 'El teléfono es obligatorio.',
             'direccion.required' => 'La dirección es obligatoria.',
             'cp.required' => 'El código postal es obligatorio.',
-            'fecha_inicio.required' => 'La fecha de inicio es obligatoria.',
-            'fecha_termino.required' => 'La fecha de término es obligatoria.',
-            'fecha_termino.after' => 'La fecha de término debe ser posterior a la fecha de inicio.',
-            'hrs_dedicadas_semana.required' => 'Las horas dedicadas por semana son obligatorias.',
-            'hrs_dedicadas_semana.min' => 'Las horas dedicadas deben ser al menos 1 hora por semana.',
-            'hrs_dedicadas_semana.max' => 'Las horas dedicadas no deben superar las 40 horas por semana.',
+            'nivel_educativo.required' => 'El nivel educativo es obligatorio.',
+            'nivel_educativo.in' => 'El nivel educativo seleccionado no es válido.',
+            'ocupacion.required' => 'La ocupación es obligatoria.',
+            'num_dependientes.required' => 'El número de dependientes es obligatorio.',
+            'num_dependientes.integer' => 'El número de dependientes debe ser un número entero.',
+            'num_dependientes.min' => 'El número de dependientes no puede ser negativo.',
+            'ingresos_mensuales.numeric' => 'Los ingresos mensuales deben ser un valor numérico.',
+            'ingresos_mensuales.min' => 'Los ingresos mensuales no pueden ser negativos.',
         ];
     }
 }

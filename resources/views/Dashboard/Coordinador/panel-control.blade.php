@@ -75,7 +75,7 @@
                             </button>
                         </a>
                     </div>
-                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $solicitudes_P }}</p>
+                    <p class="text-3xl font-bold mt-4 text-blue-400">{{ $total_PS }}</p>
                     <h3 class="text-lg font-bold mb-2">SOLICITUDES</h3> 
                 </div>
     
@@ -134,8 +134,15 @@
             </div>
         </div>
 
-        <x-support-widget :roles="['Administrador', 'Voluntario']" />
-    
+        <div class="fixed bottom-5 right-5 z-100">
+            <a href="{{ route('coordinador.chat') }}">
+                <button 
+                    class="bg-blue-400 text-white p-3 h-12 w-12 rounded-full shadow-lg hover:bg-blue-300 flex items-center justify-center">
+                    <i class='bx bx-message-square-dots text-2xl'></i>
+                </button>
+            </a>
+        </div>
+        
     </div>
     
     
@@ -147,10 +154,10 @@
         const programasChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Solicitud', 'En Revision', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'],
+                labels: ['Solicitud', 'Aprobado', 'Activo', 'Inactivo', 'Terminado', 'Cancelado'],
                 datasets: [{
                     label: ' Cantidad de Programas',
-                    data: [ {{ $total_PS }}, {{ $total_PR }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PT }}, {{ $total_PC }}],
+                    data: [ {{ $total_PS }}, {{ $total_PAP }}, {{ $total_PA }}, {{ $total_PI }}, {{ $total_PT }}, {{ $total_PC }}],
                     backgroundColor: ['#4CAF50'],
                     borderColor: ['#596475'],
                     borderWidth: 1

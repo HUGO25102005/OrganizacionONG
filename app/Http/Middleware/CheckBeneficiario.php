@@ -16,12 +16,14 @@ class CheckBeneficiario
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         if (Auth::check()) {
+
             $beneficiario = Auth::user()->beneficiario;
 
             if ($beneficiario && // Verificamos que beneficiario no sea null
                 Auth::user()->id == $beneficiario->user->id &&
-                $beneficiario->estado == "1"
+                $beneficiario->estado == 1
             ) {
                 return $next($request);
             }

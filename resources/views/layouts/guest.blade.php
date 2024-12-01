@@ -20,6 +20,11 @@
 <body class="flex justify-center items-center min-h-screen m-0 bg-cover bg-center"
     style="background-image: url('{{ asset('/images/fofondo3.jpeg') }}');">
 
+    <a href="{{ route('conocenos.index') }}" 
+        class="absolute top-8 left-8 bg-white text-black py-2 px-4 rounded-lg shadow hover:bg-gray-200 transition">
+        <i class="fas fa-arrow-left"></i><b>&nbsp; Página principal</b>
+    </a>
+    
     <div class="relative w-[90vw] h-[90vh] md:w-[630px] md:h-[720px] flex justify-center items-center">
         <!-- Hexágono de fondo con el logo arriba -->
         <div class="absolute w-[80vw] h-[80vh] md:w-[630px] md:h-[740px] shadow-lg flex flex-col justify-center items-center" 
@@ -27,9 +32,9 @@
                     background-color: #f6f6fe;">
             
             <!-- Logo centrado arriba en el hexágono -->
-<div class="absolute top-[-40px] md:top-[70px] w-[70px] h-[70px] md:w-[80px] md:h-[80px] flex items-center justify-center rounded-full">
-    <img src="{{ asset('/images/logo_n.png') }}" alt="Logo" class="w-full h-full object-cover">
-</div>
+            <div class="absolute top-[-40px] md:top-[70px] w-[70px] h-[70px] md:w-[80px] md:h-[80px] flex items-center justify-center rounded-full">
+                <img src="{{ asset('/images/logo_n.png') }}" alt="Logo" class="w-full h-full object-cover">
+            </div>
 
     
             <!-- Caja de inicio de sesión -->

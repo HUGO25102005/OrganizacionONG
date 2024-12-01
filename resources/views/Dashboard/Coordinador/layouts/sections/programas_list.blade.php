@@ -13,7 +13,7 @@
             @foreach ($programas as $programa)
                 <div class="bg-white min-w-[250px] sm:min-w-[300px] p-6 rounded-lg shadow-lg border-l-8 {{ $colores[$loop->index % count($colores)] }} snap-center">
                     <h3 class="text-lg font-bold mb-2">{{ $programa->nombre_programa }}</h3>
-                    <p class="text-gray-500 mb-2">Impartido por: <span class="font-semibold">{{ $programa->voluntario->trabajador->user->name }}</span></p>
+                    <p class="text-gray-500 mb-2">Impartido por: <span class="font-semibold">{{ $programa->voluntario->trabajador->user->name. ' ' .$programa->voluntario->trabajador->user->apellido_paterno }}</span></p>
                     <p class="text-gray-500 mb-2">Total Beneficiarios: <span class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
                     <p class="text-gray-500 mb-2">Recursos Asignados: <span class="font-semibold">${{ number_format($programa->presupuesto->monto) }}</span></p>
                 </div>
@@ -31,20 +31,20 @@
     <!-- Gráficos en un contenedor flex -->
     <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
         <!-- Gráfico 1: Estatus Programas Educativos -->
-        <div class="w-full lg:w-1/2 flex flex-col items-center">
+        <div class="w-full lg:w-1/2 flex flex-col items-center mx-auto"> <!-- Quitar mx-auto si uso las dos graficas -->
             <h3 class="text-center font-bold mb-4">Gráfico del estatus</h3>
             <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
                 <canvas id="incomeChart"></canvas>
             </div>
         </div>
         
-        <!-- Gráfico 2: Estatus de Beneficiarios -->
+{{--         <!-- Gráfico 2: Estatus de Beneficiarios -->
         <div class="w-full lg:w-1/2 flex flex-col items-center">
             <h3 class="text-center font-bold mb-4">Gráfico de la modalidad</h3>
             <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
                 <canvas id="expenseChart"></canvas>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
     
@@ -72,13 +72,10 @@
                             @include('Dashboard.Coordinador.layouts.tables.thead.th_todosP')
                             @break
                         @case(2)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_revision')                            
-                            @break
-                        @case(3)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_aprovado')                            
+                            @include('Dashboard.Coordinador.layouts.tables.thead.th_inactivo')                            
                             @break
                         @case(4)
-                            @include('Dashboard.Coordinador.layouts.tables.thead.th_activo_p')                            
+                            @include('Dashboard.Coordinador.layouts.tables.thead.th_todosP')                            
                             @break
                         @case(5)
                             @include('Dashboard.Coordinador.layouts.tables.thead.th_terminado')                            
@@ -91,10 +88,7 @@
                             @include('Dashboard.Coordinador.layouts.tables.tbody.tb_todosP')
                             @break
                         @case(2)
-                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_revision')                            
-                            @break
-                        @case(3)
-                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_aprovado')                            
+                            @include('Dashboard.Coordinador.layouts.tables.tbody.tb_inactivoP')                            
                             @break
                         @case(4)
                             @include('Dashboard.Coordinador.layouts.tables.tbody.tb_activo_p')                            
@@ -106,10 +100,14 @@
                 </tbody>                     
             </table>
         </div>
-        {{-- {{ $datos->links() }}
-        @if ($beneficiariosearch)
-            {{ $beneficiariosearch->links() }}
-        @endif --}}
+        <div class="mt-2" id="lista">
+            @if($datos and $estado != 0)
+                {{ $datos->links() }}
+            @endif
+            @if ($programassearch and $estado == 0)
+                {{ $programassearch->links() }}
+            @endif  
+        </div>
     </div>
 </div>
 
@@ -190,12 +188,12 @@
     const incomeChart = new Chart(ctxIncome, {
         type: 'bar',
         data: {
-            labels: ['Solicitud', 'En Revisión', 'Aprovado', 'Activo', 'Terminado', 'Cancelado'], // Meses
+            labels: ['Solicitud', 'Aprobado', 'Activo', 'Inactivo', 'Terminado', 'Cancelado'], // Meses
             datasets: [{
                 label: 'Estatus de Programas Educativos',
-                data: [0, 0, 0, 0, 0, 0], // Valores de ingresos
-                backgroundColor: 'rgba(54, 162, 235, 1)', // Azul sólido
-                borderColor: 'rgba(54, 162, 235, 1)',
+                data: [ {{ $programas_solicitados }}, {{ $programas_aprobados }}, {{ $programas_activos }}, {{ $programas_inactivos }}, {{ $programas_terminados }}, {{ $programas_cancelados }}], // Valores de ingresos
+                backgroundColor: ['#4CAF50'],
+                borderColor: ['#596475'],
                 borderWidth: 1
             }]
         },
@@ -209,7 +207,7 @@
         }
     });
 
-    // Gráfico de Gastos Mensuales
+/*     // Gráfico de Gastos Mensuales
     const ctxExpense = document.getElementById('expenseChart').getContext('2d');
     const expenseChart = new Chart(ctxExpense, {
         type: 'bar',
@@ -218,8 +216,8 @@
             datasets: [{
                 label: 'Modalidad',
                 data: [0, 0], // Valores de gastos
-                backgroundColor: 'rgba(255, 99, 132, 1)', // Rojo sólido
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: ['#1E96FC'],
+                borderColor: ['#596475'],
                 borderWidth: 1
             }]
         },
@@ -231,11 +229,26 @@
                 }
             }
         }
-    });
+    }); */
 </script>
 
 <script>
     document.getElementById('search').addEventListener('click', function () {
+        // Guarda la posición de scroll actual
+        localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Restaura la posición de scroll después de recargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('scrollPosition') !== null) {
+            window.scrollTo(0, localStorage.getItem('scrollPosition'));
+            localStorage.removeItem('scrollPosition'); // Elimina el valor después de restaurarlo
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('lista').addEventListener('click', function () {
         // Guarda la posición de scroll actual
         localStorage.setItem('scrollPosition', window.scrollY);
     });

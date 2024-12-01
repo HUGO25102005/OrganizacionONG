@@ -46,8 +46,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('coordinador.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->voluntario) {
             return redirect()->intended(route('vol.home'))->with('success', 'Sesión iniciada correctamente');
-        } else {
-            return redirect()->intended(route('dashboard'));
+        } else if($user->beneficiario) {
+            return redirect()->intended(route('ben.home'))->with('success', 'Sesión iniciada correctamente');
         } 
     }
 
@@ -63,6 +63,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
