@@ -170,21 +170,39 @@
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         required>
                                 </div>
-
                             </div>
-
+                            <div class="relative w-full mb-5 flex items-center gap-4">
+                                <!-- Checkbox con estilo neumorphism -->
+                                <label class="relative flex items-center cursor-pointer">
+                                    <input type="checkbox" class="hidden accept-terms">
+                                    <div class="w-6 h-6 bg-gray-100 rounded-lg shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-110 checkbox-container"
+                                         style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
+                                        <!-- Icono de palomita -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white hidden check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                </label>
+                                <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
+                            </div>                                                   
+                            <br>
                         </div>
                     </div>
                 </div>
 
                 <!-- Botones -->
                 <div class="flex justify-between mt-6">
-                    <button type="submit"
-                        class="bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500">Enviar</button>
-                    <button type="button" @click="open = false"
-                        class="text-red-600 hover:underline">Cancelar</button>
+                    <!-- Botón de Enviar -->
+                    <button type="submit" class="submit-button bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
+                        Enviar
+                    </button>
+                    <!-- Botón de Cancelar -->
+                    <button type="button" @click="open = false" class="text-red-600 hover:underline">
+                        Cancelar
+                    </button>
                 </div>
             </form>
+            {{-- <div id="contenido-dinamico" class="fixed inset-0 bg-white z-50 hidden overflow-auto"></div> --}}
         </div>
     </div>
 </div>

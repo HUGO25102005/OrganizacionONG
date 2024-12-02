@@ -127,7 +127,7 @@
     const indicatorsContainer = document.getElementById('indicators');
     const programas = @json($programas); // Convertir los datos de programas en JSON
     const slideWidth = 100; // Ajusta según el ancho de cada tarjeta
-    const itemsPerIndicator = 1; // Cada indicador representará tres programas
+    const itemsPerIndicator = 3; // Cada indicador representará tres programas
     const totalSlides = Math.ceil(programas.length / itemsPerIndicator);
 
     let currentIndex = 0;
@@ -136,7 +136,7 @@
     function createIndicators() {
         for (let i = 0; i < totalSlides; i++) {
             const indicator = document.createElement('button');
-            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-200', 'transition-all', 'duration-300');
+            indicator.classList.add('indicator', 'w-3', 'h-3', 'rounded-full', 'bg-gray-500', 'transition-all', 'duration-300');
             indicator.addEventListener('click', () => {
                 currentIndex = i;
                 updateCarousel();
@@ -151,11 +151,11 @@
         const indicators = document.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             if (index === currentIndex) {
-                indicator.classList.add('w-8', 'bg-black'); // Indicador activo
-                indicator.classList.remove('w-3', 'bg-gray-300');
+                indicator.classList.add('w-8', 'bg-gray-500'); // Indicador activo
+                indicator.classList.remove('w-3', 'bg-gray-200');
             } else {
-                indicator.classList.add('w-3', 'bg-gray-300'); // Indicador inactivo
-                indicator.classList.remove('w-8', 'bg-black');
+                indicator.classList.add('w-3', 'bg-gray-500'); // Indicador inactivo
+                indicator.classList.remove('w-8', 'bg-gray-200');
             }
         });
     }

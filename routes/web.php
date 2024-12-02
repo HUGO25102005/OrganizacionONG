@@ -258,7 +258,9 @@ Route::group(['prefix' => '/'], function () {
 
 
 Route::group(['prefix' => 'terminosCondiciones'], function () {
-    Route::get('/', [TerminosCondicionesController::class, 'index'])->name('terminosCondiciones.index');
+    Route::get('/', function(){
+        return view('TerminosCondiciones.index');
+    })->name('terminosCondiciones.index');
 });
 
 Route::group(['prefix' => 'pdf'], function () {
