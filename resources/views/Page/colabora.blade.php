@@ -1,6 +1,6 @@
 @extends('Page.layouts.app')
 @section('importaciones')
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/colabora.css'])
+    @vite(['resources/css/app.css', 'resources/css/colabora.css'])
 @endsection
 @section('content')
 
@@ -326,112 +326,117 @@
             });
         });
     </script>
+
 @endsection
-<div id="coordinatorModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
+
+{{-- <div id="coordinatorModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
     <div class="bg-white rounded-lg p-6 w-full max-w-lg shadow-xl" style="width: 900px; height: 700px;">
         <h2 class="text-xl font-bold mb-4 text-[#3B3636]">Solicitud a Coordinador</h2>
+
+        <form id="coordinadorForm" action="{{ route('coordinador.store') }}" method="POST">
+            @csrf
         <!-- Formulario de entrada -->
         <div class="grid grid-cols-2 gap-4">
             <!-- Nombre completo -->
             <div class="relative mb-4">
                 <i class='bx bx-user absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Nombre completo"
+                <input type="text" id="nombrecompleto" placeholder="Nombre completo"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Habilidades clave -->
             <div class="relative mb-4">
                 <i class='bx bx-brain absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Habilidades clave"
+                <input type="text" id="habilidades" placeholder="Habilidades clave"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Fecha de nacimiento -->
             <div class="relative mb-4">
                 <i class='bx bx-calendar absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="date" placeholder="Fecha de nacimiento"
+                <input type="date" id="fecha_nacimiento" placeholder="Fecha de nacimiento"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs placeholder:text-[#3B3636]">
             </div>
             <!-- Idiomas -->
             <div class="relative mb-4">
                 <i class='bx bx-globe absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Idiomas"
+                <input type="text" id="idiomas" placeholder="Idiomas"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Género -->
             <div class="relative mb-4">
                 <i class='bx bx-male-female absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Género"
+                <input type="text" id="genero" placeholder="Género"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Función clave -->
             <div class="relative mb-4">
                 <i class='bx bx-briefcase-alt absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Función clave"
+                <input type="text" id="funcion_clave" placeholder="Función clave"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Domicilio -->
             <div class="relative mb-4">
                 <i class='bx bx-home absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Domicilio"
+                <input type="text" id="domicilio" placeholder="Domicilio"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Área de supervisión -->
             <div class="relative mb-4">
                 <i class='bx bx-map-pin absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Área de supervisión"
+                <input type="text" id="area_supervision" placeholder="Área de supervisión"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Teléfono -->
             <div class="relative mb-4">
                 <i class='bx bx-phone absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="tel" placeholder="Teléfono"
+                <input type="tel" id="telefono" placeholder="Teléfono"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Capacidad de manejo de equipos -->
             <div class="relative mb-4">
                 <i class='bx bx-group absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Capacidad de manejo de equipos"
+                <input type="text" id="manejo_equipos" placeholder="Capacidad de manejo de equipos"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Correo electrónico -->
             <div class="relative mb-4">
                 <i class='bx bx-envelope absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="email" placeholder="Correo electrónico"
+                <input type="email" id="correo" placeholder="Correo electrónico"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Conocimiento de herramientas -->
             <div class="relative mb-4">
                 <i class='bx bx-wrench absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Conocimiento de herramientas"
+                <input type="text" id="conocimiento_herramientas" placeholder="Conocimiento de herramientas"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Especialización en cursos -->
             <div class="relative mb-4">
                 <i class='bx bx-book-open absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Especialización en cursos"
+                <input type="text" id="cursos" placeholder="Especialización en cursos"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Disponibilidad de horario -->
             <div class="relative mb-4">
                 <i class='bx bx-time-five absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Disponibilidad de horario"
+                <input type="text" id="disponibilidad_horarios" placeholder="Disponibilidad de horario"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Experiencia laboral -->
             <div class="relative mb-4">
                 <i class='bx bx-history absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Experiencia laboral"
+                <input type="text" id="experiencia_laboral" placeholder="Experiencia laboral"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Disponibilidad de viajes -->
             <div class="relative mb-4">
                 <i class='bx bx-plane absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Disponibilidad de viajes"
+                <input type="text" id="disponibilidad_viajes" placeholder="Disponibilidad de viajes"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
             <!-- Experiencia en sector educativo -->
             <div class="relative mb-4">
                 <i class='bx bx-book-reader absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Experiencia en sector educativo"
+                <input type="text" id="experiencia_educativa" placeholder="Experiencia en sector educativo"
                     class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
             </div>
         </div>
@@ -440,5 +445,6 @@
                 class="bg-blue-100 text-black px-4 py-2 rounded-full mr-2 shadow-inner">Cerrar</button>
             <button class="bg-[#063663] text-white px-4 py-2 rounded-full shadow-md">Enviar Solicitud</button>
         </div>
+        </form>
     </div>
-</div>
+</div> --}}
