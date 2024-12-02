@@ -327,7 +327,7 @@
         });
     </script>
 @endsection
-<div id="coordinatorModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
+{{-- <div id="coordinatorModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
     <div class="bg-white rounded-lg p-6 w-full max-w-lg shadow-xl" style="width: 900px; height: 700px;">
         <h2 class="text-xl font-bold mb-4 text-[#3B3636]">Solicitud a Coordinador</h2>
         <!-- Formulario de entrada -->
@@ -441,4 +441,4 @@
             <button class="bg-[#063663] text-white px-4 py-2 rounded-full shadow-md">Enviar Solicitud</button>
         </div>
     </div>
-</div>
+</div> --}}

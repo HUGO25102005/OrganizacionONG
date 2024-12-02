@@ -11,6 +11,7 @@ class DonacionController extends Controller
     public function procesarDonacion(Request $request)
     {
 
+        // dd($request);
         try {
             // Validar los datos recibidos
             $request->validate([
@@ -18,6 +19,7 @@ class DonacionController extends Controller
                 'status' => 'required|string', // Estado de la transacción
                 'amount' => 'required|numeric', // Monto de la transacción
                 'currency' => 'required|string|max:4', // Moneda de la transacción
+                'id_donante' => 'required|exists:donantes,id', // Moneda de la transacción
             ]);
 
             // Guardar la donación en la base de datos
@@ -26,8 +28,10 @@ class DonacionController extends Controller
                 'currency' => $request->currency,
                 'monto' => $request->amount,
                 'status' => $request->status,
+                'id_donante' => $request->id_donante,
             ]);
 
+            // dd($donacion);
             // Retornar respuesta exitosa
             return response()->json([
                 'message' => 'Donación procesada correctamente.',

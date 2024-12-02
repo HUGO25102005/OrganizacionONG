@@ -13,7 +13,7 @@ class Donacion extends Model
     use HasFactory;
 
     protected $table = 'donacion';
-    protected $fillable = ['id_transaccion', 'status', 'currency', 'monto'];
+    protected $fillable = ['id_transaccion', 'status', 'currency', 'monto', 'id_donante'];
 
     public static function getDonacionesPorMes()
     {

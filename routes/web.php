@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Coordinador\DashboardCoordinadorController;
 use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
+use App\Http\Controllers\Donaciones\DonanteController;
 use App\Http\Controllers\Donaciones\RecaudacionController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Page\ColaboraController;
@@ -221,14 +222,16 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => '/'], function () {
 
     Route::resources([
-
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
-        'donar' => DonarController::class,
     ]);
 
     Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
+    });
+    Route::prefix('donar')->group(function () {
+        Route::get('/', [DonarController::class, 'index'])->name('donar.index');
+        Route::post('/donante', [DonanteController::class, 'comprobarCorreo'])->name('donante.comprobarCorreo');
     });
 
     Route::prefix('colabora')->group(function () {
