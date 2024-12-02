@@ -105,8 +105,8 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-center rounded-l-lg">Nombre</th>
-                            <th class="text-center rounded-r-lg">Estatus</th>
+                            <th class="w-1/2 text-center rounded-l-lg">Nombre</th>
+                            <th class="w-1/2 text-center rounded-r-lg">Estatus</th>
                        </tr>
                     </thead>
                     <tbody>

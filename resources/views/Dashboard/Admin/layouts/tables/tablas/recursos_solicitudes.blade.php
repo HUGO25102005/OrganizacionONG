@@ -1,13 +1,13 @@
 <div id="urlUpdateTableSoli" data-url="{{ route('tabla.actuSoli') }}"></div>
-<table class="w-full bg-white rounded-[20px] shadow-md min-w-[600px]" id="tablaSolicituides">
+<table class="w-full bg-[#F6F8FF] rounded-[20px] shadow-md min-w-[600px]" id="tablaSolicituides">
     <thead>
         <tr class="bg-[#BBDEFB] text-center">
-            <th class="p-[15px] ">Nombre del programa</th>
+            <th class="p-[15px] rounded-l-lg">Nombre del programa</th>
             <th class="p-[15px] ">Impartidor</th>
             <th class="p-[15px] ">Total de beneficiarios esperados</th>
             <th class="p-[15px] ">Recursos solicitados</th>
             <th class="p-[15px] ">Estado</th>
-            <th class="p-[15px] ">Acciones</th>
+            <th class="p-[15px] rounded-r-lg ">Acciones</th>
         </tr>
     </thead>
 

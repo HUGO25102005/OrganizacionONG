@@ -39,9 +39,9 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-left">Nombre</th>
-                            <th class="text-right">Monto</th>
-                        </tr>
+                            <th class="w-1/2 text-center rounded-l-lg">Nombre</th>
+                            <th class="w-1/2 text-center rounded-r-lg">Monto</th>
+                       </tr>
                     </thead>
                     <tbody>
                         @if ($ultimas_donaciones->isEmpty())
@@ -51,8 +51,8 @@
                         @else
                             @foreach ($ultimas_donaciones as $donacion)
                                 <tr>
-                                    <td>{{ $donacion->donante->getFullName() }}</td>
-                                    <td class="text-right">${{ $donacion->monto }}</td>
+                                    <td class="text-center">{{ $donacion->donante->getFullName() }}</td>
+                                    <td class="text-center">${{ $donacion->monto }}</td>
                                 </tr>
                             @endforeach
                         @endif
@@ -66,15 +66,15 @@
                 <table class="w-full">
                     <thead class="bg-[#BBDEFB]">
                         <tr>
-                            <th class="text-left">Campaña</th>
-                            <th class="text-right">Meta</th>
-                        </tr>
+                            <th class="w-1/2 text-center rounded-l-lg">Campaña</th>
+                            <th class="w-1/2 text-center rounded-r-lg">Meta</th>
+                          </tr>
                     </thead>
                     <tbody>
                         @foreach ($convocatorias as $conv)
                             <tr>
-                                <td>{{ $conv->titulo }}</td>
-                                <td class="text-right">{{ $conv->cantarticulos }} {{ $conv->producto->nombre }}</td>
+                                <td class="text-center">{{ $conv->titulo }}</td>
+                                <td class="text-center">{{ $conv->cantarticulos }} {{ $conv->producto->nombre }}</td>
                             </tr>
                         @endforeach
                     </tbody>

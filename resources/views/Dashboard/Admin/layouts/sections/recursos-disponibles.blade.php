@@ -58,7 +58,7 @@
 
 
     <!-- Sección: Asignación de recursos -->
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
+    <div class="bg-[#F6F8FF] p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-center font-semibold text-2xl md:text-3xl">Solicitudes de Recursos</h3>
             <form action="{{ route('tabla.actuSoli') }}" method="GET" id="search-form" class="flex items-center">
