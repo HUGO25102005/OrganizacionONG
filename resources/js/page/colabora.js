@@ -1,4 +1,4 @@
-import { getValueRequired } from "./../generalsFunctions";
+import { getValueRequired, resetInput, messageMandatory, messageSendError, messageSendSuccess, getValue, messageSendSuccessPage } from "./../generalsFunctions";
 (function () {
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -9,6 +9,7 @@ import { getValueRequired } from "./../generalsFunctions";
         const anonymousInfo = document.getElementById("anonymous-info");
         const emailContainer = document.getElementById("donor-email-container");
         const continueButton = document.getElementById("continue-button");
+        const countryCodeSelect = document.getElementById("country_code");
 
         // Función para manejar animaciones de visibilidad
         const toggleElement = (element, show) => {
@@ -54,11 +55,11 @@ import { getValueRequired } from "./../generalsFunctions";
         const validateBeforeSubmit = () => {
             const selectedType = document.querySelector('input[name="donation_type"]:checked');
             if (!selectedType) {
-                alert("Selecciona un tipo de donación.");
+                messageSendError('Selecciona un tipo de donación.')
                 return false;
             }
             if (selectedType.value === "with_email" && !document.getElementById("donor-email").value.trim()) {
-                alert("Por favor, ingresa un correo.");
+                messageSendError('Por favor, ingresa un correo.')
                 return false;
             }
             return true;
@@ -70,10 +71,10 @@ import { getValueRequired } from "./../generalsFunctions";
 
             const divProcesar = document.getElementById('routerProcesarDonacion');
             const url = divProcesar.getAttribute('data-url');
-            const correo = document.getElementById('donor-email').value.trim();
-            const nombre = document.getElementById('first_name').value.trim();
-            const apellido = document.getElementById('last_name').value.trim();
-            const codigoPais = document.getElementById('country_code').value.trim();
+            const correo = getValue('donor-email');
+            const nombre = getValue('first_name');
+            const apellido = getValue('last_name');
+            const codigoPais = getValue('country_code');
 
             const { tx, st, amt, cc } = params;
 
@@ -104,11 +105,12 @@ import { getValueRequired } from "./../generalsFunctions";
                 .then((response) => response.json())
                 .then((result) => {
                     console.log('Respuesta del servidor:', result);
-                    alert('¡Donación procesada correctamente!');
+                    messageSendSuccessPage('¡Donación procesada correctamente!')
+                        .then(() => location.reload());
                 })
                 .catch((error) => {
                     console.error('Error al enviar la solicitud:', error);
-                    alert('Hubo un error al procesar la donación. Por favor, intenta nuevamente.');
+                    messageSendSuccess('Hubo un error al procesar la donación. Por favor, intenta nuevamente.');
                 });
         };
 
@@ -137,12 +139,60 @@ import { getValueRequired } from "./../generalsFunctions";
         }
 
         // Función para comprobar el correo y manejar el donante
-        function comprobarCorreoDonante() {
-            const btnDONAR = document.querySelector('#donate-button')
-            btnDONAR.click();
+        function comprobarCorreoDonante(tipo = 'donante') {
+            if (tipo == 'donante') {
+
+                const correo = getValueRequired('donor-email');
+                const nombre = getValueRequired('first_name');
+                const apellido = getValueRequired('last_name');
+                const codigoPais = getValueRequired('country_code');
+
+                if (
+                    nombre === false ||
+                    correo === false ||
+                    apellido === false ||
+                    codigoPais === false
+                ) {
+                    messageMandatory();
+                    return;
+                }
+                const btnDONAR = document.querySelector('#donate-button')
+                btnDONAR.click();
+            } else {
+                const btnDONAR = document.querySelector('#donate-button')
+                btnDONAR.click();
+            }
         }
 
+        async function cargarPaises() {
+            try {
+                // Obtener datos de la API de REST Countries
+                const response = await fetch('https://restcountries.com/v3.1/all');
+                if (!response.ok) {
+                    throw new Error('Error al cargar los países');
+                }
+                const countries = await response.json();
+
+                // Ordenar países por nombre
+                countries.sort((a, b) => a.translations.spa.common.localeCompare(b.translations.spa.common));
+
+                // Poblar el <select> con las opciones de países
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.cca2; // Código ISO del país
+                    option.textContent = `${country.translations.spa.common} (${country.cca2})`;
+                    option.setAttribute('data-flag', country.flags.svg); // Guardar la URL de la bandera
+                    countryCodeSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error al cargar la lista de países:', error);
+            }
+        }
+        window.onload = () => {
+            cargarPaises();
+        }
         window.comprobarCorreoDonante = comprobarCorreoDonante;
+        window.resetInput = resetInput;
     });
 
 })();

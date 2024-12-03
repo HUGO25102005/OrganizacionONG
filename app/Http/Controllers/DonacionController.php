@@ -22,8 +22,9 @@ class DonacionController extends Controller
                 'currency' => 'required|string|max:4', // Moneda de la transacción
             ]);
 
+            $correo = $request->correo ?? '';
 
-            if ($request->id_donante != 2) {
+            if ($request->id_donante != 2 && !empty($correo)) {
 
                 $correo = $request->correo;
 

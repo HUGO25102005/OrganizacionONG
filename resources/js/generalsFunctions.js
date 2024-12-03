@@ -71,7 +71,19 @@ export function messageSendSuccess(message) {
     });
 }
 
-export function messageSendError(message, response){
+export function messageSendSuccessPage(message) {
+    return Swal.fire({
+        title: message,
+        text: 'Los datos se enviaron correctamente.',
+        iconHtml: '<i class="bx bx-check-circle" style="color: #2ecc71; font-size: 2.5rem;"></i>',
+        customClass: {
+            icon: 'swal-icon',
+        },
+        confirmButtonText: 'Aceptar',
+    });
+}
+
+export function messageSendError(message, response = ''){
     Swal.fire({
         title: message,
         text: response || 'Hubo un problema con los datos enviados.',
@@ -82,6 +94,7 @@ export function messageSendError(message, response){
         confirmButtonText: 'Aceptar',
     });
 }
+
 
 export function messageErrorRequest(errorMessage){
     Swal.fire({

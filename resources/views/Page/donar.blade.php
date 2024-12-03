@@ -81,7 +81,7 @@
 
 
     <section
-    class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto px-6 lg:px-[10%] py-8 relative">
+        class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto px-6 lg:px-[10%] py-8 relative">
         <!-- Imagen -->
         <div class="relative max-w-full lg:max-w-[40%] lg:absolute lg:bottom-0 lg:left-0">
             <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop"
@@ -138,9 +138,15 @@
                             Has elegido donar de forma <strong>anónima</strong>. Tu contribución será completamente privada
                             y no recibirás un recibo.
                         </p>
-                        <div id="donate-button-container" class="w-full flex justify-center mt-6">
-                            <div id="donate-button-anonimo" class="opacity-50 pointer-events-none">
-                                <!-- Aquí se renderizará el botón de PayPal -->
+                        <button onclick="comprobarCorreoDonante('anonimo')"
+                            class="w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg">
+                            Donar
+                        </button>
+                        <div class="hidden">
+                            <div id="donate-button-container" class="w-full flex justify-center mt-6">
+                                <div id="donate-button-anonimo" class="opacity-50 pointer-events-none">
+                                    <!-- Aquí se renderizará el botón de PayPal -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,34 +166,39 @@
                                 <label for="donor-email" class="block text-sm font-medium text-gray-700 mb-1">Correo
                                     Electrónico</label>
                                 <input type="email" id="donor-email" name="donor-email"
+                                    onfocus="resetInput('donor-email')"
                                     class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
                                     placeholder="Ingresa tu correo" required />
                             </div>
 
                             <!-- Campo Nombre -->
                             <div>
-                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                                <input type="text" id="first_name" name="first_name"
+                                <label for="first_name"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Nombre(s)</label>
+                                <input type="text" id="first_name" name="first_name" onfocus="resetInput('first_name')"
                                     class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
                                     placeholder="Ingresa tu nombre" required />
                             </div>
 
                             <!-- Campo Apellido -->
                             <div>
-                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
-                                <input type="text" id="last_name" name="last_name"
+                                <label for="last_name"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Apellido(s)</label>
+                                <input type="text" id="last_name" name="last_name" onfocus="resetInput('last_name')"
                                     class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
                                     placeholder="Ingresa tu apellido" required />
                             </div>
 
                             <!-- Campo Código del País -->
-                            <div>
-                                <label for="country_code" class="block text-sm font-medium text-gray-700 mb-1">Código del
-                                    País</label>
-                                <input type="text" id="country_code" name="country_code"
-                                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
-                                    placeholder="Ejemplo: MX" required />
-                            </div>
+                            <label for="country_code" class="block text-sm font-medium text-gray-700 mb-1">País de
+                                procedencia</label>
+                            <select id="country_code" name="country_code" onfocus="resetInput('country_code')"
+                                class="block w-full p-4 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                required>
+                                <!-- Opciones generadas dinámicamente -->
+                                <option value="" disabled selected>Selecciona una opcion</option>
+                            </select>
+
                         </form>
 
                     </div>
