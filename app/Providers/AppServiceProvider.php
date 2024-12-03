@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\RoleMiddleware;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        
+        // Establecer el idioma desde la sesión o usar el idioma predeterminado
+        App::setLocale(Session::get('locale', config('app.locale')));
     }
 }

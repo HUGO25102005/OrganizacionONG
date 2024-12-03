@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckCoordinador;
 use App\Http\Middleware\CheckVoluntario;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/login', function () {
     return view('auth.login');

@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center mb-[20px]">
         <h2 class="text-2xl font-semibold">Campañas de Recaudación</h2>
 
-        <div x-data="{ open: false, tab: 'informacion' }">
+        <div x-data="{ open: false, tab: 'informacion' }" x-init="$watch('open', value => document.body.classList.toggle('overflow-hidden', value))">
             <!-- Botón para abrir el modal -->
             <button @click="open = true" class="bg-blue-500 text-white px-4 py-2 rounded">
                 Nueva Campaña
@@ -153,9 +153,9 @@
 
                     <!-- Footer del modal -->
                     <div class="flex justify-end p-4 border-t border-gray-200">
-                        <button @click="open = false"
+                        <button @click="open = false" id="btnModalCerrar"
                             class="bg-red-500 text-white px-4 py-2 rounded mr-2">Cerrar</button>
-                        <button onclick="submitFormulario('form')"
+                        <button onclick="formNuevaCampania()"
                             class="bg-green-500 text-white px-4 py-2 rounded">Guardar
                             Campaña</button>
                     </div>
@@ -241,7 +241,7 @@
 
             <!-- Contenedor del Título (lado derecho) -->
             <div class="flex-1 flex justify-end">
-
+                
                 <form action="{{ route('admin.donaciones', ['seccion' => 2]) }}" method="POST" id="search-form"
                     class="flex items-center space-x-6">
                     @csrf
@@ -359,7 +359,7 @@
     </div>
 </div>
 {{ $convocatorias->links() }}
-
+@vite(['resources/js/donaciones_campanias.js'])
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('campaignChart').getContext('2d');
