@@ -231,7 +231,8 @@ Route::group(['prefix' => '/'], function () {
     });
     Route::prefix('donar')->group(function () {
         Route::get('/', [DonarController::class, 'index'])->name('donar.index');
-        Route::post('/donante', [DonanteController::class, 'comprobarCorreo'])->name('donante.comprobarCorreo');
+        Route::post('/donante', [DonanteController::class, 'comprobarCorreo'])->name('donante.comprobarCorreo'); 
+        Route::post('/donante/correo', [ColaboraController::class, 'emailBeforeDonacionDonante'])->name('donante.enviarCorreo'); 
     });
 
     Route::prefix('colabora')->group(function () {

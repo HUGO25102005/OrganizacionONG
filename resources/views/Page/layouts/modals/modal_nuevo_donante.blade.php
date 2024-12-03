@@ -18,27 +18,7 @@
             </div>
 
 
-            <!-- Campo Nombre -->
-            <div>
-                <input type="text" id="first_name" name="first_name"
-                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
-                    placeholder="Nombre" required>
-            </div>
-
-            <!-- Campo Apellido -->
-            <div>
-                <input type="text" id="last_name" name="last_name"
-                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
-                    placeholder="Apellido" required>
-            </div>
-
-            <!-- Campo Código del País -->
-            <div>
-                <input type="text" id="country_code" name="country_code"
-                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
-                    placeholder="Código del País (ejemplo: MX)" required>
-            </div>
-
+           
             <!-- Botones de Acción -->
             <div class="col-span-1 sm:col-span-2 flex justify-end">
                 <button type="button" onclick="cerrarModal()"
@@ -54,3 +34,11 @@
         </form>
     </div>
 </div>
+
+<script>
+    function cerrarModal() {
+        const modal = document.getElementById('modal-crear-donante');
+        modal.classList.add('hidden');
+        modal.classList.remove('opacity-100');
+    }
+</script>

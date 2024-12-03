@@ -53,4 +53,13 @@ class ColaboraController extends Controller
      * Display the specified resource.
      */
 
+     public function emailBeforeDonacionDonante(Request $request){
+
+        dd($request);
+        $idDonante = $request->id_donante;
+
+        // if()
+
+
+     }
 }

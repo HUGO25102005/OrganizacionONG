@@ -81,7 +81,7 @@
 
 
     <section
-        class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto lg:h-[65vh] px-6 lg:px-[10%] py-8 relative">
+    class="flex flex-col-reverse mb-20 lg:flex-row-reverse items-center justify-between bg-[#f7f9fc] h-auto px-6 lg:px-[10%] py-8 relative">
         <!-- Imagen -->
         <div class="relative max-w-full lg:max-w-[40%] lg:absolute lg:bottom-0 lg:left-0">
             <img src="{{ asset('images/estudiante.png') }}" alt="Persona con laptop"
@@ -99,7 +99,7 @@
             </p>
 
             <!-- Contenedor del formulario -->
-            <div class="flex flex-col items-center lg:items-start p-6 bg-white rounded-lg shadow-lg w-full lg:w-4/5">
+            <div class="flex flex-col items-center lg:items-start p-6 bg-white rounded-lg shadow-lg w-full lg">
                 <!-- Título del formulario -->
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center lg:text-left">Elige cómo deseas hacer tu
                     donación</h2>
@@ -152,15 +152,44 @@
                             Ingresa tu correo para recibir un recibo de tu donación y actualizaciones sobre cómo estamos
                             utilizando tu apoyo.
                         </p>
-                        <form action="{{ route('donante.comprobarCorreo') }}" method="" class="mb-4"
+                        <form action="{{ route('donante.comprobarCorreo') }}" method="" class="space-y-4"
                             id="formCorreoDonante">
                             @csrf
-                            <label for="donor-email" class="block text-sm font-medium text-gray-700 mb-2">Correo
-                                electrónico:</label>
-                            <input type="email" id="donor-email"
-                                class="block w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
-                                placeholder="Ingresa tu correo">
+                            <!-- Campo Correo Electrónico -->
+                            <div>
+                                <label for="donor-email" class="block text-sm font-medium text-gray-700 mb-1">Correo
+                                    Electrónico</label>
+                                <input type="email" id="donor-email" name="donor-email"
+                                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                    placeholder="Ingresa tu correo" required />
+                            </div>
+
+                            <!-- Campo Nombre -->
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                <input type="text" id="first_name" name="first_name"
+                                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                    placeholder="Ingresa tu nombre" required />
+                            </div>
+
+                            <!-- Campo Apellido -->
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+                                <input type="text" id="last_name" name="last_name"
+                                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                    placeholder="Ingresa tu apellido" required />
+                            </div>
+
+                            <!-- Campo Código del País -->
+                            <div>
+                                <label for="country_code" class="block text-sm font-medium text-gray-700 mb-1">Código del
+                                    País</label>
+                                <input type="text" id="country_code" name="country_code"
+                                    class="block w-full p-4 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring focus:ring-blue-300 focus:border-blue-500"
+                                    placeholder="Ejemplo: MX" required />
+                            </div>
                         </form>
+
                     </div>
                 </div>
 
@@ -174,6 +203,7 @@
         </div>
 
         <div id="routerProcesarDonacion" class="hidden" data-url="{{ route('paypal.procesarDonacion') }}"></div>
+        <div id="enviarCorreoDonante" class="hidden" data-url="{{ route('donante.enviarCorreo') }}"></div>
     </section>
 
     @include('Page.layouts.modals.modal_nuevo_donante')
@@ -184,216 +214,7 @@
     <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let dynamicUserId = null; // Variable para almacenar el ID del usuario con correo
-
-            // Elementos comunes
-            const donationTypeInputs = document.querySelectorAll('input[name="donation_type"]');
-            const anonymousInfo = document.getElementById("anonymous-info");
-            const emailContainer = document.getElementById("donor-email-container");
-            const continueButton = document.getElementById("continue-button");
-
-            // Función para manejar animaciones de visibilidad
-            const toggleElement = (element, show) => {
-                if (!element) return;
-                element.classList.toggle("hidden", !show);
-                element.classList.toggle("opacity-0", !show);
-                element.classList.toggle("translate-y-4", !show);
-                element.classList.toggle("scale-95", !show);
-                element.classList.toggle("opacity-100", show);
-                element.classList.toggle("translate-y-0", show);
-                element.classList.toggle("scale-100", show);
-            };
-
-            // Configuración del botón PayPal
-            const renderPayPalButton = (containerSelector) => {
-                const container = document.querySelector(containerSelector);
-                if (!container) {
-                    console.error(`Contenedor no encontrado: ${containerSelector}`);
-                    return;
-                }
-
-                container.innerHTML = ''; // Limpia contenedor
-                container.classList.remove("pointer-events-none");
-                container.style.opacity = "1";
-
-                console.log(`Renderizando botón PayPal en: ${containerSelector}`);
-                PayPal.Donation.Button({
-                    env: "sandbox", // Cambiar a 'production' en entornos reales
-                    hosted_button_id: "BNH9DUN6KARHS",
-                    image: {
-                        src: "{{ asset('images/donar.png') }}",
-                        alt: "Donar con PayPal",
-                        title: "PayPal - Seguro y fácil",
-                    },
-                    onClick: validateBeforeSubmit,
-                    onComplete: handleTransactionComplete,
-                }).render(containerSelector);
-            };
-
-            // Validación previa
-            const validateBeforeSubmit = () => {
-                const selectedType = document.querySelector('input[name="donation_type"]:checked');
-                if (!selectedType) {
-                    alert("Selecciona un tipo de donación.");
-                    return false;
-                }
-                if (selectedType.value === "with_email" && !document.getElementById("donor-email").value
-                    .trim()) {
-                    alert("Por favor, ingresa un correo.");
-                    return false;
-                }
-                return true;
-            };
-
-            // Manejo de la transacción
-            const handleTransactionComplete = (params) => {
-                console.log("Transacción completada:", params);
-
-                const divProcesar = document.getElementById('routerProcesarDonacion');
-                const url = divProcesar.getAttribute('data-url');
-                console.log(url);
-
-                const {
-                    tx,
-                    st,
-                    amt,
-                    cc
-                } = params;
-
-                // Determinar el ID del usuario
-                const isAnonymous = document.querySelector('input[name="donation_type"]:checked').value ===
-                    "anonymous";
-                const userId = isAnonymous ? 2 : dynamicUserId; // ID 1 para anónimo
-
-                const data = {
-                    transaction_id: tx,
-                    status: st,
-                    amount: amt,
-                    currency: cc,
-                    id_donante: userId, // Agregar el ID del usuario
-                };
-
-                console.log('Enviando datos al servidor:', data);
-
-                fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content'),
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    .then((response) => response.json())
-                    .then((result) => {
-                        console.log('Respuesta del servidor:', result);
-                        alert('¡Donación procesada correctamente!');
-                    })
-                    .catch((error) => {
-                        console.error('Error al enviar la solicitud:', error);
-                        alert('Hubo un error al procesar la donación. Por favor, intenta nuevamente.');
-                    });
-            };
-
-            // Función para manejar el cambio de tipo de donación
-            const handleDonationTypeChange = (value) => {
-                const isAnonymous = value === "anonymous";
-
-                toggleElement(anonymousInfo, isAnonymous);
-                toggleElement(emailContainer, !isAnonymous);
-
-                continueButton.disabled = isAnonymous;
-                continueButton.classList.toggle("hidden", isAnonymous);
-
-                const btnRenderClass = isAnonymous ? "#donate-button-anonimo" : "#donate-button-perfil";
-                renderPayPalButton(btnRenderClass);
-            };
-
-            // Inicialización de eventos
-            donationTypeInputs.forEach((input) => {
-                input.addEventListener("change", (e) => handleDonationTypeChange(e.target.value));
-            });
-
-            const initialSelection = document.querySelector('input[name="donation_type"]:checked');
-            if (initialSelection) {
-                handleDonationTypeChange(initialSelection.value);
-            }
-
-            // Función para comprobar correo y obtener ID dinámico
-            window.comprobarCorreoDonante = () => {
-                const form = document.getElementById('formCorreoDonante');
-                const correo = document.getElementById('donor-email').value.trim();
-                const url = form.getAttribute('action');
-                
-                const emailForm = document.querySelector('#email');
-                const fistName = document.querySelector('#first_name');
-                const lastName = document.querySelector('#last_name');
-                const countryCode = document.querySelector('#country_code');
-
-                const data = {
-                    email: correo
-                };
-
-                fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content'),
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    .then((response) => {
-                        if (!response.ok) throw new Error('Error en la respuesta del servidor');
-                        return response.json();
-                    })
-                    .then(({
-                        donante,
-                        exists
-                    }) => {
-                        if (exists) {
-                            dynamicUserId = donante.id; // Guardar el ID dinámico del usuario
-                            console.log("Usuario existente:", donante);
-                            const {
-                                email,
-                                first_name,
-                                last_name,
-                                country_code
-                            } = donante;
-
-                            emailForm.value = email;
-                            fistName.value = first_name;
-                            lastName.value = last_name;
-                            countryCode.value = country_code;
-
-                            abrirModalNuevoDonante();
-                        } else {
-                            dynamicUserId = null;
-                            console.log("Usuario nuevo. ID no asignado.");
-                            emailForm.value = '';
-                            fistName.value = '';
-                            lastName.value = '';
-                            countryCode.value = '';
-                            abrirModalNuevoDonante();
-                        }
-                    })
-                    .catch((error) => console.error('Error al verificar el correo:', error));
-            };
-
-            function abrirModalNuevoDonante() {
-                const modal = document.getElementById('modal-crear-donante');
-                modal.classList.remove('hidden');
-                modal.classList.add('opacity-100');
-            }
-
-            function cerrarModal() {
-                const modal = document.getElementById('modal-crear-donante');
-                modal.classList.add('hidden');
-                modal.classList.remove('opacity-100');
-            }
-
-        });
+        const imageUrl = "{{ asset('images/donar.png') }}";
     </script>
     <style>
         #modal-crear-donante {
