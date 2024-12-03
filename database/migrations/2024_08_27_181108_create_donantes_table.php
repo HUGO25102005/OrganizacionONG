@@ -13,15 +13,11 @@ return new class extends Migration
     {
         Schema::create('donantes', function (Blueprint $table) {
             $table->id();
-            $table->string('payer_id')->comment('id de cuenta paypal');
             $table->string('email')->unique();
             $table->string('first_name', 50);
             $table->string('last_name', 70);
             $table->string('country_code', 10);
             $table->timestamps();
-
-            $table->unique('payer_id');
-            
         });
     }
 

@@ -3,7 +3,7 @@
     <button @click="open = true" class="experience-donate">
         <img src="{{ asset('images/unirme.png') }}" alt="Unirme" class="donate-img w-28 h-22">
     </button>
-    
+
 
     <!-- Modal -->
     <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Contenido del formulario -->
-            <form action="{{ route('ben.store') }}" method="POST" class="p-4">
+            <form action="{{ route('ben.store') }}" method="POST" id="beneform" class="p-4">
                 @csrf
 
                 <div class="relative mt-1 overflow-hidden">
@@ -53,26 +53,33 @@
                             x-transition:leave-end="opacity-0" class="w-full px-4 space-y-4 flex-shrink-0">
                             <div class="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
                                 <div class="mb-4">
-                                    <input type="text" name="name" placeholder="Nombre"
+                                    <input type="text" value="{{ old('ben_nombre') }}" id="ben_nombre"
+                                        onfocus="resetInput('ben_nombre')" name="name" placeholder="Nombre"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="apellido_paterno" placeholder="Apellido Paterno"
+                                    <input type="text" value="{{ old('apellido_paterno') }}"
+                                        id="ben_apellido_paterno" onfocus="resetInput('ben_apellido_paterno')"
+                                        name="apellido_paterno" placeholder="Apellido Paterno"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="apellido_materno" placeholder="Apellido Materno"
+                                    <input type="text" value="{{ old('apellido_materno') }}"
+                                        id="ben_apellido_materno" onfocus="resetInput('ben_apellido_materno')"
+                                        name="apellido_materno" placeholder="Apellido Materno"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="email" name="email" placeholder="Correo electrónico"
+                                    <input type="email" value="{{ old('email') }}" id="ben_email"
+                                        onfocus="resetInput('ben_email')" name="email"
+                                        placeholder="Correo electrónico"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
                                     <label for="genero" class="block text-gray-700 font-bold mb-2">Género</label>
-                                    <select name="genero" id="genero"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required>
+                                    <select name="genero" value="{{ old('genero') }}" id="ben_genero"
+                                        onfocus="resetInput('ben_genero')"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                         <option value="" disabled selected>Selecciona una opción</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
@@ -81,46 +88,49 @@
                                 <div class="mb-4">
                                     <label for="fecha_nacimiento" class="block text-gray-700 font-bold mb-2">Fecha
                                         Nacimiento</label>
-                                    <input type="date" name="fecha_nacimiento"
-                                        class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
-                                </div>
-
-                                <div class="mb-4">
-                                    <input type="tel" name="telefono" placeholder="Teléfono"
+                                    <input type="date" value="{{ old('fecha_nacimiento') }}"
+                                        id="ben_fecha_nacimiento" onfocus="resetInput('ben_fecha_nacimiento')"
+                                        name="fecha_nacimiento"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="direccion" placeholder="Dirección"
+                                    <input type="tel" value="{{ old('telefono') }}" id="ben_telefono"
+                                        onfocus="resetInput('ben_telefono')" name="telefono" placeholder="Teléfono"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-                                <!-- País -->
                                 <div class="mb-4">
-                                    <input type="text" name="pais" placeholder="País"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                    <input type="text" value="{{ old('direccion') }}" id="ben_direccion"
+                                        onfocus="resetInput('ben_direccion')" name="direccion"
+                                        placeholder="Dirección"
+                                        class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-
-                                <!-- Estado -->
                                 <div class="mb-4">
-                                    <input type="text" name="estado" placeholder="Estado"
+                                    <input type="text" value="{{ old('pais') }}" id="ben_pais"
+                                        onfocus="resetInput('ben_pais')" name="pais" placeholder="País"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                        maxlength="100">
                                 </div>
-
-                                <!-- Municipio -->
                                 <div class="mb-4">
-                                    <input type="text" name="municipio" placeholder="Municipio"
+                                    <input type="text" value="{{ old('estado') }}" id="ben_estado"
+                                        onfocus="resetInput('ben_estado')" name="estado" placeholder="Estado"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                        maxlength="100">
                                 </div>
-
-                                <!-- Código Postal -->
                                 <div class="mb-4">
-                                    <input type="text" name="cp" placeholder="Código Postal"
+                                    <input type="text" value="{{ old('municipio') }}" id="ben_municipio"
+                                        onfocus="resetInput('ben_municipio')" name="municipio"
+                                        placeholder="Municipio"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required minlength="5">
+                                        maxlength="100">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" value="{{ old('cp') }}" id="ben_cp"
+                                        onfocus="resetInput('ben_cp')" name="cp" placeholder="Código Postal"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        minlength="5">
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- Datos Técnicos -->
@@ -132,9 +142,9 @@
                             <div class="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
                                 <!-- Campo para 'nivel_educativo' -->
                                 <div class="mb-4">
-                                    <select name="nivel_educativo" id="nivel_educativo"
-                                            class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            required>
+                                    <select value="{{ old('nivel_educativo') }}" id="ben_nivel_educativo"
+                                        name="nivel_educativo" onfocus="resetInput('ben_nivel_educativo')"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                         <option value="" disabled selected>Nivel Educativo</option>
                                         <option value="1">Primaria</option>
                                         <option value="2">Secundaria</option>
@@ -145,21 +155,26 @@
 
                                 <!-- Campo para 'ocupacion' -->
                                 <div class="mb-4">
-                                    <input type="text" name="ocupacion" placeholder="Ocupación"
+                                    <input type="text" value="{{ old('ocupacion') }}" id="ben_ocupacion"
+                                        onfocus="resetInput('ben_ocupacion')" name="ocupacion"
+                                        placeholder="Ocupación"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
 
                                 <!-- Campo para 'num_dependientes' -->
                                 <div class="mb-4">
-                                    <input type="number" name="num_dependientes"
-                                        placeholder="Número de Dependientes" min="0"
+                                    <input type="number" value="{{ old('num_dependientes') }}"
+                                        onfocus="resetInput('ben_num_dependientes')" id="ben_num_dependientes"
+                                        name="num_dependientes" placeholder="Número de Dependientes" min="0"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
 
                                 <!-- Campo para 'ingresos_mensuales' -->
                                 <div class="mb-4">
-                                    <input type="number" name="ingresos_mensuales" placeholder="Ingresos Mensuales"
-                                        min="0" step="0.01"
+                                    <input type="number" value="{{ old('ingresos_mensuales') }}"
+                                        onfocus="resetInput('ben_ingresos_mensuales')" id="ben_ingresos_mensuales"
+                                        name="ingresos_mensuales" placeholder="Ingresos Mensuales" min="0"
+                                        step="0.01"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                             </div>
@@ -168,15 +183,18 @@
                                 <label class="relative flex items-center cursor-pointer">
                                     <input type="checkbox" class="hidden accept-terms">
                                     <div class="w-6 h-6 bg-gray-100 rounded-lg shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-110 checkbox-container"
-                                         style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
+                                        style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
                                         <!-- Icono de palomita -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white hidden check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4 text-white hidden check-icon" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
                                 </label>
-                                <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
-                            </div>                         
+                                <a href="#" class="link-terminos">Acepto los <strong>Términos y
+                                        Condiciones</strong></a>
+                            </div>
                             <br>
                         </div>
                     </div>
@@ -184,18 +202,26 @@
 
                 <!-- Botones -->
                 <div class="flex justify-between mt-6">
-                    <!-- Botón de Enviar -->
-                    <button type="submit" class="submit-button bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
-                        Enviar
-                    </button>
-                    <!-- Botón de Cancelar -->
-                    <button type="button" @click="open = false" class="text-red-600 hover:underline">
-                        Cancelar
-                    </button>
+                    <button onclick="beneficiarioform()"
+                        class="submit-button bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500"
+                        disabled>Enviar</button>
+                    <button type="button" @click="open = false"
+                        class="text-red-600 hover:underline">Cancelar</button>
                 </div>
-
             </form>
-            {{-- <div id="contenido-dinamico" class="fixed inset-0 bg-white z-50 hidden overflow-auto"></div> --}}
         </div>
     </div>
 </div>
+
+@vite(['resources/js/beneficiarioform.js'])
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('beneform');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            console.log('El formulario ha sido prevenido de ser enviado.');
+            // Aquí puedes agregar lógica adicional, como validaciones o alertas
+        });
+    });
+</script>

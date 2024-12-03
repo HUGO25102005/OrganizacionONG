@@ -52,5 +52,4 @@ class ColaboraController extends Controller
     /**
      * Display the specified resource.
      */
-
 }

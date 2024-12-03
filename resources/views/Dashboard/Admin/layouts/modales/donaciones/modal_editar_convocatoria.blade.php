@@ -51,18 +51,21 @@
                                     <div class="col-span-2">
                                         <label for="titulo"
                                             class="block text-sm font-medium text-gray-700">Título:</label>
-                                        <input type="text" id="titulo" name="titulo"
+                                        <input type="text" id="edit_titulo" name="titulo"
                                             value="{{ old('titulo', $conv->titulo) }}"
+                                            onfocus="resetInput('edit_titulo')"
                                             class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Ingrese el título" required>
+                                            placeholder="Ingrese el título" >
                                     </div>
 
                                     <!-- Descripción -->
                                     <div class="col-span-2">
                                         <label for="descripcion"
                                             class="block text-sm font-medium text-gray-700">Descripción:</label>
-                                        <textarea id="descripcion" name="descripcion" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Ingrese la descripción" required>{{ old('descripcion', $conv->descripcion) }}</textarea>
+                                        <textarea id="edit_descripcion" name="descripcion" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                        onfocus="resetInput('edit_descripcion')"
+                                        placeholder="Ingrese la descripción" >{{ old('descripcion', $conv->descripcion) }}
+                                        </textarea>
                                     </div>
 
                                     <!-- Fecha de Inicio -->
@@ -70,34 +73,38 @@
                                         <label for="fecha_inicio" class="block text-sm font-medium text-gray-700">Fecha
                                             de
                                             Inicio:</label>
-                                        <input type="date" id="fecha_inicio" name="fecha_inicio"
+                                        <input type="date" id="edit_fecha_inicio" name="fecha_inicio"
+                                            onfocus="resetInput('edit_fecha_inicio')"
                                             value="{{ old('fecha_inicio', $conv->fecha_inicio) }}"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" >
                                     </div>
 
                                     <!-- Fecha de Fin -->
                                     <div class="col-span-2">
                                         <label for="fecha_fin" class="block text-sm font-medium text-gray-700">Fecha de
                                             Fin:</label>
-                                        <input type="date" id="fecha_fin" name="fecha_fin"
+                                        <input type="date" id="edit_fecha_fin" name="fecha_fin"
+                                        onfocus="resetInput('edit_fecha_fin')"
                                             value="{{ old('fecha_fin', $conv->fecha_fin) }}"
-                                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" >
                                     </div>
 
                                     <!-- Objetivo -->
                                     <div class="col-span-2">
                                         <label for="objetivo"
                                             class="block text-sm font-medium text-gray-700">Objetivo:</label>
-                                        <textarea id="objetivo" name="objetivo" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Ingrese el objetivo" required>{{ old('objetivo', $conv->objetivo) }}</textarea>
+                                        <textarea id="edit_objetivo" name="objetivo" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                        onfocus="resetInput('edit_objetivo')"
+                                        placeholder="Ingrese el objetivo" >{{ old('objetivo', $conv->objetivo) }}</textarea>
                                     </div>
 
                                     <!-- Comentarios -->
                                     <div class="col-span-2">
                                         <label for="comentarios"
                                             class="block text-sm font-medium text-gray-700">Comentarios:</label>
-                                        <textarea id="comentarios" name="comentarios" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Ingrese comentarios adicionales">{{ old('comentarios', $conv->comentarios) }}</textarea>
+                                        <textarea id="edit_comentarios" name="comentarios" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                        onfocus="resetInput('edit_comentarios')"
+                                        placeholder="Ingrese comentarios adicionales">{{ old('comentarios', $conv->comentarios) }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -109,18 +116,20 @@
                                     <div class="col-span-2">
                                         <label for="nombre"
                                             class="block text-sm font-medium text-gray-700">Nombre:</label>
-                                        <input type="text" id="nombre" name="nombre"
+                                        <input type="text" id="edit_nombre" name="nombre"
                                             value="{{ old('nombre', $conv->producto->nombre) }}"
+                                            onfocus="resetInput('edit_nombre')"
                                             class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Ingrese el nombre del producto" required>
+                                            placeholder="Ingrese el nombre del producto" >
                                     </div>
 
                                     <!-- Campo de textarea para 'descript' -->
                                     <div class="col-span-2">
                                         <label for="descript"
                                             class="block text-sm font-medium text-gray-700">Descripción:</label>
-                                        <textarea id="descript" name="descript" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3"
-                                            placeholder="Ingrese la descripción" required>{{ old('descript', $conv->producto->descript) }}</textarea>
+                                        <textarea id="edit_descript" name="descript" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3"
+                                        onfocus="resetInput('edit_descript')"
+                                        placeholder="Ingrese la descripción" >{{ old('descript', $conv->producto->descript) }}</textarea>
                                     </div>
 
                                     <!-- Cantidad de Artículos -->
@@ -128,10 +137,11 @@
                                         <label for="cantarticulos"
                                             class="block text-sm font-medium text-gray-700">Cantidad de
                                             Artículos:</label>
-                                        <input type="number" id="cantarticulos" name="cantarticulos"
+                                        <input type="number" id="cantarticulos" name="cantarticulos" 
                                             value="{{ old('cantarticulos', $conv->cantarticulos) }}"
+                                            onfocus="resetInput('cantarticulos')"
                                             class="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="Meta de productos en unidades, ejemplo: 10 unidades" required>
+                                            placeholder="Meta de productos en unidades, ejemplo: 10 unidades" >
                                     </div>
                                 </div>
                             </div>
@@ -143,10 +153,11 @@
             <!-- Footer del modal -->
             <div class="flex justify-end p-4 border-t border-gray-200">
                 <button @click="open = false" class="bg-red-500 text-white px-4 py-2 rounded mr-2">Cerrar</button>
-                <button onclick="submitFormulario('formUp{{$conv->id}}')" class="bg-green-500 text-white px-4 py-2 rounded">Guardar
+                <button onclick="editarConvo('formUp{{$conv->id}}')" class="bg-green-500 text-white px-4 py-2 rounded">Guardar
                     Cambios</button>
             </div>
         </div>
     </div>
 </div>
 
+@vite(['resources/js/editarconvo.js'])

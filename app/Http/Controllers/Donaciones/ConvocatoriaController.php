@@ -13,7 +13,6 @@ class ConvocatoriaController extends Controller
 {
     public function store(ConvocatoriaRequest $request)
     {
-        // dd($request);
 
         $userId = session('id');
         $userExists = User::where('id', $userId)->exists();
@@ -46,10 +45,16 @@ class ConvocatoriaController extends Controller
                 'estado' => 1,
             ]);
 
-            $seccion = 2;
-            return redirect()
-                ->route('admin.donaciones', compact(['seccion']))
-                ->with('success', 'Convocatoria creada exitosamente.');
+            if ($convocatoria) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Convocatoria creada con éxito',
+                    'data' => [
+                        'convocatoria' => $convocatoria,
+                        'producto' => $producto,
+                    ]
+                    ]);
+            } 
         }
     }
 

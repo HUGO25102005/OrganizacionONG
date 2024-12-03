@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Coordinador\DashboardCoordinadorController;
 use App\Http\Controllers\Dashboard\Voluntario\DashboardVolunController;
 use App\Http\Controllers\Donaciones\CargarCampaniasPageController;
 use App\Http\Controllers\Donaciones\ConvocatoriaController;
+use App\Http\Controllers\Donaciones\DonanteController;
 use App\Http\Controllers\Donaciones\RecaudacionController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Page\ColaboraController;
@@ -33,6 +34,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckCoordinador;
 use App\Http\Middleware\CheckVoluntario;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -104,15 +107,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('admin.chat.setActiveStatus');
         Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('admin.chat.group');
         Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('admin.chat.user');
-    
-    
     });
 
     //* Rutas del Dashboard Coordinador
     Route::middleware([CheckCoordinador::class])->prefix('dashboard/coordinador')->group(function () {
         Route::get('/home', [DashboardCoordinadorController::class, 'home'])->name('coordinador.home');
         Route::get('/panelControl', [DashboardCoordinadorController::class, 'panelControl'])->name('coordinador.panelControl');
-        
+
         Route::get('/beneficiarios', [DashboardCoordinadorController::class, 'beneficiarios'])->name('coordinador.beneficiarios');
         Route::get('/beneficiarios/searchb', [DashboardCoordinadorController::class, 'searchb'])->name('coordinador.beneficiarios.searchb');
         Route::get('/beneficiarios/searchbs', [DashboardCoordinadorController::class, 'searchbs'])->name('coordinador.beneficiarios.searchbs');
@@ -184,7 +185,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/setActiveStatus', [MessagesController::class, 'setActiveStatus'])->name('vol.chat.setActiveStatus');
         Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('vol.chat.group');
         Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('vol.chat.user');
-        
     });
 
     //* Rutas del Dashboard Beneficiario
@@ -217,24 +217,26 @@ Route::middleware('auth')->group(function () {
         Route::get('/chat/group/{id}', [MessagesController::class, 'index'])->name('ben.chat.group');
         Route::get('/chat/{id}', [MessagesController::class, 'index'])->name('ben.chat.user');
     });
-
-
 });
 
 
 //TODO: RUTAS DE LINING PAGE
-Route::group(['prefix' => 'page'], function () {
+
+Route::group(['prefix' => '/'], function () {
 
     Route::resources([
-
         'transparencia' => TrasparenciaController::class,
         'nuestro-trabajo' => NuestroTrabajoController::class,
-        'donar' => DonarController::class,
     ]);
 
-    /* Route::prefix('conocenos')->group(function () {
+    Route::prefix('conocenos')->group(function () {
         Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
-    }); */
+    });
+    Route::prefix('donar')->group(function () {
+        Route::get('/', [DonarController::class, 'index'])->name('donar.index');
+        Route::post('/donante', [DonanteController::class, 'comprobarCorreo'])->name('donante.comprobarCorreo');
+        Route::post('/donante/correo', [ColaboraController::class, 'emailBeforeDonacionDonante'])->name('donante.enviarCorreo');
+    });
 
     Route::prefix('colabora')->group(function () {
         Route::get('/', [ColaboraController::class, 'index'])->name('colabora.index');
@@ -243,26 +245,14 @@ Route::group(['prefix' => 'page'], function () {
         Route::post('/solicitudes/coordinador', [ColaboraController::class, 'storeCoordinador'])->name('coord.store');
     });
 
-    /* Route::get('/', function () {
-        return redirect()->route('conocenos.index');
-    }); */
-});
-
-Route::group(['prefix' => '/'], function () {
-    
-    Route::prefix('conocenos')->group(function () {
-        Route::get('/', [ConocenosController::class, 'index'])->name('conocenos.index');
-    });
-
     Route::get('/', function () {
         return redirect()->route('conocenos.index');
     });
-
 });
 
 
 Route::group(['prefix' => 'terminosCondiciones'], function () {
-    Route::get('/', function(){
+    Route::get('/', function () {
         return view('TerminosCondiciones.index');
     })->name('terminosCondiciones.index');
 });
