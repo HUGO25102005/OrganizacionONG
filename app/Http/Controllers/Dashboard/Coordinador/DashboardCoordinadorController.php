@@ -140,6 +140,56 @@ class DashboardCoordinadorController extends Controller
         }
     }
 
+    public function searchp(Request $request)
+    {
+        $search = $request->input('search');
+        $estado = $request->input('estado', '0'); // Estado por defecto
+        $programassearch = ProgramaEducativo::getProgramasEducativos($search)->paginate(10);
+
+        // Renderiza solo el tbody para ser actualizado en el frontend
+        $html = view('Dashboard.Coordinador.layouts.tables.tbody.tb_todosP', compact('programassearch'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+
+    public function searchps(Request $request)
+    {
+        $seccion = $request->get('seccion', 2);
+        $search = $request->input('search');
+        $estado = $request->input('estado', '0'); // Estado por defecto
+        $programassearch1 = ProgramaEducativo::getProgramasEducativos1($search)->paginate(10);
+
+        // Renderiza solo el tbody para ser actualizado en el frontend
+        $html = view('Dashboard.Coordinador.layouts.tables.tbody.tb_todosPS', compact('programassearch1', 'seccion'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+    
+    public function searchb(Request $request)
+    {
+        $search = $request->input('search');
+        $estado = $request->input('estado', '0'); // Estado por defecto
+        $beneficiariosearch = Beneficiario::getBeneficiarios($search)->paginate(10);
+
+        // Renderiza solo el tbody para ser actualizado en el frontend
+        $html = view('Dashboard.Coordinador.layouts.tables.tbody.tb_todos', compact('beneficiariosearch'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+    
+    public function searchbs(Request $request)
+    {
+        $seccion = $request->get('seccion', 2);
+        $search = $request->input('search');
+        $estado = $request->input('estado', '0'); // Estado por defecto
+        $beneficiariosearch2 = Beneficiario::getBeneficiarios2($search)->paginate(10);
+
+        // Renderiza solo el tbody para ser actualizado en el frontend
+        $html = view('Dashboard.Coordinador.layouts.tables.tbody.tb_todosSC', compact('beneficiariosearch2', 'seccion'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+
     public function programas(Request $request)
     {
         $monto_total_donaciones = Donacion::getMontoTotal();
