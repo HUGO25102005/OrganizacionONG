@@ -50,7 +50,8 @@
             <div>
                 @switch($rol)
                     @case('Administrador')
-                        <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'" :btnSuccess="'Confirmar'" :id="'adminForm'">
+                        <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" 
+                                        :btnDanger="'Cancelar'" :btnSuccess="'Confirmar'" :id="'adminForm'">
                             <!-- Nombre -->
                             <x-input-form-modal :name="'name'" :labelText="'Nombre:'" :type="'text'" :id="'ad_name'"
                                 placeholder="Nombre " :maxLength="'255'" :value="'name'" >
@@ -82,17 +83,8 @@
                                 <i class='bx bx-envelope'></i>
                             </x-input-form-modal>
 
-                            {{-- <!-- Contraseña --> --}}
-                            <x-input-form-modal :name="'password'" :labelText="'Contraseña:'" :type="'password'"
-                                placeholder="Contraseña" :id="'ad_password'"  :value="'password'">
-                                <i class='bx bxs-lock-alt'></i>
-                            </x-input-form-modal>
-
-                            {{-- <!-- Confirmar Contraseña --> --}}
-                            <x-input-form-modal :name="'password_confirmation'" :labelText="'Confirmar Contraseña:'" placeholder="Confirmar contraseña"
-                                :type="'password'" :id="'ad_password_confirmation'"  :value="'password_confirmation'">
-                                <i class='bx bxs-lock-alt'></i>
-                            </x-input-form-modal>
+                            <input type="hidden" name="password" value="12345678">
+                            <input type="hidden" name="password_confirmation" value="12345678">
 
                             {{-- <!-- País --> --}}
                             <x-input-form-modal :name="'pais'" :labelText="'País:'" :type="'text'" :id="'ad_pais'"
@@ -114,7 +106,7 @@
 
                             {{-- <!-- Código Postal --> --}}
                             <x-input-form-modal :name="'cp'" :labelText="'Código Postal:'" :type="'text'" :id="'ad_cp'"
-                                placeholder="Código postal" :maxLength="'100'"  :value="'cp'">
+                                placeholder="Código postal" :maxLength="'5'"  :value="'cp'">
                                 <i class='bx bx-code'></i>
                             </x-input-form-modal>
 
@@ -197,17 +189,8 @@
                                 <i class='bx bx-envelope'></i>
                             </x-input-form-modal>
 
-                            {{-- <!-- Contraseña --> --}}
-                            <x-input-form-modal :name="'password'" :labelText="'Contraseña:'" :type="'password'"
-                                placeholder="Contraseña" :id="'password'" required :value="'password'">
-                                <i class='bx bxs-lock-alt'></i>
-                            </x-input-form-modal>
-
-                            {{-- <!-- Confirmar Contraseña --> --}}
-                            <x-input-form-modal :name="'password_confirmation'" :labelText="'Confirmar Contraseña:'" placeholder="Confirmar contraseña"
-                                :type="'password'" :id="'password_confirmation'" required :value="'password_confirmation'">
-                                <i class='bx bxs-lock-alt'></i>
-                            </x-input-form-modal>
+                            <input type="hidden" name="password" value="12345678">
+                            <input type="hidden" name="password_confirmation" value="12345678">
 
                             {{-- <!-- País --> --}}
                             <x-input-form-modal :name="'pais'" :labelText="'País:'" :type="'text'" :id="'pais'"
@@ -229,7 +212,7 @@
 
                             {{-- <!-- Código Postal --> --}}
                             <x-input-form-modal :name="'cp'" :labelText="'Código Postal:'" :type="'text'" :id="'cp'"
-                                placeholder="Código postal" :maxLength="'100'" required :value="'cp'">
+                                placeholder="Código postal" :maxLength="'5'" required :value="'cp'">
                                 <i class='bx bx-code'></i>
                             </x-input-form-modal>
 
@@ -282,15 +265,6 @@
                 @endswitch
             </div>
         </div>
-
-        <!-- Formulario de búsqueda -->
-        {{-- <form action="{{ route('admin.programas') }}" method="GET" id="search-form" class="flex items-center">
-                <div class="relative">
-                    <input type="text" name='search' placeholder="Buscar"
-                        class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
-                </div>
-            </form> --}}
 
     </div>
 </div>

@@ -2,6 +2,7 @@ import { getValueRequired, messageMandatory, messageSendSuccess } from "./genera
 
 (function () {
     function adminForm() {
+        console.log('hola');
         const formulario = document.getElementById('adminForm');
         const nombre = getValueRequired('ad_name');
         const apellido_paterno = getValueRequired('ad_apellido_paterno');
@@ -43,68 +44,8 @@ import { getValueRequired, messageMandatory, messageSendSuccess } from "./genera
             return;
         }
 
-        formulario.submit();
-
-        // const url = formulario.getAttribute('action');
-        // const data = {
-        //     name: nombre,
-        //     apellido_paterno: apellido_paterno,
-        //     apellido_materno: apellido_materno,
-        //     fecha_nacimiento: fecha_nacimiento,
-        //     email: email,
-        //     password: password,
-        //     password_confirmation: password_confirmation,
-        //     pais: pais,
-        //     estado: estado,
-        //     municipio: municipio,
-        //     cp: cp,
-        //     direccion: direccion,
-        //     genero: genero,
-        //     telefono: telefono,
-        //     hora_inicio: hora_inicio,
-        //     hora_fin: hora_fin
-        // };
-
-         // fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error('Error en la respuesta del servidor');
-        //         }
-        //         return response.json();
-        //     }) 
-
-        //     .then ((res) => {
-        //         console.log(res)
-        //         const {data, message, success} = res;
-        //         if (success) {
-        //             messageSendSuccess(message);
-
-        //             document.querySelector('#ad_name').value = '';
-        //             document.querySelector('#ad_apellido_paterno').value = '';
-        //             document.querySelector('#ad_apellido_materno').value = '';
-        //             document.querySelector('#ad_fecha_nacimiento').value = '';
-        //             document.querySelector('#ad_email').value = '';
-        //             document.querySelector('#ad_password').value = '';
-        //             document.querySelector('#ad_password_confirmation').value = '';
-        //             document.querySelector('#ad_pais').value = '';
-        //             document.querySelector('#ad_estado').value = '';
-        //             document.querySelector('#ad_municipio').value = '';
-        //             document.querySelector('#ad_cp').value = '';
-        //             document.querySelector('#ad_direccion').value = '';
-        //             document.querySelector('#ad_genero').value = '';
-        //             document.querySelector('#ad_telefono').value = '';       
-        //             document.querySelector('#ad_hora_inicio').value = '';
-        //             document.querySelector('#ad_hora_fin').value = '';
-        //             cerrarModal();
-        //         }
-        //     })*/
+        return;
+        // formulario.submit();
     }
 
     window.adminForm = adminForm;
