@@ -41,12 +41,20 @@ class AuthenticatedSessionController extends Controller
         }
         //dd($user);
         if ($user->trabajador && $user->trabajador->administrador) {
+
+            session(['name' => auth()->user()->name, 'rol' => 'Administrador', 'id' => auth()->user()->id]);
             return redirect()->intended(route('admin.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->coordinador) {
+
+            session(['name' => auth()->user()->name, 'rol' => 'Coordinador', 'id' => auth()->user()->id]);
             return redirect()->intended(route('coordinador.home'))->with('success', 'Sesión iniciada correctamente');
         } elseif ($user->trabajador && $user->trabajador->voluntario) {
+            
+            session(['name' => auth()->user()->name, 'rol' => 'Voluntario', 'id' => auth()->user()->id]);
             return redirect()->intended(route('vol.home'))->with('success', 'Sesión iniciada correctamente');
         } else if($user->beneficiario) {
+
+            session(['name' => auth()->user()->name, 'rol' => 'Beneficiario', 'id' => auth()->user()->id]);
             return redirect()->intended(route('ben.home'))->with('success', 'Sesión iniciada correctamente');
         } 
     }

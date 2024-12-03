@@ -37,7 +37,7 @@
             </div>
 
             <!-- Contenido del formulario -->
-            <form action="{{ route('vol.store') }}" method="POST" class="p-4">
+            <form action="{{ route('vol.store') }}" id="nuevoVoluntario" method="POST" class="p-4">
                 @csrf
 
                 <div class="relative mt-1 overflow-hidden">
@@ -52,73 +52,83 @@
                             x-transition:leave-end="opacity-0" class="w-full px-4 space-y-4 flex-shrink-0">
                             <div class="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
                                 <div class="mb-4">
-                                    <input type="text" name="name" placeholder="Nombre"
+                                    <input type="text" value="{{ old('name') }}" id="vol_name" name="name"
+                                        placeholder="Nombre" onfocus="resetInput('vol_name')"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="apellido_paterno" placeholder="Apellido Paterno"
+                                    <input type="text" value="{{ old('apellido_paterno') }}"
+                                        onfocus="resetInput('vol_apellido_paterno')" id="vol_apellido_paterno"
+                                        name="apellido_paterno" placeholder="Apellido Paterno"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="apellido_materno" placeholder="Apellido Materno"
+                                    <input type="text" value="{{ old('apellido_materno') }}"
+                                        onfocus="resetInput('vol_apellido_materno')" id="vol_apellido_materno"
+                                        name="apellido_materno" placeholder="Apellido Materno"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="email" name="email" placeholder="Correo electrónico"
+                                    <input type="email" value="{{ old('email') }}" id="vol_email" name="email"
+                                        onfocus="resetInput('vol_email')" placeholder="Correo electrónico"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
                                     <label for="genero" class="block text-gray-700 font-bold mb-2">Género</label>
-                                    <select name="genero" id="genero"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required>
+                                    <select name="genero" value="{{ old('genero') }}" id="vol_genero"
+                                        onfocus="resetInput('vol_genero')"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                         <option value="" disabled selected>Selecciona una opción</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
                                     </select>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="fecha_nacimiento" class="block text-gray-700 font-bold mb-2">Fecha Nacimiento</label>
-                                    <input type="date" name="fecha_nacimiento"
+                                    <label for="fecha_nacimiento" class="block text-gray-700 font-bold mb-2">Fecha
+                                        Nacimiento</label>
+                                    <input type="date" value="{{ old('fecha_nacimiento') }}"
+                                        onfocus="resetInput('vol_fecha_nacimiento')" id="vol_fecha_nacimiento"
+                                        name="fecha_nacimiento"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-                                
                                 <div class="mb-4">
-                                    <input type="tel" name="telefono" placeholder="Teléfono"
+                                    <input type="tel" value="{{ old('telefono') }}" id="vol_telefono"
+                                        name="telefono" onfocus="resetInput('vol_telefono')" placeholder="Teléfono"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="direccion" placeholder="Dirección"
+                                    <input type="text" value="{{ old('direccion') }}" id="vol_direccion"
+                                        name="direccion" onfocus="resetInput('vol_direccion')"
+                                        placeholder="Dirección"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-                                <!-- País -->
                                 <div class="mb-4">
-                                    <input type="text" name="pais" placeholder="País"
+                                    <input type="text" value="{{ old('pais') }}" id="vol_pais" name="pais"
+                                        onfocus="resetInput('vol_pais')" placeholder="País"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                        maxlength="100">
                                 </div>
-
-                                <!-- Estado -->
                                 <div class="mb-4">
-                                    <input type="text" name="estado" placeholder="Estado"
+                                    <input type="text" value="{{ old('estado') }}" id="vol_estado"
+                                        name="estado" onfocus="resetInput('vol_estado')" placeholder="Estado"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                        maxlength="100">
                                 </div>
-
-                                <!-- Municipio -->
                                 <div class="mb-4">
-                                    <input type="text" name="municipio" placeholder="Municipio"
+                                    <input type="text" value="{{ old('municipio') }}" id="vol_municipio"
+                                        name="municipio" onfocus="resetInput('vol_municipio')"
+                                        placeholder="Municipio"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required maxlength="100">
+                                        maxlength="100">
                                 </div>
-
-                                <!-- Código Postal -->
                                 <div class="mb-4">
-                                    <input type="text" name="cp" placeholder="Código Postal"
+                                    <input type="text" value="{{ old('cp') }}" id="vol_cp" name="cp"
+                                        onfocus="resetInput('vol_cp')" placeholder="Código Postal"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required minlength="5"  >
+                                        maxlength="5">
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- Datos Técnicos -->
@@ -129,62 +139,98 @@
                             class="w-full px-4 space-y-4 flex-shrink-0">
                             <div class="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
                                 <div class="mb-4">
-                                    <input type="text" name="dias_disponibles" placeholder="Días disponibles"
+                                    <input type="text" value="{{ old('dias_disponibles') }}" id="vol_dias_dispo"
+                                        onfocus="resetInput('vol_dias_dispo')" name="dias_disponibles"
+                                        placeholder="Días disponibles"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="preferencia_colaboracion"
-                                        placeholder="Preferencia de colaboración"
+                                    <input type="text" value="{{ old('preferencia_colaboracion') }}"
+                                        id="vol_preferencia_colabo" onfocus="resetInput('vol_preferencia_colabo')"
+                                        name="preferencia_colaboracion" placeholder="Preferencia de colaboración"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="experiencia_previa" placeholder="Experiencia previa"
+                                    <input type="text" value="{{ old('experiencia_previa') }}"
+                                        id="vol_experencia_previa" onfocus="resetInput('vol_experencia_previa')"
+                                        name="experiencia_previa" placeholder="Experiencia previa"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="habilidades_conocimientos"
-                                        placeholder="Habilidades y conocimientos"
+                                    <input type="text" value="{{ old('habilidades_conocimientos') }}"
+                                        id="vol_habilidades" onfocus="resetInput('vol_habilidades')"
+                                        name="habilidades_conocimientos" placeholder="Habilidades y conocimientos"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="area_interes" placeholder="Área de interés"
+                                    <input type="text" value="{{ old('area_interes') }}" id="vol_area"
+                                        onfocus="resetInput('vol_area')" name="area_interes"
+                                        placeholder="Área de interés"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="number" id="hrs_dedicadas_semana" name="hrs_dedicadas_semana"
-                                        min="1" max="40" placeholder="Horas dedicadas por semana"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required>
+                                    <input type="number" value="{{ old('hrs_dedicadas_semana') }}"
+                                        id="vol_hrs_dedicadas_semana" onfocus="resetInput('vol_hrs_dedicadas_semana')"
+                                        name="hrs_dedicadas_semana" min="1" max="40"
+                                        placeholder="Horas dedicadas por semana"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
                                     <label for="fecha_inicio" class="block text-gray-700 font-medium mb-2">Fecha de
                                         inicio</label>
-                                    <input type="date" id="fecha_inicio" name="fecha_inicio"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required>
+                                    <input type="date" value="{{ old('fecha_incio') }}" id="vol_fecha_inicio"
+                                        onfocus="resetInput('vol_fecha_inicio')" name="fecha_inicio"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="mb-4">
                                     <label for="fecha_termino" class="block text-gray-700 font-medium mb-2">Fecha de
                                         termino</label>
-                                    <input type="date" id="fecha_termino" name="fecha_termino"
-                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        required>
+                                    <input type="date" value="{{ old('fecha_termino') }}" id="vol_fecha_termino"
+                                        onfocus="resetInput('vol_fecha_termino')" name="fecha_termino"
+                                        class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
-
                             </div>
-
+                            <div class="relative w-full mb-5 flex items-center gap-4">
+                                <!-- Checkbox con estilo neumorphism -->
+                                <label class="relative flex items-center cursor-pointer">
+                                    <input type="checkbox" class="hidden accept-terms">
+                                    <div class="w-6 h-6 bg-gray-100 rounded-lg shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-110 checkbox-container"
+                                         style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
+                                        <!-- Icono de palomita -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white hidden check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                </label>
+                                <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
+                            </div>                                                   
+                            <br>
                         </div>
                     </div>
                 </div>
 
                 <!-- Botones -->
                 <div class="flex justify-between mt-6">
-                    <button type="submit"
-                        class="bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500">Enviar</button>
+                    <button onclick="voluntarioForm()" 
+                    class="submit-button bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>Enviar</button>
                     <button type="button" @click="open = false"
                         class="text-red-600 hover:underline">Cancelar</button>
                 </div>
             </form>
+            {{-- <div id="contenido-dinamico" class="fixed inset-0 bg-white z-50 hidden overflow-auto"></div> --}}
         </div>
     </div>
 </div>
+
+@vite(['resources/js/voluntarioform.js'])
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('nuevoVoluntario');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            console.log('El formulario ha sido prevenido de ser enviado.');
+            // Aquí puedes agregar lógica adicional, como validaciones o alertas
+        });
+    });
+</script>

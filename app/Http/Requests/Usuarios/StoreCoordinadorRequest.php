@@ -41,9 +41,6 @@ class StoreCoordinadorRequest extends FormRequest
             'habilidades_conocimientos' => 'nullable|string',
             'area_interes' => 'nullable|string',
             'comentarios' => 'nullable|string',
-            'fecha_inicio' => 'required|date|after_or_equal:today',
-            'fecha_termino' => 'required|date|after:fecha_inicio',
-            'hrs_dedicadas_semana' => 'required|integer|min:1|max:40',
         ];
     }
 

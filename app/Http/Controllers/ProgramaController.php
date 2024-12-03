@@ -85,19 +85,20 @@ class ProgramaController extends Controller
     {
         $idPrograma = $request->id;
         $idCoordinador = auth()->user()->trabajador->coordinador->id;
+        
         // Obtener el programa junto con las relaciones necesarias
-        $programa = ProgramaEducativo::with(['aprobacionPresupuesto'])->find($idPrograma);
-    
+        $programa = ProgramaEducativo::with(['aprobacionPresupuestos'])->find($idPrograma);
+
         if ($programa) {
             // Verificar si el presupuesto está desaprobado (si_no = 0)
-            $aprobacionPresupuesto = $programa->aprobacionPresupuesto;
-    
+            $aprobacionPresupuesto = $programa->aprobacionPresupuestos;
+
             if ($aprobacionPresupuesto && $aprobacionPresupuesto->si_no == 0) {
                 $programa->update(['estado' => 6]); // Cambiar estado a rechazado
                 return redirect()->route('coordinador.programas', ['seccion' => 2])
                     ->with('warning', 'El programa fue rechazado debido a la desaprobación del presupuesto.');
             }
-    
+
             // Crear o actualizar el registro en `aprobacion_contenidos` con `si_no = 1`
             AprobacionContenido::updateOrCreate(
                 ['id_programa_educativo' => $idPrograma],
@@ -106,20 +107,21 @@ class ProgramaController extends Controller
                     'si_no' => 1, // Aceptar
                 ]
             );
-    
+
             // Verificar si el presupuesto está aprobado (si_no = 1)
             $nuevoEstado = ($aprobacionPresupuesto && $aprobacionPresupuesto->si_no == 1) ? 4 : 3;
-    
+
             // Actualizar el estado del programa
             $programa->update(['estado' => $nuevoEstado]);
-    
+
             return redirect()->route('coordinador.programas', ['seccion' => 2])
                 ->with('success', 'El programa fue aceptado con éxito.');
         }
-    
+
         return redirect()->route('coordinador.programas', ['seccion' => 2])
             ->with('error', 'No se encontró el programa.');
     }
+
 
     public function show($id){
         $programa = ProgramaEducativo::find($id);

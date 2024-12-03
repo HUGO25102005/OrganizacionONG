@@ -10,7 +10,7 @@ class Donante extends Model
     use HasFactory;
     
     protected $table = 'donantes';
-    protected $fillable = ['payer_id', 'email', 'Tipo_Donante', 'first_name', 'last_name', 'country_code'];
+    protected $fillable = ['payer_id', 'email', 'first_name', 'last_name', 'country_code'];
     
     /*// Especifica la tabla si el nombre no sigue la convención plural
     protected $table = 'donantes';

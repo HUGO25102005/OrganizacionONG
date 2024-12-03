@@ -40,7 +40,5 @@
         </div>
         
     </div>
-
-    <x-support-widget :roles="['Coordinador']" />
     
 </x-app-layout>

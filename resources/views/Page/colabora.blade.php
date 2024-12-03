@@ -1,6 +1,6 @@
 @extends('Page.layouts.app')
 @section('importaciones')
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/colabora.css'])
+    @vite(['resources/css/app.css', 'resources/css/colabora.css'])
 @endsection
 @section('content')
 
@@ -15,6 +15,40 @@
             </ul>
         </div>
     @endif
+    
+    <style>
+        input:checked + div {
+            box-shadow: inset 5px 5px 10px #3b3b7e, inset -5px -5px 10px #635bf6;
+        }
+    
+        input:hover + div {
+            box-shadow: 5px 5px 12px #c2c2c2, -5px -5px 12px #ffffff;
+        }
+    
+        input + div {
+            transition: all 0.3s ease-in-out;
+        }
+    
+        /* Animación para el icono de check */
+        @keyframes check {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-20deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2) rotate(0deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+    
+        .peer-checked:animate-check {
+            animation: check 0.3s ease-in-out forwards;
+        }
+    </style>
 
     <style>
         @keyframes slide-in {
@@ -150,12 +184,76 @@
 
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const carousel = document.querySelector("#carousel .carousel-items");
+            const slides = document.querySelectorAll(".carousel-item");
+            const prevButton = document.querySelector("#prev");
+            const nextButton = document.querySelector("#next");
+            const slideInterval = 5000; // Cambia cada 5 segundos automáticamente
+            let currentIndex = 0;
+            let autoSlide;
+
+            const resetAnimations = () => {
+                slides.forEach((slide) => {
+                    const texts = slide.querySelectorAll("h2, p");
+                    texts.forEach((text) => {
+                        text.classList.remove("animate-slide-in");
+                    });
+                });
+            };
+
+            const playAnimations = (slide) => {
+                const texts = slide.querySelectorAll("h2, p");
+                texts.forEach((text, index) => {
+                    text.style.animationDelay = `${index * 0.4}s`;
+                    text.classList.add("animate-slide-in");
+                });
+            };
+
+            const updateCarousel = () => {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                resetAnimations();
+                playAnimations(slides[currentIndex]);
+            };
+
+            const resetAutoSlide = () => {
+                clearInterval(autoSlide);
+                autoSlide = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                }, slideInterval);
+            };
+
+            nextButton.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+                resetAutoSlide();
+            });
+
+            prevButton.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateCarousel();
+                resetAutoSlide();
+            });
+
+            // Auto-slide inicial
+            autoSlide = setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }, slideInterval);
+
+            playAnimations(slides[currentIndex]); // Animación inicial
+        });
+    </script>
+
     <section class="valores neumorphic-section scroll-animation bg-[#efeff9] text-[#262D34] text-center px-8 py-8">
         <div
             class=" val_font w-full max-w-7xl mx-auto rounded-[32px] bg-[#ffffff] shadow-[10px_10px_20px_#d1d9e6,-10px_-10px_20px_#ffffff] p-8 flex flex-col justify-between items-center overflow-hidden">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 text-center">
                 Se parte de nuestro equipo
             </h1>
+            <br>
             <p class="paragraph mb-20 px-8 md:px-20 lg:px-40 text-justify">
                 Nuestra plataforma está dedicada a brindar acceso gratuito a la educación para todas las personas, sin
                 importar su situación. Estos son los valores que guían nuestro trabajo:
@@ -164,35 +262,40 @@
                 <div>
                     <div
                         class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
-                        <h3 class="text-2xl font-semibold mb-4">Se parte de nuestros beneficiarios</h3>
+                        <h4 class="text-2xl font-semibold mb-4">Se parte de nuestros beneficiarios</h4>
+                        <br>
                         <p class="text-md font-semibold text-[#262D34] text-justify">
                             Toma cursos de tu interés de forma gratuita.
                         </p>
-                        <img src="{{ asset('images/estudiante.png') }}" alt="Estudiante" class="neumorphic-img h-48 mb-6">
+                        <br>
+                        <img src="{{ asset('images/estudiante.png') }}" alt="Estudiante" class="neumorphic-img h-29 w-40 mb-6">
                     </div>
-                    <div class="">@include('Page.layouts.modals.modal_nuevo_beneficiario')</div>
+                    @include('Page.layouts.modals.modal_nuevo_beneficiario')
                 </div>
 
                 <div>
                     <div
                         class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
-                        <h3 class="text-2xl font-semibold mb-10">Se parte de nuestro soporte de docentes</h3>
+                        <h4 class="text-2xl font-semibold mb-10">Se parte de nuestro soporte de docentes</h4>
+                        <br>
                         <p class="text-md font-semibold text-[#262D34] text-justify">
                             Toma cursos de tu interés de forma gratuita.
                         </p>
-                        <img src="{{ asset('images/mtro.png') }}" alt="Docente" class="neumorphic-img mb-6">
-                        
+                        <br>
+                        <img src="{{ asset('images/mtro.png') }}" alt="Docente" class="neumorphic-img h-35 w-40 mb-6">
                     </div>
                     @include('Page.layouts.modals.modal_nuevo_voluntario')
                 </div>
                 <div>
                     <div
                         class="valor-item max-w-[280px] p-5 rounded-[16px] bg-[#f6f7ff] shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] transition-all duration-300 transform mb-10">
-                        <h3 class="text-2xl font-semibold mb-2">Se parte de nuestro soporte de coordinación</h3>
+                        <h4 class="text-2xl font-semibold mb-2">Se parte de nuestro soporte de coordinación</h4>
+                        <br>
                         <p class="text-md font-semibold text-[#262D34] text-justify">
                             Toma cursos de tu interés de forma gratuita.
                         </p>
-                        <img src="{{ asset('images/coordinador.png') }}" alt="Coordinador" class="neumorphic-img mb-6">
+                        <br>
+                        <img src="{{ asset('images/coordinador.png') }}" alt="Coordinador" class="neumorphic-img h-35 w-40 mb-6">
                     </div>
                     @include('Page.layouts.modals.modal_nuevo_coordinador')
                 </div>
@@ -306,6 +409,56 @@
         });
     </script>  
 
+    {{-- <script>
+        function toggleCheckmark(checkbox) {
+        const checkboxContainer = document.getElementById('checkboxContainer');
+        const checkIcon = document.getElementById('checkIcon');
+
+        if (checkbox.checked) {
+            // Cambiar el fondo a verde
+            checkboxContainer.style.backgroundColor = '#22c55e'; // Verde Tailwind (green-500)
+            // Mostrar la palomita
+            checkIcon.style.display = 'block';
+        } else {
+            // Restaurar el fondo original
+            checkboxContainer.style.backgroundColor = '#f3f4f6'; // Gris Tailwind (gray-100)
+            // Ocultar la palomita
+            checkIcon.style.display = 'none';
+        }
+    }
+    </script> --}}
+
+    <script>
+        document.querySelectorAll('.accept-terms').forEach((checkbox, index) => {
+            const submitButton = document.querySelectorAll('.submit-button')[index];
+            const checkboxContainer = document.querySelectorAll('.checkbox-container')[index];
+            const checkIcon = document.querySelectorAll('.check-icon')[index];
+
+            // Evento para habilitar/deshabilitar el botón de enviar
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+                    submitButton.disabled = false; // Habilita el botón
+                    submitButton.classList.remove('disabled:bg-gray-300', 'disabled:text-gray-500');
+                    submitButton.classList.add('bg-blue-600', 'text-white');
+
+                    // Cambia el estilo del checkbox
+                    checkboxContainer.style.backgroundColor = '#22c55e'; // Verde
+                    checkboxContainer.style.border = '2px solid #16a34a'; // Verde oscuro
+                    checkIcon.style.display = 'block'; // Muestra la palomita
+                } else {
+                    submitButton.disabled = true; // Deshabilita el botón
+                    submitButton.classList.remove('bg-blue-600', 'text-white');
+                    submitButton.classList.add('disabled:bg-gray-300', 'disabled:text-gray-500');
+
+                    // Restaura el estilo del checkbox
+                    checkboxContainer.style.backgroundColor = '#f3f4f6'; // Gris
+                    checkboxContainer.style.border = '2px solid #dbe8fc'; // Azul claro
+                    checkIcon.style.display = 'none'; // Oculta la palomita
+                }
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const scrollElements = document.querySelectorAll(".scroll-animation");
@@ -334,119 +487,5 @@
             });
         });
     </script>
+
 @endsection
-<div id="coordinatorModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
-    <div class="bg-white rounded-lg p-6 w-full max-w-lg shadow-xl" style="width: 900px; height: 700px;">
-        <h2 class="text-xl font-bold mb-4 text-[#3B3636]">Solicitud a Coordinador</h2>
-        <!-- Formulario de entrada -->
-        <div class="grid grid-cols-2 gap-4">
-            <!-- Nombre completo -->
-            <div class="relative mb-4">
-                <i class='bx bx-user absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Nombre completo"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Habilidades clave -->
-            <div class="relative mb-4">
-                <i class='bx bx-brain absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Habilidades clave"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Fecha de nacimiento -->
-            <div class="relative mb-4">
-                <i class='bx bx-calendar absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="date" placeholder="Fecha de nacimiento"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs placeholder:text-[#3B3636]">
-            </div>
-            <!-- Idiomas -->
-            <div class="relative mb-4">
-                <i class='bx bx-globe absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Idiomas"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Género -->
-            <div class="relative mb-4">
-                <i class='bx bx-male-female absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Género"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Función clave -->
-            <div class="relative mb-4">
-                <i class='bx bx-briefcase-alt absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Función clave"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Domicilio -->
-            <div class="relative mb-4">
-                <i class='bx bx-home absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Domicilio"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Área de supervisión -->
-            <div class="relative mb-4">
-                <i class='bx bx-map-pin absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Área de supervisión"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Teléfono -->
-            <div class="relative mb-4">
-                <i class='bx bx-phone absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="tel" placeholder="Teléfono"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Capacidad de manejo de equipos -->
-            <div class="relative mb-4">
-                <i class='bx bx-group absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Capacidad de manejo de equipos"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Correo electrónico -->
-            <div class="relative mb-4">
-                <i class='bx bx-envelope absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="email" placeholder="Correo electrónico"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Conocimiento de herramientas -->
-            <div class="relative mb-4">
-                <i class='bx bx-wrench absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Conocimiento de herramientas"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Especialización en cursos -->
-            <div class="relative mb-4">
-                <i class='bx bx-book-open absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Especialización en cursos"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Disponibilidad de horario -->
-            <div class="relative mb-4">
-                <i class='bx bx-time-five absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Disponibilidad de horario"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Experiencia laboral -->
-            <div class="relative mb-4">
-                <i class='bx bx-history absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Experiencia laboral"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Disponibilidad de viajes -->
-            <div class="relative mb-4">
-                <i class='bx bx-plane absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Disponibilidad de viajes"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-            <!-- Experiencia en sector educativo -->
-            <div class="relative mb-4">
-                <i class='bx bx-book-reader absolute left-2 top-2.5 text-[#3B3636]'></i>
-                <input type="text" placeholder="Experiencia en sector educativo"
-                    class="pl-4 py-2 bg-[#E6ECF8] rounded-full w-full drop-shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#3B3636] text-xs">
-            </div>
-        </div>
-        <div class="flex justify-end mt-4">
-            <button onclick="closeCoordinatorModal()"
-                class="bg-blue-100 text-black px-4 py-2 rounded-full mr-2 shadow-inner">Cerrar</button>
-            <button class="bg-[#063663] text-white px-4 py-2 rounded-full shadow-md">Enviar Solicitud</button>
-        </div>
-    </div>
-</div>

@@ -58,14 +58,14 @@
 
 
     <!-- Sección: Asignación de recursos -->
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
+    <div class="bg-[#F6F8FF] p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-center font-semibold text-2xl md:text-3xl">Solicitudes de Recursos</h3>
             <form action="{{ route('tabla.actuSoli') }}" method="GET" id="search-form" class="flex items-center">
                 @csrf
                 <div class="relative">
                     <input type="text" name="search"
-                        placeholder="Buscar por nombre del programa, impartido por, beneficiarios o recursos"
+                        placeholder="Buscar"
                         class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
                 </div>
@@ -74,7 +74,9 @@
 
 
         @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')
-
+        <div class="mt-2">
+            {{ $soliRecursos->links() }}
+        </div>
     </div>
 
     <div class="fixed bottom-5 right-5 z-100">
