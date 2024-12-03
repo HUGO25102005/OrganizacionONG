@@ -13,12 +13,13 @@
     <!-- Scripts -->
     @yield('importaciones')
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/dashboard.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/dashboard.css', 'resources/js/scroll.js', 'resources/js/terminosCondiciones.js'])
 
     <title>Pi</title>
 </head>
 
 <body>
+    <div id="contenido-dinamico" class="fixed inset-0 bg-white z-[100] hidden overflow-auto"></div>
     <header>
         @include('Page.layouts.navigation')
     </header>

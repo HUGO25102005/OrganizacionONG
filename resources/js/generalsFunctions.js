@@ -95,7 +95,6 @@ export function messageSendError(message, response = ''){
     });
 }
 
-
 export function messageErrorRequest(errorMessage){
     Swal.fire({
         title: 'Error en la solicitud',

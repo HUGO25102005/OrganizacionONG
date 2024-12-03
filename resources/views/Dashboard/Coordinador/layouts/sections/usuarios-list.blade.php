@@ -78,10 +78,11 @@
 <br><br><br><br>
 
 <div class="container w-full mb-5 flex relative">
-    <form action="{{ route('coordinador.beneficiarios') }}" method="GET" id="search-form" class="absolute right-6 bottom-2">
+    <form id="search-form" class="absolute right-6 bottom-2">
         <input type="text" id="search" name="search" placeholder="Buscar"
             class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('search', request()->input('search')) }}" />
         <i class="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+        <input type="hidden" name="estado" value="{{ $estado }}">
     </form>
 </div>
 
@@ -105,7 +106,7 @@
                     </tr>
                 </thead>
                 
-                <tbody>
+                <tbody id="beneficiarios-tbody">
                     @switch($estado)
                         @case(0)
                             @include('Dashboard.Coordinador.layouts.tables.tbody.tb_todos')
@@ -159,4 +160,33 @@
             localStorage.removeItem('scrollPosition'); // Elimina el valor después de restaurarlo
         }
     });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('#search');
+    const searchForm = document.querySelector('#search-form');
+    const tbody = document.querySelector('#beneficiarios-tbody');
+
+    // Escucha cambios en el input de búsqueda
+    searchInput.addEventListener('input', () => {
+        const formData = new FormData(searchForm);
+        const url = "{{ route('coordinador.beneficiarios.searchb') }}";
+
+        fetch(url + '?' + new URLSearchParams(formData), {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al buscar programas.');
+            return response.json();
+        })
+        .then(data => {
+            // Reemplaza el contenido del tbody con los resultados
+            tbody.innerHTML = data.html;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
 </script>
