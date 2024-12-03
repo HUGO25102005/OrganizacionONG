@@ -50,77 +50,77 @@
             <div>
                 @switch($rol)
                     @case('Administrador')
-                        <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'" :btnSuccess="'Confirmar'">
+                        <x-modal-form :btnTitulo="'Nuevo Administrador'" :tituloModal="'Agrega Nuevo Administrador'" :router="route('admin.store')" :btnDanger="'Cancelar'" :btnSuccess="'Confirmar'" :id="'adminForm'">
                             <!-- Nombre -->
-                            <x-input-form-modal :name="'name'" :labelText="'Nombre:'" :type="'text'" :id="'name'"
-                                placeholder="Nombre " :maxLength="'255'" :value="'name'" required>
+                            <x-input-form-modal :name="'name'" :labelText="'Nombre:'" :type="'text'" :id="'ad_name'"
+                                placeholder="Nombre " :maxLength="'255'" :value="'name'" >
                                 <i class="bx bx-user"></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Apellido Paterno --> --}}
-                            <x-input-form-modal :name="'apellido_paterno'" :labelText="'Apellido Paterno:'" :type="'text'" :id="'apellido_paterno'"
-                                placeholder="Apellido Paterno" :maxLength="'255'" required :value="'apellido_paterno'">
+                            <x-input-form-modal :name="'apellido_paterno'" :labelText="'Apellido Paterno:'" :type="'text'" :id="'ad_apellido_paterno'"
+                                placeholder="Apellido Paterno" :maxLength="'255'"  :value="'apellido_paterno'">
                                 <i class="bx bxs-user-pin"></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Apellido Materno --> --}}
-                            <x-input-form-modal :name="'apellido_materno'" :labelText="'Apellido Materno:'" :type="'text'" :id="'apellido_materno'"
-                                placeholder="Apellido Materno" :maxLength="'255'" required :value="'apellido_materno'">
+                            <x-input-form-modal :name="'apellido_materno'" :labelText="'Apellido Materno:'" :type="'text'" :id="'ad_apellido_materno'"
+                                placeholder="Apellido Materno" :maxLength="'255'"  :value="'apellido_materno'">
                                 <i class='bx bxs-universal-access'></i>
                             </x-input-form-modal>
                             {{-- <!-- Fecha de Nacimiento 
                                         --> --}}
 
-                            <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'fecha_nacimiento'"
-                                required :placeholder="'fecha_nacimiento'" :value="'fecha_nacimiento'">
+                            <x-input-form-modal :name="'fecha_nacimiento'" :labelText="'Fecha de Nacimiento:'" :type="'date'" :id="'ad_fecha_nacimiento'"
+                                 :placeholder="'fecha_nacimiento'" :value="'fecha_nacimiento'">
                                 <i class='bx bxs-universal-access'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Email --> --}}
-                            <x-input-form-modal :name="'email'" :labelText="'Correo Electrónico:'" :type="'email'" :id="'email'"
-                                placeholder="Correo electrónico" :maxLength="'255'" required :value="'email'">
+                            <x-input-form-modal :name="'email'" :labelText="'Correo Electrónico:'" :type="'email'" :id="'ad_email'"
+                                placeholder="Correo electrónico" :maxLength="'255'"  :value="'email'">
                                 <i class='bx bx-envelope'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Contraseña --> --}}
                             <x-input-form-modal :name="'password'" :labelText="'Contraseña:'" :type="'password'"
-                                placeholder="Contraseña" :id="'password'" required :value="'password'">
+                                placeholder="Contraseña" :id="'ad_password'"  :value="'password'">
                                 <i class='bx bxs-lock-alt'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Confirmar Contraseña --> --}}
                             <x-input-form-modal :name="'password_confirmation'" :labelText="'Confirmar Contraseña:'" placeholder="Confirmar contraseña"
-                                :type="'password'" :id="'password_confirmation'" required :value="'password_confirmation'">
+                                :type="'password'" :id="'ad_password_confirmation'"  :value="'password_confirmation'">
                                 <i class='bx bxs-lock-alt'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- País --> --}}
-                            <x-input-form-modal :name="'pais'" :labelText="'País:'" :type="'text'" :id="'pais'"
-                                placeholder="PaÍs" :maxLength="'100'" required :value="'pais'">
+                            <x-input-form-modal :name="'pais'" :labelText="'País:'" :type="'text'" :id="'ad_pais'"
+                                placeholder="PaÍs" :maxLength="'100'"  :value="'pais'">
                                 <i class='bx bx-world'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Estado --> --}}
-                            <x-input-form-modal :name="'estado'" :labelText="'Estado:'" :type="'text'" :id="'estado'"
-                                placeholder="Estado" :maxLength="'100'" required :value="'estado'">
+                            <x-input-form-modal :name="'estado'" :labelText="'Estado:'" :type="'text'" :id="'ad_estado'"
+                                placeholder="Estado" :maxLength="'100'"  :value="'estado'">
                                 <i class='bx bxs-building'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Municipio --> --}}
-                            <x-input-form-modal :name="'municipio'" :labelText="'Municipio:'" :type="'text'" :id="'municipio'"
-                                placeholder="Municipio" :maxLength="'100'" required :value="'municipio'">
+                            <x-input-form-modal :name="'municipio'" :labelText="'Municipio:'" :type="'text'" :id="'ad_municipio'"
+                                placeholder="Municipio" :maxLength="'100'"  :value="'municipio'">
                                 <i class='bx bxs-building-house'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Código Postal --> --}}
-                            <x-input-form-modal :name="'cp'" :labelText="'Código Postal:'" :type="'text'" :id="'cp'"
-                                placeholder="Código postal" :maxLength="'100'" required :value="'cp'">
+                            <x-input-form-modal :name="'cp'" :labelText="'Código Postal:'" :type="'text'" :id="'ad_cp'"
+                                placeholder="Código postal" :maxLength="'100'"  :value="'cp'">
                                 <i class='bx bx-code'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Dirección --> --}}
-                            <x-input-form-modal :name="'direccion'" :labelText="'Dirección:'" :type="'text'" :id="'direccion'"
-                                placeholder="Dirección" :maxLength="'255'" required :value="'direccion'">
+                            <x-input-form-modal :name="'direccion'" :labelText="'Dirección:'" :type="'text'" :id="'ad_direccion'"
+                                placeholder="Dirección" :maxLength="'255'"  :value="'direccion'">
                                 <i class='bx bxs-upvote'></i>
                             </x-input-form-modal>
 
@@ -131,7 +131,7 @@
                                 </div>
                                 <select
                                     class="flex-1 bg-transparent border-none outline-none text-black placeholder-gray-500 text-sm px-2"
-                                    style="min-width: 200px;" name="genero" id="genero" required>
+                                    style="min-width: 200px;" name="genero" id="genero" >
                                     <option value="" disabled selected hidden>Género</option> <!-- Placeholder -->
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
@@ -141,22 +141,22 @@
 
 
                             {{-- <!-- Teléfono --> --}}
-                            <x-input-form-modal :name="'telefono'" :labelText="'Teléfono:'" :type="'text'" :id="'telefono'"
-                                placeholder="Teléfono" :maxLength="'20'" required :value="'telefono'">
+                            <x-input-form-modal :name="'telefono'" :labelText="'Teléfono:'" :type="'text'" :id="'ad_telefono'"
+                                placeholder="Teléfono" :maxLength="'20'"  :value="'telefono'">
                                 <i class='bx bxs-phone-call'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Hora Inicio 
                                         --> --}}
-                            <x-input-form-modal :name="'hora_inicio'" :labelText="'Hora Inicio:'" :type="'time'" :id="'hora_inicio'"
-                                required :value="'hora_inicio'" :placeholder="''">
+                            <x-input-form-modal :name="'hora_inicio'" :labelText="'Hora Inicio:'" :type="'time'" :id="'ad_hora_inicio'"
+                                 :value="'hora_inicio'" :placeholder="''">
                                 <i class='bx bxs-phone-call'></i>
                             </x-input-form-modal>
 
                             {{-- <!-- Hora Fin --> 
                                     --> --}}
-                            <x-input-form-modal :name="'hora_fin'" :labelText="'Hora Fin:'" :type="'time'" :id="'hora_fin'"
-                                required :value="'hora_fin'" :placeholder="''">
+                            <x-input-form-modal :name="'hora_fin'" :labelText="'Hora Fin:'" :type="'time'" :id="'ad_hora_fin'"
+                                 :value="'hora_fin'" :placeholder="''">
                                 <i class='bx bxs-phone-call'></i>
                             </x-input-form-modal>
 
@@ -164,7 +164,7 @@
                     @break
 
                     @case('Coordinador')
-                        <x-modal-form :btnTitulo="'Nuevo Coordinador'" :tituloModal="'Agrega Nuevo Coordinador'" :router="route('coordinador.store')" :btnDanger="'Cancelar'"
+                        <x-modal-form :btnTitulo="'Nuevo Coordinador'" :tituloModal="'Agrega Nuevo Coordinador'" :router="route('coordinador.store')" :btnDanger="'Cancelar'" :id="'nuevoCoordinador'"
                             :btnSuccess="'Confirmar'">
                             <!-- Nombre -->
                             <x-input-form-modal :name="'name'" :labelText="'Nombre:'" :type="'text'" :id="'name'"
@@ -294,3 +294,5 @@
 
     </div>
 </div>
+
+@vite(['resources/js/adminform.js'])
