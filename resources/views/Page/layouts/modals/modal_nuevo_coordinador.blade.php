@@ -6,9 +6,10 @@
     </button>
 
     <!-- Modal -->
-    <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+    <div x-show="open" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
 
         <div
@@ -31,10 +32,10 @@
                     </nav>
                 </div>
             </div>
-            
+
 
             <!-- Contenido del formulario -->
-            <form action="{{ route('coord.store') }}"  id="coordinadorForm" method="POST" class="p-4">
+            <form action="{{ route('coord.store') }}" id="coordinadorForm" method="POST" class="p-4">
                 @csrf
 
                 <div class="relative mt-1 overflow-hidden">
@@ -49,90 +50,114 @@
                             x-transition:leave-end="opacity-0" class="w-full px-4 space-y-4 flex-shrink-0">
                             <div class="grid grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('name') }}" id="co_name" name="name" placeholder="Nombre"
+                                    <input type="text" value="{{ old('name') }}" id="co_name" name="name"
+                                        placeholder="Nombre" onfocus="resetInput('co_name')"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('apellido_paterno') }}" id="co_apellido_paterno" name="apellido_paterno" placeholder="Apellido Paterno"
+                                    <input type="text" value="{{ old('apellido_paterno') }}" id="co_apellido_paterno"
+                                        name="apellido_paterno" placeholder="Apellido Paterno"
+                                        onfocus="resetInput('co_apellido_paterno')"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('apellido_materno') }}" id="co_apellido_materno" name="apellido_materno" placeholder="Apellido Materno"
+                                    <input type="text" value="{{ old('apellido_materno') }}" id="co_apellido_materno"
+                                        onfocus="resetInput('co_apellido_materno')" name="apellido_materno"
+                                        placeholder="Apellido Materno"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="email" value="{{ old('email') }}" id="co_email" name="email" placeholder="Correo electrónico"
+                                    <input type="email" value="{{ old('email') }}" id="co_email" name="email"
+                                        onfocus="resetInput('co_email')" placeholder="Correo electrónico"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
                                     <label for="genero" class="block text-gray-700 font-bold mb-2">Género</label>
-                                    <select name="genero" id="co_genero"
+                                    <select name="genero" id="co_genero" onfocus="resetInput('co_genero')"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <option value="" disabled {{ old('genero') == '' ? 'selected' : '' }}>Selecciona una opción</option>
-                                        <option value="M" {{ old('genero') == 'M' ? 'selected' : '' }}>Masculino</option>
-                                        <option value="F" {{ old('genero') == 'F' ? 'selected' : '' }}>Femenino</option>
+                                        <option value="" disabled {{ old('genero') == '' ? 'selected' : '' }}>
+                                            Selecciona una opción</option>
+                                        <option value="M" {{ old('genero') == 'M' ? 'selected' : '' }}>Masculino
+                                        </option>
+                                        <option value="F" {{ old('genero') == 'F' ? 'selected' : '' }}>Femenino
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="fecha_nacimiento" class="block text-gray-700 font-bold mb-2">Fecha Nacimiento</label>
-                                    <input type="date" value="{{ old('fecha_nacimiento') }}" id="co_fecha_nacimiento" name="fecha_nacimiento"
+                                    <label for="fecha_nacimiento" class="block text-gray-700 font-bold mb-2">Fecha
+                                        Nacimiento</label>
+                                    <input type="date" value="{{ old('fecha_nacimiento') }}"
+                                        id="co_fecha_nacimiento" onfocus="resetInput('co_fecha_nacimiento')"
+                                        name="fecha_nacimiento"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-                                
+
                                 <div class="mb-4">
-                                    <input type="tel" value="{{ old('telefono') }}" id="co_telefono" name="telefono" placeholder="Teléfono"
+                                    <input type="tel" value="{{ old('telefono') }}" id="co_telefono"
+                                        onfocus="resetInput('co_telefono')" name="telefono" placeholder="Teléfono"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('direccion') }}" id="co_direccion" name="direccion" placeholder="Dirección"
+                                    <input type="text" value="{{ old('direccion') }}" id="co_direccion"
+                                        onfocus="resetInput('co_direccion')" name="direccion" placeholder="Dirección"
                                         class="w-full form-control py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500">
                                 </div>
-                                
+
                                 <!-- País -->
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('pais') }}" id="co_pais" name="pais" placeholder="País"
+                                    <input type="text" value="{{ old('pais') }}" id="co_pais" name="pais"
+                                        onfocus="resetInput('co_pais')" placeholder="País"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         maxlength="100">
                                 </div>
-                                
+
                                 <!-- Estado -->
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('estado') }}" id="co_estado" name="estado" placeholder="Estado"
+                                    <input type="text" value="{{ old('estado') }}" id="co_estado" name="estado"
+                                        onfocus="resetInput('co_estado')" placeholder="Estado"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         maxlength="100">
                                 </div>
-                                
+
                                 <!-- Municipio -->
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('municipio') }}" id="co_municipio" name="municipio" placeholder="Municipio"
+                                    <input type="text" value="{{ old('municipio') }}" id="co_municipio"
+                                        onfocus="resetInput('co_municipio')" name="municipio" placeholder="Municipio"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         maxlength="100">
                                 </div>
-                                
+
                                 <!-- Código Postal -->
                                 <div class="mb-4">
-                                    <input type="text" value="{{ old('cp') }}" id="co_cp" name="cp" placeholder="Código Postal"
+                                    <input type="text" value="{{ old('cp') }}" id="co_cp" name="cp"
+                                        onfocus="resetInput('co_cp')" placeholder="Código Postal"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        minlength="5">
+                                        maxlength="5">
                                 </div>
-                                
+
                                 {{-- Hora inicio --}}
                                 <div class="mb-4">
-                                    <label for="hora_inicio" class="block text-gray-700 font-medium mb-2">Hora de inicio</label>
-                                    <input type="time" value="{{ old('hora_inicio') }}" id="co_hora_inicio" name="hora_inicio"
+                                    <label for="hora_inicio" class="block text-gray-700 font-medium mb-2">Hora de
+                                        inicio</label>
+                                    <input type="time" value="{{ old('hora_inicio') }}" id="co_hora_inicio"
+                                        onfocus="resetInput('co_hora_inicio')" name="hora_inicio"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
-                                
+
                                 {{-- Hora fin --}}
                                 <div class="mb-4">
-                                    <label for="hora_fin" class="block text-gray-700 font-medium mb-2">Hora de fin</label>
-                                    <input type="time" value="{{ old('hora_fin') }}" id="co_hora_fin" name="hora_fin"
+                                    <label for="hora_fin" class="block text-gray-700 font-medium mb-2">Hora de
+                                        fin</label>
+                                    <input type="time" value="{{ old('hora_fin') }}" id="co_hora_fin"
+                                        onfocus="resetInput('co_hora_fin')" name="hora_fin"
                                         class="w-full py-2 px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
-                                
+
                                 <input type="hidden" id="password" name="password" value="12345678">
-                                <input type="hidden" id="password_confirmation" name="password_confirmation" value="12345678">
+                                <input type="hidden" id="password_confirmation" name="password_confirmation"
+                                    value="12345678">
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -152,13 +177,12 @@
 @vite(['resources/js/coordinatorform.js'])
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('coordinadorForm');
+        const form = document.getElementById('coordinadorForm');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita el envío del formulario
-        console.log('El formulario ha sido prevenido de ser enviado.');
-        // Aquí puedes agregar lógica adicional, como validaciones o alertas
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            console.log('El formulario ha sido prevenido de ser enviado.');
+            // Aquí puedes agregar lógica adicional, como validaciones o alertas
+        });
     });
-});
-
 </script>

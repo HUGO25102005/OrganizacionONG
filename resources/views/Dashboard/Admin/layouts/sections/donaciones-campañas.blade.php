@@ -57,6 +57,7 @@
                                                     class="block text-sm font-medium text-gray-700">Título:</label>
                                                 <input type="text" id="titulo" name="titulo"
                                                     value="{{ old('titulo') }}"
+                                                    onfocus="resetInput('titulo')"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     placeholder="Ingrese el título" required>
                                                 <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
@@ -67,6 +68,7 @@
                                                 <label for="descripcion"
                                                     class="block text-sm font-medium text-gray-700">Descripción:</label>
                                                 <textarea id="descripcion" name="descripcion" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                                    onfocus="resetInput('descripcion')"
                                                     placeholder="Ingrese la descripción" required>{{ old('descripcion') }}</textarea>
                                             </div>
 
@@ -76,6 +78,7 @@
                                                     class="block text-sm font-medium text-gray-700">Fecha de
                                                     Inicio:</label>
                                                 <input type="date" id="fecha_inicio" name="fecha_inicio"
+                                                    onfocus="resetInput('fecha_inicio')"
                                                     value="{{ old('fecha_inicio') }}"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     required>
@@ -87,6 +90,7 @@
                                                     class="block text-sm font-medium text-gray-700">Fecha de
                                                     Fin:</label>
                                                 <input type="date" id="fecha_fin" name="fecha_fin"
+                                                    onfocus="resetInput('fecha_fin')"
                                                     value="{{ old('fecha_fin') }}"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     required>
@@ -97,6 +101,7 @@
                                                 <label for="objetivo"
                                                     class="block text-sm font-medium text-gray-700">Objetivo:</label>
                                                 <textarea id="objetivo" name="objetivo" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                                    onfocus="resetInput('objetivo')"
                                                     placeholder="Ingrese el objetivo" required>{{ old('objetivo') }}</textarea>
                                             </div>
 
@@ -105,6 +110,7 @@
                                                 <label for="comentarios"
                                                     class="block text-sm font-medium text-gray-700">Comentarios:</label>
                                                 <textarea id="comentarios" name="comentarios" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                                    onfocus="resetInput('comentarios')"
                                                     placeholder="Ingrese comentarios adicionales">{{ old('comentarios') }}</textarea>
                                             </div>
                                         </div>
@@ -118,6 +124,7 @@
                                                 <label for="nombre"
                                                     class="block text-sm font-medium text-gray-700">Nombre:</label>
                                                 <input type="text" id="nombre" name="nombre"
+                                                    onfocus="resetInput('nombre')"
                                                     value="{{ old('nombre') }}"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     placeholder="Ingrese el nombre del producto" required>
@@ -128,6 +135,7 @@
                                                 <label for="descript"
                                                     class="block text-sm font-medium text-gray-700">Descripción:</label>
                                                 <textarea id="descript" name="descript" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                                                    onfocus="resetInput('descript')"
                                                     rows="3" placeholder="Ingrese la descripción" required>{{ old('descript') }}</textarea>
                                             </div>
 
@@ -137,6 +145,7 @@
                                                     class="block text-sm font-medium text-gray-700">Cantidad de
                                                     Artículos:</label>
                                                 <input type="number" id="cantarticulos" name="cantarticulos"
+                                                    onfocus="resetInput('cantarticulos')"
                                                     value="{{ old('cantarticulos') }}"
                                                     class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                                     placeholder="Meta de productos en unidades, ejemplo: 10 unidades"

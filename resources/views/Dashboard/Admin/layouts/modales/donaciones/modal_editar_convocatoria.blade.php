@@ -128,7 +128,7 @@
                                         <label for="cantarticulos"
                                             class="block text-sm font-medium text-gray-700">Cantidad de
                                             Artículos:</label>
-                                        <input type="number" id="cantarticulos" name="cantarticulos"
+                                        <input type="number" id="cantarticulos" name="cantarticulos" 
                                             value="{{ old('cantarticulos', $conv->cantarticulos) }}"
                                             class="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                             placeholder="Meta de productos en unidades, ejemplo: 10 unidades" required>

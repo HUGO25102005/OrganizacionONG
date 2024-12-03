@@ -1,4 +1,4 @@
-import { getValueRequired, messageMandatory, messageSendSuccess } from "./generalsFunctions";
+import { getValueRequired, messageMandatory, messageSendSuccess, resetInput } from "./generalsFunctions";
 
 (function () {
    function formNuevaCampania(){
@@ -39,7 +39,7 @@ import { getValueRequired, messageMandatory, messageSendSuccess } from "./genera
             fecha_fin: fecha_fin,
             fecha_inicio: fecha_inicio,
             objetivo: objetivo,
-            comentarios: comentarios,
+            comentarios: Number(comentarios),
             nombre: nombre_articulo,
             descript: descript,
             cantarticulos: cantarticulos,
@@ -85,4 +85,5 @@ import { getValueRequired, messageMandatory, messageSendSuccess } from "./genera
         }
    }
     window.formNuevaCampania = formNuevaCampania;
+    window.resetInput = resetInput;
 })();

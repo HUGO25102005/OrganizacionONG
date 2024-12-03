@@ -1,4 +1,4 @@
-import { getValueRequired, messageMandatory, messageSendSuccess } from "./generalsFunctions";
+import { getValueRequired, messageMandatory, messageSendSuccess, resetInput } from "./generalsFunctions";
 
 (function () {
     function coordinatorForm() {
@@ -100,5 +100,6 @@ import { getValueRequired, messageMandatory, messageSendSuccess } from "./genera
         //         }
         //     })
     }
+    window.resetInput = resetInput
     window.coordinatorForm = coordinatorForm;
 })()
