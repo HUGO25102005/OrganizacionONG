@@ -65,7 +65,7 @@
                 @csrf
                 <div class="relative">
                     <input type="text" name="search"
-                        placeholder="Buscar por nombre del programa, impartido por, beneficiarios o recursos"
+                        placeholder="Buscar"
                         class="bg-gray-200 text-gray-700 rounded-full px-4 py-2 pl-10 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <i class='bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500'></i>
                 </div>
@@ -74,7 +74,9 @@
 
 
         @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')
-
+        <div class="mt-2">
+            {{ $soliRecursos->links() }}
+        </div>
     </div>
 
     <div class="fixed bottom-5 right-5 z-100">
