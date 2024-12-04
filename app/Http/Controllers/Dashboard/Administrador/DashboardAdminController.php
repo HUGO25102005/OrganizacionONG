@@ -155,54 +155,20 @@ class DashboardAdminController extends Controller
     public function recursos(Request $request)
     {
 
-        if (empty($request->seccion)) {
-            $seccion = $request->get('seccion', 1);
-        } else {
-            $seccion = $request->seccion;
-        }
+        $seccion = 1;
 
-        if ($seccion == 1) {
-            // $monto_total_donaciones = Donacion::getMontoTotal();
-            // $total_donaciones = Donacion::all();
-            // $total_donaciones_semana = Donacion::getTotalMontoSemana();
-            $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
+        $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
 
-            // dd($soliRecursos);
-            return view(
-                'Dashboard.Admin.recursos',
-                compact(
-                    [
-                        'soliRecursos',
-                        'seccion'
-                    ]
-                )
-            )->render();
-        } else {
-
-            $search = $request->input('search');
-
-            $programas = ProgramaEducativo::when($search, function ($query, $search) {
-                return $query->where('nombre_programa', 'LIKE', '%' . $search . '%')
-                    //Aquí recorremos las relaciones para llegar a 'name' en el modelo Usuario
-                    ->orWhereHas('voluntario.trabajador.user', function ($query) use ($search) {
-                        $query->where('name', 'LIKE', '%' . $search . '%');
-                    })
-                    ->orWhereDate('fecha_inicio', '=', date('Y-m-d', strtotime($search)))
-                    ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
-                    ->orWhere('estado', 'LIKE', '%' . $search . '%');
-            })
-                ->paginate(5);
-
-
-            if (empty($request->seccion)) {
-                $seccion = $request->get('seccion', 1);
-            } else {
-                $seccion = $request->seccion;
-            }
-
-
-            return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
-        }
+        // dd($soliRecursos);
+        return view(
+            'Dashboard.Admin.recursos',
+            compact(
+                [
+                    'soliRecursos',
+                    'seccion'
+                ]
+            )
+        );
     }
     public function actualizarSolicitudes(Request $request)
     {

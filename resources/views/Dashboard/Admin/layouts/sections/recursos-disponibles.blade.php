@@ -74,9 +74,7 @@
 
 
         @include('Dashboard.Admin.layouts.tables.tablas.recursos_solicitudes')
-        <div class="mt-2">
-            {{ $soliRecursos->links() }}
-        </div>
+        
     </div>
 
     <div class="fixed bottom-5 right-5 z-100">
@@ -89,7 +87,7 @@
     </div>
 </div>
 
-<!-- Script para generar los gráficos -->
+{{-- <!-- Script para generar los gráficos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -151,6 +149,6 @@
             }
         }
     });
-</script>
+</script> --}}
 
 @vite(['resources/js/recursos-disponibles.js'])

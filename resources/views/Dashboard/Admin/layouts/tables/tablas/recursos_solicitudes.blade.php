@@ -57,6 +57,7 @@
         @endforeach
 
     </tbody>
-
-    
 </table>
+<div class="mt-2">
+    {{ $soliRecursos->links() }}
+</div>

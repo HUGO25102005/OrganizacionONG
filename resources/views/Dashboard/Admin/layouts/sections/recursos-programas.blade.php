@@ -43,9 +43,9 @@
                     <!-- Puedes agregar más filas aquí -->
                 </tbody>
             </table>
-        </div>
-        <div class="mt-2">
-            {{ $programas->links() }}
+            <div class="mt-2">
+                {{ $programas->links() }}
+            </div>
         </div>
        
     </div>

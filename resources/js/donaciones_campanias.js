@@ -39,7 +39,7 @@ import { getValueRequired, messageMandatory, messageSendSuccess, resetInput } fr
             fecha_fin: fecha_fin,
             fecha_inicio: fecha_inicio,
             objetivo: objetivo,
-            comentarios: Number(comentarios),
+            comentarios: comentarios,
             nombre: nombre_articulo,
             descript: descript,
             cantarticulos: cantarticulos,
