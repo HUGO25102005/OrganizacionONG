@@ -23,7 +23,7 @@
   </section>
   
   <section id="rutinas" class=" flex flex-col items-center rounded-t-3xl pt-0 pb-12 h-auto">
-    <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-10 mb-12">
+    <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-10 mb-10">
       CONSTRUCCIÓN DE COMUNITARIOS
     </h1>
     <div class="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
@@ -54,10 +54,13 @@
 
 
 
-  
+  <br>
   <!-- Imágenes interactivas -->
   <section class="w-full h-auto bg-cover bg-center scroll-animation flex overflow-hidden flex-col items-center justify-center">
-    <div id="slider" class="flex mt-20 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
+    <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-6">
+      Programas Finalizados
+    </h1>
+    <div id="slider" class="flex mt-6 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
         <!-- Imagen 1 -->
         @foreach ($programas as $programa)
           <div class="slider-item snap-center flex-shrink-0 w-[300px] md:w-[400px]] lg:w-[20%] rounded-md bg-gray-100 shadow-lg">
@@ -66,7 +69,7 @@
                   <h2 class="font-bold text-lg text-gray-800 text-center"> {{ $programa->nombre_programa }} </h2>
                   <br>
                   <p class="text-gray-500 mb-2">Encargado: <span class="font-semibold">{{ $programa->voluntario->trabajador->user->name. ' ' .$programa->voluntario->trabajador->user->apellido_paterno }}</span></p>
-                  <p class="text-gray-500 mb-2">Inscritos: <span class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
+                  <p class="text-gray-500 mb-2">Estudiantes: <span class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
                   <p class="text-gray-500 mb-2">Objetivo: <span class="font-semibold">{{ $programa->objetivos }}</span></p>
                   {{-- <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn1">
                       Ver más

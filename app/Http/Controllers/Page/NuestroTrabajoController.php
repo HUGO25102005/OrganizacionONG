@@ -13,7 +13,7 @@ class NuestroTrabajoController extends Controller
      */
     public function index()
     {
-        $programas = ProgramaEducativo::getProgramasActivos()->get();
+        $programas = ProgramaEducativo::getProgramas(5)->get();
         $linkActive = 3;
         return view('Page.nuestro-trabajo', compact('linkActive', 'programas'));
     }

@@ -1,6 +1,6 @@
 @extends('Page.layouts.app')
 @section('importaciones')
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/donar.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/donar.css', 'resources/js/terminosCondiciones.js'])
 @endsection
 @section('content')
     <section id="home" class="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden">
@@ -35,8 +35,11 @@
 
 
     <!-- Imágenes interactivas -->
-    <section class="w-full h-auto bg-cover bg-center flex overflow-hidden flex-col items-center justify-center">
-        <div id="slider" class="flex mt-20 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
+    <section class="w-full h-auto bg-cover bg-center flex overflow-hidden flex-col items-center justify-center mt-20">
+        <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+            Programas Finalizados
+          </h1>
+        <div id="slider" class="flex mt-6 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
             <!-- Imagen 1 -->
             @foreach ($programas as $programa)
                 <div
@@ -48,7 +51,7 @@
                         <p class="text-gray-500 mb-2">Encargado: <span
                                 class="font-semibold">{{ $programa->voluntario->trabajador->user->name . ' ' . $programa->voluntario->trabajador->user->apellido_paterno }}</span>
                         </p>
-                        <p class="text-gray-500 mb-2">Inscritos: <span
+                        <p class="text-gray-500 mb-2">Estudiantes: <span
                                 class="font-semibold">{{ $programa->getTotalBeneficiarios() }}</span></p>
                         <p class="text-gray-500 mb-2">Objetivo: <span
                                 class="font-semibold">{{ $programa->objetivos }}</span></p>
@@ -138,8 +141,22 @@
                             Has elegido donar de forma <strong>anónima</strong>. Tu contribución será completamente privada
                             y no recibirás un recibo.
                         </p>
+                        <div class="relative w-full mb-5 flex items-center gap-4">
+                            <!-- Checkbox con estilo neumorphism -->
+                            <label class="relative flex items-center cursor-pointer">
+                                <input type="checkbox" class="hidden accept-terms">
+                                <div class="w-6 h-6 bg-gray-100 rounded-lg shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-110 checkbox-container"
+                                     style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
+                                    <!-- Icono de palomita -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white opacity-0 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </label>
+                            <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
+                        </div>    
                         <button onclick="comprobarCorreoDonante('anonimo')"
-                            class="w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg">
+                            class="submit-button w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
                             Donar
                         </button>
                         <div class="hidden">
@@ -198,16 +215,28 @@
                                 <!-- Opciones generadas dinámicamente -->
                                 <option value="" disabled selected>Selecciona una opcion</option>
                             </select>
-
                         </form>
-
+                        <div class="relative w-full mb-2 flex items-center gap-4 mt-6">
+                            <!-- Checkbox con estilo neumorphism -->
+                            <label class="relative flex items-center cursor-pointer">
+                                <input type="checkbox" class="hidden accept-terms">
+                                <div class="w-6 h-6 bg-gray-100 rounded-lg shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-110 checkbox-container"
+                                     style="box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff; border: 2px solid #dbe8fc;">
+                                    <!-- Icono de palomita -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white opacity-0 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </label>
+                            <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
+                        </div>
+                        <br>
                     </div>
                 </div>
 
                 <!-- Botón Continuar -->
                 <button id="continue-button" onclick="comprobarCorreoDonante()"
-                    class="hidden w-full mt-6 p-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg disabled:opacity-50 disabled:pointer-events-none transition-opacity duration-300 ease-in-out"
-                    disabled>
+                    class="submit-button w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
                     Continuar
                 </button>
             </div>
@@ -277,6 +306,49 @@
             display: block;
         }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar todos los checkboxes con clase "accept-terms"
+            document.querySelectorAll('.accept-terms').forEach((checkbox, index) => {
+                const submitButton = document.querySelectorAll('.submit-button')[index];
+                const checkboxContainer = document.querySelectorAll('.checkbox-container')[index];
+                const checkIcon = document.querySelectorAll('.check-icon')[index];
+
+                // Inicializa el estado del botón al cargar la página
+                if (!checkbox.checked) {
+                    submitButton.disabled = true; // Asegúrate de que el botón esté deshabilitado
+                    submitButton.classList.add('disabled:bg-gray-300', 'disabled:text-gray-500');
+                    submitButton.classList.remove('bg-blue-600', 'text-white');
+                }
+
+                // Evento para habilitar/deshabilitar el botón al cambiar el estado del checkbox
+                checkbox.addEventListener('change', function () {
+                    if (checkbox.checked) {
+                        submitButton.disabled = false; // Habilita el botón
+                        submitButton.classList.remove('disabled:bg-gray-300', 'disabled:text-gray-500');
+                        submitButton.classList.add('bg-blue-600', 'text-white');
+
+                        // Cambia el estilo del checkbox
+                        checkboxContainer.style.backgroundColor = '#22c55e'; // Verde
+                        checkboxContainer.style.border = '2px solid #16a34a'; // Verde oscuro
+                        checkIcon.classList.remove('opacity-0'); // Muestra la palomita
+                    } else {
+                        submitButton.disabled = true; // Deshabilita el botón
+                        submitButton.classList.remove('bg-blue-600', 'text-white');
+                        submitButton.classList.add('disabled:bg-gray-300', 'disabled:text-gray-500');
+
+                        // Restaura el estilo del checkbox
+                        checkboxContainer.style.backgroundColor = '#f3f4f6'; // Gris
+                        checkboxContainer.style.border = '2px solid #dbe8fc'; // Azul claro
+                        checkIcon.classList.add('opacity-0'); // Oculta la palomita
+                    }
+                });
+            });
+        });
+
+
+    </script>
 @endsection
 
 @vite(['resources/js/page/colabora.js'])

@@ -66,7 +66,7 @@ class ProgramaEducativo extends Model
     //     // Devolver los datos organizados
     // }
 
-    public static function obtenerDetallesClase($idVoluntario, $idClase, $estado = 1)
+    public static function obtenerDetallesClase($idVoluntario, $idClase, $estado = 4)
     {
         // Validar parámetros (opcional, dependiendo del contexto)
         if (!is_numeric($idVoluntario) || !is_numeric($idClase) || !is_numeric($estado)) {
@@ -127,7 +127,7 @@ class ProgramaEducativo extends Model
         return $detallesClase;
     }
 
-    public static function getProgramasForVoluntario($idVoluntario, $estado = 1)
+    public static function getProgramasForVoluntario($idVoluntario, $estado = 4)
     {
         return self::where('id_voluntario', $idVoluntario)
             ->where('estado', $estado)->get();
