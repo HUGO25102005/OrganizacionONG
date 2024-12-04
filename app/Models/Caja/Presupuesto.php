@@ -14,15 +14,17 @@ class Presupuesto extends Model
         'porque',
     ];
 
-    public static function getMontoTotal(){
-        return self::whereHas('aprobacionPresupuestos', function ($query) {
-            $query->where('si_no', true); // Ajusta 'estado' según tu modelo
+    public static function getMontoTotal()
+    {
+        return self::whereHas('programasEducativos', function ($query) {
+            $query->whereIn('estado', [2, 4, 5]);
         })->sum('monto');
     }
-    // public static function programasEducativos()
-    // {
-    //     return $this->hasMany(ProgramaEducativo::class, 'id_presupuesto');
-    // }
+
+    public function programasEducativos()
+    {
+        return $this->hasMany(ProgramaEducativo::class, 'id_presupuesto');
+    }
 
 
     public function aprobacionPresupuestos()

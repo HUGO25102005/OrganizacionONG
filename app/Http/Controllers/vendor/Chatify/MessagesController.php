@@ -245,7 +245,7 @@ class MessagesController extends Controller
                 $contacts .= Chatify::getContactItem($user);
             }
         } else {
-            $contacts = '<p class="message-hint center-el"><span>Your contact list is empty</span></p>';
+            $contacts = '<p class="message-hint center-el"><span>Tu lista de mensajes esta vacía</span></p>';
         }
 
         return Response::json([
@@ -416,7 +416,7 @@ class MessagesController extends Controller
         }
         // send the response
         return Response::json([
-            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Nothing shared yet</span></p>',
+            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Nada compartido aún</span></p>',
         ], 200);
     }
 

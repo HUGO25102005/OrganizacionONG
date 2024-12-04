@@ -4,7 +4,7 @@
         <td class="py-3 px-4 text-center">{{ $usuario->trabajador->user->name }}</td>
         <td class="py-3 px-4 text-center">{{ $usuario->trabajador->user->email }}</td>
         <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getTipoRolUsuario() }}</td>
-        <td class="py-3 px-4 text-center">{{ $usuario->trabajador->getEstadoDescripcion() }}</td>
+        <td class="py-3 px-4 text-center"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">{{ $usuario->trabajador->getEstadoDescripcion() }}</span></td>
         <td class="py-3 px-4 text-center">
             <div class="p-[15px] flex justify-center space-x-4">
                 <x-modal-view-info :classButton="'mr-2 text-blue-500 text-xl hover'">

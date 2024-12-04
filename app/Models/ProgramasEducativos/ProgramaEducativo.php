@@ -320,7 +320,7 @@ class ProgramaEducativo extends Model
     }
 
     public function presupuesto()
-    { 
+    {
         return $this->belongsTo(Presupuesto::class, 'id_presupuesto');
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Administrador;
 
 use App\Http\Controllers\Controller;
 use App\Models\Caja\AprobacionPresupuesto;
+use App\Models\ProgramasEducativos\AprobacionContenido;
 use App\Models\Caja\CajaFondo;
 use App\Models\Caja\Presupuesto;
 use App\Models\Donaciones\Convocatoria;
@@ -268,13 +269,13 @@ class DashboardAdminController extends Controller
                         ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+                            /* if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);
 
@@ -299,13 +300,13 @@ class DashboardAdminController extends Controller
                             // Filtramos según el estado, fecha de creación, etc.
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+                            /* if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);  // Paginamos los resultados
                     break;
@@ -329,13 +330,13 @@ class DashboardAdminController extends Controller
                             // Filtramos por el estado, fecha de creación, etc. en la tabla 'trabajadores'
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+                            /* if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);  // Paginamos los resultados
                     break;
@@ -343,9 +344,22 @@ class DashboardAdminController extends Controller
                 case 'Beneficiario':
                     $datos = Beneficiario::when($search, function ($query, $search) {
                         // Filtramos por nombre del beneficiario
-                        return $query->where('nombre', 'LIKE', '%' . $search . '%');
+                        return $query->whereHas('user', function ($query) use ($search) {
+                            // Búsqueda por nombre
+                            $query->where('name', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido paterno
+                                ->orWhere('apellido_paterno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por apellido materno
+                                ->orWhere('apellido_materno', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por correo
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                // Búsqueda por ID de usuario
+                                ->orWhere('id', '=', $search);  // Asegúrate de que el 'id' sea numérico
+                        });
                     })
+                        ->orwhere('estado', '=', intval($estado))
                         ->paginate(10);  // Paginamos los resultados
+
                     break;
 
                 default:
@@ -374,13 +388,13 @@ class DashboardAdminController extends Controller
                         ->whereHas('trabajador', function ($query) use ($estado, $fecha_inicio, $fecha_fin) {
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+/*                             if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);
 
@@ -405,13 +419,13 @@ class DashboardAdminController extends Controller
                             // Filtramos según el estado, fecha de creación, etc.
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+                           /*  if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);  // Paginamos los resultados
                     break;
@@ -435,13 +449,13 @@ class DashboardAdminController extends Controller
                             // Filtramos según el estado, fecha de creación, etc.
                             $query->where('estado', '=', intval($estado));
 
-                            if ($fecha_inicio) {
+                         /*    if ($fecha_inicio) {
                                 $query->where('created_at', '>=', $fecha_inicio);
                             }
 
                             if ($fecha_fin) {
                                 $query->where('created_at', '<=', $fecha_fin);
-                            }
+                            } */
                         })
                         ->paginate(10);
                     break;
@@ -457,38 +471,103 @@ class DashboardAdminController extends Controller
     {
         $idAdmin = auth()->user()->trabajador->administrador->id;
         $idPresupuesto = $request->id;
+
         // Validar que el método sea PUT
         if ($request->isMethod('put')) {
-            // Procesar la acción
+            // Obtener el presupuesto y el programa educativo relacionado
+            $presupuesto = Presupuesto::find($idPresupuesto);
+
+            if (!$presupuesto || !$presupuesto->programasEducativos) {
+                return redirect()->route('admin.recursos')->with('error', 'Presupuesto o programa educativo no encontrado.');
+            }
+
+            $programaEducativo = $presupuesto->programasEducativos->first(); // Supone una relación de uno a uno
+
+            // Verificar si hay un registro en AprobacionContenido con si_no = 1
+            $aprobacionContenido = AprobacionContenido::where('id_programa_educativo', $programaEducativo->id)->first();
+
+            if ($aprobacionContenido && $aprobacionContenido->si_no == 1) {
+                // Cambiar estado del programa educativo a 4
+                $programaEducativo->update(['estado' => 4]);
+
+                // Actualizar o crear el registro en AprobacionPresupuesto
+                AprobacionPresupuesto::updateOrCreate(
+                    ['id_presupuesto' => $idPresupuesto],
+                    ['id_administrador' => $idAdmin, 'si_no' => 1]
+                );
+
+                return redirect()->route('admin.recursos')->with('success', 'Recurso aceptado y programa actualizado con éxito.');
+            }
+
+            // Si el programa ya está en estado 3, cambiar estado a 4
+            if ($programaEducativo->estado == 3) {
+                $programaEducativo->update(['estado' => 4]);
+
+                // Actualizar o crear el registro en AprobacionPresupuesto
+                AprobacionPresupuesto::updateOrCreate(
+                    ['id_presupuesto' => $idPresupuesto],
+                    ['id_administrador' => $idAdmin, 'si_no' => 1]
+                );
+
+                return redirect()->route('admin.recursos')->with('success', 'Recurso aceptado y programa actualizado con éxito.');
+            }
+
+            // Si no hay registro de AprobacionContenido, solo actualizar AprobacionPresupuesto
             AprobacionPresupuesto::updateOrCreate(
                 ['id_presupuesto' => $idPresupuesto],
                 ['id_administrador' => $idAdmin, 'si_no' => 1]
             );
 
-            // Redirigir para evitar duplicación al recargar
             return redirect()->route('admin.recursos')->with('success', 'Recurso aceptado con éxito.');
         }
 
         // Si no es PUT, redirige con un mensaje de error
         return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
     }
+
     public function rechazarRecurso(Request $request)
     {
         $idAdmin = auth()->user()->trabajador->administrador->id;
         $idPresupuesto = $request->id;
+
         // Validar que el método sea PUT
         if ($request->isMethod('put')) {
-            // Procesar la acción
+            // Obtener el presupuesto y el programa educativo relacionado
+            $presupuesto = Presupuesto::find($idPresupuesto);
+
+            if (!$presupuesto || !$presupuesto->programasEducativos) {
+                return redirect()->route('admin.recursos')->with('error', 'Presupuesto o programa educativo no encontrado.');
+            }
+
+            $programaEducativo = $presupuesto->programasEducativos->first(); // Supone una relación de uno a uno
+
+            // Verificar si hay un registro en AprobacionContenido con si_no = 0
+            $aprobacionContenido = AprobacionContenido::where('id_programa_educativo', $programaEducativo->id)->first();
+
+            if ($aprobacionContenido && $aprobacionContenido->si_no == 0) {
+                // Cambiar estado del programa educativo a 6 (rechazado)
+                $programaEducativo->update(['estado' => 6]);
+
+                // Actualizar o crear el registro en AprobacionPresupuesto
+                AprobacionPresupuesto::updateOrCreate(
+                    ['id_presupuesto' => $idPresupuesto],
+                    ['id_administrador' => $idAdmin, 'si_no' => 0]
+                );
+
+                return redirect()->route('admin.recursos')->with('warning', 'Recurso rechazado y programa actualizado con éxito.');
+            }
+
+            // Si no hay registro en AprobacionContenido, actualizar solo AprobacionPresupuesto
             AprobacionPresupuesto::updateOrCreate(
                 ['id_presupuesto' => $idPresupuesto],
                 ['id_administrador' => $idAdmin, 'si_no' => 0]
             );
 
-            // Redirigir para evitar duplicación al recargar
             return redirect()->route('admin.recursos')->with('warning', 'Recurso rechazado con éxito.');
         }
 
         // Si no es PUT, redirige con un mensaje de error
         return redirect()->route('admin.recursos')->with('error', 'Método no permitido.');
     }
+
 }

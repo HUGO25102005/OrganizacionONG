@@ -1,7 +1,7 @@
 @foreach ($datos as $user)
     <tr class="border-b border-gray-300">
         <td class="py-3 px-4 text-center">{{ $user->trabajador->id }}</td>
-        <td class="py-3 px-4 text-center">{{ $user->trabajador->user->name }}</td>
+        <td class="py-3 px-4 text-center">{{ $user->trabajador->user->getFullname() }}</td>
         <td class="py-3 px-4 text-center">{{ $user->trabajador->user->email }}</td>
         <td class="py-3 px-4 text-center">
             @switch($user->trabajador->estado)
