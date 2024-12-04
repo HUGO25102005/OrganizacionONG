@@ -63,6 +63,31 @@
             @endforeach
         </div>
     </section>
+    @if($campanas->count() > 0)
+        <section class="w-full h-auto bg-cover bg-center scroll-animation flex overflow-hidden flex-col items-center justify-center">
+            <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-6">
+            Campañas activas
+            </h1>
+            <div id="slider" class="flex mt-6 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
+                <!-- Imagen 1 -->
+                @foreach ($campanas as $cam)
+                <div class="slider-item snap-center flex-shrink-0 w-[300px] md:w-[400px]] lg:w-[20%] rounded-md bg-gray-100 shadow-lg">
+                    <img class="w-full h-[50%] object-cover rounded-t-md" src="{{ asset('images/centro1.jpg') }}">
+                    <div class="p-4 h[50%]">
+                        <h2 class="font-bold text-lg text-gray-800 text-center"> {{ $cam->titulo }} </h2>
+                        <br>
+                        <p class="text-gray-500 mb-2">Descripción: <span class="font-semibold">{{ $cam->descripcion }}</span></p>
+                        <p class="text-gray-500 mb-2">Material: <span class="font-semibold">{{ $cam->producto->nombre }}</span></p>
+                        <p class="text-gray-500 mb-2">Cantidad necesitada: <span class="font-semibold">{{ $cam->cantarticulos }}</span></p>
+                        {{-- <button class="openModalBtn mt-2 px-4 py-2 bg-slate-700 text-white rounded-full" id="openModalBtn1">
+                            Ver más
+                        </button> --}}
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
     <style>
         #slider {
             scroll-snap-type: x mandatory;
@@ -231,14 +256,18 @@
                             <a href="#" class="link-terminos">Acepto los <strong>Términos y Condiciones</strong></a>
                         </div>
                         <br>
+                        <button id="continue-button" onclick="comprobarCorreoDonante()"
+                            class="submit-button w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
+                            Continuar
+                        </button>
                     </div>
                 </div>
 
-                <!-- Botón Continuar -->
+              {{--   <!-- Botón Continuar -->
                 <button id="continue-button" onclick="comprobarCorreoDonante()"
                     class="submit-button w-full bg-blue-500 text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-600 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300 ease-in-out text-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500" disabled>
                     Continuar
-                </button>
+                </button> --}}
             </div>
         </div>
 

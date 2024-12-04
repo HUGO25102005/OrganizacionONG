@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProgramasEducativos\ProgramaEducativo;
+use App\Models\Donaciones\Convocatoria;
 use Illuminate\Http\Request;
 
 class DonarController extends Controller
@@ -14,8 +15,9 @@ class DonarController extends Controller
     public function index()
     {
         $programas = ProgramaEducativo::getProgramasActivos()->get();
+        $campanas = Convocatoria::getCampanas()->get();
         $linkActive = 5;
-        return view('Page.donar', compact('linkActive', 'programas'));
+        return view('Page.donar', compact('linkActive', 'programas', 'campanas'));
     }
 
     /**

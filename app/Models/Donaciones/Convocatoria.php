@@ -83,6 +83,17 @@ class Convocatoria extends Model
     {
         return self::where('estado', '!=', 3)->sum('cantarticulos');
     }
+
+    public static function getCampanas()
+    {
+         // Obtener registros de convocatorias que existen en la tabla `CargarCampaniasPage`
+        return self::whereHas('cargarCampanias', function ($query) {
+            $query->select('id_convocatoria'); // Filtrar por el id_convocatoria
+        })
+        ->orderBy('created_at', 'desc'); // Ordenar por fecha de creación de manera descendente
+    }
+
+
     /**
      * Relación con Administrador (uno a muchos, con opción nullable).
      */
@@ -103,4 +114,10 @@ class Convocatoria extends Model
     {
         return $this->belongsTo(ProductoSolicitado::class, 'id_producto');
     }
+
+    public function cargarCampanias()
+    {
+        return $this->hasMany(CargarCampaniasPage::class, 'id_convocatoria', 'id');    
+    }
+
 }
