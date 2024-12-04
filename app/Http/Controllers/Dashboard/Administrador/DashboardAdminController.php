@@ -154,18 +154,8 @@ class DashboardAdminController extends Controller
     }
     public function recursos(Request $request)
     {
-
-        if (empty($request->seccion)) {
-            $seccion = $request->get('seccion', 1);
-        } else {
-            $seccion = $request->seccion;
-        }
-
-        if ($seccion == 1) {
-            // $monto_total_donaciones = Donacion::getMontoTotal();
-            // $total_donaciones = Donacion::all();
-            // $total_donaciones_semana = Donacion::getTotalMontoSemana();
-            $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
+        $seccion = 1;
+        $soliRecursos = ProgramaEducativo::getSoliRecursos()->paginate(10);
 
             // dd($soliRecursos);
             return view(
@@ -176,9 +166,8 @@ class DashboardAdminController extends Controller
                         'seccion'
                     ]
                 )
-            )->render();
-        } else {
-
+            );
+        /* } else {
             $search = $request->input('search');
 
             $programas = ProgramaEducativo::when($search, function ($query, $search) {
@@ -191,18 +180,18 @@ class DashboardAdminController extends Controller
                     ->orWhereDate('fecha_termino', '=', date('Y-m-d', strtotime($search)))
                     ->orWhere('estado', 'LIKE', '%' . $search . '%');
             })
-                ->paginate(5);
+                ->paginate(10);
 
 
             if (empty($request->seccion)) {
-                $seccion = $request->get('seccion', 1);
+                $seccion = $request->get('seccion', 2);
             } else {
                 $seccion = $request->seccion;
             }
 
 
             return view('Dashboard.Admin.recursos', compact(['seccion', 'programas']));
-        }
+        } */
     }
     public function actualizarSolicitudes(Request $request)
     {

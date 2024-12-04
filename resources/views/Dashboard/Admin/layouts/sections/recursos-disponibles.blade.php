@@ -90,7 +90,7 @@
 </div>
 
 <!-- Script para generar los gráficos -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         updateTableSolicitudes();
@@ -151,6 +151,6 @@
             }
         }
     });
-</script>
+</script> --}}
 
 @vite(['resources/js/recursos-disponibles.js'])

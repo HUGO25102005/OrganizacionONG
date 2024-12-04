@@ -37,7 +37,7 @@
     <!-- Imágenes interactivas -->
     <section class="w-full h-auto bg-cover bg-center flex overflow-hidden flex-col items-center justify-center mt-20">
         <h1 class="text-gray-800 text-3xl md:text-4xl lg:text-5xl font-bold text-center">
-            Programas Finalizados
+            Programas en curso
           </h1>
         <div id="slider" class="flex mt-6 mb-20 flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 ml-8 mr-8 py-4">
             <!-- Imagen 1 -->
@@ -251,6 +251,12 @@
     {{-- --}}
 
     <!-- Botón de donar con sandbox -->
+
+    <button id="scrollButton"
+        class="fixed bottom-4 right-4 z-10 bg-white text-black rounded-full items-center justify-center text-lg font-semibold w-14 h-14 cursor-pointer transition-all duration-300 ease-in-out border border-black shadow-none hover:-translate-y-1 hover:-translate-x-0.5 hover:shadow-[2px_5px_0_0_black] active:translate-y-0.5 active:translate-x-0.25 active:shadow-none">
+        <i id="scrollIcon" class='bx bxs-chevron-down'></i>
+    </button>
+
     <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>

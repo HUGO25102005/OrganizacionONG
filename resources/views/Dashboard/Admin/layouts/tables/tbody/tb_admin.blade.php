@@ -127,7 +127,7 @@
                 </x-modal-view-info>
                 <x-button-trash 
                     :messageAlert="'¿Estás seguro de que deseas eliminar al usuario ' .  $admin->trabajador->user->name .'?'" 
-                    :router="route('admin.desactivar')" 
+                    :router="route('admin.desactivar')"
                     :itemId="$admin->trabajador->id"
                     :tituloModal="'Confirmar Eliminación'" />
 

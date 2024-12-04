@@ -106,6 +106,49 @@ class ProgramaEducativo extends Model
         }
         // Devolver los datos organizados
     }
+    
+    /* public static function obtenerDetallesClase1($idVoluntario, $idClase, $estado = 5)
+    {
+        // Validar parámetros (opcional, dependiendo del contexto)
+        if (!is_numeric($idVoluntario) || !is_numeric($idClase) || !is_numeric($estado)) {
+            return ['error' => 'Parámetros inválidos'];
+        }
+
+        // Obtener información de la clase
+        $detallesClase = self::where([
+            ['id_voluntario', '=', $idVoluntario],
+            ['id', '=', $idClase],
+            ['estado', '=', $estado],
+        ])->with(['presupuesto'])->first();
+
+        // Verificar si se encontró la clase
+        if (!$detallesClase) {
+            return ['error' => 'Clase no encontrada'];
+        }
+
+        // Obtener lista de alumnos relacionada
+        $listaAlumnos = SalonesClase::where('id_programa_educativo', '=', $idClase)
+            ->with(['beneficiario.user'])
+            ->get();
+
+        if ($estado == 1) {
+            return [
+                'detallesClase' => $detallesClase,
+                'listaAlumnos' => $listaAlumnos
+            ];
+        } else {
+            $reporte = InformesSeguimientos::where('id_programa_educativo', '=', intval($idClase))->first();
+            // dd($reporte);
+            return [
+                'detallesClase' => $detallesClase,
+                'listaAlumnos' => $listaAlumnos,
+                'reporte' => $reporte
+            ];
+        }
+        // Devolver los datos organizados
+    } */
+
+
     public static function obtenerDetalles($idClase)
     {
         // Validar parámetro (opcional)
@@ -132,10 +175,17 @@ class ProgramaEducativo extends Model
         return self::where('id_voluntario', $idVoluntario)
             ->where('estado', $estado)->get();
     }
-    public static function getProgramasForVoluntarioTable($idVoluntario, $estado = 1)
+    
+    public static function getProgramasForVoluntario1($idVoluntario, $estado = 5)
     {
         return self::where('id_voluntario', $idVoluntario)
-            ->where('estado', $estado)
+            ->where('estado', $estado)->get();
+    }
+
+    public static function getProgramasForVoluntarioTable($idVoluntario)
+    {
+        return self::where('id_voluntario', $idVoluntario)
+            ->wherein('estado', [1, 3, 6])
             ->with(['presupuesto.aprobacionPresupuestos', 'aprobacionContenidos']);
     }
     public static function getSoliRecursos()

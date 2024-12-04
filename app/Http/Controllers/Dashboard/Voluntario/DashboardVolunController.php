@@ -101,7 +101,7 @@ class DashboardVolunController extends Controller
         } else {
 
             $idVoluntario = Auth()->user()->trabajador->voluntario->id;
-            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntario($idVoluntario, 5);
+            $claFinalizadas = ProgramaEducativo::getProgramasForVoluntario1($idVoluntario, 5);
 
             return view('Dashboard.Voluntario.mis_clases', compact(['seccion', 'claFinalizadas']));
         }

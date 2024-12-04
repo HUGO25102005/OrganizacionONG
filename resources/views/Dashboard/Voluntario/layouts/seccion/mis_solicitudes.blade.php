@@ -2,7 +2,7 @@
     <table class="w-full bg-white shadow-md rounded-lg overflow-x-auto text-center">
         <thead class="bg-[#BBDEFB] text-black font-semibold">
             <tr>
-                <th class="px-3 py-4">Id</th>
+                <th class="px-3 py-4">Número</th>
                 <th class="px-6 py-4">Nombre</th>
                 <th class="px-6 py-4">Fecha envío</th>
                 <th class="px-6 py-4">Información</th>
@@ -13,17 +13,17 @@
         <tbody class="text-gray-700">
             @foreach ($misSolicitudes as $soli)
                 <tr class="hover:bg-blue-50">
-                    <td class="px-3 py-4">{{ $soli->id }}</td>
+                    <td class="px-3 py-4">{{ $loop->iteration }}</td>
                     <td class="px-6 py-4">{{ $soli->nombre_programa }}</td>
                     <td class="px-6 py-4">{{ $soli->created_at->format('d-m-y') }}</td>
                     <td class="px-6 py-4">
 
-                        @if ($soli->aprobacionContenido == null)
-                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">En
-                                revisión</span>
-                        @elseif ($soli->aprobacionContenido)
-                            <span
-                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aprobado</span>
+                        @if ($soli->aprobacionContenidos == null)
+                            <span class="bg-yellow-100 text-black-700 px-3 py-1 rounded-full text-sm font-semibold">Solicitado</span>
+                            @elseif ($soli->aprobacionContenidos->si_no == 1)
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aprobada</span>
+                            @else
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Rechazada</span>
                         @endif
 
 
@@ -31,12 +31,13 @@
                     </td>
                     <td class="px-6 py-4">
 
-                        @if ($soli->presupuesto->aprobacionPresupuestos == null)
+                        @if ($soli->aprobacionPresupuestos == null)
                             <span
-                                class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
-                        @else
-                            <span
-                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
+                                class="bg-yellow-100 text-black-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
+                            @elseif ($soli->aprobacionPresupuestos->si_no == 1)
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
+                            @else
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">${{ $soli->presupuesto->monto }}</span>
                         @endif
 
 
@@ -47,7 +48,7 @@
                                 class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">Rechazado</span>
                         @elseif ($soli->estado == 3)
                             <span
-                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Aceptado</span>
+                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">En aprobación</span>
                         @elseif ($soli->estado == 1)
                             @if ($soli->tiene_aprobacion_contenido == 0 || $soli->tiene_aprobacion_presupuesto == 0)
                                 <span
