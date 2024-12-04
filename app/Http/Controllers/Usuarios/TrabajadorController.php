@@ -32,13 +32,13 @@ class TrabajadorController extends Controller
             $mensaje = "
                         <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
                             <h1 style='color: #4CAF50;'>Hola, {$trabajador->user->name}.</h1>
-                            <p>¡Tu solicitud ha sido aceptada exitosamente! Aquí están tus credenciales de acceso:</p>
+                            <p>¡Tu solicitud ha sido aceptada exitosamente! Aqu&iacute; est&aacute;n tus credenciales de acceso:</p>
                             <div style='background-color: #f9f9f9; border: 1px solid #ddd; padding: 10px; margin: 10px 0;'>
                                 <p><strong>Correo:</strong> $correo</p>
                                 <p><strong>Contraseña temporal:</strong> $passwordTemporal</p>
                             </div>
-                            <p style='color: #d9534f;'><strong>Importante:</strong> Por favor, cambia tu contraseña después de iniciar sesión para mantener tu cuenta segura.</p>
-                            <p>Si tienes algún problema, no dudes en contactarnos.</p>
+                            <p style='color: #d9534f;'><strong>Importante:</strong> Por favor, cambia tu contraseña despu&eacute;s de iniciar sesi&oacute;n para mantener tu cuenta segura.</p>
+                            <p>Si tienes alg&uacute;n problema, no dudes en contactarnos.</p>
                             <p>Saludos,</p>
                             <p><strong>El equipo de InspireUp</strong></p>
                         </div>
@@ -69,12 +69,12 @@ class TrabajadorController extends Controller
 
             // Preparar el correo
             $correo = $trabajador->user->email;
-            $asunto = 'Notificación de Desactivación de Cuenta';
+            $asunto = 'Notificación de Desactivaci&oacute;n de Cuenta';
             $mensaje = "
                         <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
                             <h1 style='color: #d9534f;'>Hola, {$trabajador->user->name}.</h1>
                             <p>Lamentamos informarte que tu cuenta ha sido <strong>desactivada</strong> por el administrador. Actualmente no puedes acceder a nuestra plataforma.</p>
-                            <p>Si crees que esto es un error o necesitas más información, por favor contacta con el administrador.</p>
+                            <p>Si crees que esto es un error o necesitas m&aacute;s informaci&n, por favor contacta con el administrador.</p>
                             <p>Saludos cordiales,</p>
                             <p><strong>El equipo de InspireUp</strong></p>
                         </div>

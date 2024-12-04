@@ -72,17 +72,17 @@ class DonacionController extends Controller
             }
 
             if ($donacion) {
-                $asunto = "Gracias por tu donación - InspireUp";
+                $asunto = "Gracias por tu donaci&oacute;n - InspireUp";
                 $mensaje = "
                             <p>Estimado(a) {$request->first_name} {$request->last_name},</p>
                             <p>Gracias por tu generosa donación a InspireUp. Nos alegra contar con tu apoyo para seguir promoviendo nuestras iniciativas.</p>
                             <p><strong>Detalles de tu donación:</strong></p>
                             <ul>
-                                <li><strong>ID de Donación:</strong> {$donacion->id}</li>
+                                <li><strong>ID de Donaci&oacute;n:</strong> {$donacion->id}</li>
                                 <li><strong>Monto:</strong> {$request->amount} {$request->currency}</li>
-                                <li><strong>ID de Transacción:</strong> {$request->transaction_id}</li>
+                                <li><strong>ID de Transacci&oacute;n:</strong> {$request->transaction_id}</li>
                             </ul>
-                            <p>Si tienes alguna duda o aclaración, por favor no dudes en escribirnos a <a href='mailto:inspireup.notificador@gmail.com'>inspireup.notificador@gmail.com</a>.</p>
+                            <p>Si tienes alguna duda o aclaraci&oacute;n, por favor no dudes en escribirnos a <a href='mailto:inspireup.notificador@gmail.com'>inspireup.notificador@gmail.com</a>.</p>
                             <p>¡Gracias por hacer la diferencia!</p>
                             <p>Atentamente,</p>
                             <p><strong>Equipo InspireUp</strong></p>
